@@ -3,6 +3,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import view.AuthorisationMenu;
+
 public class Main 
 {
 	public static Connection conn;
@@ -19,6 +21,8 @@ public class Main
 		    ex.printStackTrace();
 		}
 
+		AuthorisationMenu frame = new AuthorisationMenu();
+		frame.setVisible(true);
 	}
 
 }

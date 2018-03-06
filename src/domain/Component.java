@@ -32,9 +32,9 @@ public class Component
 		return component_id;
 	}
 	
-	public void setId(int scientific_theme_id)
+	public void setId(int component_id)
 	{	
-		this.component_id = scientific_theme_id;
+		this.component_id = component_id;
 	}
 	
 	public String getType() 
