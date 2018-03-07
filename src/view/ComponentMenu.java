@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -13,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.SwingConstants;
+import java.awt.SystemColor;
 
 public class ComponentMenu extends JFrame {
 
@@ -23,7 +25,7 @@ public class ComponentMenu extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ComponentMenu(JFrame parent)
+	public ComponentMenu()
 	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 740, 527);
@@ -39,41 +41,84 @@ public class ComponentMenu extends JFrame {
 		contentPane.add(MenuTitleLabel);
 		
 		JButton InfoButton = new JButton("1)Переглянути інформацію про наявні компоненти.");
+		InfoButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				ComponentMenu.this.setVisible(false);
+				try {
+					new InfoComponent(ComponentMenu.this).setVisible(true);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+			}
+		});
 		InfoButton.setHorizontalAlignment(SwingConstants.LEFT);
-		InfoButton.setForeground(Color.RED);
+		InfoButton.setForeground(new Color(255, 127, 80));
 		InfoButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		InfoButton.setBounds(42, 111, 456, 43);
+		InfoButton.setBounds(42, 111, 496, 43);
 		contentPane.add(InfoButton);
 		
 		JButton AddButton = new JButton("2)Додати інфориацію про новий компонент.");
+		AddButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				ComponentMenu.this.setVisible(false);
+				new AddComponent(ComponentMenu.this).setVisible(true); 
+			}
+		});
 		AddButton.setHorizontalAlignment(SwingConstants.LEFT);
-		AddButton.setForeground(Color.RED);
+		AddButton.setForeground(SystemColor.desktop);
 		AddButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		AddButton.setBounds(42, 191, 456, 43);
+		AddButton.setBounds(42, 191, 496, 43);
 		contentPane.add(AddButton);
 		
 		JButton EditButton = new JButton("3)Редагувати інформацію про компонент.");
+		EditButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				ComponentMenu.this.setVisible(false);
+				try {
+					new EditComponent(ComponentMenu.this).setVisible(true);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+			}
+		});
 		EditButton.setHorizontalAlignment(SwingConstants.LEFT);
-		EditButton.setForeground(Color.RED);
+		EditButton.setForeground(SystemColor.desktop);
 		EditButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		EditButton.setBounds(42, 271, 456, 43);
+		EditButton.setBounds(42, 271, 496, 43);
 		contentPane.add(EditButton);
 		
 		JButton InDeviceButton = new JButton("4)Переглянути список приладів,які містять компонент");
+		InDeviceButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				ComponentMenu.this.setVisible(false);
+				try {
+					new DeviceWhichHasComponent(ComponentMenu.this).setVisible(true);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+			}
+		});
 		InDeviceButton.setHorizontalAlignment(SwingConstants.LEFT);
-		InDeviceButton.setForeground(Color.RED);
+		InDeviceButton.setForeground(new Color(255, 165, 0));
 		InDeviceButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		InDeviceButton.setBounds(42, 350, 456, 43);
+		InDeviceButton.setBounds(42, 350, 496, 43);
 		contentPane.add(InDeviceButton);
 		
 		
 		JButton btnBack = new JButton("BACK");
 		btnBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (parent != null)
-					parent.setVisible(true);
+			public void actionPerformed(ActionEvent e) 
+			{
 				ComponentMenu.this.setVisible(false);
 				ComponentMenu.this.dispose();
+				new ConstructorMenu().setVisible(true);
 			}
 		});
 		btnBack.setBounds(596, 427, 97, 25);

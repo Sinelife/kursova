@@ -16,7 +16,7 @@ import main.Main;
 public class UserDao 
 {
 	/** @throws SQLException */
-    public void create(Device d) throws SQLException 
+    public void createUser(Device d) throws SQLException 
     {
 		String sql = "INSERT INTO device (device_id, name, supply_voltage, border_regulation_time,rating,date) VALUES (?,?,?,?,?,?)";
  	  	PreparedStatement stm = Main.conn.prepareStatement(sql);
@@ -42,7 +42,7 @@ public class UserDao
     
 
     /** @throws SQLException */
-    public User read(int key) throws SQLException 
+    public User readUser(int key) throws SQLException 
     {
         String sql = "SELECT * FROM user WHERE user_id = ?";
         User u = new User();

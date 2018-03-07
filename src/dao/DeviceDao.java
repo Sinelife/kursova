@@ -117,6 +117,31 @@ public class DeviceDao
         }
         return list;
     }
+    
+    
+    public List<Device> getAllDeviceWhichHasComponent(int component_id) throws SQLException 
+    {
+        String sql = "SELECT * FROM device WHERE device_id in "
+        		+ "(SELECT device_id FROM component_device WHERE component_id = " + component_id;
+        List<Device> list = new ArrayList<Device>();
+        try (PreparedStatement stm = Main.conn.prepareStatement(sql)) 
+        {
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) 
+            {
+                Device d = new Device();
+                d.setId(rs.getInt("device_id"));
+                d.setName(rs.getString("name"));
+                d.setSupplyVoltage(rs.getString("supply_voltage"));
+                d.setBorderRegulationTime(rs.getString("border_regulation_time"));
+                d.setRating(rs.getInt("rating"));
+                d.setDate(rs.getDate("date"));
+                list.add(d);
+            }
+        }
+        return list;
+    }
+    
 }
 
 

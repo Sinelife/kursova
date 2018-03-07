@@ -13,6 +13,8 @@ import javax.swing.SwingConstants;
 import java.awt.Color;
 import javax.swing.JTextField;
 import java.awt.SystemColor;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ConstructorMenu extends JFrame {
 
@@ -56,6 +58,13 @@ public class ConstructorMenu extends JFrame {
 		contentPane.add(MenuTitleLabel);
 		
 		JButton DeviceMenuButton = new JButton("1)Меню роботи з приладами");
+		DeviceMenuButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				ConstructorMenu.this.setVisible(false);
+				new DeviceMenu(ConstructorMenu.this).setVisible(true); 
+			}
+		});
 		DeviceMenuButton.setForeground(Color.RED);
 		DeviceMenuButton.setHorizontalAlignment(SwingConstants.LEFT);
 		DeviceMenuButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
@@ -63,6 +72,13 @@ public class ConstructorMenu extends JFrame {
 		contentPane.add(DeviceMenuButton);
 		
 		JButton ComponentMenuButton = new JButton("2)Меню роботи з компонентами");
+		ComponentMenuButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				ConstructorMenu.this.setVisible(false);
+				new ComponentMenu().setVisible(true); 
+			}
+		});
 		ComponentMenuButton.setForeground(Color.RED);
 		ComponentMenuButton.setHorizontalAlignment(SwingConstants.LEFT);
 		ComponentMenuButton.setFont(new Font("Tahoma", Font.PLAIN, 17));

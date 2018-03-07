@@ -9,14 +9,14 @@ public class Component
 
 	private int component_id;
 	private String type;
-	private String unit_measurement;
+	private String name;
 	private String technical_info;
 	
-	Component(int component_id, String type,String unit_measurement,String technical_info)
+	Component(int component_id, String type, String name, String technical_info)
 	{
 		this.component_id = component_id; 
 		this.type = type; 
-		this.unit_measurement = unit_measurement;
+		this.name = name;
 		this.technical_info= technical_info; 
 	}
 	
@@ -47,14 +47,14 @@ public class Component
 		this.type = type;	
 	}
 	
-	public String getUnitMeasurement() 
+	public String getName() 
 	{
-		return unit_measurement;	
+		return name;	
 	}
 	
-	public void setUnitMeasurement(String unit_measurement) 
+	public void setName(String name) 
 	{
-		this.unit_measurement = unit_measurement;	
+		this.name = name;	
 	}
 	
 	public String getTechnicalInfo() 

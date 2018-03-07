@@ -36,11 +36,6 @@ public class AuthorisationMenu extends JFrame {
 	 */
 	public AuthorisationMenu() 
 	{
-
-		
-		
-		
-		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 666, 387);
@@ -99,12 +94,16 @@ public class AuthorisationMenu extends JFrame {
 					{
 						if(user.getRole().equals("constructor"))
 						{
+							loginIn = true;
 							AuthorisationMenu.this.setVisible(false);
 							new ConstructorMenu().setVisible(true); 
 						}
 					}
 				}
-				JOptionPane.showMessageDialog(null, "Помилковий логін або пароль!" );
+				if(loginIn == false)
+				{
+					JOptionPane.showMessageDialog(null, "Помилковий логін або пароль!" );
+				}
 			}
 		});
 		button.setFont(new Font("Tahoma", Font.PLAIN, 15));

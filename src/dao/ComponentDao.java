@@ -1,6 +1,5 @@
 package dao;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,6 +10,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import domain.Component;
+import domain.Device;
 import main.Main;
 
 
@@ -18,9 +18,9 @@ public class ComponentDao
 {
 	
     /** @throws SQLException */
-    public void create(Component c) throws SQLException 
+    public void addComponent(Component c) throws SQLException 
     {
-		String sql = "INSERT INTO component (component_id, type, unit_measurement, technical_info) VALUES (?,?,?,?)";
+		String sql = "INSERT INTO component (component_id, type, name, technical_info) VALUES (?,?,?,?)";
  	  	PreparedStatement stm = Main.conn.prepareStatement(sql);
 		int i = -1;
 		String sql_for_id = "SELECT MAX(component_id) from component";
@@ -33,7 +33,7 @@ public class ComponentDao
 		}
 		stm.setInt(1,i+1);
     	stm.setString(2, c.getType());
-    	stm.setString(3, c.getUnitMeasurement());
+    	stm.setString(3, c.getName());
     	stm.setString(4, c.getTechnicalInfo());
     	stm.executeUpdate();
     	JOptionPane.showMessageDialog (null, "Новий компонент додано до бази данних!" );
@@ -42,7 +42,7 @@ public class ComponentDao
     
 
     /** @throws SQLException */
-    public Component read(int key) throws SQLException 
+    public Component readComponent(int key) throws SQLException 
     {
         String sql = "SELECT * FROM component WHERE component_id = ?";
         Component c = new Component();
@@ -53,7 +53,7 @@ public class ComponentDao
             rs.next();
             c.setId(rs.getInt("component_id"));
             c.setType(rs.getString("type"));
-            c.setUnitMeasurement(rs.getString("unit_measurement"));
+            c.setName(rs.getString("name"));
             c.setTechnicalInfo(rs.getString("technical_info"));
         }
         return c;
@@ -62,12 +62,12 @@ public class ComponentDao
 
     
     /**@throws SQLException */
-    public void update(Component c) throws SQLException 
+    public void updateComponent(Component c) throws SQLException 
     {
-    	String sql = "update component set type = ?, unit_measurement = ?, technical_info = ? where component_id = " +  c.getId();
+    	String sql = "update component set type = ?, name = ?, technical_info = ? where component_id = " +  c.getId();
     	PreparedStatement stm = Main.conn.prepareStatement(sql);
     	stm.setString(1, c.getType());
-    	stm.setString(2, c.getUnitMeasurement());
+    	stm.setString(2, c.getName());
     	stm.setString(3, c.getTechnicalInfo());
     	stm.executeUpdate();
     	JOptionPane.showMessageDialog (null, "Інформація про компонент відредагована!" ); 
@@ -92,7 +92,7 @@ public class ComponentDao
    
     public List<Component> getAll() throws SQLException 
     {
-        String sql = "SELECT * FROM сomponent;";
+        String sql = "SELECT * FROM component";
         List<Component> list = new ArrayList<Component>();
         try (PreparedStatement stm = Main.conn.prepareStatement(sql)) 
         {
@@ -102,13 +102,62 @@ public class ComponentDao
                 Component c = new Component();
 				c.setId(rs.getInt("component_id"));
                 c.setType(rs.getString("type"));
-                c.setUnitMeasurement(rs.getString("unit_measurement"));
+                c.setName(rs.getString("name"));
                 c.setTechnicalInfo(rs.getString("technical_info"));
                 list.add(c);
             }
         }
         return list;
     }
+    
+ 
+    public List<Component> getAllComponentsInDevice(int device_id) throws SQLException 
+    {
+        String sql = "SELECT * FROM component WHERE component_id in "
+        		+ "(SELECT component_id FROM component_device WHERE device_id = " + device_id;
+        List<Component> list = new ArrayList<Component>();
+        try (PreparedStatement stm = Main.conn.prepareStatement(sql)) 
+        {
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) 
+            {
+                Component c = new Component();
+				c.setId(rs.getInt("component_id"));
+                c.setType(rs.getString("type"));
+                c.setName(rs.getString("name"));
+                c.setTechnicalInfo(rs.getString("technical_info"));
+                list.add(c);
+            }
+        }
+        return list;
+    }
+    
+    
+    public List<Device> getAllDeviceWhichHasComponent(int component_id) throws SQLException 
+    {
+        String sql = "SELECT * FROM device WHERE device_id in "
+        		+ "(SELECT device_id FROM component_device WHERE component_id = " + component_id + ")";
+        List<Device> list = new ArrayList<Device>();
+        try (PreparedStatement stm = Main.conn.prepareStatement(sql)) 
+        {
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) 
+            {
+                Device d = new Device();
+                d.setId(rs.getInt("device_id"));
+                d.setName(rs.getString("name"));
+                d.setSupplyVoltage(rs.getString("supply_voltage"));
+                d.setBorderRegulationTime(rs.getString("border_regulation_time"));
+                d.setRating(rs.getInt("rating"));
+                d.setDate(rs.getDate("date"));
+                list.add(d);
+            }
+        }
+        return list;
+    }
+    
+    
+    
 }
 
 

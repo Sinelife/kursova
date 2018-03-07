@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,20 +14,28 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import dao.ComponentDao;
+import domain.Component;
+import java.awt.Color;
+
 public class ComponentInformation extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField TypeField;
-	private JTextField UnitMeasurementField;
+	private JTextField NameField;
 	private JTextField TechnicalInfoField;
 	
 
 
 	/**
 	 * Create the frame.
+	 * @throws SQLException 
 	 */
-	public ComponentInformation(JFrame parent) 
+	public ComponentInformation(JFrame parent) throws SQLException 
 	{
+ 	  	ComponentDao cd = new ComponentDao();
+ 	  	Component c = cd.readComponent(InfoComponent.id_to_look);
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 646, 558);
 		contentPane = new JPanel();
@@ -43,9 +52,9 @@ public class ComponentInformation extends JFrame {
 		TypeLabel.setBounds(36, 157, 136, 22);
 		contentPane.add(TypeLabel);
 		
-		JLabel UnitMeasurementLabel = new JLabel("Unit measurement");
-		UnitMeasurementLabel.setBounds(36, 209, 136, 22);
-		contentPane.add(UnitMeasurementLabel);
+		JLabel NameLabel = new JLabel("Назва компоненту");
+		NameLabel.setBounds(36, 209, 136, 22);
+		contentPane.add(NameLabel);
 		
 		JLabel TechnicalInfoLabel = new JLabel("Технічна інформація");
 		TechnicalInfoLabel.setBounds(36, 267, 136, 22);
@@ -53,22 +62,28 @@ public class ComponentInformation extends JFrame {
 		
 		
 		TypeField = new JTextField();
+		TypeField.setBackground(Color.WHITE);
 		TypeField.setEditable(false);
 		TypeField.setBounds(209, 157, 350, 22);
 		contentPane.add(TypeField);
 		TypeField.setColumns(10);
+		TypeField.setText(c.getType());
 		
-		UnitMeasurementField = new JTextField();
-		UnitMeasurementField.setEditable(false);
-		UnitMeasurementField.setBounds(209, 209, 350, 22);
-		contentPane.add(UnitMeasurementField);
-		UnitMeasurementField.setColumns(10);
+		NameField = new JTextField();
+		NameField.setBackground(Color.WHITE);
+		NameField.setEditable(false);
+		NameField.setBounds(209, 209, 350, 22);
+		contentPane.add(NameField);
+		NameField.setColumns(10);
+		NameField.setText(c.getName());
 		
 		TechnicalInfoField = new JTextField();
+		TechnicalInfoField.setBackground(Color.WHITE);
 		TechnicalInfoField.setEditable(false);
 		TechnicalInfoField.setColumns(10);
 		TechnicalInfoField.setBounds(209, 267, 350, 71);
 		contentPane.add(TechnicalInfoField);
+		TechnicalInfoField.setText(c.getTechnicalInfo());
 		
 		
 		
