@@ -10,6 +10,8 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import domain.Component;
+import domain.ComponentDevice;
 import domain.Device;
 import main.Main;
 
@@ -18,7 +20,7 @@ public class DeviceDao
 {
 	
     /** @throws SQLException */
-    public void create(Device d) throws SQLException 
+    public void addDevice(Device d) throws SQLException 
     {
 		String sql = "INSERT INTO device (device_id, name, supply_voltage, border_regulation_time,rating,date) VALUES (?,?,?,?,?,?)";
  	  	PreparedStatement stm = Main.conn.prepareStatement(sql);
@@ -44,7 +46,7 @@ public class DeviceDao
     
 
     /** @throws SQLException */
-    public Device read(int key) throws SQLException 
+    public Device readDevice(int key) throws SQLException 
     {
         String sql = "SELECT * FROM device WHERE device_id = ?";
         Device d = new Device();
@@ -66,7 +68,7 @@ public class DeviceDao
 
     
     /**@throws SQLException */
-    public void update(Device d) throws SQLException 
+    public void updateDevice(Device d) throws SQLException 
     {
     	String sql = "update device set name = ?, supply_voltage = ?, border_regulation_time = ?, rating = ?, date = ? where device_id = " +  d.getId();
     	PreparedStatement stm = Main.conn.prepareStatement(sql);
@@ -85,12 +87,7 @@ public class DeviceDao
     /** @throws SQLException */ 
     public void delete(Device d) throws SQLException 
     {
-    	String sql = "DELETE FROM device WHERE device_id = " + d.getId();
-    	try (Statement stm = Main.conn.createStatement())
-    	{
-            stm.executeUpdate(sql);
-    	}
-    	JOptionPane.showMessageDialog (null, "Прилад видалено з бази данних!" );
+
 	}
 
     
@@ -142,6 +139,54 @@ public class DeviceDao
         return list;
     }
     
+    
+    public ComponentDevice readComponentInDevice(int device_id, int component_id) throws SQLException 
+    {
+        String sql = "SELECT * FROM component_device WHERE device_id = ?" + " and component_id = ?";
+        ComponentDevice cd = new ComponentDevice();
+        try (PreparedStatement stm = Main.conn.prepareStatement(sql)) 
+        {
+            stm.setInt(1, device_id);
+            stm.setInt(2, component_id);
+            ResultSet rs = stm.executeQuery();
+            rs.next();
+            cd.setDeviceId(rs.getInt("device_id"));
+            cd.setComponentId(rs.getInt("component_id"));
+            cd.setNumber(rs.getInt("number"));
+        }
+        return cd;
+	}
+    
+    public void addComponentToDevice(ComponentDevice cd) throws SQLException 
+    {
+		String sql = "INSERT INTO component_device (device_id, component_id, number) VALUES (?,?,?)";
+ 	  	PreparedStatement stm = Main.conn.prepareStatement(sql);
+ 	  	stm.setInt(1, cd.getDeviceId());
+		stm.setInt(2, cd.getComponentId());
+    	stm.setInt(3, cd.getNumber());
+    	stm.executeUpdate();
+    	JOptionPane.showMessageDialog (null, "Компонент додано до специфікації приладу!" );
+	}
+    
+    
+    public void deleteComponentFromDevice(ComponentDevice cd) throws SQLException 
+    {
+		String sql = "DELETE FROM component_device WHERE device_id = " + cd.getDeviceId() + " and component_id = " + cd.getComponentId();
+    	try (Statement stm = Main.conn.createStatement())
+    	{
+            stm.executeUpdate(sql);
+    	}
+    	JOptionPane.showMessageDialog (null, "Компонент видалено з специфікації приладу!" );
+	}
+    
+    public void updateComponentInDevice(ComponentDevice cd) throws SQLException 
+    {
+    	String sql = "update component_device set number = ? where device_id = " + cd.getDeviceId() + " and component_id = " + cd.getComponentId();
+    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+    	stm.setInt(1, cd.getNumber());
+    	stm.executeUpdate();
+    	JOptionPane.showMessageDialog (null, "Інформація про компонент в приладі відредагована!" ); 
+	}
 }
 
 

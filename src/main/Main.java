@@ -1,7 +1,10 @@
 package main;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
+import javax.swing.JTextField;
 
 import view.AuthorisationMenu;
 
@@ -25,4 +28,19 @@ public class Main
 		frame.setVisible(true);
 	}
 
+	
+	public static void DateToString(Date d,JTextField t)
+	{
+		String res = null;
+		if(d == null)
+		{
+			res = "";
+			t.setText(res);
+		}
+		else
+		{
+			t.setText(String.valueOf(d));
+		}
+	}
+	
 }

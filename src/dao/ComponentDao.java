@@ -114,7 +114,7 @@ public class ComponentDao
     public List<Component> getAllComponentsInDevice(int device_id) throws SQLException 
     {
         String sql = "SELECT * FROM component WHERE component_id in "
-        		+ "(SELECT component_id FROM component_device WHERE device_id = " + device_id;
+        		+ "(SELECT component_id FROM component_device WHERE device_id = " + device_id + ")";
         List<Component> list = new ArrayList<Component>();
         try (PreparedStatement stm = Main.conn.prepareStatement(sql)) 
         {
@@ -131,6 +131,30 @@ public class ComponentDao
         }
         return list;
     }
+    
+    
+    public List<Component> getAllComponentsNotInDevice(int device_id) throws SQLException 
+    {
+        String sql = "SELECT * FROM component WHERE component_id not in "
+        		+ "(SELECT component_id FROM component_device WHERE device_id = " + device_id + ")";
+        List<Component> list = new ArrayList<Component>();
+        try (PreparedStatement stm = Main.conn.prepareStatement(sql)) 
+        {
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) 
+            {
+                Component c = new Component();
+				c.setId(rs.getInt("component_id"));
+                c.setType(rs.getString("type"));
+                c.setName(rs.getString("name"));
+                c.setTechnicalInfo(rs.getString("technical_info"));
+                list.add(c);
+            }
+        }
+        return list;
+    }
+    
+    
     
     
     public List<Device> getAllDeviceWhichHasComponent(int component_id) throws SQLException 

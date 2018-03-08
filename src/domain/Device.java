@@ -36,9 +36,9 @@ public class Device
 		return device_id;
 	}
 	
-	public void setId(int scientific_theme_id)
+	public void setId(int device_id)
 	{	
-		this.device_id = scientific_theme_id;
+		this.device_id = device_id;
 	}
 	
 	public String getName() 

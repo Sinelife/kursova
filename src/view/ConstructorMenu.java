@@ -21,7 +21,6 @@ public class ConstructorMenu extends JFrame {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
 	/**
@@ -62,10 +61,10 @@ public class ConstructorMenu extends JFrame {
 			public void actionPerformed(ActionEvent arg0) 
 			{
 				ConstructorMenu.this.setVisible(false);
-				new DeviceMenu(ConstructorMenu.this).setVisible(true); 
+				new DeviceMenu().setVisible(true); 
 			}
 		});
-		DeviceMenuButton.setForeground(Color.RED);
+		DeviceMenuButton.setForeground(Color.BLACK);
 		DeviceMenuButton.setHorizontalAlignment(SwingConstants.LEFT);
 		DeviceMenuButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		DeviceMenuButton.setBounds(53, 177, 390, 43);
@@ -79,7 +78,7 @@ public class ConstructorMenu extends JFrame {
 				new ComponentMenu().setVisible(true); 
 			}
 		});
-		ComponentMenuButton.setForeground(Color.RED);
+		ComponentMenuButton.setForeground(Color.BLACK);
 		ComponentMenuButton.setHorizontalAlignment(SwingConstants.LEFT);
 		ComponentMenuButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		ComponentMenuButton.setBounds(53, 269, 390, 43);
