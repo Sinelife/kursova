@@ -54,7 +54,7 @@ public class ComponentMenu extends JFrame {
 			}
 		});
 		InfoButton.setHorizontalAlignment(SwingConstants.LEFT);
-		InfoButton.setForeground(new Color(255, 127, 80));
+		InfoButton.setForeground(Color.GRAY);
 		InfoButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		InfoButton.setBounds(42, 111, 496, 43);
 		contentPane.add(InfoButton);
@@ -106,7 +106,7 @@ public class ComponentMenu extends JFrame {
 			}
 		});
 		InDeviceButton.setHorizontalAlignment(SwingConstants.LEFT);
-		InDeviceButton.setForeground(new Color(255, 165, 0));
+		InDeviceButton.setForeground(Color.GRAY);
 		InDeviceButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		InDeviceButton.setBounds(42, 350, 496, 43);
 		contentPane.add(InDeviceButton);

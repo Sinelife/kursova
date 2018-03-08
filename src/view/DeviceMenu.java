@@ -108,7 +108,7 @@ public class DeviceMenu extends JFrame {
 			}
 		});
 		SpecificationButton.setHorizontalAlignment(SwingConstants.LEFT);
-		SpecificationButton.setForeground(Color.RED);
+		SpecificationButton.setForeground(Color.GRAY);
 		SpecificationButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		SpecificationButton.setBounds(42, 350, 456, 43);
 		contentPane.add(SpecificationButton);
