@@ -19,17 +19,17 @@ public class Delivery
 	}
 	
 	
-	Delivery()
+	public Delivery()
 	{
 		
 	}
 	
-	public int getDeliveryId() 
+	public int getId() 
 	{
 		return delivery_id;
 	}
 	
-	public void setDeliveryId(int delivery_id) 
+	public void setId(int delivery_id) 
 	{
 		this.delivery_id = delivery_id;
 	}

@@ -19,17 +19,17 @@ public class Order
 	}
 	
 	
-	Order()
+	public Order()
 	{
 		
 	}
 	
-	public int getOrderId() 
+	public int getId() 
 	{
 		return order_id;
 	}
 	
-	public void setOrderId(int order_id) 
+	public void setId(int order_id) 
 	{
 		this.order_id = order_id;
 	}

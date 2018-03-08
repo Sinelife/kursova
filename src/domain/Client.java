@@ -21,17 +21,17 @@ public class Client
 	}
 	
 	
-	Client()
+	public Client()
 	{
 		
 	}
 	
-	public int getClientId() 
+	public int getId() 
 	{
 		return client_id;
 	}
 	
-	public void setClientId(int client_id) 
+	public void setId(int client_id) 
 	{
 		this.client_id = client_id;
 	}

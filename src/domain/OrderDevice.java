@@ -9,10 +9,10 @@ public class OrderDevice
 	
 	OrderDevice(int order_id, int device_id, int number, int price)
 	{
-		this.setOrderId(order_id);
-		this.setDeviceId(device_id);
-		this.setNumber(number);
-		this.setPrice(price);
+		this.order_id = order_id;
+		this.device_id = device_id;;
+		this.number = number;
+		this.price = price;
 	}
 	
 	OrderDevice()

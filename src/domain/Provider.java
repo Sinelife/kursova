@@ -23,17 +23,17 @@ public class Provider
 	}
 	
 	
-	Provider()
+	public Provider()
 	{
 		
 	}
 	
-	public int getProviderId() 
+	public int getId() 
 	{
 		return provider_id;
 	}
 	
-	public void setProviderId(int provider_id) 
+	public void setId(int provider_id) 
 	{
 		this.provider_id = provider_id;
 	}
