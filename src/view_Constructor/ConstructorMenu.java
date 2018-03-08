@@ -1,19 +1,22 @@
-package view;
+package view_Constructor;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import dao.UserDao;
+import domain.User;
+import view.AuthorisationMenu;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.Color;
-import javax.swing.JTextField;
-import java.awt.SystemColor;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
 public class ConstructorMenu extends JFrame {
@@ -23,27 +26,17 @@ public class ConstructorMenu extends JFrame {
 	 */
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ConstructorMenu frame = new ConstructorMenu();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
+	 * @throws SQLException
 	 */
-	public ConstructorMenu() 
+	public ConstructorMenu() throws SQLException 
 	{
+		UserDao ud = new UserDao();
+		User u = ud.readUser(AuthorisationMenu.user_id_to_choose);
+		String UserSurnameName = u.getSurname() + " " + u.getName();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 740, 527);
 		contentPane = new JPanel();
@@ -55,6 +48,11 @@ public class ConstructorMenu extends JFrame {
 		MenuTitleLabel.setFont(new Font("Tahoma", Font.BOLD, 21));
 		MenuTitleLabel.setBounds(128, 13, 456, 38);
 		contentPane.add(MenuTitleLabel);
+		
+		JLabel UserPIBLabel = new JLabel(UserSurnameName);
+		UserPIBLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		UserPIBLabel.setBounds(205, 64, 267, 38);
+		contentPane.add(UserPIBLabel);
 		
 		JButton DeviceMenuButton = new JButton("1)Меню роботи з приладами");
 		DeviceMenuButton.addActionListener(new ActionListener() {
@@ -91,9 +89,17 @@ public class ConstructorMenu extends JFrame {
 		button_2.setBounds(53, 361, 390, 43);
 		contentPane.add(button_2);
 		
-		JLabel UserPIBLabel = new JLabel("UserPIb");
-		UserPIBLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		UserPIBLabel.setBounds(205, 64, 267, 38);
-		contentPane.add(UserPIBLabel);
+		
+		
+		JButton btnBack = new JButton("Розлогінитися");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ConstructorMenu.this.setVisible(false);
+				ConstructorMenu.this.dispose();
+				new AuthorisationMenu().setVisible(true);
+			}
+		});
+		btnBack.setBounds(550, 429, 140, 25);
+		contentPane.add(btnBack);
 	}
 }

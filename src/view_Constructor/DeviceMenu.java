@@ -1,4 +1,4 @@
-package view;
+package view_Constructor;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -141,7 +141,12 @@ public class DeviceMenu extends JFrame {
 			{
 				DeviceMenu.this.setVisible(false);
 				DeviceMenu.this.dispose();
-				new ConstructorMenu().setVisible(true);
+				try {
+					new ConstructorMenu().setVisible(true);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnBack.setBounds(602, 534, 97, 25);

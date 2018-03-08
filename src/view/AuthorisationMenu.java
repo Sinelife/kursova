@@ -1,14 +1,13 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import dao.UserDao;
 import domain.User;
+import view_Constructor.ConstructorMenu;
+import view_workerselldevice.WorkerSalesDepartmentMenu;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -22,13 +21,15 @@ import java.sql.SQLException;
 import java.util.List;
 import java.awt.event.ActionEvent;
 
-public class AuthorisationMenu extends JFrame {
+public class AuthorisationMenu extends JFrame 
+{
 
 	private JPanel contentPane;
 	private JTextField LoginField;
 	private JTextField PasswordField;
 	private JLabel LoginMenuTitle;
 	private JButton button;
+	public static int user_id_to_choose;
 
 
 	/**
@@ -95,8 +96,26 @@ public class AuthorisationMenu extends JFrame {
 						if(user.getRole().equals("constructor"))
 						{
 							loginIn = true;
+							user_id_to_choose = user.getId();
 							AuthorisationMenu.this.setVisible(false);
-							new ConstructorMenu().setVisible(true); 
+							try {
+								new ConstructorMenu().setVisible(true);
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} 
+						}
+						if(user.getRole().equals("worker_of_sales_department"))
+						{
+							loginIn = true;
+							user_id_to_choose = user.getId();
+							AuthorisationMenu.this.setVisible(false);
+							try {
+								new WorkerSalesDepartmentMenu().setVisible(true);
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} 
 						}
 					}
 				}

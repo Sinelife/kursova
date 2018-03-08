@@ -1,4 +1,4 @@
-package view;
+package view_Constructor;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -118,7 +118,12 @@ public class ComponentMenu extends JFrame {
 			{
 				ComponentMenu.this.setVisible(false);
 				ComponentMenu.this.dispose();
-				new ConstructorMenu().setVisible(true);
+				try {
+					new ConstructorMenu().setVisible(true);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnBack.setBounds(596, 427, 97, 25);

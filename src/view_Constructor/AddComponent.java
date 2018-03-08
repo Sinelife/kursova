@@ -1,4 +1,4 @@
-package view;
+package view_Constructor;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -7,34 +7,34 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+
 import dao.ComponentDao;
 import domain.Component;
-import java.awt.Color;
 
-public class ComponentInformation extends JFrame {
+import javax.swing.JButton;
+
+public class AddComponent extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField TypeField;
 	private JTextField NameField;
 	private JTextField TechnicalInfoField;
-	
 
 
 	/**
 	 * Create the frame.
-	 * @throws SQLException 
 	 */
-	public ComponentInformation(JFrame parent) throws SQLException 
+	public AddComponent(JFrame parent)
 	{
- 	  	ComponentDao cd = new ComponentDao();
- 	  	Component c = cd.readComponent(InfoComponent.id_to_look);
+		ComponentDao cd = new ComponentDao();
+		Component c = new Component();
+		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 646, 558);
@@ -43,7 +43,7 @@ public class ComponentInformation extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Інформація про компонент");
+		JLabel lblNewLabel = new JLabel("Додавання нового компонента");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblNewLabel.setBounds(103, 13, 421, 59);
 		contentPane.add(lblNewLabel);
@@ -62,30 +62,43 @@ public class ComponentInformation extends JFrame {
 		
 		
 		TypeField = new JTextField();
-		TypeField.setBackground(Color.WHITE);
-		TypeField.setEditable(false);
 		TypeField.setBounds(209, 157, 350, 22);
 		contentPane.add(TypeField);
 		TypeField.setColumns(10);
-		TypeField.setText(c.getType());
 		
 		NameField = new JTextField();
-		NameField.setBackground(Color.WHITE);
-		NameField.setEditable(false);
 		NameField.setBounds(209, 209, 350, 22);
 		contentPane.add(NameField);
 		NameField.setColumns(10);
-		NameField.setText(c.getName());
 		
 		TechnicalInfoField = new JTextField();
-		TechnicalInfoField.setBackground(Color.WHITE);
-		TechnicalInfoField.setEditable(false);
 		TechnicalInfoField.setColumns(10);
-		TechnicalInfoField.setBounds(209, 267, 350, 71);
+		TechnicalInfoField.setBounds(209, 267, 350, 22);
 		contentPane.add(TechnicalInfoField);
-		TechnicalInfoField.setText(c.getTechnicalInfo());
 		
 		
+		JButton AddButton = new JButton("Додати");
+		AddButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				c.setType(TypeField.getText());
+				c.setName(NameField.getText());
+				c.setTechnicalInfo(TechnicalInfoField.getText());
+				try {
+					cd.addComponent(c);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				if (parent != null)
+					parent.setVisible(true);
+				AddComponent.this.setVisible(false);
+				AddComponent.this.dispose();
+			}
+		});
+		AddButton.setBounds(52, 427, 97, 25);
+		contentPane.add(AddButton);
 		
 		
 		JButton btnBack = new JButton("BACK");
@@ -93,12 +106,11 @@ public class ComponentInformation extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (parent != null)
 					parent.setVisible(true);
-				ComponentInformation.this.setVisible(false);
-				ComponentInformation.this.dispose();
+				AddComponent.this.setVisible(false);
+				AddComponent.this.dispose();
 			}
 		});
 		btnBack.setBounds(489, 427, 97, 25);
 		contentPane.add(btnBack);
 	}
-
 }

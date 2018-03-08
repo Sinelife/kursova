@@ -1,4 +1,4 @@
-package view;
+package view_Constructor;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -13,13 +13,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import dao.ComponentDao;
 import dao.DeviceDao;
-import domain.Component;
 import domain.Device;
+import main.Main;
+import java.awt.Color;
 
-
-public class EditDeviceFrame extends JFrame {
+public class DeviceInformation extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField NameField;
@@ -28,16 +27,14 @@ public class EditDeviceFrame extends JFrame {
 	private JTextField RatingField;
 	private JTextField StartDateField;
 	
-	
 	/**
 	 * Create the frame.
 	 * @throws SQLException 
 	 */
-	public EditDeviceFrame(JFrame parent) throws SQLException 
+	public DeviceInformation(JFrame parent) throws SQLException 
 	{
 		DeviceDao dd = new DeviceDao();
-		Device d = dd.readDevice(EditDevice.id_to_edit);
-		
+		Device d = dd.readDevice(InfoDevice.id_to_look);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 646, 558);
@@ -46,9 +43,9 @@ public class EditDeviceFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Редагування інформаціх про прилад");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 26));
-		lblNewLabel.setBounds(51, 13, 473, 59);
+		JLabel lblNewLabel = new JLabel("Інформація про прилад");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		lblNewLabel.setBounds(103, 13, 421, 59);
 		contentPane.add(lblNewLabel);
 		
 		JLabel NameLabel_1 = new JLabel("Назва приладу");
@@ -73,60 +70,45 @@ public class EditDeviceFrame extends JFrame {
 		
 		
 		NameField = new JTextField();
+		NameField.setBackground(Color.WHITE);
+		NameField.setEditable(false);
 		NameField.setBounds(209, 129, 350, 22);
 		contentPane.add(NameField);
 		NameField.setColumns(10);
 		NameField.setText(d.getName());
 		
 		SupplyVoltageField = new JTextField();
+		SupplyVoltageField.setBackground(Color.WHITE);
+		SupplyVoltageField.setEditable(false);
 		SupplyVoltageField.setBounds(209, 171, 350, 22);
 		contentPane.add(SupplyVoltageField);
 		SupplyVoltageField.setColumns(10);
 		SupplyVoltageField.setText(d.getSupplyVoltage());
 		
 		BorderRegulationTimeField = new JTextField();
+		BorderRegulationTimeField.setBackground(Color.WHITE);
+		BorderRegulationTimeField.setEditable(false);
 		BorderRegulationTimeField.setColumns(10);
 		BorderRegulationTimeField.setBounds(209, 217, 350, 22);
 		contentPane.add(BorderRegulationTimeField);
 		BorderRegulationTimeField.setText(d.getBorderRegulationTime());
 		
 		RatingField = new JTextField();
+		RatingField.setBackground(Color.WHITE);
+		RatingField.setEditable(false);
 		RatingField.setColumns(10);
 		RatingField.setBounds(209, 261, 350, 22);
 		contentPane.add(RatingField);
 		RatingField.setText(String.valueOf(d.getRating()));
 		
 		StartDateField = new JTextField();
+		StartDateField.setBackground(Color.WHITE);
+		StartDateField.setEditable(false);
 		StartDateField.setColumns(10);
 		StartDateField.setBounds(209, 301, 350, 22);
 		contentPane.add(StartDateField);
-		StartDateField.setText(String.valueOf(d.getDate()));
+		Main.DateToString(d.getDate(), StartDateField);
 		
-		
-		JButton EditButton = new JButton("Редагувати");
-		EditButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		EditButton.addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent e) 
-			{
-				d.setName(NameField.getText());
-				d.setSupplyVoltage(SupplyVoltageField.getText());
-				d.setBorderRegulationTime(BorderRegulationTimeField.getText());
-				d.setRating(Integer.valueOf(RatingField.getText()));
-				d.setDate(Date.valueOf(StartDateField.getText()));
-				try {
-					dd.updateDevice(d);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				EditDeviceFrame.this.setVisible(false);
-				EditDeviceFrame.this.dispose();
-				new DeviceMenu().setVisible(true);
-			}
-		});
-		EditButton.setBounds(36, 427, 125, 25);
-		contentPane.add(EditButton);
 		
 		
 		JButton btnBack = new JButton("BACK");
@@ -134,8 +116,8 @@ public class EditDeviceFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (parent != null)
 					parent.setVisible(true);
-				EditDeviceFrame.this.setVisible(false);
-				EditDeviceFrame.this.dispose();
+				DeviceInformation.this.setVisible(false);
+				DeviceInformation.this.dispose();
 			}
 		});
 		btnBack.setBounds(489, 427, 97, 25);
