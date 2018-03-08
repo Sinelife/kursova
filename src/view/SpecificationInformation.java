@@ -17,6 +17,7 @@ import javax.swing.border.EmptyBorder;
 import dao.ComponentDao;
 import dao.DeviceDao;
 import domain.Component;
+import domain.ComponentDevice;
 import domain.Device;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -61,45 +62,24 @@ public class SpecificationInformation extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		
-		String[] columnNames = {"First Name",
-                "Last Name",
-                "Sport",
-                "# of Years",
-                "Vegetarian"};
-
-				Object[][] data = {
-				{"Kathy", "Smith",
-				"Snowboarding", new Integer(5), new Boolean(false)},
-				{"John", "Doe",
-				"Rowing", new Integer(3), new Boolean(true)},
-				{"Sue", "Black",
-				"Knitting", new Integer(2), new Boolean(false)},
-				{"Jane", "White",
-				"Speed reading", new Integer(20), new Boolean(true)},
-				{"Joe", "Brown",
-				"Pool", new Integer(10), new Boolean(false)}
-				};
-				JTable table = new JTable(data, columnNames);
-
-				contentPane.add(table.getTableHeader(), BorderLayout.PAGE_START);
-				contentPane.add(table, BorderLayout.CENTER);
-				
-				
-				
+		
+		JComboBox<String> comboBox_1 = new JComboBox<String>();
+		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		comboBox_1.setBounds(40, 324, 504, 34);
+		contentPane.add(comboBox_1);
+		
+		
 						
 		JButton button = new JButton("Вибрати");
 		button.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
+				comboBox_1.removeAllItems();
 				ComponentDao cd = new ComponentDao();
+				DeviceDao dd = new DeviceDao();
 				List<Component> components = null;
-				try {
-					components = cd.getAll();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+
 				name_to_choose = String.valueOf(comboBox.getSelectedItem());
 				for(Device device : devices)
 				{
@@ -108,13 +88,50 @@ public class SpecificationInformation extends JFrame {
 						id_to_choose = device.getId();
 					}
 				}
-
+				try {
+					components = cd.getAllComponentsInDevice(id_to_choose);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				String info[] = new String[100];
+				int i = 0 ;
+				ComponentDevice c_d = null;
+				Component comp = null;
+				for(Component component : components)
+				{
+					try {
+						c_d = dd.readComponentInDevice(id_to_choose, component.getId());
+						comp = cd.readComponent(component.getId());
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					info[i] = "Назва: " + comp.getName() + "    Тип: " + comp.getType() + "    Кількість:" + c_d.getNumber();
+					comboBox_1.addItem(info[i]);
+					i++;
+				}
+				
 			}
 		});
 		button.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		button.setBounds(331, 197, 119, 25);
 		contentPane.add(button);
 		
+
+		JButton btnBack = new JButton("BACK");
+		btnBack.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				if (parent != null)
+					parent.setVisible(true);
+				SpecificationInformation.this.setVisible(false);
+				SpecificationInformation.this.dispose();
+			}
+		});
+		btnBack.setBounds(519, 473, 97, 25);
+		contentPane.add(btnBack);
 		
 
 	}

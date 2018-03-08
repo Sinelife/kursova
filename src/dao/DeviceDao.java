@@ -157,6 +157,24 @@ public class DeviceDao
         return cd;
 	}
     
+    public ComponentDevice readSpecificationInfo(int device_id, int component_id) throws SQLException 
+    {
+        String sql = "SELECT device.name FROM component_device WHERE device_id = ?" + " and component_id = ?";
+        ComponentDevice cd = new ComponentDevice();
+        try (PreparedStatement stm = Main.conn.prepareStatement(sql)) 
+        {
+            stm.setInt(1, device_id);
+            stm.setInt(2, component_id);
+            ResultSet rs = stm.executeQuery();
+            rs.next();
+            cd.setDeviceId(rs.getInt("device_id"));
+            cd.setComponentId(rs.getInt("component_id"));
+            cd.setNumber(rs.getInt("number"));
+        }
+        return cd;
+	}
+    
+    
     public void addComponentToDevice(ComponentDevice cd) throws SQLException 
     {
 		String sql = "INSERT INTO component_device (device_id, component_id, number) VALUES (?,?,?)";
@@ -187,6 +205,9 @@ public class DeviceDao
     	stm.executeUpdate();
     	JOptionPane.showMessageDialog (null, "Інформація про компонент в приладі відредагована!" ); 
 	}
+    
+    
+    
 }
 
 
