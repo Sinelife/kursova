@@ -30,26 +30,23 @@ public class OrderDeviceDao
 	    /** @throws SQLException */
 	    public OrderDevice readOrderDevice(int order_id, int device_id) throws SQLException 
 	    {
-	        String sql = "SELECT * FROM OrderDevice WHERE order_id = ?";
-	        OrderDevice c = new OrderDevice();
+	        String sql = "SELECT * FROM OrderDevice WHERE order_id = ? and device_id = ?";
+	        OrderDevice od = new OrderDevice();
 	        try (PreparedStatement stm = Main.conn.prepareStatement(sql)) 
 	        {
-	            stm.setInt(1, key);
+	            stm.setInt(1, order_id);
+	            stm.setInt(2, device_id);
 	            ResultSet rs = stm.executeQuery();
 	            rs.next();
-	            c.setId(rs.getInt("OrderDevice_id"));
-	            c.setName(rs.getString("name"));
-	            c.setPhone(rs.getString("phone"));
-	            c.setContactPIB(rs.getString("contactPIB"));
-	            c.setCodeERPOU(rs.getString("codeERPOU"));
-	            c.setCodeTaxpayer(rs.getString("codeTaxpayer"));
+	            od.setNumber(rs.getInt("number"));
+	            od.setPrice(rs.getInt("price"));
 	        }
-	        return c;
+	        return od;
 		}
 	    
 
 	    
-	    /**@throws SQLException */
+	    /**@throws SQLException *//*
 	    public void updateOrderDevice(OrderDevice c) throws SQLException 
 	    {
 	    	String sql = "update OrderDevice set name = ?, phone = ?, contactPIB = ?, codeERPOU = ?, codeTaxpayer = ? where OrderDevice_id = " +  c.getId();
@@ -66,7 +63,7 @@ public class OrderDeviceDao
 	    
 	    
 	    
-	    /** @throws SQLException */ 
+	    /** @throws SQLException */ /**
 	    public void delete(OrderDevice d) throws SQLException 
 	    {
 
@@ -95,6 +92,6 @@ public class OrderDeviceDao
 	            }
 	        }
 	        return list;
-	    }
+	    }*/
 
 }

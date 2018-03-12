@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import domain.Device;
 import domain.User;
 import domain.User;
 import main.Main;
@@ -16,7 +17,7 @@ import main.Main;
 public class UserDao 
 {
 	/** @throws SQLException */
-    public void createUser(User u) throws SQLException 
+    public void addUser(User u) throws SQLException 
     {
 		String sql = "INSERT INTO user (user_id, surname, name, login, password, role) VALUES (?,?,?,?,?,?)";
  	  	PreparedStatement stm = Main.conn.prepareStatement(sql);
@@ -64,18 +65,31 @@ public class UserDao
 
     
     /**@throws SQLException */
-    public void update(User d) throws SQLException 
+    public void updateUser(User u) throws SQLException 
     {
-
+    	String sql = "update user set surname = ?, name = ?, login = ?, password = ?, role = ? where user_id = " +  u.getId();
+    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+    	stm.setString(1, u.getSurname());
+    	stm.setString(2, u.getName());
+    	stm.setString(3, u.getLogin());
+    	stm.setString(4, u.getPassword());
+    	stm.setString(5, u.getRole());
+    	stm.executeUpdate();
+    	JOptionPane.showMessageDialog (null, "Акаунт працівника відредаговано!" ); 
 	}
 
     
     
     
     /** @throws SQLException */ 
-    public void delete(User d) throws SQLException 
+    public void delete(User u) throws SQLException 
     {
-
+		String sql = "DELETE FROM user WHERE user_id = " + u.getId();
+    	try (Statement stm = Main.conn.createStatement())
+    	{
+            stm.executeUpdate(sql);
+    	}
+    	JOptionPane.showMessageDialog (null, "Акаунт працівника видалено!" );
 	}
 
     

@@ -7,6 +7,7 @@ import javax.swing.border.EmptyBorder;
 import dao.UserDao;
 import domain.User;
 import view_Constructor.ConstructorMenu;
+import view_admin.AdminMenu;
 import view_workerselldevice.WorkerSalesDepartmentMenu;
 
 import javax.swing.JLabel;
@@ -112,6 +113,18 @@ public class AuthorisationMenu extends JFrame
 							AuthorisationMenu.this.setVisible(false);
 							try {
 								new WorkerSalesDepartmentMenu().setVisible(true);
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} 
+						}
+						if(user.getRole().equals("admin"))
+						{
+							loginIn = true;
+							user_id_to_choose = user.getId();
+							AuthorisationMenu.this.setVisible(false);
+							try {
+								new AdminMenu().setVisible(true);
 							} catch (SQLException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();

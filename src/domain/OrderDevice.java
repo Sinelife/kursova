@@ -15,7 +15,7 @@ public class OrderDevice
 		this.price = price;
 	}
 	
-	OrderDevice()
+	public OrderDevice()
 	{
 		
 	}
