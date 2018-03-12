@@ -5,14 +5,16 @@ import java.sql.Date;
 public class Order 
 {
 	private int order_id;
+	private String order_name;
 	private int client_id;
 	private Date startDate;
 	private boolean paid;
 	
 	
-	Order(int order_id, int client_id, Date startDate, boolean paid)
+	Order(int order_id, String order_name, int client_id, Date startDate, boolean paid)
 	{
 		this.order_id = order_id;
+		this.setOrderName(order_name);
 		this.client_id = client_id;
 		this.startDate = startDate;
 		this.paid = paid;
@@ -32,6 +34,16 @@ public class Order
 	public void setId(int order_id) 
 	{
 		this.order_id = order_id;
+	}
+	
+	public String getOrderName() 
+	{
+		return order_name;
+	}
+
+	public void setOrderName(String order_name) 
+	{
+		this.order_name = order_name;
 	}
 	
 	public int getClientId() 

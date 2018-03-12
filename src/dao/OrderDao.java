@@ -16,7 +16,7 @@ public class OrderDao
 	
 	public void addOrder(Order o) throws SQLException 
 	{
-		String sql = "INSERT INTO order (order_id, client_id, startdate, paid) VALUES (?,?,?,?)";
+		String sql = "INSERT INTO orders (order_id, order_name, client_id, startdate, paid) VALUES (?,?,?,?,?)";
 		PreparedStatement stm = Main.conn.prepareStatement(sql);
 		int i = -1;
 		String sql_for_id = "SELECT MAX(order_id) from order";
@@ -27,9 +27,10 @@ public class OrderDao
 			i = result.getInt(1);
 		}
 		stm.setInt(1, i + 1);
-		stm.setInt(2, o.getClientId());
-		stm.setDate(3, o.getStartDate());
-		stm.setBoolean(4, o.getPaid());
+		stm.setString(2, o.getOrderName());
+		stm.setInt(3, o.getClientId());
+		stm.setDate(4, o.getStartDate());
+		stm.setBoolean(5, o.getPaid());
 		stm.executeUpdate();
 		JOptionPane.showMessageDialog(null, "Нове замовлення на купівлю додано до бази данних!");
 	}
@@ -42,7 +43,7 @@ public class OrderDao
 	 */
 	public Order readOrder(int key) throws SQLException 
 	{
-		String sql = "SELECT * FROM order WHERE order_id = ?";
+		String sql = "SELECT * FROM orders WHERE order_id = ?";
 		Order o = new Order();
 		try (PreparedStatement stm = Main.conn.prepareStatement(sql)) 
 		{
@@ -50,6 +51,7 @@ public class OrderDao
 			ResultSet rs = stm.executeQuery();
 			rs.next();
 			o.setId(rs.getInt("order_id"));
+			o.setOrderName(rs.getString("order_name"));
 			o.setClientId(rs.getInt("client_id"));
 			o.setStartDate(rs.getDate("startdate"));
 			o.setPaid(rs.getBoolean("paid"));
@@ -65,11 +67,12 @@ public class OrderDao
 	 */
 	public void updateOrder(Order o) throws SQLException 
 	{
-		String sql = "update Order set client_id = ?, startdate = ?, paid = ? where order_id = " + o.getId();
+		String sql = "update orders set order_name = ?, client_id = ?, startdate = ?, paid = ? where order_id = " + o.getId();
 		PreparedStatement stm = Main.conn.prepareStatement(sql);
-		stm.setInt(1, o.getClientId());
-		stm.setDate(2, o.getStartDate());
-		stm.setBoolean(3, o.getPaid());
+		stm.setString(1, o.getOrderName());
+		stm.setInt(2, o.getClientId());
+		stm.setDate(3, o.getStartDate());
+		stm.setBoolean(4, o.getPaid());
 		stm.executeUpdate();
 		JOptionPane.showMessageDialog(null, "Інформація про замовлення на купівлю відредаговано!");
 	}
@@ -90,7 +93,7 @@ public class OrderDao
 
 	public List<Order> getAll() throws SQLException 
 	{
-		String sql = "SELECT * FROM order;";
+		String sql = "SELECT * FROM orders;";
 		List<Order> list = new ArrayList<Order>();
 		try (PreparedStatement stm = Main.conn.prepareStatement(sql)) 
 		{
@@ -98,6 +101,7 @@ public class OrderDao
 			while (rs.next()) {
 				Order o = new Order();
 				o.setId(rs.getInt("order_id"));
+				o.setOrderName(rs.getString("order_name"));
 				o.setClientId(rs.getInt("client_id"));
 				o.setStartDate(rs.getDate("startdate"));
 				o.setPaid(rs.getBoolean("paid"));

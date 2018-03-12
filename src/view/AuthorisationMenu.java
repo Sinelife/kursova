@@ -38,7 +38,6 @@ public class AuthorisationMenu extends JFrame
 	 */
 	public AuthorisationMenu() 
 	{
-		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 666, 387);
 		contentPane = new JPanel();

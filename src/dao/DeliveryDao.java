@@ -16,7 +16,7 @@ public class DeliveryDao
 	
 	public void addDelivery(Delivery d) throws SQLException 
 	{
-		String sql = "INSERT INTO delivery (delivery_id, provider_id, startdate, paid) VALUES (?,?,?,?)";
+		String sql = "INSERT INTO delivery (delivery_id, delivery_name, provider_id, startdate, paid) VALUES (?,?,?,?,?)";
 		PreparedStatement stm = Main.conn.prepareStatement(sql);
 		int i = -1;
 		String sql_for_id = "SELECT MAX(delivery_id) from delivery";
@@ -27,9 +27,10 @@ public class DeliveryDao
 			i = result.getInt(1);
 		}
 		stm.setInt(1, i + 1);
-		stm.setInt(2, d.getId());
-		stm.setDate(3, d.getStartDate());
-		stm.setBoolean(4, d.getPaid());
+		stm.setString(2, d.getDeliveryName());
+		stm.setInt(3, d.getProviderId());
+		stm.setDate(4, d.getStartDate());
+		stm.setBoolean(5, d.getPaid());
 		stm.executeUpdate();
 		JOptionPane.showMessageDialog(null, "Ќове замовленн€ на постачанн€ додано до бази данних!");
 	}
@@ -50,6 +51,7 @@ public class DeliveryDao
 			ResultSet rs = stm.executeQuery();
 			rs.next();
 			d.setId(rs.getInt("delivery_id"));
+			d.setDeliveryName(rs.getString("delivery_name"));
 			d.setProviderId(rs.getInt("provider_id"));
 			d.setStartDate(rs.getDate("startdate"));
 			d.setPaid(rs.getBoolean("paid"));
@@ -65,7 +67,7 @@ public class DeliveryDao
 	 */
 	public void updateDelivery(Delivery d) throws SQLException 
 	{
-		String sql = "update delivery set provider_id = ?, startdate = ?, paid = ? where delivery_id = " + d.getId();
+		String sql = "update delivery set delivery_name = ?, provider_id = ?, startdate = ?, paid = ? where delivery_id = " + d.getId();
 		PreparedStatement stm = Main.conn.prepareStatement(sql);
 		stm.setInt(1, d.getProviderId());
 		stm.setDate(2, d.getStartDate());
@@ -99,6 +101,7 @@ public class DeliveryDao
 			{
 				Delivery d = new Delivery();
 				d.setId(rs.getInt("delivery_id"));
+				d.setDeliveryName(rs.getString("delivery_name"));
 				d.setProviderId(rs.getInt("provider_id"));
 				d.setStartDate(rs.getDate("startdate"));
 				d.setPaid(rs.getBoolean("paid"));
