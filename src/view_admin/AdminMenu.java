@@ -109,6 +109,19 @@ public class AdminMenu extends JFrame {
 		
 		
 		JButton DeliveryDepartmentWorkerTablesButton = new JButton("4)ћеню роботи з таблиц€ми в≥дд≥лу постачанн€");
+		DeliveryDepartmentWorkerTablesButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				AdminMenu.this.setVisible(false);
+				try {
+					new WorkerDeliveryDepartmentAdminMenu().setVisible(true);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+			}
+		});
 		DeliveryDepartmentWorkerTablesButton.setHorizontalAlignment(SwingConstants.LEFT);
 		DeliveryDepartmentWorkerTablesButton.setForeground(Color.RED);
 		DeliveryDepartmentWorkerTablesButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
@@ -124,7 +137,7 @@ public class AdminMenu extends JFrame {
 				new AuthorisationMenu().setVisible(true);
 			}
 		});
-		btnBack.setBounds(579, 429, 115, 25);
+		btnBack.setBounds(567, 429, 127, 25);
 		contentPane.add(btnBack);
 		
 

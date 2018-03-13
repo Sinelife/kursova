@@ -1,4 +1,4 @@
-package view_workerbuycomponent;
+package view_admin;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -16,8 +16,9 @@ import javax.swing.border.EmptyBorder;
 import dao.UserDao;
 import domain.User;
 import view.AuthorisationMenu;
+import view_workerbuycomponent.ProviderMenu;
 
-public class WorkerDeliveryDepartmentMenu extends JFrame {
+public class WorkerDeliveryDepartmentAdminMenu extends JFrame {
 
 	private JPanel contentPane;
 
@@ -26,7 +27,7 @@ public class WorkerDeliveryDepartmentMenu extends JFrame {
 	 * Create the frame.
 	 * @throws SQLException 
 	 */
-	public WorkerDeliveryDepartmentMenu() throws SQLException 
+	public WorkerDeliveryDepartmentAdminMenu() throws SQLException 
 	{
 		UserDao ud = new UserDao();
 		User u = ud.readUser(AuthorisationMenu.user_id_to_choose);
@@ -44,7 +45,7 @@ public class WorkerDeliveryDepartmentMenu extends JFrame {
 		UserPIBLabel.setBounds(205, 64, 267, 38);
 		contentPane.add(UserPIBLabel);
 		
-		JLabel MenuTitleLabel = new JLabel("Меню члена відділу постачання");
+		JLabel MenuTitleLabel = new JLabel("Меню адміна(як члена відділу постачання)");
 		MenuTitleLabel.setFont(new Font("Tahoma", Font.BOLD, 21));
 		MenuTitleLabel.setBounds(35, 13, 531, 38);
 		contentPane.add(MenuTitleLabel);
@@ -54,7 +55,7 @@ public class WorkerDeliveryDepartmentMenu extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				WorkerDeliveryDepartmentMenu.this.setVisible(false);
+				WorkerDeliveryDepartmentAdminMenu.this.setVisible(false);
 				new ProviderMenu().setVisible(true); 
 			}
 		});
@@ -73,15 +74,20 @@ public class WorkerDeliveryDepartmentMenu extends JFrame {
 		
 		
 		
-		JButton LogOutButtton = new JButton("Розлогінитись");
+		JButton LogOutButtton = new JButton("BACK");
 		LogOutButtton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				WorkerDeliveryDepartmentMenu.this.setVisible(false);
-				WorkerDeliveryDepartmentMenu.this.dispose();
-				new AuthorisationMenu().setVisible(true);
+				WorkerDeliveryDepartmentAdminMenu.this.setVisible(false);
+				WorkerDeliveryDepartmentAdminMenu.this.dispose();
+				try {
+					new AdminMenu().setVisible(true);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
-		LogOutButtton.setBounds(454, 430, 130, 25);
+		LogOutButtton.setBounds(498, 430, 86, 25);
 		contentPane.add(LogOutButtton);
 	}
 
