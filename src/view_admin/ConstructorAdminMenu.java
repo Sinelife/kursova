@@ -1,6 +1,4 @@
-package view_Constructor;
-
-import java.awt.EventQueue;
+package view_admin;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -9,6 +7,8 @@ import javax.swing.border.EmptyBorder;
 import dao.UserDao;
 import domain.User;
 import view.AuthorisationMenu;
+import view_Constructor.ComponentMenu;
+import view_Constructor.DeviceMenu;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -19,18 +19,19 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
-public class ConstructorMenu extends JFrame {
+public class ConstructorAdminMenu extends JFrame {
 
 	/**
 	 * 
 	 */
 	private JPanel contentPane;
+	
 
 	/**
 	 * Create the frame.
 	 * @throws SQLException
 	 */
-	public ConstructorMenu() throws SQLException 
+	public ConstructorAdminMenu() throws SQLException 
 	{
 		UserDao ud = new UserDao();
 		User u = ud.readUser(AuthorisationMenu.user_id_to_choose);
@@ -43,9 +44,9 @@ public class ConstructorMenu extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel MenuTitleLabel = new JLabel("Меню члена конструкторського відділу");
+		JLabel MenuTitleLabel = new JLabel("Меню адміна(як члена конструкторського бюро)");
 		MenuTitleLabel.setFont(new Font("Tahoma", Font.BOLD, 21));
-		MenuTitleLabel.setBounds(128, 13, 456, 38);
+		MenuTitleLabel.setBounds(60, 13, 630, 38);
 		contentPane.add(MenuTitleLabel);
 		
 		JLabel UserPIBLabel = new JLabel(UserSurnameName);
@@ -57,7 +58,7 @@ public class ConstructorMenu extends JFrame {
 		DeviceMenuButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				ConstructorMenu.this.setVisible(false);
+				ConstructorAdminMenu.this.setVisible(false);
 				new DeviceMenu().setVisible(true); 
 			}
 		});
@@ -71,7 +72,7 @@ public class ConstructorMenu extends JFrame {
 		ComponentMenuButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
-				ConstructorMenu.this.setVisible(false);
+				ConstructorAdminMenu.this.setVisible(false);
 				new ComponentMenu().setVisible(true); 
 			}
 		});
@@ -90,12 +91,17 @@ public class ConstructorMenu extends JFrame {
 		
 		
 		
-		JButton btnBack = new JButton("Розлогінитися");
+		JButton btnBack = new JButton("BACK");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ConstructorMenu.this.setVisible(false);
-				ConstructorMenu.this.dispose();
-				new AuthorisationMenu().setVisible(true);
+				ConstructorAdminMenu.this.setVisible(false);
+				ConstructorAdminMenu.this.dispose();
+				try {
+					new AdminMenu().setVisible(true);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnBack.setBounds(550, 429, 140, 25);

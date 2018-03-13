@@ -42,7 +42,6 @@ public class DeviceWhichHasComponent extends JFrame {
 	{
 		ComponentDao cd = new ComponentDao();
 		List<Component> components = cd.getAll();
-		DeviceDao dd = new DeviceDao();
 		
 
 
@@ -74,19 +73,7 @@ public class DeviceWhichHasComponent extends JFrame {
 		DeviceComboBox.setBounds(34, 264, 504, 34);
 		contentPane.add(DeviceComboBox);
 		
-		
-		
-		JButton btnBack = new JButton("BACK");
-		btnBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (parent != null)
-					parent.setVisible(true);
-				DeviceWhichHasComponent.this.setVisible(false);
-				DeviceWhichHasComponent.this.dispose();
-			}
-		});
-		btnBack.setBounds(489, 427, 97, 25);
-		contentPane.add(btnBack);
+
 		
 		JButton btnNewButton = new JButton("Вибрати");
 		btnNewButton.addActionListener(new ActionListener() 
@@ -117,6 +104,19 @@ public class DeviceWhichHasComponent extends JFrame {
 		btnNewButton.setBounds(441, 187, 97, 25);
 		contentPane.add(btnNewButton);
 		
+		
+		
+		JButton btnBack = new JButton("BACK");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (parent != null)
+					parent.setVisible(true);
+				DeviceWhichHasComponent.this.setVisible(false);
+				DeviceWhichHasComponent.this.dispose();
+			}
+		});
+		btnBack.setBounds(489, 427, 97, 25);
+		contentPane.add(btnBack);
 
 	}
 }

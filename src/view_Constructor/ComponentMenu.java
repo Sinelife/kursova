@@ -1,7 +1,5 @@
 package view_Constructor;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +9,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import view.AuthorisationMenu;
+import view_admin.ConstructorAdminMenu;
+
 import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.SwingConstants;
@@ -118,11 +120,23 @@ public class ComponentMenu extends JFrame {
 			{
 				ComponentMenu.this.setVisible(false);
 				ComponentMenu.this.dispose();
-				try {
-					new ConstructorMenu().setVisible(true);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				if(AuthorisationMenu.user_role.equals("constructor"))
+				{
+					try {
+						new ConstructorMenu().setVisible(true);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+				if(AuthorisationMenu.user_role.equals("admin"))
+				{
+					try {
+						new ConstructorAdminMenu().setVisible(true);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 			}
 		});

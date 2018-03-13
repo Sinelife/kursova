@@ -1,8 +1,6 @@
 package view_Constructor;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,17 +13,19 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import view.AuthorisationMenu;
+import view_admin.ConstructorAdminMenu;
+
 public class DeviceMenu extends JFrame {
 
 	private JPanel contentPane;
-
 
 
 	/**
 	 * Create the frame.
 	 */
 	public DeviceMenu() 
-	{
+	{	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 742, 619);
 		contentPane = new JPanel();
@@ -141,11 +141,23 @@ public class DeviceMenu extends JFrame {
 			{
 				DeviceMenu.this.setVisible(false);
 				DeviceMenu.this.dispose();
-				try {
-					new ConstructorMenu().setVisible(true);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				if(AuthorisationMenu.user_role.equals("constructor"))
+				{
+					try {
+						new ConstructorMenu().setVisible(true);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+				if(AuthorisationMenu.user_role.equals("admin"))
+				{
+					try {
+						new ConstructorAdminMenu().setVisible(true);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 			}
 		});

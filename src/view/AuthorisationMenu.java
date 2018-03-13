@@ -31,7 +31,7 @@ public class AuthorisationMenu extends JFrame
 	private JLabel LoginMenuTitle;
 	private JButton button;
 	public static int user_id_to_choose;
-
+	public static String user_role;
 
 	/**
 	 * Create the frame.
@@ -93,6 +93,7 @@ public class AuthorisationMenu extends JFrame
 				{
 					if(user.getLogin().equals(login)&&(user.getPassword().equals(password)))
 					{
+						user_role = user.getRole();
 						if(user.getRole().equals("constructor"))
 						{
 							loginIn = true;

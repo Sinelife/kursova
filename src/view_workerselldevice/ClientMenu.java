@@ -13,6 +13,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import view.AuthorisationMenu;
+import view_admin.WorkerSalesDepartmentAdminMenu;
+
 public class ClientMenu extends JFrame {
 
 	private JPanel contentPane;
@@ -107,13 +110,27 @@ public class ClientMenu extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				ClientMenu.this.setVisible(false);
-				ClientMenu.this.dispose();
-				try {
-					new WorkerSalesDepartmentMenu().setVisible(true);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				if(AuthorisationMenu.user_role.equals("worker_of_sales_department"))
+				{
+					ClientMenu.this.setVisible(false);
+					ClientMenu.this.dispose();
+					try {
+						new WorkerSalesDepartmentMenu().setVisible(true);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+				if(AuthorisationMenu.user_role.equals("admin"))
+				{
+					ClientMenu.this.setVisible(false);
+					ClientMenu.this.dispose();
+					try {
+						new WorkerSalesDepartmentAdminMenu().setVisible(true);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 			}
 		});

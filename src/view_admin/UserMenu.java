@@ -9,6 +9,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
+import view_Constructor.ConstructorMenu;
+import view_Constructor.DeviceMenu;
+
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
@@ -24,7 +28,7 @@ public class UserMenu extends JFrame {
 	public UserMenu() 
 	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 740, 527);
+		setBounds(100, 100, 635, 526);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -88,5 +92,22 @@ public class UserMenu extends JFrame {
 		EditUserButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		EditUserButton.setBounds(53, 295, 390, 43);
 		contentPane.add(EditUserButton);
+		
+		
+		JButton btnBack = new JButton("BACK");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UserMenu.this.setVisible(false);
+				UserMenu.this.dispose();
+				try {
+					new AdminMenu().setVisible(true);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnBack.setBounds(496, 429, 97, 25);
+		contentPane.add(btnBack);
 	}
 }
