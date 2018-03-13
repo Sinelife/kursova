@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import domain.Component;
+import domain.Device;
 import domain.Provider;
 import main.Main;
 
@@ -119,4 +121,28 @@ public class ProviderDao
 		}
 		return list;
 	}
+	
+	
+    public List<Component> getAllComponentsInProvider(int provider_id) throws SQLException
+    {
+    	String sql = "SELECT * FROM component where component_id in " + 
+    			"(select component_id from delivery_component where delivery_id in " + 
+    			"(select delivery_id from delivery where provider_id in " + 
+    			"(select provider_id from provider where provider_id = " + provider_id + ")))";
+        List<Component> list = new ArrayList<Component>();
+        try (PreparedStatement stm = Main.conn.prepareStatement(sql))
+        {
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) 
+            {
+            	Component c = new Component();
+				c.setId(rs.getInt("component_id"));
+                c.setType(rs.getString("type"));
+                c.setName(rs.getString("name"));
+                c.setTechnicalInfo(rs.getString("technical_info"));
+                list.add(c);
+            }
+        }
+        return list;
+    }
 }
