@@ -32,7 +32,7 @@ public class ProviderMenu extends JFrame {
 	public ProviderMenu() 
 	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 701, 540);
+		setBounds(100, 100, 618, 436);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -59,9 +59,9 @@ public class ProviderMenu extends JFrame {
 			}
 		});
 		InfoButton.setHorizontalAlignment(SwingConstants.LEFT);
-		InfoButton.setForeground(Color.RED);
+		InfoButton.setForeground(Color.DARK_GRAY);
 		InfoButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		InfoButton.setBounds(42, 111, 456, 43);
+		InfoButton.setBounds(42, 111, 479, 43);
 		contentPane.add(InfoButton);
 		
 		JButton AddButton = new JButton("2)Додати інформацію про нового постачальника");
@@ -75,7 +75,7 @@ public class ProviderMenu extends JFrame {
 		AddButton.setHorizontalAlignment(SwingConstants.LEFT);
 		AddButton.setForeground(Color.BLACK);
 		AddButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		AddButton.setBounds(42, 191, 456, 43);
+		AddButton.setBounds(42, 191, 479, 43);
 		contentPane.add(AddButton);
 		
 		JButton EditButton = new JButton("3)Редагувати інформацію про постачальника");
@@ -95,15 +95,8 @@ public class ProviderMenu extends JFrame {
 		EditButton.setHorizontalAlignment(SwingConstants.LEFT);
 		EditButton.setForeground(Color.BLACK);
 		EditButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		EditButton.setBounds(42, 271, 456, 43);
+		EditButton.setBounds(42, 271, 479, 43);
 		contentPane.add(EditButton);
-		
-		JButton DevicesInClientButton = new JButton("4)Компоненти, які постачає постачальник");
-		DevicesInClientButton.setHorizontalAlignment(SwingConstants.LEFT);
-		DevicesInClientButton.setForeground(Color.RED);
-		DevicesInClientButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		DevicesInClientButton.setBounds(42, 350, 456, 43);
-		contentPane.add(DevicesInClientButton);
 		
 
 		
@@ -138,7 +131,7 @@ public class ProviderMenu extends JFrame {
 				}
 			}
 		});
-		btnBack.setBounds(574, 455, 97, 25);
+		btnBack.setBounds(491, 351, 97, 25);
 		contentPane.add(btnBack);
 	}
 

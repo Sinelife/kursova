@@ -9,6 +9,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import domain.Component;
+import domain.Delivery;
 import domain.Device;
 import domain.Provider;
 import main.Main;
@@ -141,6 +142,28 @@ public class ProviderDao
                 c.setName(rs.getString("name"));
                 c.setTechnicalInfo(rs.getString("technical_info"));
                 list.add(c);
+            }
+        }
+        return list;
+    }
+    
+    public List<Delivery> getAllDeliveriesInProvider(int provider_id) throws SQLException
+    {
+    	String sql = "SELECT * FROM delivery where provider_id in "
+    			+ "(select provider_id from provider where provider_id = " + provider_id + ")";
+        List<Delivery> list = new ArrayList<Delivery>();
+        try (PreparedStatement stm = Main.conn.prepareStatement(sql))
+        {
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) 
+            {
+            	Delivery d = new Delivery();
+            	d.setId(rs.getInt("delivery_id"));
+				d.setDeliveryName(rs.getString("delivery_name"));
+				d.setProviderId(rs.getInt("provider_id"));
+				d.setStartDate(rs.getDate("startdate"));
+				d.setPaid(rs.getBoolean("paid"));
+                list.add(d);
             }
         }
         return list;

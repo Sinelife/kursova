@@ -15,7 +15,7 @@ public class DeliveryComponent
 		this.price = price;
 	}
 	
-	DeliveryComponent()
+	public DeliveryComponent()
 	{
 		
 	}

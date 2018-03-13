@@ -14,7 +14,7 @@ public class Delivery
 	Delivery(int delivery_id, String delivery_name, int provider_id, Date startDate, boolean paid)
 	{
 		this.delivery_id = delivery_id;
-		this.setDeliveryName(delivery_name);
+		this.delivery_name = delivery_name;
 		this.provider_id = provider_id;
 		this.startDate = startDate;
 		this.paid = paid;

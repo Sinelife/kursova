@@ -35,7 +35,7 @@ public class ProviderInformation extends JFrame
 	public ProviderInformation(JFrame parent) throws SQLException 
 	{
 		ProviderDao pd = new ProviderDao();
-		Provider p = pd.readProvider(InfoProvider.id_to_look);
+		Provider p = pd.readProvider(InfoProvider.provider_id_to_look);
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -13,17 +13,23 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import dao.ComponentDao;
+import dao.DeliveryComponentDao;
 import dao.ProviderDao;
 import domain.Provider;
 import domain.Component;
+import domain.Delivery;
+import domain.DeliveryComponent;
 
 public class InfoProvider extends JFrame {
 
 	private JPanel contentPane;
-	public static int id_to_look;
-	public static String name_to_look;
+	public static int provider_id_to_look;
+	public static String provider_name_to_look;
+	public static int delivery_id_to_look;
+	public static String delivery_name_to_look;
 
-
+	public List<Delivery> deliveries;
 	/**
 	 * Create the frame.
 	 * @throws SQLException 
@@ -34,12 +40,24 @@ public class InfoProvider extends JFrame {
 		List<Provider> providers = pd.getAll();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 646, 558);
+		setBounds(100, 100, 724, 612);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
+		
+		
+		JLabel lblNewLabel = new JLabel("Перегляд інформації про постачальника");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		lblNewLabel.setBounds(46, 25, 559, 59);
+		contentPane.add(lblNewLabel);
+		
+		JLabel ProviderLabel = new JLabel("Список постачальників");
+		ProviderLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		ProviderLabel.setBounds(40, 83, 198, 25);
+		contentPane.add(ProviderLabel);
+		
+		
 		JComboBox<String> ProviderComboBox = new JComboBox<String>();
 		ProviderComboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		ProviderComboBox.setBounds(40, 121, 430, 34);
@@ -49,29 +67,40 @@ public class InfoProvider extends JFrame {
 			ProviderComboBox.addItem(provider.getName());
 		}
 		
-		JLabel lblNewLabel = new JLabel("Перегляд інформації про постачальника");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lblNewLabel.setBounds(46, 25, 559, 59);
-		contentPane.add(lblNewLabel);
+		JLabel DeliveryLabel = new JLabel("Список замовлень на постачання обраного постачальника");
+		DeliveryLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		DeliveryLabel.setBounds(40, 259, 447, 25);
+		contentPane.add(DeliveryLabel);
+
+		
+		JComboBox<String> DeliveryInProviderComboBox = new JComboBox<String>();
+		DeliveryInProviderComboBox.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		DeliveryInProviderComboBox.setBounds(40, 293, 430, 34);
+		contentPane.add(DeliveryInProviderComboBox);
+		
+		JLabel ComponentInfoLabel = new JLabel("Інформація про компоненти в замовленні постачання");
+		ComponentInfoLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		ComponentInfoLabel.setBounds(40, 448, 447, 25);
+		contentPane.add(ComponentInfoLabel);
 		
 		
 		JComboBox<String> ComponentInProviderComboBox = new JComboBox<String>();
-		ComponentInProviderComboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		ComponentInProviderComboBox.setBounds(40, 258, 430, 34);
+		ComponentInProviderComboBox.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		ComponentInProviderComboBox.setBounds(40, 480, 430, 34);
 		contentPane.add(ComponentInProviderComboBox);
 		
 		
 		
-		JButton InfoButton = new JButton("Інформація");
-		InfoButton.addActionListener(new ActionListener() 
+		JButton ProviderInfoButton = new JButton("Інформація");
+		ProviderInfoButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				name_to_look = String.valueOf(ProviderComboBox.getSelectedItem());
+				provider_name_to_look = String.valueOf(ProviderComboBox.getSelectedItem());
 				for(Provider provider : providers) 
 				{
-					id_to_look = provider.getId();
-					if(provider.getName().equals(name_to_look))
+					provider_id_to_look = provider.getId();
+					if(provider.getName().equals(provider_name_to_look))
 					{
 						break;
 					}
@@ -85,43 +114,99 @@ public class InfoProvider extends JFrame {
 				}
 			}
 		});
-		InfoButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		InfoButton.setBounds(483, 121, 122, 34);
-		contentPane.add(InfoButton);
+		ProviderInfoButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		ProviderInfoButton.setBounds(483, 121, 122, 34);
+		contentPane.add(ProviderInfoButton);
 		
 		
-		JButton btnNewButton = new JButton("Вибрати");
-		btnNewButton.addActionListener(new ActionListener() 
+		
+		
+		JButton SelectDeliveryButtonButton = new JButton("Вибрати");
+		SelectDeliveryButtonButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				ComponentInProviderComboBox.removeAllItems();
-				List<Component> ComponentsInProvider = null;
-				name_to_look = String.valueOf(ProviderComboBox.getSelectedItem());
+				DeliveryInProviderComboBox.removeAllItems();
+				List<Delivery> DeliveriesInProvider = null;
+				provider_name_to_look = String.valueOf(ProviderComboBox.getSelectedItem());
 				for(Provider provider : providers) 
 				{
-					id_to_look = provider.getId();
-					if(provider.getName().equals(name_to_look))
+					provider_id_to_look = provider.getId();
+					if(provider.getName().equals(provider_name_to_look))
 					{
 						break;
 					}
 				}
 				
 				try {
-					ComponentsInProvider = pd.getAllComponentsInProvider(id_to_look);
+					DeliveriesInProvider = pd.getAllDeliveriesInProvider(provider_id_to_look);
+				} catch (SQLException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+				for(Delivery delivery : DeliveriesInProvider)
+				{
+					DeliveryInProviderComboBox.addItem(delivery.getDeliveryName());
+				}
+				
+				try {
+					deliveries = pd.getAllDeliveriesInProvider(provider_id_to_look);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
-				for(Component component : ComponentsInProvider)
+			}
+		});
+		
+		JButton SelectProviderButton = new JButton("Вибрати");
+		SelectProviderButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				ComponentInProviderComboBox.removeAllItems();
+				delivery_name_to_look = String.valueOf(DeliveryInProviderComboBox.getSelectedItem());
+				for(Delivery delivery : deliveries) 
 				{
-					ComponentInProviderComboBox.addItem(component.getName());
+					delivery_id_to_look = delivery.getId();
+					if(delivery.getDeliveryName().equals(delivery_name_to_look))
+					{
+						break;
+					}
+				}
+				DeliveryComponentDao dcd = new DeliveryComponentDao();
+				List<DeliveryComponent> ComponentsInfoInDelivery = null;
+				try {
+					ComponentsInfoInDelivery = dcd.getAllFromDelivery(delivery_id_to_look);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				for(DeliveryComponent delivery_component : ComponentsInfoInDelivery)
+				{
+					String component_name = null;
+					try {
+						component_name = dcd.getComponentNameById(delivery_id_to_look, delivery_component.getComponentId());
+					} catch (SQLException e2) {
+						e2.printStackTrace();
+					}
+					String component_type = null;
+					try {
+						component_type = dcd.getComponentTypeById(delivery_id_to_look, delivery_component.getComponentId());
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+					String info = "Назва: " + component_name + 
+							"  Тип: " + component_type +
+							"  Кількість: " + delivery_component.getNumber() + 
+							"  Ціна: " + delivery_component.getPrice();
+					ComponentInProviderComboBox.addItem(info);
 				}
 			}
 		});
-		btnNewButton.setBounds(188, 177, 97, 25);
-		contentPane.add(btnNewButton);
+		SelectProviderButton.setBounds(40, 340, 97, 25);
+		contentPane.add(SelectProviderButton);
+		SelectDeliveryButtonButton.setBounds(40, 179, 97, 25);
+		contentPane.add(SelectDeliveryButtonButton);
 		
 		
 		
@@ -134,7 +219,7 @@ public class InfoProvider extends JFrame {
 				InfoProvider.this.dispose();
 			}
 		});
-		btnBack.setBounds(489, 427, 97, 25);
+		btnBack.setBounds(597, 527, 97, 25);
 		contentPane.add(btnBack);
 		
 	}

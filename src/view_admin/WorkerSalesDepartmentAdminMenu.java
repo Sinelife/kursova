@@ -67,7 +67,7 @@ public class WorkerSalesDepartmentAdminMenu extends JFrame
 		contentPane.add(ClientMenuButton);
 		
 		JButton OrderMenuButton = new JButton("2)Меню роботи з замовленнями на купівлю");
-		OrderMenuButton.setForeground(Color.BLACK);
+		OrderMenuButton.setForeground(Color.RED);
 		OrderMenuButton.setHorizontalAlignment(SwingConstants.LEFT);
 		OrderMenuButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		OrderMenuButton.setBounds(53, 269, 390, 43);

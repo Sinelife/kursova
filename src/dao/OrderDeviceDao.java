@@ -46,24 +46,23 @@ public class OrderDeviceDao
 	    
 
 	    
-	    /**@throws SQLException *//*
-	    public void updateOrderDevice(OrderDevice c) throws SQLException 
+	    /** @throws SQLException */
+	    public void updateOrderDevice(OrderDevice od) throws SQLException 
 	    {
-	    	String sql = "update OrderDevice set name = ?, phone = ?, contactPIB = ?, codeERPOU = ?, codeTaxpayer = ? where OrderDevice_id = " +  c.getId();
+	    	String sql = "update order_device set device_id = ?, number = ?, price = ? where order_device_id = " +  od.getOrderId();
 	    	PreparedStatement stm = Main.conn.prepareStatement(sql);
-	    	stm.setString(1, c.getName());
-	    	stm.setString(2, c.getPhone());
-	    	stm.setString(3, c.getContactPIB());
-	    	stm.setString(4, c.getCodeERPOU());
-	    	stm.setString(5, c.getCodeTaxpayer());
+			stm.setInt(1, od.getOrderId());
+	    	stm.setInt(2, od.getDeviceId());
+	    	stm.setInt(3, od.getNumber());
+	    	stm.setInt(4, od.getPrice());
 	    	stm.executeUpdate();
-	    	JOptionPane.showMessageDialog (null, "Інформація про клієнта відредагована!" ); 
+	    	JOptionPane.showMessageDialog (null, "Інформація про прилад в замовленні відредагована!" ); 
 		}
 
 	    
 	    
 	    
-	    /** @throws SQLException */ /**
+	    /** @throws SQLException */ 
 	    public void delete(OrderDevice d) throws SQLException 
 	    {
 
@@ -74,24 +73,22 @@ public class OrderDeviceDao
 	   
 	    public List<OrderDevice> getAll() throws SQLException 
 	    {
-	        String sql = "SELECT * FROM OrderDevice;";
+	        String sql = "SELECT * FROM order_device;";
 	        List<OrderDevice> list = new ArrayList<OrderDevice>();
 	        try (PreparedStatement stm = Main.conn.prepareStatement(sql)) 
 	        {
 	            ResultSet rs = stm.executeQuery();
 	            while (rs.next()) 
 	            {
-	                OrderDevice c = new OrderDevice();
-		            c.setId(rs.getInt("OrderDevice_id"));
-		            c.setName(rs.getString("name"));
-		            c.setPhone(rs.getString("phone"));
-		            c.setContactPIB(rs.getString("contactPIB"));
-		            c.setCodeERPOU(rs.getString("codeERPOU"));
-		            c.setCodeTaxpayer(rs.getString("codeTaxpayer"));
-	                list.add(c);
+	                OrderDevice od = new OrderDevice();
+	                od.setOrderId(rs.getInt("order_id"));
+	                od.setDeviceId(rs.getInt("device_id"));
+	                od.setNumber(rs.getInt("number"));
+	                od.setPrice(rs.getInt("price"));
+	                list.add(od);
 	            }
 	        }
 	        return list;
-	    }*/
+	    }
 
 }

@@ -65,7 +65,7 @@ public class WorkerDeliveryDepartmentMenu extends JFrame {
 		contentPane.add(ProviderMenuButton);
 		
 		JButton DeliveryMenuButton = new JButton("2)Меню роботи з замовленнями постачання");
-		DeliveryMenuButton.setForeground(Color.BLACK);
+		DeliveryMenuButton.setForeground(Color.RED);
 		DeliveryMenuButton.setHorizontalAlignment(SwingConstants.LEFT);
 		DeliveryMenuButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		DeliveryMenuButton.setBounds(53, 269, 419, 43);
