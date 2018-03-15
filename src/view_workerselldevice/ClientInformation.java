@@ -34,7 +34,7 @@ public class ClientInformation extends JFrame
 	public ClientInformation(JFrame parent) throws SQLException 
 	{
 		ClientDao cd = new ClientDao();
-		Client c = cd.readClient(InfoClient.id_to_look);
+		Client c = cd.readClient(InfoClient.client_id_to_look);
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -10,7 +10,6 @@ import javax.swing.JOptionPane;
 
 import domain.Component;
 import domain.Delivery;
-import domain.Device;
 import domain.Provider;
 import main.Main;
 

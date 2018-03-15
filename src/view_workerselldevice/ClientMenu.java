@@ -28,7 +28,7 @@ public class ClientMenu extends JFrame {
 	public ClientMenu() 
 	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 701, 540);
+		setBounds(100, 100, 609, 452);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -55,7 +55,7 @@ public class ClientMenu extends JFrame {
 			}
 		});
 		InfoButton.setHorizontalAlignment(SwingConstants.LEFT);
-		InfoButton.setForeground(Color.RED);
+		InfoButton.setForeground(Color.DARK_GRAY);
 		InfoButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		InfoButton.setBounds(42, 111, 456, 43);
 		contentPane.add(InfoButton);
@@ -94,13 +94,6 @@ public class ClientMenu extends JFrame {
 		EditButton.setBounds(42, 271, 456, 43);
 		contentPane.add(EditButton);
 		
-		JButton DevicesInClientButton = new JButton("4)Прилади, які замовив клієнт");
-		DevicesInClientButton.setHorizontalAlignment(SwingConstants.LEFT);
-		DevicesInClientButton.setForeground(Color.RED);
-		DevicesInClientButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		DevicesInClientButton.setBounds(42, 350, 456, 43);
-		contentPane.add(DevicesInClientButton);
-		
 
 		
 		
@@ -134,7 +127,7 @@ public class ClientMenu extends JFrame {
 				}
 			}
 		});
-		btnBack.setBounds(574, 455, 97, 25);
+		btnBack.setBounds(477, 367, 97, 25);
 		contentPane.add(btnBack);
 	}
 

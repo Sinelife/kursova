@@ -123,7 +123,7 @@ public class AdminMenu extends JFrame {
 			}
 		});
 		DeliveryDepartmentWorkerTablesButton.setHorizontalAlignment(SwingConstants.LEFT);
-		DeliveryDepartmentWorkerTablesButton.setForeground(Color.RED);
+		DeliveryDepartmentWorkerTablesButton.setForeground(new Color(255, 140, 0));
 		DeliveryDepartmentWorkerTablesButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		DeliveryDepartmentWorkerTablesButton.setBounds(51, 352, 466, 43);
 		contentPane.add(DeliveryDepartmentWorkerTablesButton);

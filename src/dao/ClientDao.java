@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 import domain.Client;
 import domain.Device;
+import domain.Order;
 import main.Main;
 
 public class ClientDao
@@ -130,6 +131,28 @@ public class ClientDao
 	                d.setRating(rs.getInt("rating"));
 	                d.setDate(rs.getDate("date"));
 	                list.add(d);
+	            }
+	        }
+	        return list;
+	    }
+	    
+	    public List<Order> getAllOrdersInClient(int client_id) throws SQLException
+	    {
+	    	String sql = "SELECT * FROM orders where client_id in "
+	    			+ "(select client_id from client where client_id = " + client_id + ")";
+	        List<Order> list = new ArrayList<Order>();
+	        try (PreparedStatement stm = Main.conn.prepareStatement(sql))
+	        {
+	            ResultSet rs = stm.executeQuery();
+	            while (rs.next()) 
+	            {
+	            	Order o = new Order();
+	            	o.setId(rs.getInt("order_id"));
+					o.setOrderName(rs.getString("order_name"));
+					o.setClientId(rs.getInt("client_id"));
+					o.setStartDate(rs.getDate("startdate"));
+					o.setPaid(rs.getBoolean("paid"));
+	                list.add(o);
 	            }
 	        }
 	        return list;

@@ -46,7 +46,7 @@ public class WorkerDeliveryDepartmentMenu extends JFrame {
 		
 		JLabel MenuTitleLabel = new JLabel("Меню члена відділу постачання");
 		MenuTitleLabel.setFont(new Font("Tahoma", Font.BOLD, 21));
-		MenuTitleLabel.setBounds(35, 13, 531, 38);
+		MenuTitleLabel.setBounds(93, 13, 379, 38);
 		contentPane.add(MenuTitleLabel);
 		
 		JButton ProviderMenuButton = new JButton("1)Меню роботи з постачальниками");
