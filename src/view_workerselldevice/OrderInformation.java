@@ -3,6 +3,7 @@ package view_workerselldevice;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
@@ -13,23 +14,26 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import java.sql.Date;
-
 import dao.OrderDao;
 import domain.Order;
+import java.awt.Color;
 
-public class AddOrder extends JFrame 
-{
+public class OrderInformation extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField NameField;
 	private JTextField StartDateField;
 	private JCheckBox PaidCheckBox;
+	
 
-	public AddOrder(JFrame parent) 
+	/**
+	 * Create the frame.
+	 * @throws SQLException 
+	 */
+	public OrderInformation(JFrame parent) throws SQLException 
 	{
 		OrderDao od = new OrderDao();
-		Order o = new Order();
+		Order o = od.readOrder(EditOrderDevice.order_id_to_edit);
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -39,9 +43,9 @@ public class AddOrder extends JFrame
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Додавання нового замовлення");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		lblNewLabel.setBounds(103, 13, 421, 59);
+		JLabel lblNewLabel = new JLabel("Інформація про замовлення на купівлю");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblNewLabel.setBounds(29, 13, 556, 59);
 		contentPane.add(lblNewLabel);
 		
 		JLabel NameLabel = new JLabel("Назва замовлення");
@@ -58,44 +62,26 @@ public class AddOrder extends JFrame
 		
 		
 		NameField = new JTextField();
+		NameField.setBackground(Color.WHITE);
+		NameField.setEditable(false);
 		NameField.setBounds(161, 143, 350, 22);
 		contentPane.add(NameField);
 		NameField.setColumns(10);
+		NameField.setText(o.getOrderName());
 		
 		StartDateField = new JTextField();
+		StartDateField.setBackground(Color.WHITE);
+		StartDateField.setEditable(false);
 		StartDateField.setBounds(161, 185, 350, 22);
 		contentPane.add(StartDateField);
 		StartDateField.setColumns(10);
+		StartDateField.setText(String.valueOf(o.getStartDate()));
 		
 		PaidCheckBox = new JCheckBox();
+		PaidCheckBox.setEnabled(false);
 		PaidCheckBox.setBounds(161, 228, 113, 25);
 		contentPane.add(PaidCheckBox);
-
-		
-		JButton AddButton = new JButton("Додати");
-		AddButton.addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent e) 
-			{
-				o.setClientId(ChooseClient.id_to_choose);
-				o.setOrderName(NameField.getText());
-				o.setStartDate(Date.valueOf(StartDateField.getText()));
-				o.setPaid(PaidCheckBox.isSelected());
-				try {
-					od.addOrder(o);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				if (parent != null)
-					parent.setVisible(true);
-				AddOrder.this.setVisible(false);
-				AddOrder.this.dispose();
-			}
-		});
-		AddButton.setBounds(51, 364, 97, 25);
-		contentPane.add(AddButton);
-		
+		PaidCheckBox.setSelected(o.getPaid());
 		
 		
 		JButton btnBack = new JButton("BACK");
@@ -103,8 +89,8 @@ public class AddOrder extends JFrame
 			public void actionPerformed(ActionEvent e) {
 				if (parent != null)
 					parent.setVisible(true);
-				AddOrder.this.setVisible(false);
-				AddOrder.this.dispose();
+				OrderInformation.this.setVisible(false);
+				OrderInformation.this.dispose();
 			}
 		});
 		btnBack.setBounds(488, 364, 97, 25);

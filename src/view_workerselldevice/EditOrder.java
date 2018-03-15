@@ -18,13 +18,13 @@ import javax.swing.border.EmptyBorder;
 import dao.OrderDao;
 import domain.Device;
 import domain.Order;
+import javax.swing.JCheckBox;
 
 public class EditOrder extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField NameField;
 	private JTextField StartDateField;
-	private JTextField PaidField;
 
 	public static int order_id_to_edit;
 	public static String order_name_to_edit;
@@ -64,32 +64,31 @@ public class EditOrder extends JFrame {
 		}
 		
 		JLabel NameLabel = new JLabel("Назва замовлення");
-		NameLabel.setBounds(39, 207, 175, 22);
+		NameLabel.setBounds(39, 207, 133, 22);
 		contentPane.add(NameLabel);
 		
 		JLabel StartDateLabel = new JLabel("Дата початку");
-		StartDateLabel.setBounds(39, 249, 175, 22);
+		StartDateLabel.setBounds(39, 249, 133, 22);
 		contentPane.add(StartDateLabel);
 		
 		JLabel PaidLabel = new JLabel("Сплачено");
-		PaidLabel.setBounds(39, 295, 175, 22);
+		PaidLabel.setBounds(39, 295, 133, 22);
 		contentPane.add(PaidLabel);
 		
 		
 		NameField = new JTextField();
-		NameField.setBounds(226, 207, 350, 22);
+		NameField.setBounds(171, 207, 350, 22);
 		contentPane.add(NameField);
 		NameField.setColumns(10);
 		
 		StartDateField = new JTextField();
-		StartDateField.setBounds(226, 249, 350, 22);
+		StartDateField.setBounds(171, 249, 350, 22);
 		contentPane.add(StartDateField);
 		StartDateField.setColumns(10);
 		
-		PaidField = new JTextField();
-		PaidField.setColumns(10);
-		PaidField.setBounds(226, 295, 350, 22);
-		contentPane.add(PaidField);
+		JCheckBox PaidCheckBox = new JCheckBox();
+		PaidCheckBox.setBounds(167, 294, 113, 25);
+		contentPane.add(PaidCheckBox);
 		
 		
 		
@@ -115,8 +114,15 @@ public class EditOrder extends JFrame {
 				}
 				NameField.setText(o.getOrderName());
 				StartDateField.setText(String.valueOf(o.getStartDate()));
-				PaidField.setText(String.valueOf(o.getPaid()));
-				
+				//PaidField.setText(String.valueOf(o.getPaid()));
+				if(o.getPaid() == true)
+				{
+					PaidCheckBox.setSelected(true);
+				}
+				else
+				{
+					PaidCheckBox.setSelected(false);
+				}
 			}
 		});
 		SelectButton.setBounds(39, 148, 97, 25);
@@ -131,7 +137,8 @@ public class EditOrder extends JFrame {
 			{
 				o.setOrderName(NameField.getText());
 				o.setStartDate(Date.valueOf(StartDateField.getText()));
-				o.setPaid(Boolean.valueOf(PaidField.getText()));
+				//o.setPaid(Boolean.valueOf(PaidField.getText()));
+				o.setPaid(PaidCheckBox.isSelected());
 				try {
 					od.updateOrder(o);
 				} catch (SQLException e1) {

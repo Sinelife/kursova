@@ -16,9 +16,12 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import dao.OrderDao;
+import domain.Component;
 import domain.Device;
 import domain.Order;
 import domain.OrderDevice;
+import view_Constructor.ComponentInformation;
+import view_Constructor.InfoComponent;
 
 import javax.swing.JTextField;
 
@@ -282,6 +285,32 @@ public class EditOrderDevice extends JFrame {
 		
 		
 		
+		JButton btnNewButton = new JButton("Інформація");
+		btnNewButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				order_name_to_edit = String.valueOf(OrderComboBox.getSelectedItem());
+				for(Order order : orders) 
+				{
+					order_id_to_edit = order.getId();
+					if(order.getOrderName().equals(order_name_to_edit))
+					{
+						break;
+					}
+				}
+				EditOrderDevice.this.setVisible(false);
+				try {
+					new OrderInformation(EditOrderDevice.this).setVisible(true);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnNewButton.setBounds(610, 85, 119, 34);
+		contentPane.add(btnNewButton);
 		
 		
 		
