@@ -25,52 +25,103 @@ public class OrderMenu extends JFrame {
 	public OrderMenu() 
 	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 714, 636);
+		setBounds(100, 100, 698, 597);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		
-		JLabel MenuTitleLabel = new JLabel("Меню роботи з замовленнями");
+		JLabel MenuTitleLabel = new JLabel("Меню роботи з замовленнями на купівлю");
 		MenuTitleLabel.setFont(new Font("Tahoma", Font.BOLD, 21));
-		MenuTitleLabel.setBounds(157, 13, 417, 38);
+		MenuTitleLabel.setBounds(89, 13, 509, 38);
 		contentPane.add(MenuTitleLabel);
 		
-		JButton OrderInClientButton = new JButton("1)Переглянути клієнтів і їх замовлення");
-		OrderInClientButton.setHorizontalAlignment(SwingConstants.LEFT);
-		OrderInClientButton.setForeground(Color.RED);
-		OrderInClientButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		OrderInClientButton.setBounds(42, 111, 456, 43);
-		contentPane.add(OrderInClientButton);
+		JLabel ClientNameLabel = new JLabel("клієнт " + ChooseClient.name_to_choose);
+		ClientNameLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		ClientNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		ClientNameLabel.setBounds(69, 55, 443, 31);
+		contentPane.add(ClientNameLabel);
 		
-		JButton AddButton = new JButton("2)Додати нове замовлення");
-		AddButton.setHorizontalAlignment(SwingConstants.LEFT);
-		AddButton.setForeground(Color.RED);
-		AddButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		AddButton.setBounds(42, 191, 456, 43);
-		contentPane.add(AddButton);
 		
-		JButton EditButton = new JButton("3)Редагувати замовлення");
-		EditButton.setHorizontalAlignment(SwingConstants.LEFT);
-		EditButton.setForeground(Color.RED);
-		EditButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		EditButton.setBounds(42, 271, 456, 43);
-		contentPane.add(EditButton);
+
+		JButton InfoOrderButton = new JButton("1)Перегляд інформації про замовлення");
+		InfoOrderButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				OrderMenu.this.setVisible(false);
+				try {
+					new InfoOrder(OrderMenu.this).setVisible(true);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		InfoOrderButton.setHorizontalAlignment(SwingConstants.LEFT);
+		InfoOrderButton.setForeground(Color.DARK_GRAY);
+		InfoOrderButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		InfoOrderButton.setBounds(42, 145, 456, 43);
+		contentPane.add(InfoOrderButton);
 		
-		JButton DevicesInOrderInfoButton = new JButton("4)Перегляд приладів в замовленні");
-		DevicesInOrderInfoButton.setHorizontalAlignment(SwingConstants.LEFT);
-		DevicesInOrderInfoButton.setForeground(Color.RED);
-		DevicesInOrderInfoButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		DevicesInOrderInfoButton.setBounds(42, 350, 456, 43);
-		contentPane.add(DevicesInOrderInfoButton);
 		
-		JButton DevicesInOrderChangeButton = new JButton("5)Робота з приладами в замовленні");
-		DevicesInOrderChangeButton.setHorizontalAlignment(SwingConstants.LEFT);
-		DevicesInOrderChangeButton.setForeground(Color.RED);
-		DevicesInOrderChangeButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		DevicesInOrderChangeButton.setBounds(42, 429, 456, 43);
-		contentPane.add(DevicesInOrderChangeButton);
+		JButton AddOrderButton = new JButton("2)Додати нове замовлення");
+		AddOrderButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				OrderMenu.this.setVisible(false);
+				new AddOrder(OrderMenu.this).setVisible(true);		
+			}
+		});
+		AddOrderButton.setHorizontalAlignment(SwingConstants.LEFT);
+		AddOrderButton.setForeground(Color.BLACK);
+		AddOrderButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		AddOrderButton.setBounds(42, 234, 456, 43);
+		contentPane.add(AddOrderButton);
+		
+		
+		
+		JButton EditOrderButton = new JButton("3)Редагувати інформацію про замовлення");
+		EditOrderButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				OrderMenu.this.setVisible(false);
+				try {
+					new EditOrder(OrderMenu.this).setVisible(true);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}	
+			}
+		});
+		EditOrderButton.setHorizontalAlignment(SwingConstants.LEFT);
+		EditOrderButton.setForeground(Color.BLACK);
+		EditOrderButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		EditOrderButton.setBounds(42, 324, 456, 43);
+		contentPane.add(EditOrderButton);
+		
+		
+		JButton EditOrderDeviceButton = new JButton("4)Робота з замовленням");
+		EditOrderDeviceButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				OrderMenu.this.setVisible(false);
+				try {
+					new EditOrderDevice(OrderMenu.this).setVisible(true);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		EditOrderDeviceButton.setHorizontalAlignment(SwingConstants.LEFT);
+		EditOrderDeviceButton.setForeground(Color.DARK_GRAY);
+		EditOrderDeviceButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		EditOrderDeviceButton.setBounds(42, 414, 456, 43);
+		contentPane.add(EditOrderDeviceButton);
 		
 		
 		
@@ -82,14 +133,14 @@ public class OrderMenu extends JFrame {
 				OrderMenu.this.setVisible(false);
 				OrderMenu.this.dispose();
 				try {
-					new WorkerSalesDepartmentMenu().setVisible(true);
+					new ChooseClient().setVisible(true);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
 		});
-		btnBack.setBounds(587, 551, 97, 25);
+		btnBack.setBounds(546, 500, 97, 25);
 		contentPane.add(btnBack);
 		
 	}

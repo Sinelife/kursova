@@ -220,7 +220,6 @@ public class EditSpecification extends JFrame {
 		JButton AddComponentButton = new JButton("Додати");
 		AddComponentButton.addActionListener(new ActionListener() 
 		{
-			@SuppressWarnings("null")
 			public void actionPerformed(ActionEvent e) 
 			{
 				String c_name = String.valueOf(AddComponentComboBox.getSelectedItem());
@@ -234,7 +233,7 @@ public class EditSpecification extends JFrame {
 				}
 				
 				ComponentDevice record = new ComponentDevice();
-				record.setDeviceId(4);
+				record.setDeviceId(id_to_choose);
 				record.setComponentId(c_id);
 				record.setNumber(Integer.valueOf(NumberAddField.getText()));
 				try {
@@ -302,21 +301,15 @@ public class EditSpecification extends JFrame {
 	
 	
 	
-	class MyItemListener implements ItemListener 
-	{
-		  // This method is called only if a new item has been selected.
-		  public void itemStateChanged(ItemEvent evt) 
-		  {
-		
+	class MyItemListener implements ItemListener {
+		// This method is called only if a new item has been selected.
+		public void itemStateChanged(ItemEvent evt) {
 
-		    if (evt.getStateChange() == ItemEvent.SELECTED) 
-		    {
+			if (evt.getStateChange() == ItemEvent.SELECTED) {
 				String c_name = String.valueOf(EditComponentComboBox.getSelectedItem());
 				int c_id = 0;
-				for(Component component : components_for_edit) 
-				{
-					if(component.getName().equals(c_name))
-					{
+				for (Component component : components_for_edit) {
+					if (component.getName().equals(c_name)) {
 						c_id = component.getId();
 					}
 				}
@@ -327,14 +320,11 @@ public class EditSpecification extends JFrame {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-		    	NumberEditField.setText(String.valueOf(record.getNumber()));
-		    	
-		    } 
-		    else if 
-		    (evt.getStateChange() == ItemEvent.DESELECTED) 
-		    {
-		    	NumberEditField.setText("");
-		    }
-		  }
+				NumberEditField.setText(String.valueOf(record.getNumber()));
+
+			} else if (evt.getStateChange() == ItemEvent.DESELECTED) {
+				NumberEditField.setText("");
+			}
+		}
 	}
 }

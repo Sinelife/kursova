@@ -28,7 +28,7 @@ public class ClientMenu extends JFrame {
 	public ClientMenu() 
 	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 609, 452);
+		setBounds(100, 100, 610, 531);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -94,7 +94,26 @@ public class ClientMenu extends JFrame {
 		EditButton.setBounds(42, 271, 456, 43);
 		contentPane.add(EditButton);
 		
-
+		
+		JButton button = new JButton("4)Обрати клієнта для подільшої роботи з ним");
+		button.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				ClientMenu.this.setVisible(false);
+				try {
+					new ChooseClient().setVisible(true);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+			}
+		});
+		button.setHorizontalAlignment(SwingConstants.LEFT);
+		button.setForeground(Color.DARK_GRAY);
+		button.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		button.setBounds(42, 354, 456, 43);
+		contentPane.add(button);
 		
 		
 		
@@ -127,8 +146,9 @@ public class ClientMenu extends JFrame {
 				}
 			}
 		});
-		btnBack.setBounds(477, 367, 97, 25);
+		btnBack.setBounds(483, 434, 97, 25);
 		contentPane.add(btnBack);
+		
 	}
 
 }

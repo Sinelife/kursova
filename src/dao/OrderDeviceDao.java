@@ -23,7 +23,7 @@ public class OrderDeviceDao
 	    	stm.setInt(3, od.getNumber());
 	    	stm.setInt(4, od.getPrice());
 	    	stm.executeUpdate();
-	    	//JOptionPane.showMessageDialog (null, "Нового кліента додано до бази данних!" );
+	    	JOptionPane.showMessageDialog (null, "Прилад додано до замовлення на купівлю!" );
 		}
 	    
 	    
