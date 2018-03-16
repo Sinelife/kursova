@@ -11,13 +11,15 @@ public class Component
 	private String type;
 	private String name;
 	private String technical_info;
+	private int price;
 	
-	Component(int component_id, String type, String name, String technical_info)
+	Component(int component_id, String type, String name, String technical_info, int price)
 	{
 		this.component_id = component_id; 
 		this.type = type; 
 		this.name = name;
 		this.technical_info= technical_info; 
+		this.price = price;
 	}
 	
 	
@@ -65,5 +67,15 @@ public class Component
 	public void setTechnicalInfo(String technical_info) 
 	{
 		this.technical_info = technical_info;
+	}
+
+	public int getPrice() 
+	{
+		return price;
+	}
+
+	public void setPrice(int price) 
+	{
+		this.price = price;
 	}
 }

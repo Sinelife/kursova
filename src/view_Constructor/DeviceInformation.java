@@ -26,6 +26,7 @@ public class DeviceInformation extends JFrame {
 	private JTextField BorderRegulationTimeField;
 	private JTextField RatingField;
 	private JTextField StartDateField;
+	private JTextField PriceField;
 	
 	/**
 	 * Create the frame.
@@ -68,6 +69,10 @@ public class DeviceInformation extends JFrame {
 		StartDateLabel.setBounds(22, 301, 175, 22);
 		contentPane.add(StartDateLabel);
 		
+		JLabel PriceLabel = new JLabel("Ціна");
+		PriceLabel.setBounds(22, 346, 175, 22);
+		contentPane.add(PriceLabel);
+		
 		
 		NameField = new JTextField();
 		NameField.setBackground(Color.WHITE);
@@ -108,6 +113,15 @@ public class DeviceInformation extends JFrame {
 		StartDateField.setBounds(209, 301, 350, 22);
 		contentPane.add(StartDateField);
 		Main.DateToString(d.getDate(), StartDateField);
+		
+		
+		PriceField = new JTextField();
+		PriceField.setEditable(false);
+		PriceField.setColumns(10);
+		PriceField.setBackground(Color.WHITE);
+		PriceField.setBounds(209, 346, 350, 22);
+		contentPane.add(PriceField);
+		PriceField.setText(String.valueOf(d.getPrice()));
 		
 		
 		

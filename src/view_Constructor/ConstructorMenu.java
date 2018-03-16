@@ -81,7 +81,7 @@ public class ConstructorMenu extends JFrame {
 		ComponentMenuButton.setBounds(53, 269, 390, 43);
 		contentPane.add(ComponentMenuButton);
 		
-		JButton button_2 = new JButton("3)");
+		JButton button_2 = new JButton("3)«м≥нити пароль та лог≥н");
 		button_2.setForeground(Color.RED);
 		button_2.setHorizontalAlignment(SwingConstants.LEFT);
 		button_2.setFont(new Font("Tahoma", Font.PLAIN, 17));

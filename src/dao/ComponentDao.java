@@ -20,7 +20,7 @@ public class ComponentDao
     /** @throws SQLException */
     public void addComponent(Component c) throws SQLException 
     {
-		String sql = "INSERT INTO component (component_id, type, name, technical_info) VALUES (?,?,?,?)";
+		String sql = "INSERT INTO component (component_id, type, name, technical_info, price) VALUES (?,?,?,?,?)";
  	  	PreparedStatement stm = Main.conn.prepareStatement(sql);
 		int i = -1;
 		String sql_for_id = "SELECT MAX(component_id) from component";
@@ -35,6 +35,7 @@ public class ComponentDao
     	stm.setString(2, c.getType());
     	stm.setString(3, c.getName());
     	stm.setString(4, c.getTechnicalInfo());
+    	stm.setInt(5, c.getPrice());
     	stm.executeUpdate();
     	JOptionPane.showMessageDialog (null, "Новий компонент додано до бази данних!" );
 	}
@@ -55,6 +56,7 @@ public class ComponentDao
             c.setType(rs.getString("type"));
             c.setName(rs.getString("name"));
             c.setTechnicalInfo(rs.getString("technical_info"));
+            c.setPrice(rs.getInt("price"));
         }
         return c;
 	}
@@ -64,11 +66,12 @@ public class ComponentDao
     /**@throws SQLException */
     public void updateComponent(Component c) throws SQLException 
     {
-    	String sql = "update component set type = ?, name = ?, technical_info = ? where component_id = " +  c.getId();
+    	String sql = "update component set type = ?, name = ?, technical_info = ?, price = ? where component_id = " +  c.getId();
     	PreparedStatement stm = Main.conn.prepareStatement(sql);
     	stm.setString(1, c.getType());
     	stm.setString(2, c.getName());
     	stm.setString(3, c.getTechnicalInfo());
+    	stm.setInt(4, c.getPrice());
     	stm.executeUpdate();
     	JOptionPane.showMessageDialog (null, "Інформація про компонент відредагована!" ); 
 	}
@@ -104,6 +107,7 @@ public class ComponentDao
                 c.setType(rs.getString("type"));
                 c.setName(rs.getString("name"));
                 c.setTechnicalInfo(rs.getString("technical_info"));
+                c.setPrice(rs.getInt("price"));
                 list.add(c);
             }
         }
@@ -126,6 +130,7 @@ public class ComponentDao
                 c.setType(rs.getString("type"));
                 c.setName(rs.getString("name"));
                 c.setTechnicalInfo(rs.getString("technical_info"));
+                c.setPrice(rs.getInt("price"));
                 list.add(c);
             }
         }
@@ -148,6 +153,7 @@ public class ComponentDao
                 c.setType(rs.getString("type"));
                 c.setName(rs.getString("name"));
                 c.setTechnicalInfo(rs.getString("technical_info"));
+                c.setPrice(rs.getInt("price"));
                 list.add(c);
             }
         }
@@ -174,6 +180,7 @@ public class ComponentDao
                 d.setBorderRegulationTime(rs.getString("border_regulation_time"));
                 d.setRating(rs.getInt("rating"));
                 d.setDate(rs.getDate("date"));
+                d.setPrice(rs.getInt("price"));
                 list.add(d);
             }
         }

@@ -27,6 +27,7 @@ public class AddDevice extends JFrame
 	private JTextField BorderRegulationTimeField;
 	private JTextField RatingField;
 	private JTextField StartDateField;
+	private JTextField PriceField;
 
 
 	/**
@@ -70,6 +71,10 @@ public class AddDevice extends JFrame
 		StartDateLabel.setBounds(22, 301, 175, 22);
 		contentPane.add(StartDateLabel);
 		
+		JLabel PriceLabel = new JLabel("Ціна");
+		PriceLabel.setBounds(22, 346, 175, 22);
+		contentPane.add(PriceLabel);
+		
 		
 		NameField = new JTextField();
 		NameField.setBounds(209, 129, 350, 22);
@@ -108,6 +113,7 @@ public class AddDevice extends JFrame
 				d.setBorderRegulationTime(BorderRegulationTimeField.getText());
 				d.setRating(Integer.valueOf(RatingField.getText()));
 				d.setDate(Date.valueOf(StartDateField.getText()));
+				d.setPrice(Integer.valueOf(PriceField.getText()));
 				try {
 					dd.addDevice(d);
 				} catch (SQLException e1) {
@@ -120,6 +126,11 @@ public class AddDevice extends JFrame
 				AddDevice.this.dispose();
 			}
 		});
+		
+		PriceField = new JTextField();
+		PriceField.setColumns(10);
+		PriceField.setBounds(209, 346, 350, 22);
+		contentPane.add(PriceField);
 		AddButton.setBounds(52, 427, 97, 25);
 		contentPane.add(AddButton);
 		

@@ -60,7 +60,7 @@ public class DeliveryMenu extends JFrame {
 			}
 		});
 		InfoDeliveryButton.setHorizontalAlignment(SwingConstants.LEFT);
-		InfoDeliveryButton.setForeground(Color.RED);
+		InfoDeliveryButton.setForeground(Color.DARK_GRAY);
 		InfoDeliveryButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		InfoDeliveryButton.setBounds(42, 145, 456, 43);
 		contentPane.add(InfoDeliveryButton);
@@ -119,7 +119,7 @@ public class DeliveryMenu extends JFrame {
 			}
 		});
 		EditDeliveryDeviceButton.setHorizontalAlignment(SwingConstants.LEFT);
-		EditDeliveryDeviceButton.setForeground(Color.RED);
+		EditDeliveryDeviceButton.setForeground(Color.DARK_GRAY);
 		EditDeliveryDeviceButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		EditDeliveryDeviceButton.setBounds(42, 414, 456, 43);
 		contentPane.add(EditDeliveryDeviceButton);

@@ -3,7 +3,6 @@ package view_Constructor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
@@ -23,6 +22,7 @@ public class EditComponentFrame extends JFrame {
 	private JTextField TypeField;
 	private JTextField NameField;
 	private JTextField TechnicalInfoField;
+	private JTextField PriceField;
 	
 	
 	/**
@@ -59,6 +59,10 @@ public class EditComponentFrame extends JFrame {
 		TechnicalInfoLabel.setBounds(36, 267, 136, 22);
 		contentPane.add(TechnicalInfoLabel);
 		
+		JLabel PriceLabel = new JLabel("Ціна");
+		PriceLabel.setBounds(36, 323, 136, 22);
+		contentPane.add(PriceLabel);
+		
 		
 		TypeField = new JTextField();
 		TypeField.setBounds(209, 157, 350, 22);
@@ -78,6 +82,13 @@ public class EditComponentFrame extends JFrame {
 		contentPane.add(TechnicalInfoField);
 		TechnicalInfoField.setText(c.getTechnicalInfo());
 		
+		PriceField = new JTextField();
+		PriceField.setText((String) null);
+		PriceField.setColumns(10);
+		PriceField.setBounds(209, 323, 350, 22);
+		contentPane.add(PriceField);
+		PriceField.setText(String.valueOf(c.getPrice()));
+		
 		
 		JButton EditButton = new JButton("Редагувати");
 		EditButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -88,6 +99,7 @@ public class EditComponentFrame extends JFrame {
 				c.setType(TypeField.getText());
 				c.setName(NameField.getText());
 				c.setTechnicalInfo(TechnicalInfoField.getText());
+				c.setPrice(Integer.valueOf(PriceField.getText()));
 				try {
 					cd.updateComponent(c);
 				} catch (SQLException e1) {
@@ -101,6 +113,7 @@ public class EditComponentFrame extends JFrame {
 		});
 		EditButton.setBounds(36, 427, 125, 25);
 		contentPane.add(EditButton);
+		
 		
 		
 		JButton btnBack = new JButton("BACK");

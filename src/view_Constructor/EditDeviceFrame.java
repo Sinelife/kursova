@@ -13,9 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import dao.ComponentDao;
 import dao.DeviceDao;
-import domain.Component;
 import domain.Device;
 
 
@@ -27,6 +25,7 @@ public class EditDeviceFrame extends JFrame {
 	private JTextField BorderRegulationTimeField;
 	private JTextField RatingField;
 	private JTextField StartDateField;
+	private JTextField PriceField;
 	
 	
 	/**
@@ -71,6 +70,10 @@ public class EditDeviceFrame extends JFrame {
 		StartDateLabel.setBounds(22, 301, 175, 22);
 		contentPane.add(StartDateLabel);
 		
+		JLabel PriceLabel = new JLabel("Ціна");
+		PriceLabel.setBounds(22, 343, 175, 22);
+		contentPane.add(PriceLabel);
+		
 		
 		NameField = new JTextField();
 		NameField.setBounds(209, 129, 350, 22);
@@ -102,6 +105,14 @@ public class EditDeviceFrame extends JFrame {
 		contentPane.add(StartDateField);
 		StartDateField.setText(String.valueOf(d.getDate()));
 		
+		PriceField = new JTextField();
+		PriceField.setText("null");
+		PriceField.setColumns(10);
+		PriceField.setBounds(209, 343, 350, 22);
+		contentPane.add(PriceField);
+		PriceField.setText(String.valueOf(d.getPrice()));
+		
+		
 		
 		JButton EditButton = new JButton("Редагувати");
 		EditButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -114,6 +125,7 @@ public class EditDeviceFrame extends JFrame {
 				d.setBorderRegulationTime(BorderRegulationTimeField.getText());
 				d.setRating(Integer.valueOf(RatingField.getText()));
 				d.setDate(Date.valueOf(StartDateField.getText()));
+				d.setPrice(Integer.valueOf(PriceField.getText()));
 				try {
 					dd.updateDevice(d);
 				} catch (SQLException e1) {
@@ -127,6 +139,7 @@ public class EditDeviceFrame extends JFrame {
 		});
 		EditButton.setBounds(36, 427, 125, 25);
 		contentPane.add(EditButton);
+		
 		
 		
 		JButton btnBack = new JButton("BACK");

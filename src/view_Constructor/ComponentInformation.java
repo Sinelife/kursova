@@ -22,6 +22,7 @@ public class ComponentInformation extends JFrame {
 	private JTextField TypeField;
 	private JTextField NameField;
 	private JTextField TechnicalInfoField;
+	private JTextField PriceField;
 	
 
 
@@ -58,6 +59,10 @@ public class ComponentInformation extends JFrame {
 		TechnicalInfoLabel.setBounds(36, 267, 136, 22);
 		contentPane.add(TechnicalInfoLabel);
 		
+		JLabel PriceLabel = new JLabel("Ціна");
+		PriceLabel.setBounds(36, 319, 136, 22);
+		contentPane.add(PriceLabel);
+		
 		
 		TypeField = new JTextField();
 		TypeField.setBackground(Color.WHITE);
@@ -79,11 +84,19 @@ public class ComponentInformation extends JFrame {
 		TechnicalInfoField.setBackground(Color.WHITE);
 		TechnicalInfoField.setEditable(false);
 		TechnicalInfoField.setColumns(10);
-		TechnicalInfoField.setBounds(209, 267, 350, 71);
+		TechnicalInfoField.setBounds(209, 267, 350, 22);
 		contentPane.add(TechnicalInfoField);
 		TechnicalInfoField.setText(c.getTechnicalInfo());
 		
 		
+		PriceField = new JTextField();
+		PriceField.setText((String) null);
+		PriceField.setEditable(false);
+		PriceField.setColumns(10);
+		PriceField.setBackground(Color.WHITE);
+		PriceField.setBounds(209, 319, 350, 22);
+		contentPane.add(PriceField);
+		PriceField.setText(String.valueOf(c.getPrice()));
 		
 		
 		JButton btnBack = new JButton("BACK");

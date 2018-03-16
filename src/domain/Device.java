@@ -13,8 +13,9 @@ public class Device
 	private String border_regulation_time;
 	private int rating;
 	private Date date;
+	private int price;
 	
-	Device(int device_id, String name,String supply_voltage,String border_regulation_time,int rating,Date date)
+	Device(int device_id, String name,String supply_voltage,String border_regulation_time,int rating,Date date, int price)
 	{
 		this.device_id = device_id; 
 		this.name = name; 
@@ -22,6 +23,7 @@ public class Device
 		this.border_regulation_time= border_regulation_time; 
 		this.rating = rating;
 		this.date = date;
+		this.price = price;
 	}
 	
 	
@@ -89,5 +91,15 @@ public class Device
 	public void setDate(Date date) 
 	{
 		this.date = date;
+	}
+
+	public int getPrice() 
+	{
+		return price;
+	}
+
+	public void setPrice(int price) 
+	{
+		this.price = price;
 	}
 }

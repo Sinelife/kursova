@@ -64,7 +64,7 @@ public class EditDeliveryComponent extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JComboBox<String> DeliveryComboBox = new JComboBox<String>();
-		DeliveryComboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		DeliveryComboBox.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		DeliveryComboBox.setBounds(39, 85, 559, 34);
 		contentPane.add(DeliveryComboBox);
 		for(Delivery delivery : deliveries) 

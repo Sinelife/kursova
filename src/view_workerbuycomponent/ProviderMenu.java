@@ -112,7 +112,7 @@ public class ProviderMenu extends JFrame {
 			}
 		});
 		ChooseButton.setHorizontalAlignment(SwingConstants.LEFT);
-		ChooseButton.setForeground(Color.RED);
+		ChooseButton.setForeground(Color.BLACK);
 		ChooseButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		ChooseButton.setBounds(42, 354, 514, 43);
 		contentPane.add(ChooseButton);

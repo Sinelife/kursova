@@ -23,6 +23,7 @@ public class AddComponent extends JFrame {
 	private JTextField TypeField;
 	private JTextField NameField;
 	private JTextField TechnicalInfoField;
+	private JTextField PriceField;
 
 
 	/**
@@ -58,6 +59,10 @@ public class AddComponent extends JFrame {
 		TechnicalInfoLabel.setBounds(36, 267, 136, 22);
 		contentPane.add(TechnicalInfoLabel);
 		
+		JLabel PriceLabel = new JLabel("Ціна");
+		PriceLabel.setBounds(36, 318, 136, 22);
+		contentPane.add(PriceLabel);
+		
 		
 		TypeField = new JTextField();
 		TypeField.setBounds(209, 157, 350, 22);
@@ -83,6 +88,7 @@ public class AddComponent extends JFrame {
 				c.setType(TypeField.getText());
 				c.setName(NameField.getText());
 				c.setTechnicalInfo(TechnicalInfoField.getText());
+				c.setPrice(Integer.valueOf(PriceField.getText()));
 				try {
 					cd.addComponent(c);
 				} catch (SQLException e1) {
@@ -95,6 +101,11 @@ public class AddComponent extends JFrame {
 				AddComponent.this.dispose();
 			}
 		});
+		
+		PriceField = new JTextField();
+		PriceField.setColumns(10);
+		PriceField.setBounds(209, 318, 350, 22);
+		contentPane.add(PriceField);
 		AddButton.setBounds(52, 427, 97, 25);
 		contentPane.add(AddButton);
 		
