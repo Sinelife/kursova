@@ -16,6 +16,8 @@ import javax.swing.border.EmptyBorder;
 import dao.DeviceDao;
 import domain.Device;
 import main.Main;
+import view.AuthorisationMenu;
+
 import java.awt.Color;
 
 public class DeviceInformation extends JFrame {
@@ -43,6 +45,8 @@ public class DeviceInformation extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		
 		
 		JLabel lblNewLabel = new JLabel("Інформація про прилад");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));

@@ -16,12 +16,11 @@ public class OrderDeviceDao
 {
 	 public void addOrderDevice(OrderDevice od) throws SQLException 
 	    {
-			String sql = "INSERT INTO order_device (order_id, device_id, number, price) VALUES (?,?,?,?)";
+			String sql = "INSERT INTO order_device (order_id, device_id, number) VALUES (?,?,?)";
 	 	  	PreparedStatement stm = Main.conn.prepareStatement(sql);
 			stm.setInt(1, od.getOrderId());
 	    	stm.setInt(2, od.getDeviceId());
 	    	stm.setInt(3, od.getNumber());
-	    	stm.setInt(4, od.getPrice());
 	    	stm.executeUpdate();
 	    	JOptionPane.showMessageDialog (null, "Прилад додано до замовлення на купівлю!" );
 		}
@@ -40,7 +39,6 @@ public class OrderDeviceDao
 	            ResultSet rs = stm.executeQuery();
 	            rs.next();
 	            od.setNumber(rs.getInt("number"));
-	            od.setPrice(rs.getInt("price"));
 	        }
 	        return od;
 		}
@@ -50,12 +48,11 @@ public class OrderDeviceDao
 	    /** @throws SQLException */
 	    public void updateOrderDevice(OrderDevice od) throws SQLException 
 	    {
-	    	String sql = "update order_device set device_id = ?, number = ?, price = ? where order_device_id = " +  od.getOrderId();
+	    	String sql = "update order_device set device_id = ?, number = ? where order_device_id = " +  od.getOrderId();
 	    	PreparedStatement stm = Main.conn.prepareStatement(sql);
 			stm.setInt(1, od.getOrderId());
 	    	stm.setInt(2, od.getDeviceId());
 	    	stm.setInt(3, od.getNumber());
-	    	stm.setInt(4, od.getPrice());
 	    	stm.executeUpdate();
 	    	JOptionPane.showMessageDialog (null, "Інформація про прилад в замовленні відредагована!" ); 
 		}
@@ -85,7 +82,6 @@ public class OrderDeviceDao
 	                od.setOrderId(rs.getInt("order_id"));
 	                od.setDeviceId(rs.getInt("device_id"));
 	                od.setNumber(rs.getInt("number"));
-	                od.setPrice(rs.getInt("price"));
 	                list.add(od);
 	            }
 	        }
@@ -106,7 +102,6 @@ public class OrderDeviceDao
 	                od.setOrderId(rs.getInt("order_id"));
 	                od.setDeviceId(rs.getInt("device_id"));
 	                od.setNumber(rs.getInt("number"));
-	                od.setPrice(rs.getInt("price"));
 	                list.add(od);
 	            }
 	        }

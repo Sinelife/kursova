@@ -15,7 +15,6 @@ import javax.swing.border.EmptyBorder;
 
 import view.AuthorisationMenu;
 import view_admin.WorkerSalesDepartmentAdminMenu;
-import view_workerselldevice.ChooseClient;
 import view_workerselldevice.WorkerSalesDepartmentMenu;
 
 public class ProviderMenu extends JFrame {
@@ -34,6 +33,7 @@ public class ProviderMenu extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
 		
 		
 		JLabel MenuTitleLabel = new JLabel("Меню роботи з постачальниками");
@@ -124,7 +124,7 @@ public class ProviderMenu extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				if(AuthorisationMenu.user_role.equals("worker_of_sales_department"))
+				if(AuthorisationMenu.user_role.equals("worker_of_delivery_department"))
 				{
 					ProviderMenu.this.setVisible(false);
 					ProviderMenu.this.dispose();

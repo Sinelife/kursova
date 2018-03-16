@@ -17,6 +17,8 @@ import javax.swing.border.EmptyBorder;
 
 import dao.DeliveryDao;
 import domain.Delivery;
+import view.AuthorisationMenu;
+
 import javax.swing.JCheckBox;
 
 public class EditDelivery extends JFrame {
@@ -40,13 +42,14 @@ public class EditDelivery extends JFrame {
 		List<Delivery> deliveries = dd.getAllFromProvider(ChooseProvider.id_to_choose);
 		
 		
-		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 759, 476);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		
 		
 		JLabel lblNewLabel = new JLabel("Редагування замовлення постачання");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));

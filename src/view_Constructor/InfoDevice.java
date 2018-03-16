@@ -1,7 +1,5 @@
 package view_Constructor;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,10 +13,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import dao.ComponentDao;
 import dao.DeviceDao;
-import domain.Component;
 import domain.Device;
+import view.AuthorisationMenu;
 
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -50,8 +47,10 @@ public class InfoDevice extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		
 
-		JComboBox<String> comboBox = new JComboBox();
+		JComboBox<String> comboBox = new JComboBox<String>();
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		comboBox.setBounds(46, 283, 438, 34);
 		contentPane.add(comboBox);

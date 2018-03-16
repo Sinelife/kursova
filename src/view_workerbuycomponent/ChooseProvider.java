@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 import dao.ProviderDao;
 import domain.Provider;
+import view.AuthorisationMenu;
 
 public class ChooseProvider extends JFrame {
 
@@ -38,6 +39,8 @@ public class ChooseProvider extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		
 		
 		JLabel lblNewLabel = new JLabel("Вибір остачальника для подальшої роботи з ним");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 23));

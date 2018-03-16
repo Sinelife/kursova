@@ -13,6 +13,8 @@ import javax.swing.border.EmptyBorder;
 
 import dao.ClientDao;
 import domain.Client;
+import view.AuthorisationMenu;
+
 import javax.swing.JButton;
 
 public class AddClient extends JFrame
@@ -41,6 +43,8 @@ public class AddClient extends JFrame
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		
 		
 		JLabel lblNewLabel = new JLabel("Додавання нового клієнта");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));

@@ -1,7 +1,5 @@
 package view_admin;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,10 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import dao.UserDao;
-import domain.Component;
 import domain.User;
-import view_Constructor.ComponentInformation;
-import view_Constructor.InfoComponent;
+import view.AuthorisationMenu;
 
 public class DeleteUser extends JFrame {
 
@@ -45,6 +41,8 @@ public class DeleteUser extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		
 
 		JComboBox comboBox = new JComboBox();
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));

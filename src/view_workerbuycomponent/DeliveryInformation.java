@@ -3,7 +3,6 @@ package view_workerbuycomponent;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
@@ -16,6 +15,8 @@ import javax.swing.border.EmptyBorder;
 
 import dao.DeliveryDao;
 import domain.Delivery;
+import view.AuthorisationMenu;
+
 import java.awt.Color;
 
 public class DeliveryInformation extends JFrame {
@@ -42,6 +43,8 @@ public class DeliveryInformation extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		
 		
 		JLabel lblNewLabel = new JLabel("Інформація про замовлення постачання");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));

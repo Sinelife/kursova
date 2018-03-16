@@ -17,6 +17,7 @@ import dao.OrderDao;
 import dao.OrderDeviceDao;
 import domain.Order;
 import domain.OrderDevice;
+import view.AuthorisationMenu;
 
 public class InfoOrder extends JFrame 
 {
@@ -36,12 +37,15 @@ public class InfoOrder extends JFrame
 		OrderDao od = new OrderDao();
 		List<Order> orders = od.getAllFromClient(ChooseClient.id_to_choose);
 		
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 784, 507);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		
 		
 		JLabel lblNewLabel = new JLabel("Перегляд інформації про замовлення на купівлю");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
@@ -116,8 +120,7 @@ public class InfoOrder extends JFrame
 					String info = "Назва: " + device_name + 
 							"  Напруга живлення: " + device_supply_voltage +
 							"  Границі регулювання часу: " + border_regulation_time +
-							"  Кількість: " + order_device.getNumber() + 
-							"  Ціна: " + order_device.getPrice();
+							"  Кількість: " + order_device.getNumber();
 					DeviceInOrderComboBox.addItem(info);
 				}
 

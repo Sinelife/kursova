@@ -13,10 +13,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import dao.ComponentDao;
 import dao.DeviceDao;
-import domain.Component;
 import domain.Device;
+import view.AuthorisationMenu;
 
 
 
@@ -42,6 +41,8 @@ public class EditDevice extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		
 
 		JComboBox<String> comboBox = new JComboBox<String>();
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));

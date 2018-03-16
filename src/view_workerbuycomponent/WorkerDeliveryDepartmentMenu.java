@@ -16,6 +16,7 @@ import javax.swing.border.EmptyBorder;
 import dao.UserDao;
 import domain.User;
 import view.AuthorisationMenu;
+import view.ChangeLoginPassword;
 
 public class WorkerDeliveryDepartmentMenu extends JFrame {
 
@@ -33,11 +34,13 @@ public class WorkerDeliveryDepartmentMenu extends JFrame {
 		String UserSurnameName = u.getSurname() + " " + u.getName();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 608, 509);
+		setBounds(100, 100, 608, 436);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		
 		
 		JLabel UserPIBLabel = new JLabel(UserSurnameName);
 		UserPIBLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -65,7 +68,20 @@ public class WorkerDeliveryDepartmentMenu extends JFrame {
 		contentPane.add(ProviderMenuButton);
 		
 		JButton DeliveryMenuButton = new JButton("2)«м≥нити лог≥н та пароль");
-		DeliveryMenuButton.setForeground(Color.RED);
+		DeliveryMenuButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				WorkerDeliveryDepartmentMenu.this.setVisible(false);
+				try {
+					new ChangeLoginPassword(WorkerDeliveryDepartmentMenu.this).setVisible(true);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+			}
+		});
+		DeliveryMenuButton.setForeground(Color.BLACK);
 		DeliveryMenuButton.setHorizontalAlignment(SwingConstants.LEFT);
 		DeliveryMenuButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		DeliveryMenuButton.setBounds(53, 269, 419, 43);
@@ -81,7 +97,7 @@ public class WorkerDeliveryDepartmentMenu extends JFrame {
 				new AuthorisationMenu().setVisible(true);
 			}
 		});
-		LogOutButtton.setBounds(454, 430, 130, 25);
+		LogOutButtton.setBounds(448, 357, 130, 25);
 		contentPane.add(LogOutButtton);
 	}
 

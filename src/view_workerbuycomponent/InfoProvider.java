@@ -16,6 +16,7 @@ import javax.swing.border.EmptyBorder;
 import dao.DeliveryComponentDao;
 import dao.ProviderDao;
 import domain.Provider;
+import view.AuthorisationMenu;
 import domain.Delivery;
 import domain.DeliveryComponent;
 
@@ -44,6 +45,7 @@ public class InfoProvider extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
 		
 		
 		JLabel lblNewLabel = new JLabel("Перегляд інформації про постачальника");
@@ -195,8 +197,7 @@ public class InfoProvider extends JFrame {
 					}
 					String info = "Назва: " + component_name + 
 							"  Тип: " + component_type +
-							"  Кількість: " + delivery_component.getNumber() + 
-							"  Ціна: " + delivery_component.getPrice();
+							"  Кількість: " + delivery_component.getNumber();
 					ComponentInDeliveryComboBox.addItem(info);
 				}
 			}

@@ -180,12 +180,11 @@ public class DeliveryDao
 	
 	public void addComponentInDelivery(DeliveryComponent dc) throws SQLException 
 	{
-		String sql = "INSERT INTO delivery_component (delivery_id, component_id, number, price) VALUES (?,?,?,?)";
+		String sql = "INSERT INTO delivery_component (delivery_id, component_id, number) VALUES (?,?,?)";
 		PreparedStatement stm = Main.conn.prepareStatement(sql);
 		stm.setInt(1, dc.getDeliveryId());
 		stm.setInt(2, dc.getComponentId());
 		stm.setInt(3, dc.getNumber());
-		stm.setInt(4, dc.getPrice());
 		stm.executeUpdate();
 		JOptionPane.showMessageDialog(null, "Компонент додано до замовлення постачання!");
 	}
@@ -193,11 +192,10 @@ public class DeliveryDao
 
 	public void updateComponentInDelivery(DeliveryComponent dc) throws SQLException 
 	{
-		String sql = "update delivery_component set number = ?, price = ? where delivery_id = "
+		String sql = "update delivery_component set number = ? where delivery_id = "
 				+ dc.getDeliveryId() + " and component_id = " + dc.getComponentId();
 		PreparedStatement stm = Main.conn.prepareStatement(sql);
 		stm.setInt(1, dc.getNumber());
-		stm.setInt(2, dc.getPrice());
 		stm.executeUpdate();
 		JOptionPane.showMessageDialog(null, "Інформацію про компонент в замовленні постачання відредаговано!");
 	}
@@ -227,7 +225,6 @@ public class DeliveryDao
             dc.setDeliveryId(rs.getInt("delivery_id"));
             dc.setComponentId(rs.getInt("component_id"));
             dc.setNumber(rs.getInt("number"));
-            dc.setPrice(rs.getInt("price"));
         }
         return dc;
 	}

@@ -1,7 +1,5 @@
 package view_Constructor;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.sql.SQLException;
 import java.util.List;
@@ -10,7 +8,6 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
@@ -19,6 +16,8 @@ import dao.DeviceDao;
 import domain.Component;
 import domain.ComponentDevice;
 import domain.Device;
+import view.AuthorisationMenu;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -45,6 +44,7 @@ public class SpecificationInformation extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
 		
 
 		JComboBox<String> comboBox = new JComboBox<String>();

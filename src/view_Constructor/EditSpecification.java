@@ -20,6 +20,8 @@ import dao.DeviceDao;
 import domain.Component;
 import domain.ComponentDevice;
 import domain.Device;
+import view.AuthorisationMenu;
+
 import javax.swing.JTextField;
 
 public class EditSpecification extends JFrame {
@@ -50,14 +52,14 @@ public class EditSpecification extends JFrame {
 		cd = new ComponentDao();
 		
 
-
-		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 770, 647);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		
 		
 		JLabel lblNewLabel = new JLabel("Вибір приладу для редагування специфікації");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));

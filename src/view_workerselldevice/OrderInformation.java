@@ -15,6 +15,8 @@ import javax.swing.border.EmptyBorder;
 
 import dao.OrderDao;
 import domain.Order;
+import view.AuthorisationMenu;
+
 import java.awt.Color;
 
 public class OrderInformation extends JFrame {
@@ -41,6 +43,8 @@ public class OrderInformation extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		
 		
 		JLabel lblNewLabel = new JLabel("Інформація про замовлення на купівлю");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));

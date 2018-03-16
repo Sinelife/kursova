@@ -38,11 +38,13 @@ public class ConstructorAdminMenu extends JFrame {
 		String UserSurnameName = u.getSurname() + " " + u.getName();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 740, 527);
+		setBounds(100, 100, 643, 403);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		
 		
 		JLabel MenuTitleLabel = new JLabel("Меню адміна(як члена конструкторського бюро)");
 		MenuTitleLabel.setFont(new Font("Tahoma", Font.BOLD, 21));
@@ -65,7 +67,7 @@ public class ConstructorAdminMenu extends JFrame {
 		DeviceMenuButton.setForeground(Color.BLACK);
 		DeviceMenuButton.setHorizontalAlignment(SwingConstants.LEFT);
 		DeviceMenuButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		DeviceMenuButton.setBounds(53, 177, 390, 43);
+		DeviceMenuButton.setBounds(52, 147, 390, 43);
 		contentPane.add(DeviceMenuButton);
 		
 		JButton ComponentMenuButton = new JButton("2)Меню роботи з компонентами");
@@ -79,15 +81,8 @@ public class ConstructorAdminMenu extends JFrame {
 		ComponentMenuButton.setForeground(Color.BLACK);
 		ComponentMenuButton.setHorizontalAlignment(SwingConstants.LEFT);
 		ComponentMenuButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		ComponentMenuButton.setBounds(53, 269, 390, 43);
+		ComponentMenuButton.setBounds(52, 239, 390, 43);
 		contentPane.add(ComponentMenuButton);
-		
-		JButton button_2 = new JButton("3)");
-		button_2.setForeground(Color.RED);
-		button_2.setHorizontalAlignment(SwingConstants.LEFT);
-		button_2.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		button_2.setBounds(53, 361, 390, 43);
-		contentPane.add(button_2);
 		
 		
 		
@@ -104,7 +99,7 @@ public class ConstructorAdminMenu extends JFrame {
 				}
 			}
 		});
-		btnBack.setBounds(550, 429, 140, 25);
+		btnBack.setBounds(477, 313, 103, 25);
 		contentPane.add(btnBack);
 	}
 }

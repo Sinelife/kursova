@@ -14,6 +14,8 @@ import javax.swing.border.EmptyBorder;
 
 import dao.ComponentDao;
 import domain.Component;
+import view.AuthorisationMenu;
+
 import java.awt.Color;
 
 public class ComponentInformation extends JFrame {
@@ -41,6 +43,8 @@ public class ComponentInformation extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		
 		
 		JLabel lblNewLabel = new JLabel("Інформація про компонент");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));

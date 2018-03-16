@@ -17,6 +17,7 @@ import java.sql.Date;
 
 import dao.OrderDao;
 import domain.Order;
+import view.AuthorisationMenu;
 
 public class AddOrder extends JFrame 
 {
@@ -38,6 +39,8 @@ public class AddOrder extends JFrame
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		
 		
 		JLabel lblNewLabel = new JLabel("Додавання нового замовлення на купівлю");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));

@@ -17,12 +17,11 @@ public class DeliveryComponentDao
 {
 	 public void addDeliveryComponent(DeliveryComponent dc) throws SQLException 
 	    {
-			String sql = "INSERT INTO delivery_component (delivery_id, component_id, number, price) VALUES (?,?,?,?)";
+			String sql = "INSERT INTO delivery_component (delivery_id, component_id, number) VALUES (?,?,?)";
 	 	  	PreparedStatement stm = Main.conn.prepareStatement(sql);
 			stm.setInt(1, dc.getDeliveryId());
 	    	stm.setInt(2, dc.getComponentId());
 	    	stm.setInt(3, dc.getNumber());
-	    	stm.setInt(4, dc.getPrice());
 	    	stm.executeUpdate();
 	    	//JOptionPane.showMessageDialog (null, "Нового кліента додано до бази данних!" );
 		}
@@ -41,7 +40,6 @@ public class DeliveryComponentDao
 	            ResultSet rs = stm.executeQuery();
 	            rs.next();
 	            dc.setNumber(rs.getInt("number"));
-	            dc.setPrice(rs.getInt("price"));
 	        }
 	        return dc;
 		}
@@ -51,12 +49,11 @@ public class DeliveryComponentDao
 	    /** @throws SQLException */
 	    public void updateDeliveryComponent(DeliveryComponent dc) throws SQLException 
 	    {
-	    	String sql = "update delivery_component set component_id = ?, number = ?, price = ? where delivery_component_id = " +  dc.getDeliveryId();
+	    	String sql = "update delivery_component set component_id = ?, number = ? where delivery_component_id = " +  dc.getDeliveryId();
 	    	PreparedStatement stm = Main.conn.prepareStatement(sql);
 			stm.setInt(1, dc.getDeliveryId());
 	    	stm.setInt(2, dc.getComponentId());
 	    	stm.setInt(3, dc.getNumber());
-	    	stm.setInt(4, dc.getPrice());
 	    	stm.executeUpdate();
 	    	JOptionPane.showMessageDialog (null, "Інформація про компонент в замовленні постачання відредагована!" ); 
 		}
@@ -86,7 +83,6 @@ public class DeliveryComponentDao
 	                dc.setDeliveryId(rs.getInt("delivery_id"));
 	                dc.setComponentId(rs.getInt("component_id"));
 	                dc.setNumber(rs.getInt("number"));
-	                dc.setPrice(rs.getInt("price"));
 	                list.add(dc);
 	            }
 	        }

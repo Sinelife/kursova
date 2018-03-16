@@ -17,6 +17,7 @@ import dao.DeliveryComponentDao;
 import dao.DeliveryDao;
 import domain.Delivery;
 import domain.DeliveryComponent;
+import view.AuthorisationMenu;
 
 public class InfoDelivery extends JFrame 
 {
@@ -42,6 +43,8 @@ public class InfoDelivery extends JFrame
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		
 		
 		JLabel lblNewLabel = new JLabel("Перегляд інформації про замовлення постачання");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
@@ -109,8 +112,7 @@ public class InfoDelivery extends JFrame
 					}
 					String info = "Назва: " + component_name + 
 							"  Тип: " + component_type +
-							"  Кількість: " + delivery_component.getNumber() + 
-							"  Ціна: " + delivery_component.getPrice();
+							"  Кількість: " + delivery_component.getNumber();
 					ComponentInDeliveryComboBox.addItem(info);
 				}
 

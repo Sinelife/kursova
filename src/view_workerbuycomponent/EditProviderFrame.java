@@ -14,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 
 import dao.ProviderDao;
 import domain.Provider;
+import view.AuthorisationMenu;
 
 
 public class EditProviderFrame extends JFrame {
@@ -43,6 +44,8 @@ public class EditProviderFrame extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		
 		
 		JLabel lblNewLabel = new JLabel("Редагування інформації постачальника");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));

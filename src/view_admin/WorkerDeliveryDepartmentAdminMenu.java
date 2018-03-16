@@ -34,11 +34,13 @@ public class WorkerDeliveryDepartmentAdminMenu extends JFrame {
 		String UserSurnameName = u.getSurname() + " " + u.getName();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 608, 509);
+		setBounds(100, 100, 608, 331);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		
 		
 		JLabel UserPIBLabel = new JLabel(UserSurnameName);
 		UserPIBLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -62,15 +64,8 @@ public class WorkerDeliveryDepartmentAdminMenu extends JFrame {
 		ProviderMenuButton.setForeground(Color.BLACK);
 		ProviderMenuButton.setHorizontalAlignment(SwingConstants.LEFT);
 		ProviderMenuButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		ProviderMenuButton.setBounds(53, 177, 419, 43);
+		ProviderMenuButton.setBounds(53, 177, 368, 43);
 		contentPane.add(ProviderMenuButton);
-		
-		JButton DeliveryMenuButton = new JButton("2)Меню роботи з замовленнями постачання");
-		DeliveryMenuButton.setForeground(Color.RED);
-		DeliveryMenuButton.setHorizontalAlignment(SwingConstants.LEFT);
-		DeliveryMenuButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		DeliveryMenuButton.setBounds(53, 269, 419, 43);
-		contentPane.add(DeliveryMenuButton);
 		
 		
 		
@@ -87,7 +82,7 @@ public class WorkerDeliveryDepartmentAdminMenu extends JFrame {
 				}
 			}
 		});
-		LogOutButtton.setBounds(498, 430, 86, 25);
+		LogOutButtton.setBounds(471, 247, 86, 25);
 		contentPane.add(LogOutButtton);
 	}
 

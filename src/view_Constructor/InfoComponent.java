@@ -15,6 +15,8 @@ import javax.swing.border.EmptyBorder;
 
 import dao.ComponentDao;
 import domain.Component;
+import view.AuthorisationMenu;
+
 import javax.swing.JTextField;
 
 public class InfoComponent extends JFrame {
@@ -42,8 +44,10 @@ public class InfoComponent extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		
 
-		JComboBox<String> comboBox = new JComboBox();
+		JComboBox<String> comboBox = new JComboBox<String>();
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		comboBox.setBounds(46, 244, 438, 34);
 		contentPane.add(comboBox);

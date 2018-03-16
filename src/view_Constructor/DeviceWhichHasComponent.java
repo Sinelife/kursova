@@ -23,6 +23,7 @@ import dao.DeviceDao;
 import domain.Component;
 import domain.Device;
 import main.Main;
+import view.AuthorisationMenu;
 
 import javax.swing.JTable;
 import javax.swing.JList;
@@ -51,6 +52,8 @@ public class DeviceWhichHasComponent extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		
 		
 		
 		JLabel lblNewLabel = new JLabel("Прилади, що містять данний компонент");

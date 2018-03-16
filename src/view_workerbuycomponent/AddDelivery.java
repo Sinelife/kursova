@@ -17,6 +17,7 @@ import java.sql.Date;
 
 import dao.DeliveryDao;
 import domain.Delivery;
+import view.AuthorisationMenu;
 
 public class AddDelivery extends JFrame 
 {
@@ -38,6 +39,8 @@ public class AddDelivery extends JFrame
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		
 		
 		JLabel lblNewLabel = new JLabel("ƒодаванн€ нового замовленн€ постачанн€");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));

@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 import dao.DeviceDao;
 import domain.Device;
+import view.AuthorisationMenu;
 
 import javax.swing.JButton;
 
@@ -45,6 +46,8 @@ public class AddDevice extends JFrame
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		
 		
 		JLabel lblNewLabel = new JLabel("Додавання нового приладу");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));

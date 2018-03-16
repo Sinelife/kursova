@@ -5,14 +5,12 @@ public class DeliveryComponent
 	private int delivery_id;
 	private int component_id;
 	private int number;
-	private int price;
 	
-	DeliveryComponent(int delivery_id, int component_id, int number, int price)
+	DeliveryComponent(int delivery_id, int component_id, int number)
 	{
 		this.delivery_id = delivery_id;
 		this.component_id = component_id;;
 		this.number = number;
-		this.price = price;
 	}
 	
 	public DeliveryComponent()
@@ -48,15 +46,5 @@ public class DeliveryComponent
 	public void setNumber(int number) 
 	{
 		this.number = number;
-	}
-
-	public int getPrice() 
-	{
-		return price;
-	}
-
-	public void setPrice(int price) 
-	{
-		this.price = price;
 	}
 }

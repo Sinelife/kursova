@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 import dao.ComponentDao;
 import domain.Component;
+import view.AuthorisationMenu;
 
 
 
@@ -41,6 +42,8 @@ public class EditComponent extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		
 
 		JComboBox<String> comboBox = new JComboBox<String>();
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));

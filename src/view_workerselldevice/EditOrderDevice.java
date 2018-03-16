@@ -19,6 +19,8 @@ import dao.OrderDao;
 import domain.Device;
 import domain.Order;
 import domain.OrderDevice;
+import view.AuthorisationMenu;
+
 import javax.swing.JTextField;
 
 public class EditOrderDevice extends JFrame {
@@ -57,6 +59,8 @@ public class EditOrderDevice extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		
 		
 		JLabel lblNewLabel = new JLabel("Редагування замовлення на купівлю");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));

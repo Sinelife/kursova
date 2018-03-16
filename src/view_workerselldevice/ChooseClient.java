@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 import dao.ClientDao;
 import domain.Client;
+import view.AuthorisationMenu;
 
 public class ChooseClient extends JFrame {
 
@@ -38,6 +39,8 @@ public class ChooseClient extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		
 		
 		JLabel lblNewLabel = new JLabel("Вибір клієнта для подальшої роботи з ним");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 23));

@@ -10,9 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import view_Constructor.ConstructorMenu;
-import view_Constructor.DeviceMenu;
-
+import view.AuthorisationMenu;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
@@ -33,6 +31,8 @@ public class UserMenu extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		
 		
 		JLabel MenuTitleLabel = new JLabel("Меню роботи з користувачами");
 		MenuTitleLabel.setFont(new Font("Tahoma", Font.PLAIN, 21));

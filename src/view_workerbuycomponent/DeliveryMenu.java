@@ -13,12 +13,12 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import view.AuthorisationMenu;
+
 
 public class DeliveryMenu extends JFrame {
 
 	private JPanel contentPane;
-
-
 
 	/**
 	 * Create the frame.
@@ -31,6 +31,8 @@ public class DeliveryMenu extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		
 		
 		JLabel MenuTitleLabel = new JLabel("Меню роботи з замовленнями постачання");
 		MenuTitleLabel.setFont(new Font("Tahoma", Font.BOLD, 21));

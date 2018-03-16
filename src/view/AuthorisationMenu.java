@@ -16,12 +16,12 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import javax.swing.JTextField;
-import java.awt.SystemColor;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.List;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class AuthorisationMenu extends JFrame 
 {
@@ -42,7 +42,7 @@ public class AuthorisationMenu extends JFrame
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 666, 387);
 		contentPane = new JPanel();
-		contentPane.setBackground(SystemColor.activeCaption);
+		contentPane.setBackground(Color.LIGHT_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -154,5 +154,28 @@ public class AuthorisationMenu extends JFrame
 		button.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		button.setBounds(284, 270, 144, 33);
 		contentPane.add(button);
+	}
+	
+	
+	
+	public static JPanel setColorOfFrame(JPanel frame, String role)
+	{
+		if(role.equals("admin"))
+		{
+			frame.setBackground(new Color(230, 243, 255));
+		}
+		if(role.equals("constructor"))
+		{
+			frame.setBackground(new Color(255, 255, 204));
+		}
+		if(role.equals("worker_of_delivery_department"))
+		{
+			frame.setBackground(new Color(245, 230, 255));
+		}
+		if(role.equals("worker_of_sales_department"))
+		{
+			frame.setBackground(new Color(230, 255, 204));
+		}
+		return frame;
 	}
 }

@@ -17,6 +17,7 @@ import dao.ClientDao;
 import dao.OrderDeviceDao;
 import domain.Client;
 import domain.OrderDevice;
+import view.AuthorisationMenu;
 import domain.Order;
 
 public class InfoClient extends JFrame {
@@ -39,12 +40,15 @@ public class InfoClient extends JFrame {
 		ClientDao cd = new ClientDao();
 		List<Client> clients = cd.getAll();
 		
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 950, 610);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		
 		
 		JLabel lblNewLabel = new JLabel("Перегляд інформації про клієнта");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
@@ -201,8 +205,7 @@ public class InfoClient extends JFrame {
 					String info = "Назва: " + device_name + 
 							"  Напруга живлення: " + device_supply_voltage +
 							"  Границі регулювання часу: " + border_regulation_time +
-							"  Кількість: " + order_device.getNumber() + 
-							"  Ціна: " + order_device.getPrice();
+							"  Кількість: " + order_device.getNumber();
 					DeviceInOrderComboBox.addItem(info);
 				}
 			}

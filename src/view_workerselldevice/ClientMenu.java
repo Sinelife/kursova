@@ -33,6 +33,7 @@ public class ClientMenu extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
 		
 		
 		JLabel MenuTitleLabel = new JLabel("ћеню роботи з кл≥Їнтами");

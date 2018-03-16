@@ -16,8 +16,9 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import dao.OrderDao;
-import domain.Device;
 import domain.Order;
+import view.AuthorisationMenu;
+
 import javax.swing.JCheckBox;
 
 public class EditOrder extends JFrame {
@@ -41,13 +42,14 @@ public class EditOrder extends JFrame {
 		List<Order> orders = od.getAllFromClient(ChooseClient.id_to_choose);
 		
 		
-		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 759, 476);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+	
 		
 		JLabel lblNewLabel = new JLabel("Редагування замовлення на купівлю");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));

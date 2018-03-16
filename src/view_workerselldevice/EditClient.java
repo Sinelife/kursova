@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 import dao.ClientDao;
 import domain.Client;
+import view.AuthorisationMenu;
 
 
 public class EditClient extends JFrame 
@@ -34,12 +35,15 @@ public class EditClient extends JFrame
 		ClientDao cd = new ClientDao();
 		List<Client> clients = cd.getAll();
 		
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 646, 558);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		
 
 		JComboBox<String> comboBox = new JComboBox<String>();
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));

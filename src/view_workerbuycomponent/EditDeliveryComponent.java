@@ -18,6 +18,8 @@ import dao.DeliveryDao;
 import domain.Component;
 import domain.Delivery;
 import domain.DeliveryComponent;
+import view.AuthorisationMenu;
+
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
@@ -57,6 +59,8 @@ public class EditDeliveryComponent extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		
 		
 		JLabel lblNewLabel = new JLabel("Редагування замовлення постачання");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));

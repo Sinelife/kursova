@@ -183,23 +183,21 @@ public class OrderDao
 	
 	public void addDeviceInOrder(OrderDevice od) throws SQLException 
 	{
-		String sql = "INSERT INTO order_device (order_id, device_id, number, price) VALUES (?,?,?,?)";
+		String sql = "INSERT INTO order_device (order_id, device_id, number) VALUES (?,?,?)";
 		PreparedStatement stm = Main.conn.prepareStatement(sql);
 		stm.setInt(1, od.getOrderId());
 		stm.setInt(2, od.getDeviceId());
 		stm.setInt(3, od.getNumber());
-		stm.setInt(4, od.getPrice());
 		stm.executeUpdate();
 		JOptionPane.showMessageDialog(null, "Прилад додано до замовлення на купівлю!");
 	}
 
 	public void updateDeviceInOrder(OrderDevice od) throws SQLException 
 	{
-		String sql = "update order_device set number = ?, price = ? where order_id = "
+		String sql = "update order_device set number = ? where order_id = "
 				+ od.getOrderId() + " and device_id = " + od.getDeviceId();
 		PreparedStatement stm = Main.conn.prepareStatement(sql);
 		stm.setInt(1, od.getNumber());
-		stm.setInt(2, od.getPrice());
 		stm.executeUpdate();
 		JOptionPane.showMessageDialog(null, "Інформацію про прилад в замовлення на купівлю відредаговано!");
 	}
@@ -227,7 +225,6 @@ public class OrderDao
             od.setOrderId(rs.getInt("order_id"));
             od.setDeviceId(rs.getInt("device_id"));
             od.setNumber(rs.getInt("number"));
-            od.setPrice(rs.getInt("price"));
         }
         return od;
 	}

@@ -35,11 +35,14 @@ public class WorkerSalesDepartmentAdminMenu extends JFrame
 		String UserSurnameName = u.getSurname() + " " + u.getName();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 608, 509);
+		setBounds(100, 100, 608, 323);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		
+		
 		
 		JLabel UserPIBLabel = new JLabel(UserSurnameName);
 		UserPIBLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -63,15 +66,8 @@ public class WorkerSalesDepartmentAdminMenu extends JFrame
 		ClientMenuButton.setForeground(Color.BLACK);
 		ClientMenuButton.setHorizontalAlignment(SwingConstants.LEFT);
 		ClientMenuButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		ClientMenuButton.setBounds(53, 177, 390, 43);
+		ClientMenuButton.setBounds(53, 177, 363, 43);
 		contentPane.add(ClientMenuButton);
-		
-		JButton OrderMenuButton = new JButton("2)Меню роботи з замовленнями на купівлю");
-		OrderMenuButton.setForeground(Color.RED);
-		OrderMenuButton.setHorizontalAlignment(SwingConstants.LEFT);
-		OrderMenuButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		OrderMenuButton.setBounds(53, 269, 390, 43);
-		contentPane.add(OrderMenuButton);
 		
 		
 		
@@ -88,7 +84,7 @@ public class WorkerSalesDepartmentAdminMenu extends JFrame
 				}
 			}
 		});
-		LogOutButtton.setBounds(498, 430, 86, 25);
+		LogOutButtton.setBounds(467, 247, 86, 25);
 		contentPane.add(LogOutButtton);
 	}
 

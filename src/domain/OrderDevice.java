@@ -5,14 +5,12 @@ public class OrderDevice
 	private int order_id;
 	private int device_id;
 	private int number;
-	private int price;
 	
-	OrderDevice(int order_id, int device_id, int number, int price)
+	OrderDevice(int order_id, int device_id, int number)
 	{
 		this.order_id = order_id;
 		this.device_id = device_id;;
 		this.number = number;
-		this.price = price;
 	}
 	
 	public OrderDevice()
@@ -49,15 +47,4 @@ public class OrderDevice
 	{
 		this.number = number;
 	}
-
-	public int getPrice() 
-	{
-		return price;
-	}
-
-	public void setPrice(int price) 
-	{
-		this.price = price;
-	}
-	
 }

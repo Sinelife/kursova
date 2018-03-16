@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 import dao.DeviceDao;
 import domain.Device;
+import view.AuthorisationMenu;
 
 
 public class EditDeviceFrame extends JFrame {
@@ -44,6 +45,8 @@ public class EditDeviceFrame extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		
 		
 		JLabel lblNewLabel = new JLabel("Редагування інформаціх про прилад");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 26));

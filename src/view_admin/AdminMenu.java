@@ -40,6 +40,8 @@ public class AdminMenu extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		
 		
 		JLabel MenuTitleLabel = new JLabel("Меню адміністратора");
 		MenuTitleLabel.setFont(new Font("Tahoma", Font.BOLD, 21));
@@ -102,7 +104,7 @@ public class AdminMenu extends JFrame {
 			}
 		});
 		SalesDepartmentWorkerTablesButton.setHorizontalAlignment(SwingConstants.LEFT);
-		SalesDepartmentWorkerTablesButton.setForeground(new Color(255, 140, 0));
+		SalesDepartmentWorkerTablesButton.setForeground(Color.BLACK);
 		SalesDepartmentWorkerTablesButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		SalesDepartmentWorkerTablesButton.setBounds(51, 276, 466, 43);
 		contentPane.add(SalesDepartmentWorkerTablesButton);
@@ -123,7 +125,7 @@ public class AdminMenu extends JFrame {
 			}
 		});
 		DeliveryDepartmentWorkerTablesButton.setHorizontalAlignment(SwingConstants.LEFT);
-		DeliveryDepartmentWorkerTablesButton.setForeground(new Color(255, 140, 0));
+		DeliveryDepartmentWorkerTablesButton.setForeground(Color.BLACK);
 		DeliveryDepartmentWorkerTablesButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		DeliveryDepartmentWorkerTablesButton.setBounds(51, 352, 466, 43);
 		contentPane.add(DeliveryDepartmentWorkerTablesButton);

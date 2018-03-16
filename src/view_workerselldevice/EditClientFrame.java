@@ -14,7 +14,7 @@ import javax.swing.border.EmptyBorder;
 
 import dao.ClientDao;
 import domain.Client;
-import view_Constructor.EditComponent;
+import view.AuthorisationMenu;
 
 public class EditClientFrame extends JFrame {
 
@@ -42,6 +42,8 @@ public class EditClientFrame extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		
 		
 		JLabel lblNewLabel = new JLabel("Редагування інформації клієнта");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
