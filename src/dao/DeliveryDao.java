@@ -159,8 +159,8 @@ public class DeliveryDao
 	
 	public List<Component> getAllComponentsNotInDelivery(int delivery_id) throws SQLException 
 	{
-		String sql = "SELECT * FROM component WHERE component_id IN"
-				+ "(SELECT component_id FROM delivery_component WHERE delivery_id <> " + delivery_id + ")";
+		String sql = "SELECT * FROM component WHERE component_id NOT IN"
+				+ "(SELECT component_id FROM delivery_component WHERE delivery_id = " + delivery_id + ")";
 		List<Component> list = new ArrayList<Component>();
 		try (PreparedStatement stm = Main.conn.prepareStatement(sql)) 
 		{

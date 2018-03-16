@@ -160,8 +160,8 @@ public class OrderDao
 	
 	public List<Device> getAllDevicesNotInOrder(int order_id) throws SQLException 
 	{
-		String sql = "SELECT * FROM device WHERE device_id IN"
-				+ "(SELECT device_id FROM order_device WHERE order_id <> " + order_id + ")";
+		String sql = "SELECT * FROM device WHERE device_id NOT IN"
+				+ "(SELECT device_id FROM order_device WHERE order_id = " + order_id + ")";
 		List<Device> list = new ArrayList<Device>();
 		try (PreparedStatement stm = Main.conn.prepareStatement(sql)) 
 		{
