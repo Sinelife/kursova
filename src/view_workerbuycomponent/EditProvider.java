@@ -1,7 +1,5 @@
 package view_workerbuycomponent;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -51,7 +49,7 @@ public class EditProvider extends JFrame {
 			comboBox.addItem(provider.getName());
 		}
 		
-		JLabel lblNewLabel = new JLabel("Вибір постачальника для редагування.");
+		JLabel lblNewLabel = new JLabel("Вибір постачальника для редагування");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		lblNewLabel.setBounds(46, 25, 559, 59);
 		contentPane.add(lblNewLabel);

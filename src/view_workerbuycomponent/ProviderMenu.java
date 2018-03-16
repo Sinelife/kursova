@@ -14,11 +14,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import view.AuthorisationMenu;
-import view_admin.WorkerDeliveryDepartmentAdminMenu;
 import view_admin.WorkerSalesDepartmentAdminMenu;
-import view_workerselldevice.AddClient;
-import view_workerselldevice.EditClient;
-import view_workerselldevice.InfoClient;
+import view_workerselldevice.ChooseClient;
 import view_workerselldevice.WorkerSalesDepartmentMenu;
 
 public class ProviderMenu extends JFrame {
@@ -32,7 +29,7 @@ public class ProviderMenu extends JFrame {
 	public ProviderMenu() 
 	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 618, 436);
+		setBounds(100, 100, 674, 531);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -61,11 +58,12 @@ public class ProviderMenu extends JFrame {
 		InfoButton.setHorizontalAlignment(SwingConstants.LEFT);
 		InfoButton.setForeground(Color.DARK_GRAY);
 		InfoButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		InfoButton.setBounds(42, 111, 479, 43);
+		InfoButton.setBounds(42, 111, 514, 43);
 		contentPane.add(InfoButton);
 		
 		JButton AddButton = new JButton("2)Додати інформацію про нового постачальника");
-		AddButton.addActionListener(new ActionListener() {
+		AddButton.addActionListener(new ActionListener() 
+		{
 			public void actionPerformed(ActionEvent e) 
 			{
 				ProviderMenu.this.setVisible(false);
@@ -75,7 +73,7 @@ public class ProviderMenu extends JFrame {
 		AddButton.setHorizontalAlignment(SwingConstants.LEFT);
 		AddButton.setForeground(Color.BLACK);
 		AddButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		AddButton.setBounds(42, 191, 479, 43);
+		AddButton.setBounds(42, 191, 514, 43);
 		contentPane.add(AddButton);
 		
 		JButton EditButton = new JButton("3)Редагувати інформацію про постачальника");
@@ -95,10 +93,29 @@ public class ProviderMenu extends JFrame {
 		EditButton.setHorizontalAlignment(SwingConstants.LEFT);
 		EditButton.setForeground(Color.BLACK);
 		EditButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		EditButton.setBounds(42, 271, 479, 43);
+		EditButton.setBounds(42, 271, 514, 43);
 		contentPane.add(EditButton);
 		
-
+		
+		JButton ChooseButton = new JButton("4)Обрати постачальника для подальшої роботи з ним");
+		ChooseButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				ProviderMenu.this.setVisible(false);
+				try {
+					new ChooseProvider().setVisible(true);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+			}
+		});
+		ChooseButton.setHorizontalAlignment(SwingConstants.LEFT);
+		ChooseButton.setForeground(Color.RED);
+		ChooseButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		ChooseButton.setBounds(42, 354, 514, 43);
+		contentPane.add(ChooseButton);
 		
 		
 		
@@ -107,12 +124,12 @@ public class ProviderMenu extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				if(AuthorisationMenu.user_role.equals("worker_of_delivery_department"))
+				if(AuthorisationMenu.user_role.equals("worker_of_sales_department"))
 				{
 					ProviderMenu.this.setVisible(false);
 					ProviderMenu.this.dispose();
 					try {
-						new WorkerDeliveryDepartmentMenu().setVisible(true);
+						new WorkerSalesDepartmentMenu().setVisible(true);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -123,7 +140,7 @@ public class ProviderMenu extends JFrame {
 					ProviderMenu.this.setVisible(false);
 					ProviderMenu.this.dispose();
 					try {
-						new WorkerDeliveryDepartmentAdminMenu().setVisible(true);
+						new WorkerSalesDepartmentAdminMenu().setVisible(true);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -131,8 +148,8 @@ public class ProviderMenu extends JFrame {
 				}
 			}
 		});
-		btnBack.setBounds(491, 351, 97, 25);
+		btnBack.setBounds(535, 439, 97, 25);
 		contentPane.add(btnBack);
+		
 	}
-
 }

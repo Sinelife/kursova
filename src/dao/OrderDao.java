@@ -9,7 +9,6 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import domain.ComponentDevice;
 import domain.Device;
 import domain.Order;
 import domain.OrderDevice;

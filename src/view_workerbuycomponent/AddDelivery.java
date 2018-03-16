@@ -1,4 +1,4 @@
-package view_workerselldevice;
+package view_workerbuycomponent;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -15,10 +15,10 @@ import javax.swing.border.EmptyBorder;
 
 import java.sql.Date;
 
-import dao.OrderDao;
-import domain.Order;
+import dao.DeliveryDao;
+import domain.Delivery;
 
-public class AddOrder extends JFrame 
+public class AddDelivery extends JFrame 
 {
 
 	private JPanel contentPane;
@@ -26,10 +26,10 @@ public class AddOrder extends JFrame
 	private JTextField StartDateField;
 	private JCheckBox PaidCheckBox;
 
-	public AddOrder(JFrame parent) 
+	public AddDelivery(JFrame parent) 
 	{
-		OrderDao od = new OrderDao();
-		Order o = new Order();
+		DeliveryDao dd = new DeliveryDao();
+		Delivery d = new Delivery();
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -39,9 +39,9 @@ public class AddOrder extends JFrame
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Додавання нового замовлення на купівлю");
+		JLabel lblNewLabel = new JLabel("Додавання нового замовлення постачання");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lblNewLabel.setBounds(29, 13, 568, 59);
+		lblNewLabel.setBounds(29, 13, 533, 59);
 		contentPane.add(lblNewLabel);
 		
 		JLabel NameLabel = new JLabel("Назва замовлення");
@@ -77,20 +77,20 @@ public class AddOrder extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				o.setClientId(ChooseClient.id_to_choose);
-				o.setOrderName(NameField.getText());
-				o.setStartDate(Date.valueOf(StartDateField.getText()));
-				o.setPaid(PaidCheckBox.isSelected());
+				d.setProviderId(ChooseProvider.id_to_choose);
+				d.setDeliveryName(NameField.getText());
+				d.setStartDate(Date.valueOf(StartDateField.getText()));
+				d.setPaid(PaidCheckBox.isSelected());
 				try {
-					od.addOrder(o);
+					dd.addDelivery(d);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				if (parent != null)
 					parent.setVisible(true);
-				AddOrder.this.setVisible(false);
-				AddOrder.this.dispose();
+				AddDelivery.this.setVisible(false);
+				AddDelivery.this.dispose();
 			}
 		});
 		AddButton.setBounds(51, 364, 97, 25);
@@ -103,8 +103,8 @@ public class AddOrder extends JFrame
 			public void actionPerformed(ActionEvent e) {
 				if (parent != null)
 					parent.setVisible(true);
-				AddOrder.this.setVisible(false);
-				AddOrder.this.dispose();
+				AddDelivery.this.setVisible(false);
+				AddDelivery.this.dispose();
 			}
 		});
 		btnBack.setBounds(488, 364, 97, 25);

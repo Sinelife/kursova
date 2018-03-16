@@ -1,4 +1,4 @@
-package view_workerselldevice;
+package view_workerbuycomponent;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -15,30 +15,29 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import dao.OrderDao;
-import domain.Device;
-import domain.Order;
+import dao.DeliveryDao;
+import domain.Delivery;
 import javax.swing.JCheckBox;
 
-public class EditOrder extends JFrame {
+public class EditDelivery extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField NameField;
 	private JTextField StartDateField;
 
-	public static int order_id_to_edit;
-	public static String order_name_to_edit;
+	public static int delivery_id_to_edit;
+	public static String delivery_name_to_edit;
 	
-	Order o;
+	Delivery d;
 	
 	/**
 	 * Create the frame.
 	 * @throws SQLException 
 	 */
-	public EditOrder(JFrame parent) throws SQLException 
+	public EditDelivery(JFrame parent) throws SQLException 
 	{
-		OrderDao od = new OrderDao();
-		List<Order> orders = od.getAllFromClient(ChooseClient.id_to_choose);
+		DeliveryDao dd = new DeliveryDao();
+		List<Delivery> deliveries = dd.getAllFromProvider(ChooseProvider.id_to_choose);
 		
 		
 		
@@ -49,18 +48,18 @@ public class EditOrder extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Редагування замовлення на купівлю");
+		JLabel lblNewLabel = new JLabel("Редагування замовлення постачання");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lblNewLabel.setBounds(103, 13, 479, 59);
+		lblNewLabel.setBounds(145, 13, 525, 59);
 		contentPane.add(lblNewLabel);
 		
-		JComboBox<String> OrderComboBox = new JComboBox<String>();
-		OrderComboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		OrderComboBox.setBounds(39, 85, 559, 34);
-		contentPane.add(OrderComboBox);
-		for(Order order : orders) 
+		JComboBox<String> DeliveryComboBox = new JComboBox<String>();
+		DeliveryComboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		DeliveryComboBox.setBounds(39, 85, 559, 34);
+		contentPane.add(DeliveryComboBox);
+		for(Delivery delivery : deliveries) 
 		{
-			OrderComboBox.addItem(order.getOrderName());
+			DeliveryComboBox.addItem(delivery.getDeliveryName());
 		}
 		
 		JLabel NameLabel = new JLabel("Назва замовлення");
@@ -97,24 +96,24 @@ public class EditOrder extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				order_name_to_edit = String.valueOf(OrderComboBox.getSelectedItem());
-				for(Order order : orders) 
+				delivery_name_to_edit = String.valueOf(DeliveryComboBox.getSelectedItem());
+				for(Delivery delivery : deliveries) 
 				{
-					if(order.getOrderName().equals(order_name_to_edit))
+					if(delivery.getDeliveryName().equals(delivery_name_to_edit))
 					{
-						order_id_to_edit = order.getId();
+						delivery_id_to_edit = delivery.getId();
 						break;
 					}
 				}
 				try {
-					o = od.readOrder(order_id_to_edit);
+					d = dd.readDelivery(delivery_id_to_edit);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				NameField.setText(o.getOrderName());
-				StartDateField.setText(String.valueOf(o.getStartDate()));
-				if(o.getPaid() == true)
+				NameField.setText(d.getDeliveryName());
+				StartDateField.setText(String.valueOf(d.getStartDate()));
+				if(d.getPaid() == true)
 				{
 					PaidCheckBox.setSelected(true);
 				}
@@ -134,18 +133,18 @@ public class EditOrder extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				o.setOrderName(NameField.getText());
-				o.setStartDate(Date.valueOf(StartDateField.getText()));
-				o.setPaid(PaidCheckBox.isSelected());
+				d.setDeliveryName(NameField.getText());
+				d.setStartDate(Date.valueOf(StartDateField.getText()));
+				d.setPaid(PaidCheckBox.isSelected());
 				try {
-					od.updateOrder(o);
+					dd.updateDelivery(d);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				EditOrder.this.setVisible(false);
-				EditOrder.this.dispose();
-				new OrderMenu().setVisible(true);
+				EditDelivery.this.setVisible(false);
+				EditDelivery.this.dispose();
+				new DeliveryMenu().setVisible(true);
 			}
 		});
 		button.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -159,8 +158,8 @@ public class EditOrder extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (parent != null)
 					parent.setVisible(true);
-				EditOrder.this.setVisible(false);
-				EditOrder.this.dispose();
+				EditDelivery.this.setVisible(false);
+				EditDelivery.this.dispose();
 			}
 		});
 		btnBack.setBounds(632, 378, 97, 25);

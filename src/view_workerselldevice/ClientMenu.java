@@ -95,8 +95,8 @@ public class ClientMenu extends JFrame {
 		contentPane.add(EditButton);
 		
 		
-		JButton button = new JButton("4)Обрати клієнта для подільшої роботи з ним");
-		button.addActionListener(new ActionListener() 
+		JButton ChooseButton = new JButton("4)Обрати клієнта для подільшої роботи з ним");
+		ChooseButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
@@ -109,11 +109,11 @@ public class ClientMenu extends JFrame {
 				} 
 			}
 		});
-		button.setHorizontalAlignment(SwingConstants.LEFT);
-		button.setForeground(Color.DARK_GRAY);
-		button.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		button.setBounds(42, 354, 456, 43);
-		contentPane.add(button);
+		ChooseButton.setHorizontalAlignment(SwingConstants.LEFT);
+		ChooseButton.setForeground(Color.DARK_GRAY);
+		ChooseButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		ChooseButton.setBounds(42, 354, 456, 43);
+		contentPane.add(ChooseButton);
 		
 		
 		

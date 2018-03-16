@@ -1,4 +1,4 @@
-package view_workerselldevice;
+package view_workerbuycomponent;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -13,25 +13,25 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import dao.DeliveryDao;
+import domain.Component;
+import domain.Delivery;
+import domain.DeliveryComponent;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import dao.OrderDao;
-import domain.Device;
-import domain.Order;
-import domain.OrderDevice;
-import javax.swing.JTextField;
-
-public class EditOrderDevice extends JFrame {
+public class EditDeliveryComponent extends JFrame {
 
 	private JPanel contentPane;
 
-	public static int order_id_to_edit;
-	public static String order_name_to_edit;
+	public static int delivery_id_to_edit;
+	public static String delivery_name_to_edit;
 
-	List<Order> orders;
-	private List<Device> DevicesInOrderEdit = null;
-	private List<Device> DevicesInOrderDelete = null;
-	private List<Device> DevicesNotInOrder = null;
+	List<Delivery> deliveries;
+	private List<Component> ComponentsInDeliveryEdit = null;
+	private List<Component> ComponentsInDeliveryDelete = null;
+	private List<Component> ComponentsNotInDelivery = null;
 	
 	private JTextField NumberAddField;
 	private JTextField NumberEditField;
@@ -40,15 +40,15 @@ public class EditOrderDevice extends JFrame {
 	JComboBox<String> DeleteComboBox = new JComboBox<String>();
 	JComboBox<String> EditComboBox = new JComboBox<String>();
 	
-	OrderDao od = new OrderDao();
+	DeliveryDao dd = new DeliveryDao();
 	
 	/**
 	 * Create the frame.
 	 * @throws SQLException
 	 */
-	public EditOrderDevice(JFrame parent) throws SQLException 
+	public EditDeliveryComponent(JFrame parent) throws SQLException 
 	{
-		orders = od.getAllFromClient(ChooseClient.id_to_choose);
+		deliveries = dd.getAllFromProvider(ChooseProvider.id_to_choose);
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,18 +58,18 @@ public class EditOrderDevice extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Редагування замовлення на купівлю");
+		JLabel lblNewLabel = new JLabel("Редагування замовлення постачання");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lblNewLabel.setBounds(162, 13, 518, 59);
+		lblNewLabel.setBounds(103, 13, 495, 59);
 		contentPane.add(lblNewLabel);
 		
-		JComboBox<String> OrderComboBox = new JComboBox<String>();
-		OrderComboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		OrderComboBox.setBounds(39, 85, 559, 34);
-		contentPane.add(OrderComboBox);
-		for(Order order : orders) 
+		JComboBox<String> DeliveryComboBox = new JComboBox<String>();
+		DeliveryComboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		DeliveryComboBox.setBounds(39, 85, 559, 34);
+		contentPane.add(DeliveryComboBox);
+		for(Delivery delivery : deliveries) 
 		{
-			OrderComboBox.addItem(order.getOrderName());
+			DeliveryComboBox.addItem(delivery.getDeliveryName());
 		}
 		
 		
@@ -106,29 +106,29 @@ public class EditOrderDevice extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				order_name_to_edit = String.valueOf(OrderComboBox.getSelectedItem());
-				for(Order order : orders) 
+				delivery_name_to_edit = String.valueOf(DeliveryComboBox.getSelectedItem());
+				for(Delivery delivery : deliveries) 
 				{
-					if(order.getOrderName().equals(order_name_to_edit))
+					if(delivery.getDeliveryName().equals(delivery_name_to_edit))
 					{
-						order_id_to_edit = order.getId();
+						delivery_id_to_edit = delivery.getId();
 					}
 				}
 				
 				try {
-					DevicesInOrderEdit = od.getAllDevicesInOrder(order_id_to_edit);
+					ComponentsInDeliveryEdit = dd.getAllComponentsInDelivery(delivery_id_to_edit);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				try {
-					DevicesInOrderDelete = od.getAllDevicesInOrder(order_id_to_edit);
+					ComponentsInDeliveryDelete = dd.getAllComponentsInDelivery(delivery_id_to_edit);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				try {
-					DevicesNotInOrder = od.getAllDevicesNotInOrder(order_id_to_edit);
+					ComponentsNotInDelivery = dd.getAllComponentsNotInDelivery(delivery_id_to_edit);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -138,17 +138,17 @@ public class EditOrderDevice extends JFrame {
 				DeleteComboBox.removeAllItems();
 				EditComboBox.removeAllItems();
 				
-				for(Device device : DevicesNotInOrder)
+				for(Component component : ComponentsNotInDelivery)
 				{
-					AddComboBox.addItem(device.getName());
+					AddComboBox.addItem(component.getName());
 				}
-				for(Device device : DevicesInOrderDelete)
+				for(Component component : ComponentsInDeliveryDelete)
 				{
-					DeleteComboBox.addItem(device.getName());
+					DeleteComboBox.addItem(component.getName());
 				}
-				for(Device device : DevicesInOrderEdit)
+				for(Component component : ComponentsInDeliveryEdit)
 				{
-					EditComboBox.addItem(device.getName());
+					EditComboBox.addItem(component.getName());
 				}
 			}
 		});
@@ -185,22 +185,22 @@ public class EditOrderDevice extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				String device_name = String.valueOf(AddComboBox.getSelectedItem());
-				int device_id = 0;
-				for(Device device : DevicesNotInOrder) 
+				String component_name = String.valueOf(AddComboBox.getSelectedItem());
+				int component_id = 0;
+				for(Component component : ComponentsNotInDelivery) 
 				{
-					if(device.getName().equals(device_name))
+					if(component.getName().equals(component_name))
 					{
-						device_id = device.getId();
+						component_id = component.getId();
 					}
 				}
 				
-				OrderDevice record = new OrderDevice();
-				record.setOrderId(order_id_to_edit);;
-				record.setDeviceId(device_id);
+				DeliveryComponent record = new DeliveryComponent();
+				record.setDeliveryId(delivery_id_to_edit);;
+				record.setComponentId(component_id);
 				record.setNumber(Integer.valueOf(NumberAddField.getText()));
 				try {
-					od.addDeviceInOrder(record);
+					dd.addComponentInDelivery(record);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -217,24 +217,24 @@ public class EditOrderDevice extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				String device_name = String.valueOf(DeleteComboBox.getSelectedItem());
-				int device_id = 0;
-				for(Device device : DevicesInOrderDelete) 
+				String component_name = String.valueOf(DeleteComboBox.getSelectedItem());
+				int component_id = 0;
+				for(Component component : ComponentsInDeliveryDelete) 
 				{
-					if(device.getName().equals(device_name))
+					if(component.getName().equals(component_name))
 					{
-						device_id = device.getId();
+						component_id = component.getId();
 					}
 				}
-				OrderDevice record = null;
+				DeliveryComponent record = null;
 				try {
-					record = od.readDeviceInOrder(order_id_to_edit, device_id);
+					record = dd.readComponentInDelivery(delivery_id_to_edit, component_id);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				try {
-					od.deleteDeviceFromOrder(record);
+					dd.deleteComponentFromDelivery(record);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -251,25 +251,25 @@ public class EditOrderDevice extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				String device_name = String.valueOf(EditComboBox.getSelectedItem());
-				int device_id = 0;
-				for(Device device : DevicesInOrderEdit) 
+				String component_name = String.valueOf(EditComboBox.getSelectedItem());
+				int component_id = 0;
+				for(Component component : ComponentsInDeliveryEdit) 
 				{
-					if(device.getName().equals(device_name))
+					if(component.getName().equals(component_name))
 					{
-						device_id = device.getId();
+						component_id = component.getId();
 					}
 				}
-				OrderDevice record = null;
+				DeliveryComponent record = null;
 				try {
-					record = od.readDeviceInOrder(order_id_to_edit, device_id);
+					record = dd.readComponentInDelivery(delivery_id_to_edit, component_id);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				record.setNumber(Integer.valueOf(NumberEditField.getText()));
 				try {
-					od.updateDeviceInOrder(record);
+					dd.updateComponentInDelivery(record);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -286,18 +286,18 @@ public class EditOrderDevice extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				order_name_to_edit = String.valueOf(OrderComboBox.getSelectedItem());
-				for(Order order : orders) 
+				delivery_name_to_edit = String.valueOf(DeliveryComboBox.getSelectedItem());
+				for(Delivery delivery : deliveries) 
 				{
-					order_id_to_edit = order.getId();
-					if(order.getOrderName().equals(order_name_to_edit))
+					delivery_id_to_edit = delivery.getId();
+					if(delivery.getDeliveryName().equals(delivery_name_to_edit))
 					{
 						break;
 					}
 				}
-				EditOrderDevice.this.setVisible(false);
+				EditDeliveryComponent.this.setVisible(false);
 				try {
-					new OrderInformation(EditOrderDevice.this).setVisible(true);
+					new DeliveryInformation(EditDeliveryComponent.this).setVisible(true);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -316,8 +316,8 @@ public class EditOrderDevice extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (parent != null)
 					parent.setVisible(true);
-				EditOrderDevice.this.setVisible(false);
-				EditOrderDevice.this.dispose();
+				EditDeliveryComponent.this.setVisible(false);
+				EditDeliveryComponent.this.dispose();
 			}
 		});
 		btnBack.setBounds(632, 491, 97, 25);
@@ -331,17 +331,17 @@ public class EditOrderDevice extends JFrame {
 		public void itemStateChanged(ItemEvent evt) 
 		{
 			if (evt.getStateChange() == ItemEvent.SELECTED) {
-				String device_name = String.valueOf(EditComboBox.getSelectedItem());
-				int device_id = 0;
-				for (Device device : DevicesInOrderEdit) {
-					if (device.getName().equals(device_name)) 
+				String component_name = String.valueOf(EditComboBox.getSelectedItem());
+				int component_id = 0;
+				for (Component component : ComponentsInDeliveryEdit) {
+					if (component.getName().equals(component_name)) 
 					{
-						device_id = device.getId();
+						component_id = component.getId();
 					}
 				}
-				OrderDevice record = null;
+				DeliveryComponent record = null;
 				try {
-					record = od.readDeviceInOrder(order_id_to_edit, device_id);
+					record = dd.readComponentInDelivery(delivery_id_to_edit, component_id);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

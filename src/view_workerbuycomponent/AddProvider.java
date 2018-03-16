@@ -1,7 +1,5 @@
 package view_workerbuycomponent;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,7 +23,6 @@ public class AddProvider extends JFrame {
 	private JTextField ContactPIBField;
 	private JTextField CodeERPOUField;
 	private JTextField CodeTaxpayerField;
-	private JTextField Specialization;
 	private JTextField SpecializationField;
 	
 

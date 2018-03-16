@@ -1,4 +1,4 @@
-package view_workerselldevice;
+package view_workerbuycomponent;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -13,10 +13,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import dao.ClientDao;
-import domain.Client;
+import dao.ProviderDao;
+import domain.Provider;
 
-public class ChooseClient extends JFrame {
+public class ChooseProvider extends JFrame {
 
 	private JPanel contentPane;
 	public static String name_to_choose;
@@ -27,10 +27,10 @@ public class ChooseClient extends JFrame {
 	 * Create the frame.
 	 * @throws SQLException 
 	 */
-	public ChooseClient() throws SQLException 
+	public ChooseProvider() throws SQLException 
 	{
-		ClientDao cd = new ClientDao();
-		List<Client> clients = cd.getAll();
+		ProviderDao pd = new ProviderDao();
+		List<Provider> providers = pd.getAll();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 563, 410);
@@ -39,19 +39,19 @@ public class ChooseClient extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Вибір клієнта для подальшої роботи з ним");
+		JLabel lblNewLabel = new JLabel("Вибір остачальника для подальшої роботи з ним");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		lblNewLabel.setBounds(40, 29, 470, 59);
 		contentPane.add(lblNewLabel);
 
 
-		JComboBox<String> ClientComboBox = new JComboBox<String>();
-		ClientComboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		ClientComboBox.setBounds(40, 121, 427, 34);
-		contentPane.add(ClientComboBox);
-		for(Client client : clients) 
+		JComboBox<String> ProviderComboBox = new JComboBox<String>();
+		ProviderComboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		ProviderComboBox.setBounds(40, 121, 427, 34);
+		contentPane.add(ProviderComboBox);
+		for(Provider provider : providers) 
 		{
-			ClientComboBox.addItem(client.getName());
+			ProviderComboBox.addItem(provider.getName());
 		}
 		
 		
@@ -62,14 +62,14 @@ public class ChooseClient extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				name_to_choose = ClientComboBox.getSelectedItem().toString();
-				for(Client client : clients) 
+				name_to_choose = ProviderComboBox.getSelectedItem().toString();
+				for(Provider provider : providers) 
 				{
-					if(client.getName().equals(name_to_choose))
+					if(provider.getName().equals(name_to_choose))
 					{
-						id_to_choose = client.getId();
-						ChooseClient.this.setVisible(false);
-						new OrderMenu().setVisible(true);
+						id_to_choose = provider.getId();
+						ChooseProvider.this.setVisible(false);
+						new DeliveryMenu().setVisible(true);
 					}
 				}
 			}
@@ -82,9 +82,9 @@ public class ChooseClient extends JFrame {
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
-				ChooseClient.this.setVisible(false);
-				ChooseClient.this.dispose();
-				new ClientMenu().setVisible(true);
+				ChooseProvider.this.setVisible(false);
+				ChooseProvider.this.dispose();
+				new ProviderMenu().setVisible(true);
 			}
 		});
 		btnBack.setBounds(436, 311, 97, 25);
