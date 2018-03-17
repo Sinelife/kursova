@@ -16,6 +16,9 @@ import javax.swing.border.EmptyBorder;
 import dao.OrderDao;
 import domain.Order;
 import view.AuthorisationMenu;
+import view_director.SalesDepartmentDirectorMenu;
+import view_director.DeliveryDepartmentDirectorMenu;
+import view_workerbuycomponent.InfoProvider;
 
 import java.awt.Color;
 
@@ -35,7 +38,17 @@ public class OrderInformation extends JFrame {
 	public OrderInformation(JFrame parent) throws SQLException 
 	{
 		OrderDao od = new OrderDao();
-		Order o = od.readOrder(EditOrderDevice.order_id_to_edit);
+		Order o = new Order();
+		
+		
+		if(AuthorisationMenu.user_role.equals("director"))
+		{
+			o = od.readOrder(SalesDepartmentDirectorMenu.order_id_to_look);		
+		}
+		else
+		{
+			o = od.readOrder(InfoClient.order_id_to_look);
+		}
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

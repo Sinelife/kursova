@@ -15,7 +15,7 @@ import javax.swing.border.EmptyBorder;
 import dao.ProviderDao;
 import domain.Provider;
 import view.AuthorisationMenu;
-import view_director.ProviderReport;
+import view_director.DeliveryDepartmentDirectorMenu;
 
 import java.awt.Color;
 
@@ -43,7 +43,7 @@ public class ProviderInformation extends JFrame
 		
 		if(AuthorisationMenu.user_role.equals("director"))
 		{
-			p = pd.readProvider(ProviderReport.provider_id_to_look);		
+			p = pd.readProvider(DeliveryDepartmentDirectorMenu.provider_id_to_look);		
 		}
 		else
 		{

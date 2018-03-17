@@ -34,7 +34,7 @@ public class ChooseProvider extends JFrame {
 		List<Provider> providers = pd.getAll();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 563, 410);
+		setBounds(100, 100, 598, 410);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -42,9 +42,9 @@ public class ChooseProvider extends JFrame {
 		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
 		
 		
-		JLabel lblNewLabel = new JLabel("Вибір остачальника для подальшої роботи з ним");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		lblNewLabel.setBounds(40, 29, 470, 59);
+		JLabel lblNewLabel = new JLabel("Вибір постачальника для подальшої роботи з ним");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblNewLabel.setBounds(22, 29, 546, 59);
 		contentPane.add(lblNewLabel);
 
 
@@ -90,7 +90,7 @@ public class ChooseProvider extends JFrame {
 				new ProviderMenu().setVisible(true);
 			}
 		});
-		btnBack.setBounds(436, 311, 97, 25);
+		btnBack.setBounds(471, 311, 97, 25);
 		contentPane.add(btnBack);
 	}
 

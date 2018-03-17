@@ -16,6 +16,7 @@ import javax.swing.border.EmptyBorder;
 import dao.DeliveryDao;
 import domain.Delivery;
 import view.AuthorisationMenu;
+import view_director.DeliveryDepartmentDirectorMenu;
 
 import java.awt.Color;
 
@@ -35,7 +36,16 @@ public class DeliveryInformation extends JFrame {
 	public DeliveryInformation(JFrame parent) throws SQLException 
 	{
 		DeliveryDao dd = new DeliveryDao();
-		Delivery d = dd.readDelivery(EditDeliveryComponent.delivery_id_to_edit);
+		Delivery d = new Delivery();
+		
+		if(AuthorisationMenu.user_role.equals("director"))
+		{
+			d = dd.readDelivery(DeliveryDepartmentDirectorMenu.delivery_id_to_look);		
+		}
+		else
+		{
+			d = dd.readDelivery(InfoProvider.delivery_id_to_look);
+		}
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

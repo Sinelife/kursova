@@ -58,7 +58,7 @@ public class DirectorMenu extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				DirectorMenu.this.setVisible(false);
-				new ConstructDepartmentDirectorMenu().setVisible(true); 
+				new ConstructDepartmentDirectorMenu(DirectorMenu.this).setVisible(true); 
 			}
 		});
 		ConstructDepartmentButton.setForeground(Color.BLACK);
@@ -73,7 +73,12 @@ public class DirectorMenu extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				DirectorMenu.this.setVisible(false);
-				new SalesDepartmentDirectorMenu().setVisible(true); 
+				try {
+					new SalesDepartmentDirectorMenu(DirectorMenu.this).setVisible(true);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
 			}
 		});
 		SalesDepartmentButton.setForeground(Color.BLACK);
@@ -88,7 +93,12 @@ public class DirectorMenu extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				DirectorMenu.this.setVisible(false);
-				new DeliveryDepartmentDirectorMenu().setVisible(true); 
+				try {
+					new DeliveryDepartmentDirectorMenu(DirectorMenu.this).setVisible(true);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
 			}
 		});
 		DeliveryDepartmentButton.setForeground(Color.BLACK);

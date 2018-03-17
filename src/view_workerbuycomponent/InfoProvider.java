@@ -207,6 +207,34 @@ public class InfoProvider extends JFrame {
 
 		
 		
+		JButton DeliveryInfoButton = new JButton("Інформація");
+		DeliveryInfoButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				delivery_name_to_look = String.valueOf(DeliveryInProviderComboBox.getSelectedItem());
+				for(Delivery delivery : DeliveriesInProvider) 
+				{
+					delivery_id_to_look = delivery.getId();
+					if(delivery.getDeliveryName().equals(delivery_name_to_look))
+					{
+						break;
+					}
+				}
+				InfoProvider.this.setVisible(false);
+				try {
+					new DeliveryInformation(InfoProvider.this).setVisible(true);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		DeliveryInfoButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		DeliveryInfoButton.setBounds(482, 293, 122, 34);
+		contentPane.add(DeliveryInfoButton);
+		
+		
 		
 		JButton btnBack = new JButton("BACK");
 		btnBack.addActionListener(new ActionListener() {

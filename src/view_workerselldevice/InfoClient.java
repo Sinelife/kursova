@@ -94,8 +94,8 @@ public class InfoClient extends JFrame {
 		
 		
 		
-		JButton InfoButton = new JButton("Інформація");
-		InfoButton.addActionListener(new ActionListener() 
+		JButton ClientInfoButton = new JButton("Інформація");
+		ClientInfoButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
@@ -117,9 +117,9 @@ public class InfoClient extends JFrame {
 				}
 			}
 		});
-		InfoButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		InfoButton.setBounds(785, 121, 122, 34);
-		contentPane.add(InfoButton);
+		ClientInfoButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		ClientInfoButton.setBounds(785, 121, 122, 34);
+		contentPane.add(ClientInfoButton);
 		
 		
 		JButton SelectClientButton = new JButton("Вибрати");
@@ -225,6 +225,33 @@ public class InfoClient extends JFrame {
 				InfoClient.this.dispose();
 			}
 		});
+		
+		JButton OrderInfoButton = new JButton("Інформація");
+		OrderInfoButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				order_name_to_look = String.valueOf(OrderInClientComboBox.getSelectedItem());
+				for(Order order : OrdersInClient) 
+				{
+					order_id_to_look = order.getId();
+					if(order.getOrderName().equals(order_name_to_look))
+					{
+						break;
+					}
+				}
+				InfoClient.this.setVisible(false);
+				try {
+					new OrderInformation(InfoClient.this).setVisible(true);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		OrderInfoButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		OrderInfoButton.setBounds(784, 293, 122, 34);
+		contentPane.add(OrderInfoButton);
 		btnBack.setBounds(823, 525, 97, 25);
 		contentPane.add(btnBack);
 		

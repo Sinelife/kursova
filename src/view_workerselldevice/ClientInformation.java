@@ -15,7 +15,7 @@ import javax.swing.border.EmptyBorder;
 import dao.ClientDao;
 import domain.Client;
 import view.AuthorisationMenu;
-import view_director.ClientReport;
+import view_director.SalesDepartmentDirectorMenu;
 import java.awt.Color;
 
 public class ClientInformation extends JFrame 
@@ -41,7 +41,7 @@ public class ClientInformation extends JFrame
 		
 		if(AuthorisationMenu.user_role.equals("director"))
 		{
-			c = cd.readClient(ClientReport.client_id_to_look);		
+			c = cd.readClient(SalesDepartmentDirectorMenu.client_id_to_look);		
 		}
 		else
 		{
