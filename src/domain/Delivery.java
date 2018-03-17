@@ -9,15 +9,16 @@ public class Delivery
 	private int provider_id;
 	private Date startDate;
 	private boolean paid;
+	private boolean shipped;
 	
-	
-	Delivery(int delivery_id, String delivery_name, int provider_id, Date startDate, boolean paid)
+	Delivery(int delivery_id, String delivery_name, int provider_id, Date startDate, boolean paid, boolean shipped)
 	{
 		this.delivery_id = delivery_id;
 		this.delivery_name = delivery_name;
 		this.provider_id = provider_id;
 		this.startDate = startDate;
 		this.paid = paid;
+		this.shipped = shipped;
 	}
 	
 	
@@ -66,7 +67,7 @@ public class Delivery
 		this.startDate = startDate;
 	}
 	
-	public boolean getPaid() 
+	public boolean isPaid() 
 	{
 		return paid;
 	}
@@ -74,6 +75,16 @@ public class Delivery
 	public void setPaid(boolean paid) 
 	{
 		this.paid = paid;
+	}
+
+	public boolean isShipped() 
+	{
+		return shipped;
+	}
+
+	public void setShipped(boolean shipped) 
+	{
+		this.shipped = shipped;
 	}
 
 }

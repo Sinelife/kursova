@@ -26,6 +26,8 @@ public class EditOrder extends JFrame {
 	private JPanel contentPane;
 	private JTextField NameField;
 	private JTextField StartDateField;
+	private JCheckBox PaidCheckBox;
+	private JCheckBox ShippedCheckBox;
 
 	public static int order_id_to_edit;
 	public static String order_name_to_edit;
@@ -43,7 +45,7 @@ public class EditOrder extends JFrame {
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 759, 476);
+		setBounds(100, 100, 759, 547);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -77,20 +79,28 @@ public class EditOrder extends JFrame {
 		PaidLabel.setBounds(39, 295, 133, 22);
 		contentPane.add(PaidLabel);
 		
+		JLabel ShippedLabel = new JLabel("Відвантажено");
+		ShippedLabel.setBounds(39, 334, 129, 22);
+		contentPane.add(ShippedLabel);
+	
 		
 		NameField = new JTextField();
-		NameField.setBounds(171, 207, 350, 22);
+		NameField.setBounds(181, 207, 340, 22);
 		contentPane.add(NameField);
 		NameField.setColumns(10);
 		
 		StartDateField = new JTextField();
-		StartDateField.setBounds(171, 249, 350, 22);
+		StartDateField.setBounds(184, 249, 337, 22);
 		contentPane.add(StartDateField);
 		StartDateField.setColumns(10);
 		
-		JCheckBox PaidCheckBox = new JCheckBox();
-		PaidCheckBox.setBounds(167, 294, 113, 25);
+		PaidCheckBox = new JCheckBox();
+		PaidCheckBox.setBounds(180, 295, 113, 25);
 		contentPane.add(PaidCheckBox);
+		
+		ShippedCheckBox = new JCheckBox();
+		ShippedCheckBox.setBounds(180, 331, 113, 25);
+		contentPane.add(ShippedCheckBox);
 		
 		
 		
@@ -116,7 +126,7 @@ public class EditOrder extends JFrame {
 				}
 				NameField.setText(o.getOrderName());
 				StartDateField.setText(String.valueOf(o.getStartDate()));
-				if(o.getPaid() == true)
+				if(o.isPaid() == true)
 				{
 					PaidCheckBox.setSelected(true);
 				}
@@ -124,9 +134,17 @@ public class EditOrder extends JFrame {
 				{
 					PaidCheckBox.setSelected(false);
 				}
+				if(o.isShipped() == true)
+				{
+					ShippedCheckBox.setSelected(true);
+				}
+				else
+				{
+					ShippedCheckBox.setSelected(false);
+				}
 			}
 		});
-		SelectButton.setBounds(39, 148, 97, 25);
+		SelectButton.setBounds(39, 140, 97, 25);
 		contentPane.add(SelectButton);
 		
 		
@@ -139,6 +157,7 @@ public class EditOrder extends JFrame {
 				o.setOrderName(NameField.getText());
 				o.setStartDate(Date.valueOf(StartDateField.getText()));
 				o.setPaid(PaidCheckBox.isSelected());
+				o.setShipped(ShippedCheckBox.isSelected());
 				try {
 					od.updateOrder(o);
 				} catch (SQLException e1) {
@@ -151,7 +170,7 @@ public class EditOrder extends JFrame {
 			}
 		});
 		button.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		button.setBounds(39, 369, 123, 34);
+		button.setBounds(39, 421, 123, 34);
 		contentPane.add(button);
 		
 		
@@ -165,7 +184,7 @@ public class EditOrder extends JFrame {
 				EditOrder.this.dispose();
 			}
 		});
-		btnBack.setBounds(632, 378, 97, 25);
+		btnBack.setBounds(632, 430, 97, 25);
 		contentPane.add(btnBack);
 	}
 }

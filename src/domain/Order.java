@@ -9,15 +9,17 @@ public class Order
 	private int client_id;
 	private Date startDate;
 	private boolean paid;
+	private boolean shipped;
 	
 	
-	Order(int order_id, String order_name, int client_id, Date startDate, boolean paid)
+	Order(int order_id, String order_name, int client_id, Date startDate, boolean paid, boolean shipped)
 	{
 		this.order_id = order_id;
-		this.setOrderName(order_name);
+		this.order_name = order_name;
 		this.client_id = client_id;
 		this.startDate = startDate;
 		this.paid = paid;
+		this.shipped = shipped;
 	}
 	
 	
@@ -66,7 +68,7 @@ public class Order
 		this.startDate = startDate;
 	}
 	
-	public boolean getPaid() 
+	public boolean isPaid() 
 	{
 		return paid;
 	}
@@ -74,5 +76,15 @@ public class Order
 	public void setPaid(boolean paid) 
 	{
 		this.paid = paid;
+	}
+
+	public boolean isShipped() 
+	{
+		return shipped;
+	}
+
+	public void setShipped(boolean shipped) 
+	{
+		this.shipped = shipped;
 	}
 }

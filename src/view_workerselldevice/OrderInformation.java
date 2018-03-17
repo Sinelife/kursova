@@ -25,6 +25,7 @@ public class OrderInformation extends JFrame {
 	private JTextField NameField;
 	private JTextField StartDateField;
 	private JCheckBox PaidCheckBox;
+	private JCheckBox ShippedCheckBox;
 	
 
 	/**
@@ -52,17 +53,21 @@ public class OrderInformation extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JLabel NameLabel = new JLabel("Назва замовлення");
-		NameLabel.setBounds(29, 143, 129, 22);
+		NameLabel.setBounds(29, 143, 482, 22);
 		contentPane.add(NameLabel);
 		
 		JLabel StartDateLabel = new JLabel("Дата початку");
-		StartDateLabel.setBounds(29, 185, 129, 22);
+		StartDateLabel.setBounds(29, 185, 482, 22);
 		contentPane.add(StartDateLabel);
 		
 		JLabel PaidLabel = new JLabel("Сплачено");
-		PaidLabel.setBounds(29, 231, 129, 22);
+		PaidLabel.setBounds(29, 231, 482, 22);
 		contentPane.add(PaidLabel);
 		
+		JLabel ShippedLabel = new JLabel("Відвантажено");
+		ShippedLabel.setBounds(29, 265, 482, 22);
+		contentPane.add(ShippedLabel);
+
 		
 		NameField = new JTextField();
 		NameField.setBackground(Color.WHITE);
@@ -82,9 +87,15 @@ public class OrderInformation extends JFrame {
 		
 		PaidCheckBox = new JCheckBox();
 		PaidCheckBox.setEnabled(false);
-		PaidCheckBox.setBounds(161, 228, 113, 25);
+		PaidCheckBox.setBounds(161, 228, 350, 25);
 		contentPane.add(PaidCheckBox);
-		PaidCheckBox.setSelected(o.getPaid());
+		PaidCheckBox.setSelected(o.isPaid());
+		
+		ShippedCheckBox = new JCheckBox();
+		ShippedCheckBox.setEnabled(false);
+		ShippedCheckBox.setBounds(161, 262, 350, 25);
+		contentPane.add(ShippedCheckBox);
+		ShippedCheckBox.setSelected(o.isShipped());
 		
 		
 		JButton btnBack = new JButton("BACK");

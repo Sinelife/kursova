@@ -19,7 +19,7 @@ public class OrderDao
 	
 	public void addOrder(Order o) throws SQLException 
 	{
-		String sql = "INSERT INTO orders (order_id, order_name, client_id, startdate, paid) VALUES (?,?,?,?,?)";
+		String sql = "INSERT INTO orders (order_id, order_name, client_id, startdate, paid, shipped) VALUES (?,?,?,?,?,?)";
 		PreparedStatement stm = Main.conn.prepareStatement(sql);
 		int i = -1;
 		String sql_for_id = "SELECT MAX(order_id) from orders";
@@ -33,7 +33,8 @@ public class OrderDao
 		stm.setString(2, o.getOrderName());
 		stm.setInt(3, o.getClientId());
 		stm.setDate(4, o.getStartDate());
-		stm.setBoolean(5, o.getPaid());
+		stm.setBoolean(5, o.isPaid());
+		stm.setBoolean(6, o.isShipped());
 		stm.executeUpdate();
 		JOptionPane.showMessageDialog(null, "Нове замовлення на купівлю додано до бази данних!");
 	}
@@ -58,6 +59,7 @@ public class OrderDao
 			o.setClientId(rs.getInt("client_id"));
 			o.setStartDate(rs.getDate("startdate"));
 			o.setPaid(rs.getBoolean("paid"));
+			o.setShipped(rs.getBoolean("shipped"));
 		}
 		return o;
 	}
@@ -70,12 +72,13 @@ public class OrderDao
 	 */
 	public void updateOrder(Order o) throws SQLException 
 	{
-		String sql = "update orders set order_name = ?, client_id = ?, startdate = ?, paid = ? where order_id = " + o.getId();
+		String sql = "update orders set order_name = ?, client_id = ?, startdate = ?, paid = ?, shipped = ? where order_id = " + o.getId();
 		PreparedStatement stm = Main.conn.prepareStatement(sql);
 		stm.setString(1, o.getOrderName());
 		stm.setInt(2, o.getClientId());
 		stm.setDate(3, o.getStartDate());
-		stm.setBoolean(4, o.getPaid());
+		stm.setBoolean(4, o.isPaid());
+		stm.setBoolean(5, o.isShipped());
 		stm.executeUpdate();
 		JOptionPane.showMessageDialog(null, "Інформація про замовлення на купівлю відредаговано!");
 	}
@@ -108,6 +111,7 @@ public class OrderDao
 				o.setClientId(rs.getInt("client_id"));
 				o.setStartDate(rs.getDate("startdate"));
 				o.setPaid(rs.getBoolean("paid"));
+				o.setShipped(rs.getBoolean("shipped"));
 				list.add(o);
 			}
 		}
@@ -129,6 +133,7 @@ public class OrderDao
 				o.setClientId(rs.getInt("client_id"));
 				o.setStartDate(rs.getDate("startdate"));
 				o.setPaid(rs.getBoolean("paid"));
+				o.setShipped(rs.getBoolean("shipped"));
 				list.add(o);
 			}
 		}

@@ -19,7 +19,7 @@ public class DeliveryDao
 	
 	public void addDelivery(Delivery d) throws SQLException 
 	{
-		String sql = "INSERT INTO delivery (delivery_id, delivery_name, provider_id, startdate, paid) VALUES (?,?,?,?,?)";
+		String sql = "INSERT INTO delivery (delivery_id, delivery_name, provider_id, startdate, paid, shipped) VALUES (?,?,?,?,?,?)";
 		PreparedStatement stm = Main.conn.prepareStatement(sql);
 		int i = -1;
 		String sql_for_id = "SELECT MAX(delivery_id) from delivery";
@@ -33,7 +33,8 @@ public class DeliveryDao
 		stm.setString(2, d.getDeliveryName());
 		stm.setInt(3, d.getProviderId());
 		stm.setDate(4, d.getStartDate());
-		stm.setBoolean(5, d.getPaid());
+		stm.setBoolean(5, d.isPaid());
+		stm.setBoolean(6, d.isShipped());
 		stm.executeUpdate();
 		JOptionPane.showMessageDialog(null, "Нове замовлення на постачання додано до бази данних!");
 	}
@@ -58,6 +59,7 @@ public class DeliveryDao
 			d.setProviderId(rs.getInt("provider_id"));
 			d.setStartDate(rs.getDate("startdate"));
 			d.setPaid(rs.getBoolean("paid"));
+			d.setShipped(rs.getBoolean("shipped"));
 		}
 		return d;
 	}
@@ -70,12 +72,13 @@ public class DeliveryDao
 	 */
 	public void updateDelivery(Delivery d) throws SQLException 
 	{
-		String sql = "update delivery set delivery_name = ?, provider_id = ?, startdate = ?, paid = ? where delivery_id = " + d.getId();
+		String sql = "update delivery set delivery_name = ?, provider_id = ?, startdate = ?, paid = ?, shipped = ? where delivery_id = " + d.getId();
 		PreparedStatement stm = Main.conn.prepareStatement(sql);
 		stm.setString(1, d.getDeliveryName());
 		stm.setInt(2, d.getProviderId());
 		stm.setDate(3, d.getStartDate());
-		stm.setBoolean(4, d.getPaid());
+		stm.setBoolean(4, d.isPaid());
+		stm.setBoolean(5, d.isShipped());
 		stm.executeUpdate();
 		JOptionPane.showMessageDialog(null, "Інформація про замовлення на постачання відредаговано!");
 	}
@@ -109,6 +112,7 @@ public class DeliveryDao
 				d.setProviderId(rs.getInt("provider_id"));
 				d.setStartDate(rs.getDate("startdate"));
 				d.setPaid(rs.getBoolean("paid"));
+				d.setShipped(rs.getBoolean("shipped"));
 				list.add(d);
 			}
 		}
@@ -130,6 +134,7 @@ public class DeliveryDao
 				d.setProviderId(rs.getInt("provider_id"));
 				d.setStartDate(rs.getDate("startdate"));
 				d.setPaid(rs.getBoolean("paid"));
+				d.setShipped(rs.getBoolean("shipped"));
 				list.add(d);
 			}
 		}

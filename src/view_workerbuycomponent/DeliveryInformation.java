@@ -25,6 +25,7 @@ public class DeliveryInformation extends JFrame {
 	private JTextField NameField;
 	private JTextField StartDateField;
 	private JCheckBox PaidCheckBox;
+	private JCheckBox ShippedCheckBox;
 	
 
 	/**
@@ -63,6 +64,10 @@ public class DeliveryInformation extends JFrame {
 		PaidLabel.setBounds(29, 231, 129, 22);
 		contentPane.add(PaidLabel);
 		
+		JLabel ShippedLabel = new JLabel("Відвантажено");
+		ShippedLabel.setBounds(29, 265, 129, 22);
+		contentPane.add(ShippedLabel);
+
 		
 		NameField = new JTextField();
 		NameField.setBackground(Color.WHITE);
@@ -84,7 +89,13 @@ public class DeliveryInformation extends JFrame {
 		PaidCheckBox.setEnabled(false);
 		PaidCheckBox.setBounds(161, 228, 113, 25);
 		contentPane.add(PaidCheckBox);
-		PaidCheckBox.setSelected(d.getPaid());
+		PaidCheckBox.setSelected(d.isPaid());
+		
+		ShippedCheckBox = new JCheckBox();
+		ShippedCheckBox.setEnabled(false);
+		ShippedCheckBox.setBounds(161, 262, 113, 25);
+		contentPane.add(ShippedCheckBox);
+		ShippedCheckBox.setSelected(d.isPaid());
 		
 		
 		JButton btnBack = new JButton("BACK");

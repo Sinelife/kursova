@@ -26,6 +26,7 @@ public class AddOrder extends JFrame
 	private JTextField NameField;
 	private JTextField StartDateField;
 	private JCheckBox PaidCheckBox;
+	private JCheckBox ShippedCheckBox;
 
 	public AddOrder(JFrame parent) 
 	{
@@ -59,6 +60,10 @@ public class AddOrder extends JFrame
 		PaidLabel.setBounds(29, 231, 129, 22);
 		contentPane.add(PaidLabel);
 		
+		JLabel ShippedLabel = new JLabel("Відвантажено");
+		ShippedLabel.setBounds(29, 265, 129, 22);
+		contentPane.add(ShippedLabel);
+		
 		
 		NameField = new JTextField();
 		NameField.setBounds(161, 143, 350, 22);
@@ -73,6 +78,10 @@ public class AddOrder extends JFrame
 		PaidCheckBox = new JCheckBox();
 		PaidCheckBox.setBounds(161, 228, 113, 25);
 		contentPane.add(PaidCheckBox);
+		
+		ShippedCheckBox = new JCheckBox();
+		ShippedCheckBox.setBounds(161, 262, 113, 25);
+		contentPane.add(ShippedCheckBox);
 
 		
 		JButton AddButton = new JButton("Додати");
@@ -84,6 +93,7 @@ public class AddOrder extends JFrame
 				o.setOrderName(NameField.getText());
 				o.setStartDate(Date.valueOf(StartDateField.getText()));
 				o.setPaid(PaidCheckBox.isSelected());
+				o.setShipped(ShippedCheckBox.isSelected());
 				try {
 					od.addOrder(o);
 				} catch (SQLException e1) {
