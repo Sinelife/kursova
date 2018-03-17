@@ -19,6 +19,7 @@ import dao.DeviceDao;
 import domain.Component;
 import domain.ComponentDevice;
 import domain.Device;
+import main.MethodsForFrames;
 import view.AuthorisationMenu;
 
 import javax.swing.JTextField;
@@ -28,16 +29,24 @@ public class EditSpecification extends JFrame {
 	private JPanel contentPane;
 	public static int id_to_choose;
 	public static String name_to_choose;
+	
 	private JTextField NumberAddField;
 	private JTextField NumberEditField;
+	
 	private List<Component> components_for_delete = null;
 	private List<Component> components_for_add = null;
 	private List<Component> components_for_edit = null;
+	
 	private DeviceDao dd = null;
+	
 	private List<Device> devices = null;
+	
 	JComboBox<String> DeleteComponentComboBox = new JComboBox<String>();
 	JComboBox<String> AddComponentComboBox = new JComboBox<String>();
 	JComboBox<String> EditComponentComboBox = new JComboBox<String>();
+	
+	public static String c_name;
+	public static int c_id;
 
 	/**
 	 * Create the frame.
@@ -56,6 +65,7 @@ public class EditSpecification extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		InfoDevice.device_information_check = 2;
 		
 		
 		JLabel lblNewLabel = new JLabel("Вибір приладу для редагування специфікації");
@@ -89,15 +99,7 @@ public class EditSpecification extends JFrame {
 		SelectButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
-
-				name_to_choose = String.valueOf(DeviceComboBox.getSelectedItem());
-				for(Device device: devices)
-				{
-					if(device.getName().equals(name_to_choose))
-					{
-						id_to_choose = device.getId();
-					}
-				}
+				id_to_choose = MethodsForFrames.getDeviceIdByDeviceName(name_to_choose, id_to_choose, DeviceComboBox, devices);
 				
 				try {
 					components_for_delete = dd.getAllComponentsInDevice(id_to_choose);
@@ -139,6 +141,29 @@ public class EditSpecification extends JFrame {
 		SelectButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		SelectButton.setBounds(425, 180, 119, 25);
 		contentPane.add(SelectButton);
+		
+		
+		
+		JButton InfoButton = new JButton("Інформація");
+		InfoButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				id_to_choose = MethodsForFrames.getDeviceIdByDeviceName(name_to_choose, id_to_choose, DeviceComboBox, devices);
+				
+				EditSpecification.this.setVisible(false);
+				try {
+					new DeviceInformation(EditSpecification.this).setVisible(true);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		InfoButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		InfoButton.setBounds(556, 121, 122, 34);
+		contentPane.add(InfoButton);
+		
 		
 		
 		JLabel DeleteComponentLabel = new JLabel("Видалення компоненту");
@@ -188,15 +213,8 @@ public class EditSpecification extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				String c_name = String.valueOf(DeleteComponentComboBox.getSelectedItem());
-				int c_id = 0;
-				for(Component component : components_for_delete) 
-				{
-					if(component.getName().equals(c_name))
-					{
-						c_id = component.getId();
-					}
-				}
+				c_id = MethodsForFrames.getComponentIdByComponentName(c_name, c_id, DeleteComponentComboBox, components_for_delete);
+				
 				ComponentDevice record = null;
 				try {
 					record = dd.readComponentInDevice(id_to_choose, c_id);
@@ -221,15 +239,7 @@ public class EditSpecification extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				String c_name = String.valueOf(AddComponentComboBox.getSelectedItem());
-				int c_id = 0;
-				for(Component component : components_for_add) 
-				{
-					if(component.getName().equals(c_name))
-					{
-						c_id = component.getId();
-					}
-				}
+				c_id = MethodsForFrames.getComponentIdByComponentName(c_name, c_id, AddComponentComboBox, components_for_add);
 				
 				ComponentDevice record = new ComponentDevice();
 				record.setDeviceId(id_to_choose);
@@ -252,15 +262,8 @@ public class EditSpecification extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				String c_name = String.valueOf(EditComponentComboBox.getSelectedItem());
-				int c_id = 0;
-				for(Component component : components_for_edit) 
-				{
-					if(component.getName().equals(c_name))
-					{
-						c_id = component.getId();
-					}
-				}
+				c_id = MethodsForFrames.getComponentIdByComponentName(c_name, c_id, EditComponentComboBox, components_for_edit);
+				
 				ComponentDevice record = null;
 				try {
 					record = dd.readComponentInDevice(id_to_choose, c_id);
@@ -307,11 +310,9 @@ public class EditSpecification extends JFrame {
 			if (evt.getStateChange() == ItemEvent.SELECTED) {
 				String c_name = String.valueOf(EditComponentComboBox.getSelectedItem());
 				int c_id = 0;
-				for (Component component : components_for_edit) {
-					if (component.getName().equals(c_name)) {
-						c_id = component.getId();
-					}
-				}
+				
+				c_id = MethodsForFrames.getComponentIdByComponentName(c_name, c_id, EditComponentComboBox, components_for_edit);
+				
 				ComponentDevice record = null;
 				try {
 					record = dd.readComponentInDevice(id_to_choose, c_id);

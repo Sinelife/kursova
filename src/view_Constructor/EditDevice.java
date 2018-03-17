@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 import dao.DeviceDao;
 import domain.Device;
+import main.MethodsForFrames;
 import view.AuthorisationMenu;
 
 
@@ -43,20 +44,20 @@ public class EditDevice extends JFrame {
 		contentPane.setLayout(null);
 		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
 		
-
-		JComboBox<String> comboBox = new JComboBox<String>();
-		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		comboBox.setBounds(40, 121, 504, 34);
-		contentPane.add(comboBox);
-		for(Device device : devices) 
-		{
-			comboBox.addItem(device.getName());
-		}
-		
-		JLabel lblNewLabel = new JLabel("Меню вибору приладу для редагування.");
+		JLabel lblNewLabel = new JLabel("Вибір приладу для редагування.");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		lblNewLabel.setBounds(46, 25, 559, 59);
 		contentPane.add(lblNewLabel);
+		
+
+		JComboBox<String> DeviceComboBox = new JComboBox<String>();
+		DeviceComboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		DeviceComboBox.setBounds(40, 121, 504, 34);
+		contentPane.add(DeviceComboBox);
+		for(Device device : devices) 
+		{
+			DeviceComboBox.addItem(device.getName());
+		}
 		
 		
 		JButton SelectButton = new JButton("Вибрати");
@@ -64,15 +65,8 @@ public class EditDevice extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				name_to_edit = String.valueOf(comboBox.getSelectedItem());
-				for(Device device : devices) 
-				{
-					id_to_edit = device.getId();
-					if(device.getName().equals(name_to_edit))
-					{
-						break;
-					}
-				}
+				id_to_edit = MethodsForFrames.getDeviceIdByDeviceName(name_to_edit, id_to_edit, DeviceComboBox, devices);
+				
 				EditDevice.this.setVisible(false);
 				try {
 					new EditDeviceFrame(EditDevice.this).setVisible(true);

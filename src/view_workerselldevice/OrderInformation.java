@@ -18,6 +18,7 @@ import domain.Order;
 import view.AuthorisationMenu;
 import view_director.SalesDepartmentDirectorMenu;
 import view_director.DeliveryDepartmentDirectorMenu;
+import view_workerbuycomponent.EditDeliveryComponent;
 import view_workerbuycomponent.InfoProvider;
 
 import java.awt.Color;
@@ -39,15 +40,19 @@ public class OrderInformation extends JFrame {
 	{
 		OrderDao od = new OrderDao();
 		Order o = new Order();
-		
+
 		
 		if(AuthorisationMenu.user_role.equals("director"))
 		{
 			o = od.readOrder(SalesDepartmentDirectorMenu.order_id_to_look);		
 		}
-		else
+		else if(InfoClient.order_information_check == 1)
 		{
 			o = od.readOrder(InfoClient.order_id_to_look);
+		}
+		else
+		{
+			o = od.readOrder(EditOrderDevice.order_id_to_edit);
 		}
 		
 		
@@ -102,13 +107,27 @@ public class OrderInformation extends JFrame {
 		PaidCheckBox.setEnabled(false);
 		PaidCheckBox.setBounds(161, 228, 350, 25);
 		contentPane.add(PaidCheckBox);
-		PaidCheckBox.setSelected(o.isPaid());
+		if(o.isPaid() == true)
+		{
+			PaidCheckBox.setSelected(true);
+		}
+		else
+		{
+			PaidCheckBox.setSelected(false);
+		}
 		
 		ShippedCheckBox = new JCheckBox();
 		ShippedCheckBox.setEnabled(false);
 		ShippedCheckBox.setBounds(161, 262, 350, 25);
 		contentPane.add(ShippedCheckBox);
-		ShippedCheckBox.setSelected(o.isShipped());
+		if(o.isShipped() == true)
+		{
+			ShippedCheckBox.setSelected(true);
+		}
+		else
+		{
+			ShippedCheckBox.setSelected(false);
+		}
 		
 		
 		JButton btnBack = new JButton("BACK");

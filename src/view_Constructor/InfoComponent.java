@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 import dao.ComponentDao;
 import domain.Component;
+import main.MethodsForFrames;
 import view.AuthorisationMenu;
 
 import javax.swing.JTextField;
@@ -27,7 +28,7 @@ public class InfoComponent extends JFrame {
 	public static int id_to_find;
 	public static String type_to_find;
 	public static String name_to_find;
-	private JTextField textField;
+	private JTextField FindField;
 
 	/**
 	 * Create the frame.
@@ -47,13 +48,13 @@ public class InfoComponent extends JFrame {
 		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
 		
 
-		JComboBox<String> comboBox = new JComboBox<String>();
-		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		comboBox.setBounds(46, 244, 438, 34);
-		contentPane.add(comboBox);
+		JComboBox<String> ComponentComboBox = new JComboBox<String>();
+		ComponentComboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		ComponentComboBox.setBounds(46, 244, 438, 34);
+		contentPane.add(ComponentComboBox);
 		for(Component component : components) 
 		{
-			comboBox.addItem(component.getName());
+			ComponentComboBox.addItem(component.getName());
 		}
 		
 		
@@ -68,15 +69,8 @@ public class InfoComponent extends JFrame {
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				name_to_look = String.valueOf(comboBox.getSelectedItem());
-				for(Component component : components) 
-				{
-					id_to_look = component.getId();
-					if(component.getName().equals(name_to_look))
-					{
-						break;
-					}
-				}
+				id_to_look = MethodsForFrames.getComponentIdByComponentName(name_to_look, id_to_look, ComponentComboBox, components);
+				
 				InfoComponent.this.setVisible(false);
 				try {
 					new ComponentInformation(InfoComponent.this).setVisible(true);
@@ -90,10 +84,10 @@ public class InfoComponent extends JFrame {
 		InfoButton.setBounds(496, 244, 122, 34);
 		contentPane.add(InfoButton);
 		
-		textField = new JTextField();
-		textField.setBounds(92, 123, 152, 22);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		FindField = new JTextField();
+		FindField.setBounds(92, 123, 152, 22);
+		contentPane.add(FindField);
+		FindField.setColumns(10);
 		
 		
 		JButton FindNameButton = new JButton("Пошук за назвою");
@@ -101,14 +95,14 @@ public class InfoComponent extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				name_to_find = textField.getText();
+				ComponentComboBox.removeAllItems();
+				name_to_find = FindField.getText();
 				System.out.println(name_to_find);
-				comboBox.removeAllItems();
 				for(Component component : components) 
 				{
 					if(component.getName().equals(name_to_find))
 					{
-						comboBox.addItem(component.getName());
+						ComponentComboBox.addItem(component.getName());
 					}
 				}
 			}
@@ -121,14 +115,14 @@ public class InfoComponent extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				type_to_find = textField.getText();
+				ComponentComboBox.removeAllItems();
+				type_to_find = FindField.getText();
 				System.out.println(type_to_find);
-				comboBox.removeAllItems();
 				for(Component component : components) 
 				{
 					if(component.getType().equals(type_to_find))
 					{
-						comboBox.addItem(component.getName());
+						ComponentComboBox.addItem(component.getName());
 					}
 				}
 			}

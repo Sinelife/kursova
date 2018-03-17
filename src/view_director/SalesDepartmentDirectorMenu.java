@@ -14,6 +14,7 @@ import dao.ClientDao;
 import dao.OrderDao;
 import domain.Client;
 import domain.Order;
+import main.MethodsForFrames;
 import view.AuthorisationMenu;
 import view_workerselldevice.ClientInformation;
 import view_workerselldevice.OrderInformation;
@@ -37,7 +38,7 @@ public class SalesDepartmentDirectorMenu extends JFrame {
 	private JTextField ShippedMoneyField;
 
 	public static int client_id_to_look;
-	public static String ñlient_name_to_look;
+	public static String client_name_to_look;
 	public static int order_id_to_look;
 	public static String order_name_to_look;
 	
@@ -55,7 +56,7 @@ public class SalesDepartmentDirectorMenu extends JFrame {
 	private static List<Client> clients;
 
 	static JComboBox<String> ClientComboBox;
-	JComboBox<String> OrderInClientComboBox;
+	JComboBox<String> OrdersInClientComboBox;
 
 	/**
 	 * Create the frame.
@@ -95,10 +96,10 @@ public class SalesDepartmentDirectorMenu extends JFrame {
 		OrderInClientLabel.setBounds(38, 425, 249, 25);
 		contentPane.add(OrderInClientLabel);
 		
-		OrderInClientComboBox = new JComboBox<String>();
-		OrderInClientComboBox.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		OrderInClientComboBox.setBounds(38, 463, 479, 34);
-		contentPane.add(OrderInClientComboBox);
+		OrdersInClientComboBox = new JComboBox<String>();
+		OrdersInClientComboBox.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		OrdersInClientComboBox.setBounds(38, 463, 479, 34);
+		contentPane.add(OrdersInClientComboBox);
 		
 		
 		
@@ -109,17 +110,9 @@ public class SalesDepartmentDirectorMenu extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				ñlient_name_to_look = String.valueOf(ClientComboBox.getSelectedItem());
-				for(Client Client : clients) 
-				{
-					client_id_to_look = Client.getId();
-					if(Client.getName().equals(ñlient_name_to_look))
-					{
-						break;
-					}
-				}
-				
-				OrderInClientComboBox.removeAllItems();
+				client_id_to_look = MethodsForFrames.getClientIdByClientName(client_name_to_look, client_id_to_look, ClientComboBox, clients);
+						
+				OrdersInClientComboBox.removeAllItems();
 				try {
 					ordersInClient = od.getAllFromClient(client_id_to_look);
 				} catch (SQLException e2) {
@@ -128,7 +121,7 @@ public class SalesDepartmentDirectorMenu extends JFrame {
 				}
 				for(Order order : ordersInClient) 
 				{
-					OrderInClientComboBox.addItem(order.getOrderName());
+					OrdersInClientComboBox.addItem(order.getOrderName());
 				}
 				
 				
@@ -222,14 +215,8 @@ public class SalesDepartmentDirectorMenu extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				ñlient_name_to_look = String.valueOf(ClientComboBox.getSelectedItem());
-				for (Client Client : clients) {
-					client_id_to_look = Client.getId();
-					if (Client.getName().equals(ñlient_name_to_look)) 
-					{
-						break;
-					}
-				}
+				client_id_to_look = MethodsForFrames.getClientIdByClientName(client_name_to_look, client_id_to_look, ClientComboBox, clients);
+				
 				SalesDepartmentDirectorMenu.this.setVisible(false);
 				try {
 					new ClientInformation(SalesDepartmentDirectorMenu.this).setVisible(true);
@@ -422,15 +409,8 @@ public class SalesDepartmentDirectorMenu extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				order_name_to_look = String.valueOf(OrderInClientComboBox.getSelectedItem());
-				for(Order order : ordersInClient) 
-				{
-					order_id_to_look = order.getId();
-					if(order.getOrderName().equals(order_name_to_look))
-					{
-						break;
-					}
-				}
+				order_id_to_look = MethodsForFrames.getOrderIdByOrderName(order_name_to_look, order_id_to_look, OrdersInClientComboBox, ordersInClient);
+				
 				SalesDepartmentDirectorMenu.this.setVisible(false);
 				try {
 					new OrderInformation(SalesDepartmentDirectorMenu.this).setVisible(true);

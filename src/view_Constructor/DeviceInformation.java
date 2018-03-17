@@ -3,7 +3,6 @@ package view_Constructor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
@@ -15,10 +14,10 @@ import javax.swing.border.EmptyBorder;
 
 import dao.DeviceDao;
 import domain.Device;
-import main.Main;
+import main.MethodsForFrames;
 import view.AuthorisationMenu;
 import view_director.ConstructDepartmentDirectorMenu;
-import view_director.DeliveryDepartmentDirectorMenu;
+import view_workerbuycomponent.EditDeliveryComponent;
 import view_workerbuycomponent.InfoProvider;
 
 import java.awt.Color;
@@ -47,11 +46,18 @@ public class DeviceInformation extends JFrame {
 		{
 			d = dd.readDevice(ConstructDepartmentDirectorMenu.device_id_to_look);		
 		}
-		else
+		else if(InfoDevice.device_information_check == 1)
 		{
 			d = dd.readDevice(InfoDevice.id_to_look);
 		}
-		
+		else if(InfoDevice.device_information_check == 2)
+		{
+			d = dd.readDevice(EditSpecification.id_to_choose);
+		}
+		else 
+		{
+			d = dd.readDevice(SpecificationInformation.id_to_choose);
+		}
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 646, 558);
@@ -130,7 +136,7 @@ public class DeviceInformation extends JFrame {
 		StartDateField.setColumns(10);
 		StartDateField.setBounds(209, 301, 350, 22);
 		contentPane.add(StartDateField);
-		Main.DateToString(d.getDate(), StartDateField);
+		MethodsForFrames.DateToString(d.getDate(), StartDateField);
 		
 		
 		PriceField = new JTextField();

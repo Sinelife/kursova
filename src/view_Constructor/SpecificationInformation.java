@@ -16,6 +16,7 @@ import dao.DeviceDao;
 import domain.Component;
 import domain.ComponentDevice;
 import domain.Device;
+import main.MethodsForFrames;
 import view.AuthorisationMenu;
 
 import javax.swing.JButton;
@@ -26,7 +27,7 @@ public class SpecificationInformation extends JFrame {
 
 	private JPanel contentPane;
 	JTable table;
-	public int id_to_choose;
+	public static int id_to_choose;
 	public String name_to_choose;
 
 	/**
@@ -40,16 +41,18 @@ public class SpecificationInformation extends JFrame {
 		ComponentDao cd = new ComponentDao();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 646, 558);
+		setBounds(100, 100, 738, 558);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		InfoDevice.device_information_check = 3;
+		
 		
 		JLabel lblNewLabel = new JLabel("Специфікації приладів");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lblNewLabel.setBounds(46, 25, 559, 59);
+		lblNewLabel.setBounds(46, 25, 411, 59);
 		contentPane.add(lblNewLabel);
 		
 
@@ -79,14 +82,8 @@ public class SpecificationInformation extends JFrame {
 				ComponentInfoComboBox.removeAllItems();	
 				List<Component> components = null;
 
-				name_to_choose = String.valueOf(DeviceComboBox.getSelectedItem());
-				for(Device device : devices)
-				{
-					if(device.getName().equals(name_to_choose))
-					{
-						id_to_choose = device.getId();
-					}
-				}
+				id_to_choose = MethodsForFrames.getDeviceIdByDeviceName(name_to_choose, id_to_choose, DeviceComboBox, devices);
+				
 				try {
 					components = dd.getAllComponentsInDevice(id_to_choose);
 				} catch (SQLException e) {
@@ -118,6 +115,28 @@ public class SpecificationInformation extends JFrame {
 		contentPane.add(SelectButton);
 		
 
+		
+		JButton InfoButton = new JButton("Інформація");
+		InfoButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				id_to_choose = MethodsForFrames.getDeviceIdByDeviceName(name_to_choose, id_to_choose, DeviceComboBox, devices);
+				
+				SpecificationInformation.this.setVisible(false);
+				try {
+					new DeviceInformation(SpecificationInformation.this).setVisible(true);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		InfoButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		InfoButton.setBounds(556, 121, 122, 34);
+		contentPane.add(InfoButton);
+		
+		
 		JButton btnBack = new JButton("BACK");
 		btnBack.addActionListener(new ActionListener() 
 		{
@@ -129,7 +148,7 @@ public class SpecificationInformation extends JFrame {
 				SpecificationInformation.this.dispose();
 			}
 		});
-		btnBack.setBounds(519, 473, 97, 25);
+		btnBack.setBounds(611, 473, 97, 25);
 		contentPane.add(btnBack);
 		
 

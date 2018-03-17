@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 import dao.ProviderDao;
 import domain.Provider;
+import main.MethodsForFrames;
 import view.AuthorisationMenu;
 
 
@@ -43,13 +44,13 @@ public class EditProvider extends JFrame {
 		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
 		
 
-		JComboBox<String> comboBox = new JComboBox<String>();
-		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		comboBox.setBounds(40, 121, 437, 34);
-		contentPane.add(comboBox);
+		JComboBox<String> ProviderComboBox = new JComboBox<String>();
+		ProviderComboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		ProviderComboBox.setBounds(40, 121, 437, 34);
+		contentPane.add(ProviderComboBox);
 		for(Provider provider : providers) 
 		{
-			comboBox.addItem(provider.getName());
+			ProviderComboBox.addItem(provider.getName());
 		}
 		
 		JLabel lblNewLabel = new JLabel("Вибір постачальника для редагування");
@@ -63,15 +64,8 @@ public class EditProvider extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				name_to_edit = String.valueOf(comboBox.getSelectedItem());
-				for(Provider provider : providers) 
-				{
-					id_to_edit = provider.getId();
-					if(provider.getName().equals(name_to_edit))
-					{
-						break;
-					}
-				}
+				id_to_edit = MethodsForFrames.getProviderIdByProviderName(name_to_edit, id_to_edit, ProviderComboBox, providers);
+
 				EditProvider.this.setVisible(false);
 				try {
 					new EditProviderFrame(EditProvider.this).setVisible(true);

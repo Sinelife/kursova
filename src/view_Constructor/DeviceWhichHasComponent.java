@@ -3,30 +3,20 @@ package view_Constructor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
-
 import dao.ComponentDao;
 import dao.DeviceDao;
 import domain.Component;
 import domain.Device;
-import main.Main;
+import main.MethodsForFrames;
 import view.AuthorisationMenu;
-
-import javax.swing.JTable;
-import javax.swing.JList;
 
 public class DeviceWhichHasComponent extends JFrame {
 
@@ -83,13 +73,7 @@ public class DeviceWhichHasComponent extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				for(Component component : components) 
-				{
-					if(component.getName().equals(ComponentComboBox.getSelectedItem()))
-					{
-						id_to_look = component.getId();
-					}
-				}
+				id_to_look = MethodsForFrames.getComponentIdByComponentName(name_to_look, id_to_look, ComponentComboBox, components);
 
 				try {
 					devices = dd.getAllDeviceWhichHasComponent(id_to_look);

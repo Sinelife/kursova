@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 import dao.DeviceDao;
 import domain.Device;
+import main.MethodsForFrames;
 import view.AuthorisationMenu;
 
 import javax.swing.JTextField;
@@ -31,6 +32,8 @@ public class InfoDevice extends JFrame {
 	public static int rating_big_to_find;
 	public static int rating_small_to_find;
 	private JTextField textField;
+	
+	public static int device_information_check;
 
 	/**
 	 * Create the frame.
@@ -48,15 +51,16 @@ public class InfoDevice extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		device_information_check = 1;
 		
 
-		JComboBox<String> comboBox = new JComboBox<String>();
-		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		comboBox.setBounds(46, 283, 438, 34);
-		contentPane.add(comboBox);
+		JComboBox<String> DeviceComboBox = new JComboBox<String>();
+		DeviceComboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		DeviceComboBox.setBounds(46, 283, 438, 34);
+		contentPane.add(DeviceComboBox);
 		for(Device device : devices) 
 		{
-			comboBox.addItem(device.getName());
+			DeviceComboBox.addItem(device.getName());
 		}
 		
 		
@@ -71,15 +75,8 @@ public class InfoDevice extends JFrame {
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				name_to_look = String.valueOf(comboBox.getSelectedItem());
-				for(Device device : devices) 
-				{
-					id_to_look = device.getId();
-					if(device.getName().equals(name_to_look))
-					{
-						break;
-					}
-				}
+				id_to_look = MethodsForFrames.getDeviceIdByDeviceName(name_to_look, id_to_look, DeviceComboBox, devices);
+				
 				InfoDevice.this.setVisible(false);
 				try {
 					new DeviceInformation(InfoDevice.this).setVisible(true);
@@ -108,12 +105,12 @@ public class InfoDevice extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				name_to_find = textField.getText();
-				comboBox.removeAllItems();
+				DeviceComboBox.removeAllItems();
 				for(Device device : devices) 
 				{
 					if(device.getName().equals(name_to_find))
 					{
-						comboBox.addItem(device.getName());
+						DeviceComboBox.addItem(device.getName());
 					}
 				}
 			}
@@ -127,12 +124,12 @@ public class InfoDevice extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				voltage_to_find = textField.getText();
-				comboBox.removeAllItems();
+				DeviceComboBox.removeAllItems();
 				for(Device device : devices) 
 				{
 					if(device.getSupplyVoltage().equals(voltage_to_find))
 					{
-						comboBox.addItem(device.getName());
+						DeviceComboBox.addItem(device.getName());
 					}
 				}
 			}
@@ -153,12 +150,12 @@ public class InfoDevice extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				rating_small_to_find = Integer.valueOf(textField.getText());
-				comboBox.removeAllItems();
+				DeviceComboBox.removeAllItems();
 				for(Device device : devices) 
 				{
 					if(device.getRating() < rating_small_to_find)
 					{
-						comboBox.addItem(device.getName());
+						DeviceComboBox.addItem(device.getName());
 					}
 				}
 			}
@@ -172,12 +169,12 @@ public class InfoDevice extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				rating_big_to_find = Integer.valueOf(textField.getText());
-				comboBox.removeAllItems();
+				DeviceComboBox.removeAllItems();
 				for(Device device : devices) 
 				{
 					if(device.getRating() > rating_big_to_find)
 					{
-						comboBox.addItem(device.getName());
+						DeviceComboBox.addItem(device.getName());
 					}
 				}
 			}

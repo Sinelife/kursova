@@ -14,6 +14,7 @@ import dao.DeliveryDao;
 import dao.ProviderDao;
 import domain.Delivery;
 import domain.Provider;
+import main.MethodsForFrames;
 import view.AuthorisationMenu;
 import view_workerbuycomponent.DeliveryInformation;
 import view_workerbuycomponent.ProviderInformation;
@@ -108,7 +109,7 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				provider_id_to_look = getProviderIdByProviderName(provider_name_to_look, provider_id_to_look, ProviderComboBox);
+				provider_id_to_look = MethodsForFrames.getProviderIdByProviderName(provider_name_to_look, provider_id_to_look, ProviderComboBox,providers);
 				
 				DeliveryInProviderComboBox.removeAllItems();
 				try {
@@ -212,14 +213,8 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				provider_name_to_look = String.valueOf(ProviderComboBox.getSelectedItem());
-				for (Provider provider : providers) {
-					provider_id_to_look = provider.getId();
-					if (provider.getName().equals(provider_name_to_look)) 
-					{
-						break;
-					}
-				}
+				provider_id_to_look = MethodsForFrames.getProviderIdByProviderName(provider_name_to_look, provider_id_to_look, ProviderComboBox,providers);
+				
 				DeliveryDepartmentDirectorMenu.this.setVisible(false);
 				try {
 					new ProviderInformation(DeliveryDepartmentDirectorMenu.this).setVisible(true);
@@ -426,15 +421,8 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				delivery_name_to_look = String.valueOf(DeliveryInProviderComboBox.getSelectedItem());
-				for(Delivery delivery : deliveriesInProvider) 
-				{
-					delivery_id_to_look = delivery.getId();
-					if(delivery.getDeliveryName().equals(delivery_name_to_look))
-					{
-						break;
-					}
-				}
+				delivery_id_to_look = MethodsForFrames.getDeliveryIdByDeliveryName(delivery_name_to_look, delivery_id_to_look, DeliveryInProviderComboBox, deliveriesInProvider);;
+				
 				DeliveryDepartmentDirectorMenu.this.setVisible(false);
 				try {
 					new DeliveryInformation(DeliveryDepartmentDirectorMenu.this).setVisible(true);
@@ -466,17 +454,5 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 	
 	
 	
-	private static int getProviderIdByProviderName(String name, int id, JComboBox<String> ComboBox)
-	{
-		name = String.valueOf(ComboBox.getSelectedItem());
-		for(Provider provider : providers) 
-		{
-			id = provider.getId();
-			if(provider.getName().equals(name))
-			{
-				break;
-			}
-		}
-		return id;
-	}
+
 }

@@ -16,6 +16,7 @@ import javax.swing.border.EmptyBorder;
 import dao.DeliveryComponentDao;
 import dao.ProviderDao;
 import domain.Provider;
+import main.MethodsForFrames;
 import view.AuthorisationMenu;
 import domain.Delivery;
 import domain.DeliveryComponent;
@@ -30,6 +31,8 @@ public class InfoProvider extends JFrame {
 
 	public List<Delivery> DeliveriesInProvider;
 	public List<DeliveryComponent> ComponentsInfoInDelivery;
+	
+	public static int information_check;
 	/**
 	 * Create the frame.
 	 * @throws SQLException 
@@ -46,6 +49,7 @@ public class InfoProvider extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		information_check = 1;
 		
 		
 		JLabel lblNewLabel = new JLabel("Перегляд інформації про постачальника");
@@ -129,15 +133,7 @@ public class InfoProvider extends JFrame {
 			{
 				DeliveryInProviderComboBox.removeAllItems();
 				
-				provider_name_to_look = String.valueOf(ProviderComboBox.getSelectedItem());
-				for(Provider provider : providers) 
-				{
-					provider_id_to_look = provider.getId();
-					if(provider.getName().equals(provider_name_to_look))
-					{
-						break;
-					}
-				}
+				provider_id_to_look = MethodsForFrames.getProviderIdByProviderName(provider_name_to_look, provider_id_to_look, ProviderComboBox, providers);
 				
 				try {
 					DeliveriesInProvider = pd.getAllDeliveriesInProvider(provider_id_to_look);
@@ -164,6 +160,8 @@ public class InfoProvider extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				ComponentInDeliveryComboBox.removeAllItems();
+				
+				
 				delivery_name_to_look = String.valueOf(DeliveryInProviderComboBox.getSelectedItem());
 				for(Delivery delivery : DeliveriesInProvider) 
 				{

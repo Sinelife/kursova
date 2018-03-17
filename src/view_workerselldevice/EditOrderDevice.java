@@ -19,6 +19,7 @@ import dao.OrderDao;
 import domain.Device;
 import domain.Order;
 import domain.OrderDevice;
+import main.MethodsForFrames;
 import view.AuthorisationMenu;
 
 import javax.swing.JTextField;
@@ -42,6 +43,9 @@ public class EditOrderDevice extends JFrame {
 	JComboBox<String> DeleteComboBox = new JComboBox<String>();
 	JComboBox<String> EditComboBox = new JComboBox<String>();
 	
+	public static String device_name;
+	public static int device_id;
+	
 	OrderDao od = new OrderDao();
 	
 	/**
@@ -60,6 +64,7 @@ public class EditOrderDevice extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		InfoClient.order_information_check = 2;
 		
 		
 		JLabel lblNewLabel = new JLabel("Редагування замовлення на купівлю");
@@ -110,14 +115,7 @@ public class EditOrderDevice extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				order_name_to_edit = String.valueOf(OrderComboBox.getSelectedItem());
-				for(Order order : orders) 
-				{
-					if(order.getOrderName().equals(order_name_to_edit))
-					{
-						order_id_to_edit = order.getId();
-					}
-				}
+				order_id_to_edit = MethodsForFrames.getOrderIdByOrderName(order_name_to_edit, order_id_to_edit, OrderComboBox, orders);
 				
 				try {
 					DevicesInOrderEdit = od.getAllDevicesInOrder(order_id_to_edit);
@@ -189,15 +187,7 @@ public class EditOrderDevice extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				String device_name = String.valueOf(AddComboBox.getSelectedItem());
-				int device_id = 0;
-				for(Device device : DevicesNotInOrder) 
-				{
-					if(device.getName().equals(device_name))
-					{
-						device_id = device.getId();
-					}
-				}
+				device_id = MethodsForFrames.getDeviceIdByDeviceName(device_name, device_id, AddComboBox, DevicesNotInOrder);
 				
 				OrderDevice record = new OrderDevice();
 				record.setOrderId(order_id_to_edit);;
@@ -221,15 +211,8 @@ public class EditOrderDevice extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				String device_name = String.valueOf(DeleteComboBox.getSelectedItem());
-				int device_id = 0;
-				for(Device device : DevicesInOrderDelete) 
-				{
-					if(device.getName().equals(device_name))
-					{
-						device_id = device.getId();
-					}
-				}
+				device_id = MethodsForFrames.getDeviceIdByDeviceName(device_name, device_id, DeleteComboBox, DevicesInOrderDelete);
+				
 				OrderDevice record = null;
 				try {
 					record = od.readDeviceInOrder(order_id_to_edit, device_id);
@@ -255,15 +238,8 @@ public class EditOrderDevice extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				String device_name = String.valueOf(EditComboBox.getSelectedItem());
-				int device_id = 0;
-				for(Device device : DevicesInOrderEdit) 
-				{
-					if(device.getName().equals(device_name))
-					{
-						device_id = device.getId();
-					}
-				}
+				device_id = MethodsForFrames.getDeviceIdByDeviceName(device_name, device_id, EditComboBox, DevicesInOrderEdit);
+				
 				OrderDevice record = null;
 				try {
 					record = od.readDeviceInOrder(order_id_to_edit, device_id);
@@ -290,15 +266,8 @@ public class EditOrderDevice extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				order_name_to_edit = String.valueOf(OrderComboBox.getSelectedItem());
-				for(Order order : orders) 
-				{
-					order_id_to_edit = order.getId();
-					if(order.getOrderName().equals(order_name_to_edit))
-					{
-						break;
-					}
-				}
+				order_id_to_edit = MethodsForFrames.getOrderIdByOrderName(order_name_to_edit, order_id_to_edit, OrderComboBox, orders);
+				
 				EditOrderDevice.this.setVisible(false);
 				try {
 					new OrderInformation(EditOrderDevice.this).setVisible(true);
@@ -334,15 +303,12 @@ public class EditOrderDevice extends JFrame {
 		// This method is called only if a new item has been selected.
 		public void itemStateChanged(ItemEvent evt) 
 		{
-			if (evt.getStateChange() == ItemEvent.SELECTED) {
+			if (evt.getStateChange() == ItemEvent.SELECTED) 
+			{
 				String device_name = String.valueOf(EditComboBox.getSelectedItem());
 				int device_id = 0;
-				for (Device device : DevicesInOrderEdit) {
-					if (device.getName().equals(device_name)) 
-					{
-						device_id = device.getId();
-					}
-				}
+				device_id = MethodsForFrames.getDeviceIdByDeviceName(device_name, device_id, EditComboBox, DevicesInOrderEdit);
+				
 				OrderDevice record = null;
 				try {
 					record = od.readDeviceInOrder(order_id_to_edit, device_id);

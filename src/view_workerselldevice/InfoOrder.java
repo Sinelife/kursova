@@ -17,6 +17,7 @@ import dao.OrderDao;
 import dao.OrderDeviceDao;
 import domain.Order;
 import domain.OrderDevice;
+import main.MethodsForFrames;
 import view.AuthorisationMenu;
 
 public class InfoOrder extends JFrame 
@@ -81,15 +82,8 @@ public class InfoOrder extends JFrame
 			{
 				DeviceInOrderComboBox.removeAllItems();
 				
-				order_name_to_look = String.valueOf(OrderComboBox.getSelectedItem());
-				for(Order order : orders) 
-				{
-					order_id_to_look = order.getId();
-					if(order.getOrderName().equals(order_name_to_look))
-					{
-						break;
-					}
-				}
+				order_id_to_look = MethodsForFrames.getOrderIdByOrderName(order_name_to_look, order_id_to_look, OrderComboBox, orders);
+				
 				OrderDeviceDao odd = new OrderDeviceDao();
 				try {
 					DevicesInfoInOrder = odd.getAllFromOrder(order_id_to_look);

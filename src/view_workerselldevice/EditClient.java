@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 import dao.ClientDao;
 import domain.Client;
+import main.MethodsForFrames;
 import view.AuthorisationMenu;
 
 
@@ -44,20 +45,20 @@ public class EditClient extends JFrame
 		contentPane.setLayout(null);
 		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
 		
-
-		JComboBox<String> comboBox = new JComboBox<String>();
-		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		comboBox.setBounds(40, 121, 437, 34);
-		contentPane.add(comboBox);
-		for(Client client : clients) 
-		{
-			comboBox.addItem(client.getName());
-		}
-		
 		JLabel lblNewLabel = new JLabel("Вибір клієнта для редагування.");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		lblNewLabel.setBounds(46, 25, 559, 59);
 		contentPane.add(lblNewLabel);
+		
+
+		JComboBox<String> ClientComboBox = new JComboBox<String>();
+		ClientComboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		ClientComboBox.setBounds(40, 121, 437, 34);
+		contentPane.add(ClientComboBox);
+		for(Client client : clients) 
+		{
+			ClientComboBox.addItem(client.getName());
+		}
 		
 		
 		JButton SelectButton = new JButton("Вибрати");
@@ -65,15 +66,8 @@ public class EditClient extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				name_to_edit = String.valueOf(comboBox.getSelectedItem());
-				for(Client client : clients) 
-				{
-					id_to_edit = client.getId();
-					if(client.getName().equals(name_to_edit))
-					{
-						break;
-					}
-				}
+				id_to_edit = MethodsForFrames.getClientIdByClientName(name_to_edit, id_to_edit, ClientComboBox, clients);
+				
 				EditClient.this.setVisible(false);
 				try {
 					new EditClientFrame(EditClient.this).setVisible(true);

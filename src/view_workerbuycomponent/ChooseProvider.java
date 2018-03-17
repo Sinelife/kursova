@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 import dao.ProviderDao;
 import domain.Provider;
+import main.MethodsForFrames;
 import view.AuthorisationMenu;
 
 public class ChooseProvider extends JFrame {
@@ -65,16 +66,12 @@ public class ChooseProvider extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e)
 			{
+				id_to_choose = MethodsForFrames.getProviderIdByProviderName(name_to_choose, id_to_choose, ProviderComboBox, providers);
+				
 				name_to_choose = ProviderComboBox.getSelectedItem().toString();
-				for(Provider provider : providers) 
-				{
-					if(provider.getName().equals(name_to_choose))
-					{
-						id_to_choose = provider.getId();
-						ChooseProvider.this.setVisible(false);
-						new DeliveryMenu().setVisible(true);
-					}
-				}
+				ChooseProvider.this.setVisible(false);
+				new DeliveryMenu().setVisible(true);
+				
 			}
 		});
 		SelectButton.setBounds(40, 311, 118, 25);

@@ -26,21 +26,5 @@ public class Main
 
 		AuthorisationMenu frame = new AuthorisationMenu();
 		frame.setVisible(true);
-	}
-
-	
-	public static void DateToString(Date d,JTextField t)
-	{
-		String res = null;
-		if(d == null)
-		{
-			res = "";
-			t.setText(res);
-		}
-		else
-		{
-			t.setText(String.valueOf(d));
-		}
-	}
-	
+	}	
 }

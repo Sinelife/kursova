@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 import dao.ClientDao;
 import domain.Client;
+import main.MethodsForFrames;
 import view.AuthorisationMenu;
 
 public class ChooseClient extends JFrame {
@@ -65,16 +66,11 @@ public class ChooseClient extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e)
 			{
+				id_to_choose = MethodsForFrames.getClientIdByClientName(name_to_choose, id_to_choose, ClientComboBox, clients);
 				name_to_choose = ClientComboBox.getSelectedItem().toString();
-				for(Client client : clients) 
-				{
-					if(client.getName().equals(name_to_choose))
-					{
-						id_to_choose = client.getId();
-						ChooseClient.this.setVisible(false);
-						new OrderMenu().setVisible(true);
-					}
-				}
+				
+				ChooseClient.this.setVisible(false);
+				new OrderMenu().setVisible(true);
 			}
 		});
 		SelectButton.setBounds(40, 311, 118, 25);

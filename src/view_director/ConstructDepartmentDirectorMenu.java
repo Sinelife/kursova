@@ -16,6 +16,7 @@ import javax.swing.border.EmptyBorder;
 import dao.DeviceDao;
 import domain.Component;
 import domain.Device;
+import main.MethodsForFrames;
 import view.AuthorisationMenu;
 import view_Constructor.ComponentInformation;
 import view_Constructor.DeviceInformation;
@@ -95,15 +96,7 @@ public class ConstructDepartmentDirectorMenu extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				device_name_to_look = String.valueOf(DeviceComboBox.getSelectedItem());
-				for(Device device : devices) 
-				{
-					device_id_to_look = device.getId();
-					if(device.getName().equals(device_name_to_look))
-					{
-						break;
-					}
-				}
+				device_id_to_look = MethodsForFrames.getDeviceIdByDeviceName(device_name_to_look, device_id_to_look, DeviceComboBox, devices);
 				
 				ComponentsInDeviceComboBox.removeAllItems();
 				try {
@@ -148,14 +141,8 @@ public class ConstructDepartmentDirectorMenu extends JFrame
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				device_name_to_look = String.valueOf(DeviceComboBox.getSelectedItem());
-				for (Device device : devices) {
-					device_id_to_look = device.getId();
-					if (device.getName().equals(device_name_to_look)) 
-					{
-						break;
-					}
-				}
+				device_id_to_look = MethodsForFrames.getDeviceIdByDeviceName(device_name_to_look, device_id_to_look, DeviceComboBox, devices);
+				
 				ConstructDepartmentDirectorMenu.this.setVisible(false);
 				try {
 					new DeviceInformation(ConstructDepartmentDirectorMenu.this).setVisible(true);
@@ -203,15 +190,8 @@ public class ConstructDepartmentDirectorMenu extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				component_name_to_look = String.valueOf(ComponentsInDeviceComboBox.getSelectedItem());
-				for (Component component : componentsInDevice) 
-				{
-					component_id_to_look = component.getId();
-					if (component.getName().equals(component_name_to_look)) 
-					{
-						break;
-					}
-				}
+				component_id_to_look = MethodsForFrames.getComponentIdByComponentName(component_name_to_look, component_id_to_look, ComponentsInDeviceComboBox, componentsInDevice);
+				
 				ConstructDepartmentDirectorMenu.this.setVisible(false);
 				try {
 					new ComponentInformation(ConstructDepartmentDirectorMenu.this).setVisible(true);
@@ -233,15 +213,7 @@ public class ConstructDepartmentDirectorMenu extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				component_name_to_look = String.valueOf(ComponentsInDeviceComboBox.getSelectedItem());
-				for (Component component : componentsInDevice) 
-				{
-					component_id_to_look = component.getId();
-					if (component.getName().equals(component_name_to_look)) 
-					{
-						break;
-					}
-				}
+				component_id_to_look = MethodsForFrames.getComponentIdByComponentName(component_name_to_look, component_id_to_look, ComponentsInDeviceComboBox, componentsInDevice);
 				
 				try {
 					componentNumber = dd.getComponentNumberInDevice(device_id_to_look,component_id_to_look);

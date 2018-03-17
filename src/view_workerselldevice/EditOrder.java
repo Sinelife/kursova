@@ -17,6 +17,7 @@ import javax.swing.border.EmptyBorder;
 
 import dao.OrderDao;
 import domain.Order;
+import main.MethodsForFrames;
 import view.AuthorisationMenu;
 
 import javax.swing.JCheckBox;
@@ -109,15 +110,8 @@ public class EditOrder extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				order_name_to_edit = String.valueOf(OrderComboBox.getSelectedItem());
-				for(Order order : orders) 
-				{
-					if(order.getOrderName().equals(order_name_to_edit))
-					{
-						order_id_to_edit = order.getId();
-						break;
-					}
-				}
+				order_id_to_edit = MethodsForFrames.getOrderIdByOrderName(order_name_to_edit, order_id_to_edit, OrderComboBox, orders);
+				
 				try {
 					o = od.readOrder(order_id_to_edit);
 				} catch (SQLException e1) {

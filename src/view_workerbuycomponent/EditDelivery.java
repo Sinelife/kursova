@@ -17,6 +17,7 @@ import javax.swing.border.EmptyBorder;
 
 import dao.DeliveryDao;
 import domain.Delivery;
+import main.MethodsForFrames;
 import view.AuthorisationMenu;
 
 import javax.swing.JCheckBox;
@@ -109,15 +110,8 @@ public class EditDelivery extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				delivery_name_to_edit = String.valueOf(DeliveryComboBox.getSelectedItem());
-				for(Delivery delivery : deliveries) 
-				{
-					if(delivery.getDeliveryName().equals(delivery_name_to_edit))
-					{
-						delivery_id_to_edit = delivery.getId();
-						break;
-					}
-				}
+				delivery_id_to_edit = MethodsForFrames.getDeliveryIdByDeliveryName(delivery_name_to_edit, delivery_id_to_edit, DeliveryComboBox, deliveries);
+
 				try {
 					d = dd.readDelivery(delivery_id_to_edit);
 				} catch (SQLException e1) {

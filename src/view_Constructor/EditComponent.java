@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 import dao.ComponentDao;
 import domain.Component;
+import main.MethodsForFrames;
 import view.AuthorisationMenu;
 
 
@@ -44,20 +45,20 @@ public class EditComponent extends JFrame {
 		contentPane.setLayout(null);
 		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
 		
-
-		JComboBox<String> comboBox = new JComboBox<String>();
-		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		comboBox.setBounds(40, 121, 504, 34);
-		contentPane.add(comboBox);
-		for(Component component : components) 
-		{
-			comboBox.addItem(component.getName());
-		}
-		
 		JLabel lblNewLabel = new JLabel("Меню вибору компоненту для редагування.");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		lblNewLabel.setBounds(46, 25, 559, 59);
 		contentPane.add(lblNewLabel);
+		
+
+		JComboBox<String> ComponentComboBox = new JComboBox<String>();
+		ComponentComboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		ComponentComboBox.setBounds(40, 121, 504, 34);
+		contentPane.add(ComponentComboBox);
+		for(Component component : components) 
+		{
+			ComponentComboBox.addItem(component.getName());
+		}
 		
 		
 		JButton SelectButton = new JButton("Вибрати");
@@ -65,15 +66,8 @@ public class EditComponent extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				name_to_edit = String.valueOf(comboBox.getSelectedItem());
-				for(Component component : components) 
-				{
-					id_to_edit = component.getId();
-					if(component.getName().equals(name_to_edit))
-					{
-						break;
-					}
-				}
+				id_to_edit = MethodsForFrames.getComponentIdByComponentName(name_to_edit, id_to_edit, ComponentComboBox, components);
+				
 				EditComponent.this.setVisible(false);
 				try {
 					new EditComponentFrame(EditComponent.this).setVisible(true);

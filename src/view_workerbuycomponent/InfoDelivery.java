@@ -17,6 +17,7 @@ import dao.DeliveryComponentDao;
 import dao.DeliveryDao;
 import domain.Delivery;
 import domain.DeliveryComponent;
+import main.MethodsForFrames;
 import view.AuthorisationMenu;
 
 public class InfoDelivery extends JFrame 
@@ -80,15 +81,8 @@ public class InfoDelivery extends JFrame
 			{
 				ComponentInDeliveryComboBox.removeAllItems();
 				
-				delivery_name_to_look = String.valueOf(DeliveryComboBox.getSelectedItem());
-				for(Delivery delivery : deliveries) 
-				{
-					delivery_id_to_look = delivery.getId();
-					if(delivery.getDeliveryName().equals(delivery_name_to_look))
-					{
-						break;
-					}
-				}
+				delivery_id_to_look = MethodsForFrames.getDeliveryIdByDeliveryName(delivery_name_to_look, delivery_id_to_look, DeliveryComboBox, deliveries);
+
 				DeliveryComponentDao dcd = new DeliveryComponentDao();
 				try {
 					ComponentsInfoInDelivery = dcd.getAllFromDelivery(delivery_id_to_look);

@@ -18,6 +18,7 @@ import dao.DeliveryDao;
 import domain.Component;
 import domain.Delivery;
 import domain.DeliveryComponent;
+import main.MethodsForFrames;
 import view.AuthorisationMenu;
 
 import javax.swing.JTextField;
@@ -42,6 +43,9 @@ public class EditDeliveryComponent extends JFrame {
 	JComboBox<String> DeleteComboBox = new JComboBox<String>();
 	JComboBox<String> EditComboBox = new JComboBox<String>();
 	
+	private int component_id;
+	private String component_name;
+	
 	DeliveryDao dd = new DeliveryDao();
 	
 	/**
@@ -60,6 +64,7 @@ public class EditDeliveryComponent extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		InfoProvider.information_check = 2;
 		
 		
 		JLabel lblNewLabel = new JLabel("Редагування замовлення постачання");
@@ -110,14 +115,7 @@ public class EditDeliveryComponent extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				delivery_name_to_edit = String.valueOf(DeliveryComboBox.getSelectedItem());
-				for(Delivery delivery : deliveries) 
-				{
-					if(delivery.getDeliveryName().equals(delivery_name_to_edit))
-					{
-						delivery_id_to_edit = delivery.getId();
-					}
-				}
+				delivery_id_to_edit = MethodsForFrames.getDeliveryIdByDeliveryName(delivery_name_to_edit, delivery_id_to_edit, DeliveryComboBox, deliveries);		
 				
 				try {
 					ComponentsInDeliveryEdit = dd.getAllComponentsInDelivery(delivery_id_to_edit);
@@ -189,15 +187,7 @@ public class EditDeliveryComponent extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				String component_name = String.valueOf(AddComboBox.getSelectedItem());
-				int component_id = 0;
-				for(Component component : ComponentsNotInDelivery) 
-				{
-					if(component.getName().equals(component_name))
-					{
-						component_id = component.getId();
-					}
-				}
+				component_id = MethodsForFrames.getComponentIdByComponentName(component_name, component_id, AddComboBox, ComponentsNotInDelivery);
 				
 				DeliveryComponent record = new DeliveryComponent();
 				record.setDeliveryId(delivery_id_to_edit);;
@@ -221,15 +211,8 @@ public class EditDeliveryComponent extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				String component_name = String.valueOf(DeleteComboBox.getSelectedItem());
-				int component_id = 0;
-				for(Component component : ComponentsInDeliveryDelete) 
-				{
-					if(component.getName().equals(component_name))
-					{
-						component_id = component.getId();
-					}
-				}
+				component_id = MethodsForFrames.getComponentIdByComponentName(component_name, component_id, DeleteComboBox, ComponentsInDeliveryDelete);
+
 				DeliveryComponent record = null;
 				try {
 					record = dd.readComponentInDelivery(delivery_id_to_edit, component_id);
@@ -255,15 +238,8 @@ public class EditDeliveryComponent extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				String component_name = String.valueOf(EditComboBox.getSelectedItem());
-				int component_id = 0;
-				for(Component component : ComponentsInDeliveryEdit) 
-				{
-					if(component.getName().equals(component_name))
-					{
-						component_id = component.getId();
-					}
-				}
+				component_id = MethodsForFrames.getComponentIdByComponentName(component_name, component_id, EditComboBox, ComponentsInDeliveryEdit);
+
 				DeliveryComponent record = null;
 				try {
 					record = dd.readComponentInDelivery(delivery_id_to_edit, component_id);
@@ -290,15 +266,8 @@ public class EditDeliveryComponent extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				delivery_name_to_edit = String.valueOf(DeliveryComboBox.getSelectedItem());
-				for(Delivery delivery : deliveries) 
-				{
-					delivery_id_to_edit = delivery.getId();
-					if(delivery.getDeliveryName().equals(delivery_name_to_edit))
-					{
-						break;
-					}
-				}
+				delivery_id_to_edit = MethodsForFrames.getDeliveryIdByDeliveryName(delivery_name_to_edit, delivery_id_to_edit, DeliveryComboBox, deliveries);
+				
 				EditDeliveryComponent.this.setVisible(false);
 				try {
 					new DeliveryInformation(EditDeliveryComponent.this).setVisible(true);

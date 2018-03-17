@@ -42,9 +42,13 @@ public class DeliveryInformation extends JFrame {
 		{
 			d = dd.readDelivery(DeliveryDepartmentDirectorMenu.delivery_id_to_look);		
 		}
-		else
+		else if(InfoProvider.information_check == 1)
 		{
 			d = dd.readDelivery(InfoProvider.delivery_id_to_look);
+		}
+		else
+		{
+			d = dd.readDelivery(EditDeliveryComponent.delivery_id_to_edit);
 		}
 		
 		
@@ -97,15 +101,32 @@ public class DeliveryInformation extends JFrame {
 		
 		PaidCheckBox = new JCheckBox();
 		PaidCheckBox.setEnabled(false);
-		PaidCheckBox.setBounds(161, 228, 113, 25);
+		PaidCheckBox.setBounds(161, 228, 32, 25);
 		contentPane.add(PaidCheckBox);
-		PaidCheckBox.setSelected(d.isPaid());
+		if(d.isPaid() == true)
+		{
+			PaidCheckBox.setSelected(true);
+		}
+		else
+		{
+			PaidCheckBox.setSelected(false);
+		}
 		
 		ShippedCheckBox = new JCheckBox();
 		ShippedCheckBox.setEnabled(false);
-		ShippedCheckBox.setBounds(161, 262, 113, 25);
+		ShippedCheckBox.setBounds(161, 262, 32, 25);
 		contentPane.add(ShippedCheckBox);
 		ShippedCheckBox.setSelected(d.isPaid());
+		if(d.isShipped() == true)
+		{
+			ShippedCheckBox.setSelected(true);
+		}
+		else
+		{
+			ShippedCheckBox.setSelected(false);
+		}
+		
+		
 		
 		
 		JButton btnBack = new JButton("BACK");

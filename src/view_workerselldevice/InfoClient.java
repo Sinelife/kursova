@@ -17,6 +17,7 @@ import dao.ClientDao;
 import dao.OrderDeviceDao;
 import domain.Client;
 import domain.OrderDevice;
+import main.MethodsForFrames;
 import view.AuthorisationMenu;
 import domain.Order;
 
@@ -30,6 +31,8 @@ public class InfoClient extends JFrame {
 
 	public List<Order> OrdersInClient;
 	public List<OrderDevice> DevicesInfoInOrder;
+	
+	public static int order_information_check;
 	
 	/**
 	 * Create the frame.
@@ -48,6 +51,7 @@ public class InfoClient extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
+		order_information_check = 1;
 		
 		
 		JLabel lblNewLabel = new JLabel("Перегляд інформації про клієнта");
@@ -99,15 +103,8 @@ public class InfoClient extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				client_name_to_look = String.valueOf(ClientComboBox.getSelectedItem());
-				for(Client client : clients) 
-				{
-					client_id_to_look = client.getId();
-					if(client.getName().equals(client_name_to_look))
-					{
-						break;
-					}
-				}
+				client_id_to_look = MethodsForFrames.getClientIdByClientName(client_name_to_look, client_id_to_look, ClientComboBox, clients);
+
 				InfoClient.this.setVisible(false);
 				try {
 					new ClientInformation(InfoClient.this).setVisible(true);
@@ -129,15 +126,7 @@ public class InfoClient extends JFrame {
 			{
 				OrderInClientComboBox.removeAllItems();
 				
-				client_name_to_look = String.valueOf(ClientComboBox.getSelectedItem());
-				for(Client client : clients) 
-				{
-					client_id_to_look = client.getId();
-					if(client.getName().equals(client_name_to_look))
-					{
-						break;
-					}
-				}
+				client_id_to_look = MethodsForFrames.getClientIdByClientName(client_name_to_look, client_id_to_look, ClientComboBox, clients);
 				
 				try {
 					OrdersInClient = cd.getAllOrdersInClient(client_id_to_look);
@@ -165,17 +154,11 @@ public class InfoClient extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				DeviceInOrderComboBox.removeAllItems();
-				order_name_to_look = String.valueOf(OrderInClientComboBox.getSelectedItem());
-				for(Order order : OrdersInClient) 
-				{
-					order_id_to_look = order.getId();
-					if(order.getOrderName().equals(order_name_to_look))
-					{
-						break;
-					}
-				}
-				OrderDeviceDao odd = new OrderDeviceDao();
 				
+				order_id_to_look = MethodsForFrames.getOrderIdByOrderName(order_name_to_look, order_id_to_look, OrderInClientComboBox, OrdersInClient);
+				
+				
+				OrderDeviceDao odd = new OrderDeviceDao();
 				try {
 					DevicesInfoInOrder = odd.getAllFromOrder(order_id_to_look);
 				} catch (SQLException e1) {
@@ -215,31 +198,13 @@ public class InfoClient extends JFrame {
 		
 		
 		
-		
-		JButton btnBack = new JButton("BACK");
-		btnBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (parent != null)
-					parent.setVisible(true);
-				InfoClient.this.setVisible(false);
-				InfoClient.this.dispose();
-			}
-		});
-		
 		JButton OrderInfoButton = new JButton("Інформація");
 		OrderInfoButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				order_name_to_look = String.valueOf(OrderInClientComboBox.getSelectedItem());
-				for(Order order : OrdersInClient) 
-				{
-					order_id_to_look = order.getId();
-					if(order.getOrderName().equals(order_name_to_look))
-					{
-						break;
-					}
-				}
+				order_id_to_look = MethodsForFrames.getOrderIdByOrderName(order_name_to_look, order_id_to_look, OrderInClientComboBox, OrdersInClient);
+				
 				InfoClient.this.setVisible(false);
 				try {
 					new OrderInformation(InfoClient.this).setVisible(true);
@@ -252,6 +217,18 @@ public class InfoClient extends JFrame {
 		OrderInfoButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		OrderInfoButton.setBounds(784, 293, 122, 34);
 		contentPane.add(OrderInfoButton);
+		
+		
+		
+		JButton btnBack = new JButton("BACK");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (parent != null)
+					parent.setVisible(true);
+				InfoClient.this.setVisible(false);
+				InfoClient.this.dispose();
+			}
+		});
 		btnBack.setBounds(823, 525, 97, 25);
 		contentPane.add(btnBack);
 		
