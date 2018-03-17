@@ -15,7 +15,7 @@ import javax.swing.border.EmptyBorder;
 import dao.ClientDao;
 import domain.Client;
 import view.AuthorisationMenu;
-
+import view_director.ClientReport;
 import java.awt.Color;
 
 public class ClientInformation extends JFrame 
@@ -36,7 +36,17 @@ public class ClientInformation extends JFrame
 	public ClientInformation(JFrame parent) throws SQLException 
 	{
 		ClientDao cd = new ClientDao();
-		Client c = cd.readClient(InfoClient.client_id_to_look);
+		Client c = new Client();
+		
+		
+		if(AuthorisationMenu.user_role.equals("director"))
+		{
+			c = cd.readClient(ClientReport.client_id_to_look);		
+		}
+		else
+		{
+			c = cd.readClient(InfoClient.client_id_to_look);
+		}
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

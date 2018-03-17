@@ -170,7 +170,7 @@ public class ProviderDao
     
     
     
-    public int getOrderNumber() throws SQLException
+    public int getDeliveryNumber() throws SQLException
     {
     	String sql = "SELECT COUNT(*) FROM delivery";
     	PreparedStatement stm = Main.conn.prepareStatement(sql);
@@ -183,7 +183,7 @@ public class ProviderDao
         return result;
     }
     
-    public int getPaidOrderNumber() throws SQLException
+    public int getPaidDeliveryNumber() throws SQLException
     {
     	String sql = "SELECT COUNT(*) FROM delivery WHERE paid = 1";
     	PreparedStatement stm = Main.conn.prepareStatement(sql);
@@ -196,7 +196,7 @@ public class ProviderDao
         return result;
     }
     
-    public int getShippedOrderNumber() throws SQLException
+    public int getShippedDeliveryNumber() throws SQLException
     {
     	String sql = "SELECT COUNT(*) FROM delivery WHERE shipped = 1";
     	PreparedStatement stm = Main.conn.prepareStatement(sql);
@@ -209,7 +209,7 @@ public class ProviderDao
         return result;
     }
     
-    public int getOrderNumberOfProvider(int provider_id) throws SQLException
+    public int getDeliveryNumberOfProvider(int provider_id) throws SQLException
     {
     	String sql = "SELECT COUNT(*) FROM delivery WHERE provider_id = " + provider_id;
     	PreparedStatement stm = Main.conn.prepareStatement(sql);
@@ -222,7 +222,7 @@ public class ProviderDao
         return result;
     }
     
-    public int getPaidOrderNumberOfProvider(int provider_id) throws SQLException
+    public int getPaidDeliveryNumberOfProvider(int provider_id) throws SQLException
     {
     	String sql = "SELECT COUNT(*) FROM delivery WHERE paid = 1 and provider_id = " + provider_id;
     	PreparedStatement stm = Main.conn.prepareStatement(sql);
@@ -235,7 +235,7 @@ public class ProviderDao
         return result;
     }
     
-    public int getShippedOrderNumberOfProvider(int provider_id) throws SQLException
+    public int getShippedDeliveryNumberOfProvider(int provider_id) throws SQLException
     {
     	String sql = "SELECT COUNT(*) FROM delivery WHERE shipped = 1 and provider_id = " + provider_id;
     	PreparedStatement stm = Main.conn.prepareStatement(sql);

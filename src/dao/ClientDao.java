@@ -159,4 +159,300 @@ public class ClientDao
 	    }
 	    
 	    
+	    
+	    
+	    
+	    
+	    
+	    public int getOrderNumber() throws SQLException
+	    {
+	    	String sql = "SELECT COUNT(*) FROM orders";
+	    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+	    	ResultSet rs = stm.executeQuery(sql);
+	    	int result = 0;
+	 	  	while(rs.next())
+	 	  	{
+	 	  		result = rs.getInt("COUNT(*)");
+	 	  	}
+	        return result;
+	    }
+	    
+	    public int getPaidOrderNumber() throws SQLException
+	    {
+	    	String sql = "SELECT COUNT(*) FROM orders WHERE paid = 1";
+	    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+	    	ResultSet rs = stm.executeQuery(sql);
+	    	int result = 0;
+	 	  	while(rs.next())
+	 	  	{
+	 	  		result = rs.getInt("COUNT(*)");
+	 	  	}
+	        return result;
+	    }
+	    
+	    public int getShippedOrderNumber() throws SQLException
+	    {
+	    	String sql = "SELECT COUNT(*) FROM orders WHERE shipped = 1";
+	    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+	    	ResultSet rs = stm.executeQuery(sql);
+	    	int result = 0;
+	 	  	while(rs.next())
+	 	  	{
+	 	  		result = rs.getInt("COUNT(*)");
+	 	  	}
+	        return result;
+	    }
+	    
+	    public int getOrderNumberOfClient(int client_id) throws SQLException
+	    {
+	    	String sql = "SELECT COUNT(*) FROM orders WHERE client_id = " + client_id;
+	    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+	    	ResultSet rs = stm.executeQuery(sql);
+	    	int result = 0;
+	 	  	while(rs.next())
+	 	  	{
+	 	  		result = rs.getInt("COUNT(*)");
+	 	  	}
+	        return result;
+	    }
+	    
+	    public int getPaidOrderNumberOfClient(int client_id) throws SQLException
+	    {
+	    	String sql = "SELECT COUNT(*) FROM orders WHERE paid = 1 and client_id = " + client_id;
+	    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+	    	ResultSet rs = stm.executeQuery(sql);
+	    	int result = 0;
+	 	  	while(rs.next())
+	 	  	{
+	 	  		result = rs.getInt("COUNT(*)");
+	 	  	}
+	        return result;
+	    }
+	    
+	    public int getShippedOrderNumberOfClient(int client_id) throws SQLException
+	    {
+	    	String sql = "SELECT COUNT(*) FROM orders WHERE shipped = 1 and client_id = " + client_id;
+	    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+	    	ResultSet rs = stm.executeQuery(sql);
+	    	int result = 0;
+	 	  	while(rs.next())
+	 	  	{
+	 	  		result = rs.getInt("COUNT(*)");
+	 	  	}
+	        return result;
+	    }
+	    
+	    
+	    
+	    
+	    
+	    
+	    public int getAllMoney() throws SQLException
+	    {
+	    	String sql = "select sum(price * order_device.number) " + 
+	    				"from device,order_device,orders,client " + 
+	    				"where device.device_id = order_device.device_id " + 
+	    				"and order_device.order_id = orders.order_id " + 
+	    				"and orders.client_id = client.client_id";
+	    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+	    	ResultSet rs = stm.executeQuery(sql);
+	    	int result = 0;
+	 	  	while(rs.next())
+	 	  	{
+	 	  		result = rs.getInt("sum(price * order_device.number)");
+	 	  	}
+	        return result;
+	    }
+	      
+	    public int getPaidMoney() throws SQLException
+	    {
+	    	String sql = "select sum(price * order_device.number) " + 
+	    				"from device,order_device,orders,client " + 
+	    				"where device.device_id = order_device.device_id " + 
+	    				"and order_device.order_id = orders.order_id and orders.paid = 1 " + 
+	    				"and orders.client_id = client.client_id";
+	    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+	    	ResultSet rs = stm.executeQuery(sql);
+	    	int result = 0;
+	 	  	while(rs.next())
+	 	  	{
+	 	  		result = rs.getInt("sum(price * order_device.number)");
+	 	  	}
+	        return result;
+	    }
+	    
+	    public int getShippedMoney() throws SQLException
+	    {
+	    	String sql = "select sum(price * order_device.number) " + 
+	    				"from device,order_device,orders,client " + 
+	    				"where device.device_id = order_device.device_id " + 
+	    				"and order_device.order_id = orders.order_id and orders.shipped = 1 " + 
+	    				"and orders.client_id = client.client_id";
+	    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+	    	ResultSet rs = stm.executeQuery(sql);
+	    	int result = 0;
+	 	  	while(rs.next())
+	 	  	{
+	 	  		result = rs.getInt("sum(price * order_device.number)");
+	 	  	}
+	        return result;
+	    }
+	    
+	    public int getAllMoneyOfClient(int client_id) throws SQLException
+	    {
+	    	String sql = "select sum(price * order_device.number) " + 
+	    				"from device,order_device,orders,client " + 
+	    				"where device.device_id = order_device.device_id " + 
+	    				"and order_device.order_id = orders.order_id " + 
+	    				"and orders.client_id = client.client_id " + 
+	    				"and client.client_id = " + client_id;
+	    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+	    	ResultSet rs = stm.executeQuery(sql);
+	    	int result = 0;
+	 	  	while(rs.next())
+	 	  	{
+	 	  		result = rs.getInt("sum(price * order_device.number)");
+	 	  	}
+	        return result;
+	    }
+	      
+	    public int getPaidMoneyOfClient(int client_id) throws SQLException
+	    {
+	    	String sql = "select sum(price * order_device.number) " + 
+	    				"from device,order_device,orders,client " + 
+	    				"where device.device_id = order_device.device_id " + 
+	    				"and order_device.order_id = orders.order_id and orders.paid = 1 " + 
+	    				"and orders.client_id = client.client_id " + 
+	    				"and client.client_id = " + client_id;
+	    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+	    	ResultSet rs = stm.executeQuery(sql);
+	    	int result = 0;
+	 	  	while(rs.next())
+	 	  	{
+	 	  		result = rs.getInt("sum(price * order_device.number)");
+	 	  	}
+	        return result;
+	    }
+	    
+	    public int getShippedMoneyOfClient(int client_id) throws SQLException
+	    {
+	    	String sql = "select sum(price * order_device.number) " + 
+	    				"from device,order_device,orders,client " + 
+	    				"where device.device_id = order_device.device_id " + 
+	    				"and order_device.order_id = orders.order_id and orders.shipped = 1 " + 
+	    				"and orders.client_id = client.client_id " + 
+	    				"and client.client_id = " + client_id;
+	    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+	    	ResultSet rs = stm.executeQuery(sql);
+	    	int result = 0;
+	 	  	while(rs.next())
+	 	  	{
+	 	  		result = rs.getInt("sum(price * order_device.number)");
+	 	  	}
+	        return result;
+	    }
+	    
+	    
+	    
+	    
+	    
+	    public int getDeviceNumber() throws SQLException
+	    {
+	    	String sql = "select sum(order_device.number) " + 
+	    				"from order_device,orders,client " + 
+	    				"where order_device.order_id = orders.order_id " + 
+	    				"and orders.client_id = client.client_id";
+	    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+	    	ResultSet rs = stm.executeQuery(sql);
+	    	int result = 0;
+	 	  	while(rs.next())
+	 	  	{
+	 	  		result = rs.getInt("sum(order_device.number)");
+	 	  	}
+	        return result;
+	    }
+	    
+	    public int getPaidDeviceNumber() throws SQLException
+	    {
+	    	String sql = "select sum(order_device.number) " + 
+	    				"from order_device,orders,client " + 
+	    				"where order_device.order_id = orders.order_id " + 
+	    				"and orders.client_id = client.client_id and orders.paid = 1";
+	    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+	    	ResultSet rs = stm.executeQuery(sql);
+	    	int result = 0;
+	 	  	while(rs.next())
+	 	  	{
+	 	  		result = rs.getInt("sum(order_device.number)");
+	 	  	}
+	        return result;
+	    }
+	    
+	    public int getShippedDeviceNumber() throws SQLException
+	    {
+	    	String sql = "select sum(order_device.number) " + 
+	    				"from order_device,orders,client " + 
+	    				"where order_device.order_id = orders.order_id " + 
+	    				"and orders.client_id = client.client_id and orders.shipped = 1";
+	    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+	    	ResultSet rs = stm.executeQuery(sql);
+	    	int result = 0;
+	 	  	while(rs.next())
+	 	  	{
+	 	  		result = rs.getInt("sum(order_device.number)");
+	 	  	}
+	        return result;
+	    }
+	    
+	    public int getDeviceNumberOfClient(int client_id) throws SQLException
+	    {
+	    	String sql = "select sum(order_device.number) " + 
+	    				"from order_device,orders,client " + 
+	    				"where order_device.order_id = orders.order_id " + 
+	    				"and orders.client_id = client.client_id " + 
+	    				"and client.client_id = " + client_id;
+	    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+	    	ResultSet rs = stm.executeQuery(sql);
+	    	int result = 0;
+	 	  	while(rs.next())
+	 	  	{
+	 	  		result = rs.getInt("sum(order_device.number)");
+	 	  	}
+	        return result;
+	    }
+	    
+	    public int getPaidDeviceNumberOfClient(int client_id) throws SQLException
+	    {
+	    	String sql = "select sum(order_device.number) " + 
+	    				"from order_device,orders,client " + 
+	    				"where order_device.order_id = orders.order_id " + 
+	    				"and orders.client_id = client.client_id and orders.paid = 1 " + 
+	    				"and client.client_id = " + client_id;
+	    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+	    	ResultSet rs = stm.executeQuery(sql);
+	    	int result = 0;
+	 	  	while(rs.next())
+	 	  	{
+	 	  		result = rs.getInt("sum(order_device.number)");
+	 	  	}
+	        return result;
+	    }
+	    
+	    public int getShippedDeviceNumberOfClient(int client_id) throws SQLException
+	    {
+	    	String sql = "select sum(order_device.number) " + 
+	    				"from order_device,orders,client " + 
+	    				"where order_device.order_id = orders.order_id " + 
+	    				"and orders.client_id = client.client_id and orders.shipped = 1 " + 
+	    				"and client.client_id = " + client_id;
+	    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+	    	ResultSet rs = stm.executeQuery(sql);
+	    	int result = 0;
+	 	  	while(rs.next())
+	 	  	{
+	 	  		result = rs.getInt("sum(order_device.number)");
+	 	  	}
+	        return result;
+	    }
+	    
 }

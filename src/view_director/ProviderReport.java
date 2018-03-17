@@ -23,9 +23,9 @@ import java.awt.event.ActionEvent;
 public class ProviderReport extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField OrderNumberField;
-	private JTextField PaidOrderNumberField;
-	private JTextField ShippedOrderNumberField;
+	private JTextField DeliveryNumberField;
+	private JTextField PaidDeliveryNumberField;
+	private JTextField ShippedDeliveryNumberField;
 	private JTextField ComponentNumberField;
 	private JTextField PaidComponentNumberField;
 	private JTextField ShippedComponentNumberField;
@@ -36,9 +36,9 @@ public class ProviderReport extends JFrame {
 	public static int provider_id_to_look;
 	public static String provider_name_to_look;
 	
-	private static int orderNumber;
-	private static int paidOrderNumber;
-	private static int shippedOrderNumber;
+	private static int deliveryNumber;
+	private static int paidDeliveryNumber;
+	private static int shippedDeliveryNumber;
 	private static int allMoney;
 	private static int paidMoney;
 	private static int shippedMoney;
@@ -99,28 +99,28 @@ public class ProviderReport extends JFrame {
 				
 				
 				try {
-					orderNumber = pd.getOrderNumberOfProvider(provider_id_to_look);
+					deliveryNumber = pd.getDeliveryNumberOfProvider(provider_id_to_look);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				OrderNumberField.setText(String.valueOf(orderNumber));
+				DeliveryNumberField.setText(String.valueOf(deliveryNumber));
 				
 				try {
-					paidOrderNumber = pd.getPaidOrderNumberOfProvider(provider_id_to_look);
+					paidDeliveryNumber = pd.getPaidDeliveryNumberOfProvider(provider_id_to_look);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				PaidOrderNumberField.setText(String.valueOf(paidOrderNumber));
+				PaidDeliveryNumberField.setText(String.valueOf(paidDeliveryNumber));
 				
 				try {
-					shippedOrderNumber = pd.getShippedOrderNumberOfProvider(provider_id_to_look);
+					shippedDeliveryNumber = pd.getShippedDeliveryNumberOfProvider(provider_id_to_look);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				ShippedOrderNumberField.setText(String.valueOf(shippedOrderNumber));
+				ShippedDeliveryNumberField.setText(String.valueOf(shippedDeliveryNumber));
 				
 				
 				
@@ -216,28 +216,28 @@ public class ProviderReport extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				try {
-					orderNumber = pd.getOrderNumber();
+					deliveryNumber = pd.getDeliveryNumber();
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				OrderNumberField.setText(String.valueOf(orderNumber));
+				DeliveryNumberField.setText(String.valueOf(deliveryNumber));
 				
 				try {
-					paidOrderNumber = pd.getPaidOrderNumber();
+					paidDeliveryNumber = pd.getPaidDeliveryNumber();
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				PaidOrderNumberField.setText(String.valueOf(paidOrderNumber));
+				PaidDeliveryNumberField.setText(String.valueOf(paidDeliveryNumber));
 				
 				try {
-					shippedOrderNumber = pd.getShippedOrderNumber();
+					shippedDeliveryNumber = pd.getShippedDeliveryNumber();
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				ShippedOrderNumberField.setText(String.valueOf(shippedOrderNumber));
+				ShippedDeliveryNumberField.setText(String.valueOf(shippedDeliveryNumber));
 				
 				
 				
@@ -298,17 +298,17 @@ public class ProviderReport extends JFrame {
 		
 		
 		
-		JLabel OrderNumberLabel = new JLabel("Кількість замовлень");
-		OrderNumberLabel.setBounds(38, 156, 198, 25);
-		contentPane.add(OrderNumberLabel);
+		JLabel DeliveryNumberLabel = new JLabel("Кількість замовлень");
+		DeliveryNumberLabel.setBounds(38, 156, 198, 25);
+		contentPane.add(DeliveryNumberLabel);
 		
-		JLabel PaidOrderNumberLabel = new JLabel("Кількість оплачених замовлень");
-		PaidOrderNumberLabel.setBounds(265, 156, 198, 25);
-		contentPane.add(PaidOrderNumberLabel);
+		JLabel PaidDeliveryNumberLabel = new JLabel("Кількість оплачених замовлень");
+		PaidDeliveryNumberLabel.setBounds(265, 156, 198, 25);
+		contentPane.add(PaidDeliveryNumberLabel);
 		
-		JLabel ShippedOrderNumberLabel = new JLabel("Кількість відвантажених замовлень");
-		ShippedOrderNumberLabel.setBounds(506, 160, 230, 25);
-		contentPane.add(ShippedOrderNumberLabel);
+		JLabel ShippedDeliveryNumberLabel = new JLabel("Кількість відвантажених замовлень");
+		ShippedDeliveryNumberLabel.setBounds(506, 160, 230, 25);
+		contentPane.add(ShippedDeliveryNumberLabel);
 		
 		JLabel ComponentNumberLabel = new JLabel("Кількість компонентів");
 		ComponentNumberLabel.setBounds(38, 253, 198, 25);
@@ -334,20 +334,20 @@ public class ProviderReport extends JFrame {
 		ShippedMoneyLabel.setBounds(506, 352, 230, 25);
 		contentPane.add(ShippedMoneyLabel);
 		
-		OrderNumberField = new JTextField();
-		OrderNumberField.setBounds(38, 185, 198, 22);
-		contentPane.add(OrderNumberField);
-		OrderNumberField.setColumns(10);
+		DeliveryNumberField = new JTextField();
+		DeliveryNumberField.setBounds(38, 185, 198, 22);
+		contentPane.add(DeliveryNumberField);
+		DeliveryNumberField.setColumns(10);
 		
-		PaidOrderNumberField = new JTextField();
-		PaidOrderNumberField.setColumns(10);
-		PaidOrderNumberField.setBounds(265, 185, 198, 22);
-		contentPane.add(PaidOrderNumberField);
+		PaidDeliveryNumberField = new JTextField();
+		PaidDeliveryNumberField.setColumns(10);
+		PaidDeliveryNumberField.setBounds(265, 185, 198, 22);
+		contentPane.add(PaidDeliveryNumberField);
 		
-		ShippedOrderNumberField = new JTextField();
-		ShippedOrderNumberField.setColumns(10);
-		ShippedOrderNumberField.setBounds(506, 185, 230, 22);
-		contentPane.add(ShippedOrderNumberField);
+		ShippedDeliveryNumberField = new JTextField();
+		ShippedDeliveryNumberField.setColumns(10);
+		ShippedDeliveryNumberField.setBounds(506, 185, 230, 22);
+		contentPane.add(ShippedDeliveryNumberField);
 		
 		ComponentNumberField = new JTextField();
 		ComponentNumberField.setColumns(10);

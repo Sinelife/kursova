@@ -53,7 +53,12 @@ public class SalesDepartmentDirectorMenu extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				SalesDepartmentDirectorMenu.this.setVisible(false);
-				new ClientReport().setVisible(true); 
+				try {
+					new ClientReport(SalesDepartmentDirectorMenu.this).setVisible(true);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
 			}
 		});
 		AddButton.setHorizontalAlignment(SwingConstants.LEFT);
