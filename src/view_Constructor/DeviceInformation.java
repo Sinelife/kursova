@@ -17,6 +17,9 @@ import dao.DeviceDao;
 import domain.Device;
 import main.Main;
 import view.AuthorisationMenu;
+import view_director.ConstructDepartmentDirectorMenu;
+import view_director.DeliveryDepartmentDirectorMenu;
+import view_workerbuycomponent.InfoProvider;
 
 import java.awt.Color;
 
@@ -37,7 +40,18 @@ public class DeviceInformation extends JFrame {
 	public DeviceInformation(JFrame parent) throws SQLException 
 	{
 		DeviceDao dd = new DeviceDao();
-		Device d = dd.readDevice(InfoDevice.id_to_look);
+		Device d = new Device();
+		
+		
+		if(AuthorisationMenu.user_role.equals("director"))
+		{
+			d = dd.readDevice(ConstructDepartmentDirectorMenu.device_id_to_look);		
+		}
+		else
+		{
+			d = dd.readDevice(InfoDevice.id_to_look);
+		}
+		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 646, 558);

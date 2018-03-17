@@ -37,6 +37,7 @@ public class SpecificationInformation extends JFrame {
 	{
 		DeviceDao dd = new DeviceDao();
 		List<Device> devices = dd.getAll();
+		ComponentDao cd = new ComponentDao();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 646, 558);
@@ -46,41 +47,39 @@ public class SpecificationInformation extends JFrame {
 		contentPane.setLayout(null);
 		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
 		
-
-		JComboBox<String> comboBox = new JComboBox<String>();
-		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		comboBox.setBounds(40, 121, 504, 34);
-		contentPane.add(comboBox);
-		for(Device device : devices) 
-		{
-			comboBox.addItem(device.getName());
-		}
-		
 		JLabel lblNewLabel = new JLabel("Специфікації приладів");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		lblNewLabel.setBounds(46, 25, 559, 59);
 		contentPane.add(lblNewLabel);
 		
+
+		JComboBox<String> DeviceComboBox = new JComboBox<String>();
+		DeviceComboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		DeviceComboBox.setBounds(40, 121, 504, 34);
+		contentPane.add(DeviceComboBox);
+		for(Device device : devices) 
+		{
+			DeviceComboBox.addItem(device.getName());
+		}
 		
 		
-		JComboBox<String> comboBox_1 = new JComboBox<String>();
-		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		comboBox_1.setBounds(40, 324, 504, 34);
-		contentPane.add(comboBox_1);
+		
+		JComboBox<String> ComponentInfoComboBox = new JComboBox<String>();
+		ComponentInfoComboBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		ComponentInfoComboBox.setBounds(40, 324, 504, 34);
+		contentPane.add(ComponentInfoComboBox);
 		
 		
 						
-		JButton button = new JButton("Вибрати");
-		button.addActionListener(new ActionListener() 
+		JButton SelectButton = new JButton("Вибрати");
+		SelectButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				comboBox_1.removeAllItems();
-				ComponentDao cd = new ComponentDao();
-				DeviceDao dd = new DeviceDao();
+				ComponentInfoComboBox.removeAllItems();	
 				List<Component> components = null;
 
-				name_to_choose = String.valueOf(comboBox.getSelectedItem());
+				name_to_choose = String.valueOf(DeviceComboBox.getSelectedItem());
 				for(Device device : devices)
 				{
 					if(device.getName().equals(name_to_choose))
@@ -89,7 +88,7 @@ public class SpecificationInformation extends JFrame {
 					}
 				}
 				try {
-					components = cd.getAllComponentsInDevice(id_to_choose);
+					components = dd.getAllComponentsInDevice(id_to_choose);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -108,15 +107,15 @@ public class SpecificationInformation extends JFrame {
 						e.printStackTrace();
 					}
 					info[i] = "Назва: " + comp.getName() + "    Тип: " + comp.getType() + "    Кількість:" + c_d.getNumber();
-					comboBox_1.addItem(info[i]);
+					ComponentInfoComboBox.addItem(info[i]);
 					i++;
 				}
 				
 			}
 		});
-		button.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		button.setBounds(331, 197, 119, 25);
-		contentPane.add(button);
+		SelectButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		SelectButton.setBounds(331, 197, 119, 25);
+		contentPane.add(SelectButton);
 		
 
 		JButton btnBack = new JButton("BACK");

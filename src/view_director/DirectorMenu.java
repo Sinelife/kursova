@@ -58,7 +58,12 @@ public class DirectorMenu extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				DirectorMenu.this.setVisible(false);
-				new ConstructDepartmentDirectorMenu(DirectorMenu.this).setVisible(true); 
+				try {
+					new ConstructDepartmentDirectorMenu(DirectorMenu.this).setVisible(true);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
 			}
 		});
 		ConstructDepartmentButton.setForeground(Color.BLACK);

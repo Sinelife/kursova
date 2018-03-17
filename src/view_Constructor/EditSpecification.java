@@ -15,7 +15,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import dao.ComponentDao;
 import dao.DeviceDao;
 import domain.Component;
 import domain.ComponentDevice;
@@ -36,7 +35,6 @@ public class EditSpecification extends JFrame {
 	private List<Component> components_for_edit = null;
 	private DeviceDao dd = null;
 	private List<Device> devices = null;
-	private ComponentDao cd = null;
 	JComboBox<String> DeleteComponentComboBox = new JComboBox<String>();
 	JComboBox<String> AddComponentComboBox = new JComboBox<String>();
 	JComboBox<String> EditComponentComboBox = new JComboBox<String>();
@@ -49,7 +47,6 @@ public class EditSpecification extends JFrame {
 	{
 		dd = new DeviceDao();
 		devices = dd.getAll();
-		cd = new ComponentDao();
 		
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -103,7 +100,7 @@ public class EditSpecification extends JFrame {
 				}
 				
 				try {
-					components_for_delete = cd.getAllComponentsInDevice(id_to_choose);
+					components_for_delete = dd.getAllComponentsInDevice(id_to_choose);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -115,7 +112,7 @@ public class EditSpecification extends JFrame {
 				}
 				
 				try {
-					components_for_add = cd.getAllComponentsNotInDevice(id_to_choose);
+					components_for_add = dd.getAllComponentsNotInDevice(id_to_choose);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -127,7 +124,7 @@ public class EditSpecification extends JFrame {
 				}
 				
 				try {
-					components_for_edit = cd.getAllComponentsInDevice(id_to_choose);
+					components_for_edit = dd.getAllComponentsInDevice(id_to_choose);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

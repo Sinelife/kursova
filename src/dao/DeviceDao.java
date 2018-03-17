@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import domain.Component;
 import domain.ComponentDevice;
 import domain.Device;
 import main.Main;
@@ -118,10 +119,58 @@ public class DeviceDao
     }
     
     
+    public List<Component> getAllComponentsInDevice(int device_id) throws SQLException 
+    {
+        String sql = "SELECT * FROM component WHERE component_id in "
+        		+ "(SELECT component_id FROM component_device WHERE device_id = " + device_id + ")";
+        List<Component> list = new ArrayList<Component>();
+        try (PreparedStatement stm = Main.conn.prepareStatement(sql)) 
+        {
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) 
+            {
+                Component c = new Component();
+				c.setId(rs.getInt("component_id"));
+                c.setType(rs.getString("type"));
+                c.setName(rs.getString("name"));
+                c.setTechnicalInfo(rs.getString("technical_info"));
+                c.setPrice(rs.getInt("price"));
+                list.add(c);
+            }
+        }
+        return list;
+    }
+    
+    
+    public List<Component> getAllComponentsNotInDevice(int device_id) throws SQLException 
+    {
+        String sql = "SELECT * FROM component WHERE component_id not in "
+        		+ "(SELECT component_id FROM component_device WHERE device_id = " + device_id + ")";
+        List<Component> list = new ArrayList<Component>();
+        try (PreparedStatement stm = Main.conn.prepareStatement(sql)) 
+        {
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) 
+            {
+                Component c = new Component();
+				c.setId(rs.getInt("component_id"));
+                c.setType(rs.getString("type"));
+                c.setName(rs.getString("name"));
+                c.setTechnicalInfo(rs.getString("technical_info"));
+                c.setPrice(rs.getInt("price"));
+                list.add(c);
+            }
+        }
+        return list;
+    }
+    
+    
+    
+    
     public List<Device> getAllDeviceWhichHasComponent(int component_id) throws SQLException 
     {
         String sql = "SELECT * FROM device WHERE device_id in "
-        		+ "(SELECT device_id FROM component_device WHERE component_id = " + component_id;
+        		+ "(SELECT device_id FROM component_device WHERE component_id = " + component_id + ")";
         List<Device> list = new ArrayList<Device>();
         try (PreparedStatement stm = Main.conn.prepareStatement(sql)) 
         {
@@ -141,6 +190,13 @@ public class DeviceDao
         }
         return list;
     }
+    
+    
+    
+    
+    
+    
+    
     
     
     public ComponentDevice readComponentInDevice(int device_id, int component_id) throws SQLException 
@@ -211,6 +267,76 @@ public class DeviceDao
     
     
     
+    
+    
+    public int getAllComponentNumberInDevice(int device_id) throws SQLException
+    {
+    	String sql = "select sum(component_device.number) "
+    			+ "from component,component_device " + 
+    			"where component.component_id = component_device.component_id " + 
+    			"and component_device.device_id = " + device_id;
+    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+    	ResultSet rs = stm.executeQuery(sql);
+    	int result = 0;
+ 	  	while(rs.next())
+ 	  	{
+ 	  		result = rs.getInt("sum(component_device.number)");
+ 	  	}
+        return result;
+    }
+    
+    
+    public int getAllComponentCostInDevice(int device_id) throws SQLException
+    {
+    	String sql = "select sum(component_device.number * component.price) " +
+    				"from component,component_device " + 
+    				"where component.component_id = component_device.component_id " + 
+    				"and component_device.device_id = " + device_id;
+    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+    	ResultSet rs = stm.executeQuery(sql);
+    	int result = 0;
+ 	  	while(rs.next())
+ 	  	{
+ 	  		result = rs.getInt("sum(component_device.number * component.price)");
+ 	  	}
+        return result;
+    }
+    
+    
+    public int getComponentNumberInDevice(int device_id, int component_id) throws SQLException
+    {
+    	String sql = "select sum(component_device.number) "
+    			+ "from component,component_device " + 
+    			"where component.component_id = component_device.component_id " + 
+    			"and component_device.device_id = " + device_id +
+    			" and component.component_id = " + component_id;
+    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+    	ResultSet rs = stm.executeQuery(sql);
+    	int result = 0;
+ 	  	while(rs.next())
+ 	  	{
+ 	  		result = rs.getInt("sum(component_device.number)");
+ 	  	}
+        return result;
+    }
+    
+    
+    public int getComponentCostInDevice(int device_id, int component_id) throws SQLException
+    {
+    	String sql = "select sum(component_device.number * component.price) " +
+    				"from component,component_device " + 
+    				"where component.component_id = component_device.component_id " + 
+    				"and component_device.device_id = " + device_id +
+    				" and component.component_id = " + component_id;
+    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+    	ResultSet rs = stm.executeQuery(sql);
+    	int result = 0;
+ 	  	while(rs.next())
+ 	  	{
+ 	  		result = rs.getInt("sum(component_device.number * component.price)");
+ 	  	}
+        return result;
+    }
 }
 
 

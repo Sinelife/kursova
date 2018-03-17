@@ -43,7 +43,7 @@ public class DeviceWhichHasComponent extends JFrame {
 	{
 		ComponentDao cd = new ComponentDao();
 		List<Component> components = cd.getAll();
-		
+		DeviceDao dd = new DeviceDao();
 
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -92,7 +92,7 @@ public class DeviceWhichHasComponent extends JFrame {
 				}
 
 				try {
-					devices = cd.getAllDeviceWhichHasComponent(id_to_look);
+					devices = dd.getAllDeviceWhichHasComponent(id_to_look);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

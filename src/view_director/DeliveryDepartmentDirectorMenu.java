@@ -51,7 +51,7 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 	private static int paidComponentNumber;
 	private static int shippedComponentNumber;
 	
-	private static List<Delivery> deliveries;
+	private static List<Delivery> deliveriesInProvider;
 	private static List<Provider> providers;
 	
 	
@@ -112,12 +112,12 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 				
 				DeliveryInProviderComboBox.removeAllItems();
 				try {
-					deliveries = dd.getAllFromProvider(provider_id_to_look);
+					deliveriesInProvider = dd.getAllFromProvider(provider_id_to_look);
 				} catch (SQLException e2) {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				}
-				for(Delivery delivery : deliveries) 
+				for(Delivery delivery : deliveriesInProvider) 
 				{
 					DeliveryInProviderComboBox.addItem(delivery.getDeliveryName());
 				}
@@ -243,12 +243,12 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 			{
 				DeliveryInProviderComboBox.removeAllItems();
 				try {
-					deliveries = dd.getAll();
+					deliveriesInProvider = dd.getAll();
 				} catch (SQLException e2) {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				}
-				for(Delivery delivery : deliveries) 
+				for(Delivery delivery : deliveriesInProvider) 
 				{
 					DeliveryInProviderComboBox.addItem(delivery.getDeliveryName());
 				}
@@ -427,7 +427,7 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				delivery_name_to_look = String.valueOf(DeliveryInProviderComboBox.getSelectedItem());
-				for(Delivery delivery : deliveries) 
+				for(Delivery delivery : deliveriesInProvider) 
 				{
 					delivery_id_to_look = delivery.getId();
 					if(delivery.getDeliveryName().equals(delivery_name_to_look))

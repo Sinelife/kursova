@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 import dao.ComponentDao;
 import domain.Component;
 import view.AuthorisationMenu;
+import view_director.ConstructDepartmentDirectorMenu;
 
 import java.awt.Color;
 
@@ -35,8 +36,19 @@ public class ComponentInformation extends JFrame {
 	public ComponentInformation(JFrame parent) throws SQLException 
 	{
  	  	ComponentDao cd = new ComponentDao();
- 	  	Component c = cd.readComponent(InfoComponent.id_to_look);
+ 	  	Component c = new Component();
 		
+ 	  	
+		if(AuthorisationMenu.user_role.equals("director"))
+		{
+			c = cd.readComponent(ConstructDepartmentDirectorMenu.component_id_to_look);		
+		}
+		else
+		{
+			c = cd.readComponent(InfoComponent.id_to_look);
+		}
+ 	  	
+ 	  	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 646, 558);
 		contentPane = new JPanel();
