@@ -82,8 +82,8 @@ public class ConstructorMenu extends JFrame {
 		ComponentMenuButton.setBounds(84, 246, 287, 43);
 		contentPane.add(ComponentMenuButton);
 		
-		JButton button_2 = new JButton("3)«м≥нити пароль та лог≥н");
-		button_2.addActionListener(new ActionListener() 
+		JButton ChangeLoginPasswordButton = new JButton("3)«м≥нити пароль та лог≥н");
+		ChangeLoginPasswordButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
@@ -96,11 +96,11 @@ public class ConstructorMenu extends JFrame {
 				} 
 			}
 		});
-		button_2.setForeground(Color.BLACK);
-		button_2.setHorizontalAlignment(SwingConstants.LEFT);
-		button_2.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		button_2.setBounds(84, 338, 287, 43);
-		contentPane.add(button_2);
+		ChangeLoginPasswordButton.setForeground(Color.BLACK);
+		ChangeLoginPasswordButton.setHorizontalAlignment(SwingConstants.LEFT);
+		ChangeLoginPasswordButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		ChangeLoginPasswordButton.setBounds(84, 338, 287, 43);
+		contentPane.add(ChangeLoginPasswordButton);
 		
 		
 		

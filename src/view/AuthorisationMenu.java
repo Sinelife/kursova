@@ -8,6 +8,7 @@ import dao.UserDao;
 import domain.User;
 import view_Constructor.ConstructorMenu;
 import view_admin.AdminMenu;
+import view_director.DirectorMenu;
 import view_workerbuycomponent.WorkerDeliveryDepartmentMenu;
 import view_workerselldevice.WorkerSalesDepartmentMenu;
 
@@ -143,6 +144,18 @@ public class AuthorisationMenu extends JFrame
 								e.printStackTrace();
 							} 
 						}
+						if(user.getRole().equals("director"))
+						{
+							loginIn = true;
+							user_id_to_choose = user.getId();
+							AuthorisationMenu.this.setVisible(false);
+							try {
+								new DirectorMenu().setVisible(true);
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} 
+						}
 					}
 				}
 				if(loginIn == false)
@@ -175,6 +188,10 @@ public class AuthorisationMenu extends JFrame
 		if(role.equals("worker_of_sales_department"))
 		{
 			frame.setBackground(new Color(230, 255, 204));
+		}
+		if(role.equals("director"))
+		{
+			frame.setBackground(new Color(255, 230, 230));
 		}
 		return frame;
 	}

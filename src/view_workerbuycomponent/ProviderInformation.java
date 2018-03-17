@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 import dao.ProviderDao;
 import domain.Provider;
 import view.AuthorisationMenu;
+import view_director.ProviderReport;
 
 import java.awt.Color;
 
@@ -37,8 +38,18 @@ public class ProviderInformation extends JFrame
 	public ProviderInformation(JFrame parent) throws SQLException 
 	{
 		ProviderDao pd = new ProviderDao();
-		Provider p = pd.readProvider(InfoProvider.provider_id_to_look);
+		Provider p = new Provider();
 		
+		
+		if(AuthorisationMenu.user_role.equals("director"))
+		{
+			p = pd.readProvider(ProviderReport.provider_id_to_look);		
+		}
+		else
+		{
+			p = pd.readProvider(InfoProvider.provider_id_to_look);
+		}
+
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 646, 558);
