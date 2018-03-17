@@ -169,6 +169,46 @@ public class ProviderDao
     }
     
     
+    
+    public int getOrderNumber() throws SQLException
+    {
+    	String sql = "SELECT COUNT(*) FROM delivery";
+    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+    	ResultSet rs = stm.executeQuery(sql);
+    	int result = 0;
+ 	  	while(rs.next())
+ 	  	{
+ 	  		result = rs.getInt("COUNT(*)");
+ 	  	}
+        return result;
+    }
+    
+    public int getPaidOrderNumber() throws SQLException
+    {
+    	String sql = "SELECT COUNT(*) FROM delivery WHERE paid = 1";
+    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+    	ResultSet rs = stm.executeQuery(sql);
+    	int result = 0;
+ 	  	while(rs.next())
+ 	  	{
+ 	  		result = rs.getInt("COUNT(*)");
+ 	  	}
+        return result;
+    }
+    
+    public int getShippedOrderNumber() throws SQLException
+    {
+    	String sql = "SELECT COUNT(*) FROM delivery WHERE shipped = 1";
+    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+    	ResultSet rs = stm.executeQuery(sql);
+    	int result = 0;
+ 	  	while(rs.next())
+ 	  	{
+ 	  		result = rs.getInt("COUNT(*)");
+ 	  	}
+        return result;
+    }
+    
     public int getOrderNumberOfProvider(int provider_id) throws SQLException
     {
     	String sql = "SELECT COUNT(*) FROM delivery WHERE provider_id = " + provider_id;
@@ -181,7 +221,6 @@ public class ProviderDao
  	  	}
         return result;
     }
-    
     
     public int getPaidOrderNumberOfProvider(int provider_id) throws SQLException
     {
@@ -196,7 +235,74 @@ public class ProviderDao
         return result;
     }
     
+    public int getShippedOrderNumberOfProvider(int provider_id) throws SQLException
+    {
+    	String sql = "SELECT COUNT(*) FROM delivery WHERE shipped = 1 and provider_id = " + provider_id;
+    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+    	ResultSet rs = stm.executeQuery(sql);
+    	int result = 0;
+ 	  	while(rs.next())
+ 	  	{
+ 	  		result = rs.getInt("COUNT(*)");
+ 	  	}
+        return result;
+    }
     
+    
+    
+    
+    
+    
+    public int getAllMoney() throws SQLException
+    {
+    	String sql = "select sum(price * delivery_component.number) " + 
+    				"from component,delivery_component,delivery,provider " + 
+    				"where component.component_id = delivery_component.component_id " + 
+    				"and delivery_component.delivery_id = delivery.delivery_id " + 
+    				"and delivery.provider_id = provider.provider_id";
+    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+    	ResultSet rs = stm.executeQuery(sql);
+    	int result = 0;
+ 	  	while(rs.next())
+ 	  	{
+ 	  		result = rs.getInt("sum(price * delivery_component.number)");
+ 	  	}
+        return result;
+    }
+      
+    public int getPaidMoney() throws SQLException
+    {
+    	String sql = "select sum(price * delivery_component.number) " + 
+    				"from component,delivery_component,delivery,provider " + 
+    				"where component.component_id = delivery_component.component_id " + 
+    				"and delivery_component.delivery_id = delivery.delivery_id and delivery.paid = 1 " + 
+    				"and delivery.provider_id = provider.provider_id";
+    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+    	ResultSet rs = stm.executeQuery(sql);
+    	int result = 0;
+ 	  	while(rs.next())
+ 	  	{
+ 	  		result = rs.getInt("sum(price * delivery_component.number)");
+ 	  	}
+        return result;
+    }
+    
+    public int getShippedMoney() throws SQLException
+    {
+    	String sql = "select sum(price * delivery_component.number) " + 
+    				"from component,delivery_component,delivery,provider " + 
+    				"where component.component_id = delivery_component.component_id " + 
+    				"and delivery_component.delivery_id = delivery.delivery_id and delivery.shipped = 1 " + 
+    				"and delivery.provider_id = provider.provider_id";
+    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+    	ResultSet rs = stm.executeQuery(sql);
+    	int result = 0;
+ 	  	while(rs.next())
+ 	  	{
+ 	  		result = rs.getInt("sum(price * delivery_component.number)");
+ 	  	}
+        return result;
+    }
     
     public int getAllMoneyOfProvider(int provider_id) throws SQLException
     {
@@ -215,8 +321,7 @@ public class ProviderDao
  	  	}
         return result;
     }
-    
-    
+      
     public int getPaidMoneyOfProvider(int provider_id) throws SQLException
     {
     	String sql = "select sum(price * delivery_component.number) " + 
@@ -235,8 +340,75 @@ public class ProviderDao
         return result;
     }
     
+    public int getShippedMoneyOfProvider(int provider_id) throws SQLException
+    {
+    	String sql = "select sum(price * delivery_component.number) " + 
+    				"from component,delivery_component,delivery,provider " + 
+    				"where component.component_id = delivery_component.component_id " + 
+    				"and delivery_component.delivery_id = delivery.delivery_id and delivery.shipped = 1 " + 
+    				"and delivery.provider_id = provider.provider_id " + 
+    				"and provider.provider_id = " + provider_id;
+    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+    	ResultSet rs = stm.executeQuery(sql);
+    	int result = 0;
+ 	  	while(rs.next())
+ 	  	{
+ 	  		result = rs.getInt("sum(price * delivery_component.number)");
+ 	  	}
+        return result;
+    }
     
     
+    
+    
+    
+    public int getComponentNumber() throws SQLException
+    {
+    	String sql = "select sum(delivery_component.number) " + 
+    				"from delivery_component,delivery,provider " + 
+    				"where delivery_component.delivery_id = delivery.delivery_id " + 
+    				"and delivery.provider_id = provider.provider_id";
+    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+    	ResultSet rs = stm.executeQuery(sql);
+    	int result = 0;
+ 	  	while(rs.next())
+ 	  	{
+ 	  		result = rs.getInt("sum(delivery_component.number)");
+ 	  	}
+        return result;
+    }
+    
+    public int getPaidComponentNumber() throws SQLException
+    {
+    	String sql = "select sum(delivery_component.number) " + 
+    				"from delivery_component,delivery,provider " + 
+    				"where delivery_component.delivery_id = delivery.delivery_id " + 
+    				"and delivery.provider_id = provider.provider_id and delivery.paid = 1";
+    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+    	ResultSet rs = stm.executeQuery(sql);
+    	int result = 0;
+ 	  	while(rs.next())
+ 	  	{
+ 	  		result = rs.getInt("sum(delivery_component.number)");
+ 	  	}
+        return result;
+    }
+    
+    public int getShippedComponentNumber() throws SQLException
+    {
+    	String sql = "select sum(delivery_component.number) " + 
+    				"from delivery_component,delivery,provider " + 
+    				"where delivery_component.delivery_id = delivery.delivery_id " + 
+    				"and delivery.provider_id = provider.provider_id and delivery.shipped = 1";
+    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+    	ResultSet rs = stm.executeQuery(sql);
+    	int result = 0;
+ 	  	while(rs.next())
+ 	  	{
+ 	  		result = rs.getInt("sum(delivery_component.number)");
+ 	  	}
+        return result;
+    }
     
     public int getComponentNumberOfProvider(int provider_id) throws SQLException
     {
@@ -255,13 +427,29 @@ public class ProviderDao
         return result;
     }
     
-    
     public int getPaidComponentNumberOfProvider(int provider_id) throws SQLException
     {
     	String sql = "select sum(delivery_component.number) " + 
     				"from delivery_component,delivery,provider " + 
     				"where delivery_component.delivery_id = delivery.delivery_id " + 
     				"and delivery.provider_id = provider.provider_id and delivery.paid = 1 " + 
+    				"and provider.provider_id = " + provider_id;
+    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+    	ResultSet rs = stm.executeQuery(sql);
+    	int result = 0;
+ 	  	while(rs.next())
+ 	  	{
+ 	  		result = rs.getInt("sum(delivery_component.number)");
+ 	  	}
+        return result;
+    }
+    
+    public int getShippedComponentNumberOfProvider(int provider_id) throws SQLException
+    {
+    	String sql = "select sum(delivery_component.number) " + 
+    				"from delivery_component,delivery,provider " + 
+    				"where delivery_component.delivery_id = delivery.delivery_id " + 
+    				"and delivery.provider_id = provider.provider_id and delivery.shipped = 1 " + 
     				"and provider.provider_id = " + provider_id;
     	PreparedStatement stm = Main.conn.prepareStatement(sql);
     	ResultSet rs = stm.executeQuery(sql);

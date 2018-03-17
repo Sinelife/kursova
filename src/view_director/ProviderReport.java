@@ -96,6 +96,8 @@ public class ProviderReport extends JFrame {
 						break;
 					}
 				}
+				
+				
 				try {
 					orderNumber = pd.getOrderNumberOfProvider(provider_id_to_look);
 				} catch (SQLException e1) {
@@ -111,6 +113,15 @@ public class ProviderReport extends JFrame {
 					e1.printStackTrace();
 				}
 				PaidOrderNumberField.setText(String.valueOf(paidOrderNumber));
+				
+				try {
+					shippedOrderNumber = pd.getShippedOrderNumberOfProvider(provider_id_to_look);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				ShippedOrderNumberField.setText(String.valueOf(shippedOrderNumber));
+				
 				
 				
 				try {
@@ -129,6 +140,15 @@ public class ProviderReport extends JFrame {
 				}
 				PaidMoneyField.setText(String.valueOf(paidMoney));
 				
+				try {
+					shippedMoney = pd.getShippedMoneyOfProvider(provider_id_to_look);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				ShippedMoneyField.setText(String.valueOf(shippedMoney));
+				
+				
 				
 				try {
 					componentNumber = pd.getComponentNumberOfProvider(provider_id_to_look);
@@ -145,42 +165,138 @@ public class ProviderReport extends JFrame {
 					e1.printStackTrace();
 				}
 				PaidComponentNumberField.setText(String.valueOf(paidComponentNumber));
+				
+				try {
+					shippedComponentNumber = pd.getShippedComponentNumberOfProvider(provider_id_to_look);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				ShippedComponentNumberField.setText(String.valueOf(shippedComponentNumber));
 			}
 		});
-		
-				
-				
-				
-				
-				JButton InfoButton = new JButton("Інформація");
-				InfoButton.addActionListener(new ActionListener() 
-				{
-					public void actionPerformed(ActionEvent e) 
-					{
-						provider_name_to_look = String.valueOf(ProviderComboBox.getSelectedItem());
-						for(Provider provider : providers) 
-						{
-							provider_id_to_look = provider.getId();
-							if(provider.getName().equals(provider_name_to_look))
-							{
-								break;
-							}
-						}
-						ProviderReport.this.setVisible(false);
-						try {
-							new ProviderInformation(ProviderReport.this).setVisible(true);
-						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						} 
-					}
-				});
-				InfoButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-				InfoButton.setBounds(491, 51, 122, 34);
-				contentPane.add(InfoButton);
 		SelectButton.setBounds(38, 109, 97, 25);
 		contentPane.add(SelectButton);
+				
+				
+				
+				
+		JButton InfoButton = new JButton("Інформація");
+		InfoButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				provider_name_to_look = String.valueOf(ProviderComboBox.getSelectedItem());
+				for (Provider provider : providers) {
+					provider_id_to_look = provider.getId();
+					if (provider.getName().equals(provider_name_to_look)) 
+					{
+						break;
+					}
+				}
+				ProviderReport.this.setVisible(false);
+				try {
+					new ProviderInformation(ProviderReport.this).setVisible(true);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		InfoButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		InfoButton.setBounds(491, 51, 122, 34);
+		contentPane.add(InfoButton);
 
+		
+		
+		
+		JButton SelectAllButton = new JButton("Вибрати всіх");
+		SelectAllButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				try {
+					orderNumber = pd.getOrderNumber();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				OrderNumberField.setText(String.valueOf(orderNumber));
+				
+				try {
+					paidOrderNumber = pd.getPaidOrderNumber();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				PaidOrderNumberField.setText(String.valueOf(paidOrderNumber));
+				
+				try {
+					shippedOrderNumber = pd.getShippedOrderNumber();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				ShippedOrderNumberField.setText(String.valueOf(shippedOrderNumber));
+				
+				
+				
+				try {
+					allMoney = pd.getAllMoney();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				AllMoneyField.setText(String.valueOf(allMoney));
+				
+				try {
+					paidMoney = pd.getPaidMoney();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				PaidMoneyField.setText(String.valueOf(paidMoney));
+				
+				try {
+					shippedMoney = pd.getShippedMoney();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				ShippedMoneyField.setText(String.valueOf(shippedMoney));
+				
+				
+				
+				try {
+					componentNumber = pd.getComponentNumber();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				ComponentNumberField.setText(String.valueOf(componentNumber));
+				
+				try {
+					paidComponentNumber = pd.getPaidComponentNumber();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				PaidComponentNumberField.setText(String.valueOf(paidComponentNumber));
+				
+				try {
+					shippedComponentNumber = pd.getShippedComponentNumber();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				ShippedComponentNumberField.setText(String.valueOf(shippedComponentNumber));
+			}
+		});
+		SelectAllButton.setBounds(171, 109, 127, 25);
+		contentPane.add(SelectAllButton);
+
+		
+		
 		
 		JLabel OrderNumberLabel = new JLabel("Кількість замовлень");
 		OrderNumberLabel.setBounds(38, 156, 198, 25);
