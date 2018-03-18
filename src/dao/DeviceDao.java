@@ -301,22 +301,7 @@ public class DeviceDao
         return result;
     }
     
-    
-    public int getAllComponentCostInDevice(int device_id) throws SQLException
-    {
-    	String sql = "select sum(component_device.number * component.price) " +
-    				"from component,component_device " + 
-    				"where component.component_id = component_device.component_id " + 
-    				"and component_device.device_id = " + device_id;
-    	PreparedStatement stm = Main.conn.prepareStatement(sql);
-    	ResultSet rs = stm.executeQuery(sql);
-    	int result = 0;
- 	  	while(rs.next())
- 	  	{
- 	  		result = rs.getInt("sum(component_device.number * component.price)");
- 	  	}
-        return result;
-    }
+
     
     
     public int getComponentNumberInDevice(int device_id, int component_id) throws SQLException

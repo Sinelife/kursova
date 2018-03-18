@@ -157,6 +157,10 @@ public class OrderDao
                 d.setBorderRegulationTime(rs.getString("border_regulation_time"));
                 d.setRating(rs.getInt("rating"));
                 d.setDate(rs.getDate("date"));
+                d.setWorkPrice(rs.getInt("work_price"));
+                d.setComponentsPrice(rs.getInt("components_price"));
+                d.setProfitPrice(rs.getInt("profit_price"));
+                d.setSumPrice(rs.getInt("sum_price"));
                 list.add(d);
 			}
 		}
@@ -179,6 +183,10 @@ public class OrderDao
                 d.setBorderRegulationTime(rs.getString("border_regulation_time"));
                 d.setRating(rs.getInt("rating"));
                 d.setDate(rs.getDate("date"));
+                d.setWorkPrice(rs.getInt("work_price"));
+                d.setComponentsPrice(rs.getInt("components_price"));
+                d.setProfitPrice(rs.getInt("profit_price"));
+                d.setSumPrice(rs.getInt("sum_price"));
                 list.add(d);
 			}
 		}

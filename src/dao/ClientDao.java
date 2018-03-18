@@ -130,6 +130,10 @@ public class ClientDao
 	                d.setBorderRegulationTime(rs.getString("border_regulation_time"));
 	                d.setRating(rs.getInt("rating"));
 	                d.setDate(rs.getDate("date"));
+	                d.setWorkPrice(rs.getInt("work_price"));
+	                d.setComponentsPrice(rs.getInt("components_price"));
+	                d.setProfitPrice(rs.getInt("profit_price"));
+	                d.setSumPrice(rs.getInt("sum_price"));
 	                list.add(d);
 	            }
 	        }
@@ -249,7 +253,7 @@ public class ClientDao
 	    
 	    public int getAllMoney() throws SQLException
 	    {
-	    	String sql = "select sum(price * order_device.number) " + 
+	    	String sql = "select sum(device.sum_price * order_device.number) " + 
 	    				"from device,order_device,orders,client " + 
 	    				"where device.device_id = order_device.device_id " + 
 	    				"and order_device.order_id = orders.order_id " + 
@@ -259,14 +263,14 @@ public class ClientDao
 	    	int result = 0;
 	 	  	while(rs.next())
 	 	  	{
-	 	  		result = rs.getInt("sum(price * order_device.number)");
+	 	  		result = rs.getInt("sum(device.sum_price * order_device.number)");
 	 	  	}
 	        return result;
 	    }
 	      
 	    public int getPaidMoney() throws SQLException
 	    {
-	    	String sql = "select sum(price * order_device.number) " + 
+	    	String sql = "select sum(device.sum_price * order_device.number) " + 
 	    				"from device,order_device,orders,client " + 
 	    				"where device.device_id = order_device.device_id " + 
 	    				"and order_device.order_id = orders.order_id and orders.paid = 1 " + 
@@ -276,14 +280,14 @@ public class ClientDao
 	    	int result = 0;
 	 	  	while(rs.next())
 	 	  	{
-	 	  		result = rs.getInt("sum(price * order_device.number)");
+	 	  		result = rs.getInt("sum(device.sum_price * order_device.number)");
 	 	  	}
 	        return result;
 	    }
 	    
 	    public int getShippedMoney() throws SQLException
 	    {
-	    	String sql = "select sum(price * order_device.number) " + 
+	    	String sql = "select sum(device.sum_price * order_device.number) " + 
 	    				"from device,order_device,orders,client " + 
 	    				"where device.device_id = order_device.device_id " + 
 	    				"and order_device.order_id = orders.order_id and orders.shipped = 1 " + 
@@ -293,14 +297,14 @@ public class ClientDao
 	    	int result = 0;
 	 	  	while(rs.next())
 	 	  	{
-	 	  		result = rs.getInt("sum(price * order_device.number)");
+	 	  		result = rs.getInt("sum(device.sum_price * order_device.number)");
 	 	  	}
 	        return result;
 	    }
 	    
 	    public int getAllMoneyOfClient(int client_id) throws SQLException
 	    {
-	    	String sql = "select sum(price * order_device.number) " + 
+	    	String sql = "select sum(device.sum_price * order_device.number) " + 
 	    				"from device,order_device,orders,client " + 
 	    				"where device.device_id = order_device.device_id " + 
 	    				"and order_device.order_id = orders.order_id " + 
@@ -311,14 +315,14 @@ public class ClientDao
 	    	int result = 0;
 	 	  	while(rs.next())
 	 	  	{
-	 	  		result = rs.getInt("sum(price * order_device.number)");
+	 	  		result = rs.getInt("sum(device.sum_price * order_device.number)");
 	 	  	}
 	        return result;
 	    }
 	      
 	    public int getPaidMoneyOfClient(int client_id) throws SQLException
 	    {
-	    	String sql = "select sum(price * order_device.number) " + 
+	    	String sql = "select sum(device.sum_price * order_device.number) " + 
 	    				"from device,order_device,orders,client " + 
 	    				"where device.device_id = order_device.device_id " + 
 	    				"and order_device.order_id = orders.order_id and orders.paid = 1 " + 
@@ -329,14 +333,14 @@ public class ClientDao
 	    	int result = 0;
 	 	  	while(rs.next())
 	 	  	{
-	 	  		result = rs.getInt("sum(price * order_device.number)");
+	 	  		result = rs.getInt("sum(device.sum_price * order_device.number)");
 	 	  	}
 	        return result;
 	    }
 	    
 	    public int getShippedMoneyOfClient(int client_id) throws SQLException
 	    {
-	    	String sql = "select sum(price * order_device.number) " + 
+	    	String sql = "select sum(device.sum_price * order_device.number) " + 
 	    				"from device,order_device,orders,client " + 
 	    				"where device.device_id = order_device.device_id " + 
 	    				"and order_device.order_id = orders.order_id and orders.shipped = 1 " + 
@@ -347,7 +351,7 @@ public class ClientDao
 	    	int result = 0;
 	 	  	while(rs.next())
 	 	  	{
-	 	  		result = rs.getInt("sum(price * order_device.number)");
+	 	  		result = rs.getInt("sum(device.sum_price * order_device.number)");
 	 	  	}
 	        return result;
 	    }
