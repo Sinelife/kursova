@@ -1,13 +1,18 @@
 package main;
 
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
+import dao.DeviceDao;
 import domain.Client;
 import domain.Component;
+import domain.ComponentDevice;
 import domain.Delivery;
 import domain.Device;
 import domain.Order;
@@ -158,4 +163,139 @@ public class MethodsForFrames
 		}
 		return id;
 	}
+	
+	
+	
+	
+	//МЕТОДИ ДЛЯ РОБОТИ З СПЕЦИФІКАЦІЄЮ ПРИЛАДУ
+	
+	//Метод для зміни вартості компонентів приладу через додавання нових приладів
+	
+	public static void changeComponentsCostBecauseAdd(int device_id, int component_id)
+	{
+		DeviceDao device_dao = new DeviceDao();
+		Device d = null;
+		try {
+			d = device_dao.readDevice(device_id);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		int old_components_price = d.getComponentsPrice();
+		int change_components_price = 0;
+		try {
+			change_components_price = device_dao.getComponentCostInDevice(device_id, component_id);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		int new_components_price = old_components_price + change_components_price;
+		d.setComponentsPrice(new_components_price);
+		d.setProfitPrice((d.getWorkPrice() + d.getComponentsPrice())/2);
+		d.setSumPrice(d.getWorkPrice() + d.getComponentsPrice() + d.getProfitPrice());
+		try {
+			device_dao.updateDevice(d);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
+	
+	//Метод для зміни вартості компонентів приладу через видалення приладів
+	
+	public static void changeComponentsCostBecauseDelete(int device_id, int component_id)
+	{
+		DeviceDao device_dao = new DeviceDao();
+		Device d = null;
+		try {
+			d = device_dao.readDevice(device_id);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		int old_components_price = d.getComponentsPrice();
+		int change_components_price = 0;
+		try {
+			change_components_price = device_dao.getComponentCostInDevice(device_id, component_id);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		int new_components_price = old_components_price - change_components_price;
+		d.setComponentsPrice(new_components_price);
+		d.setProfitPrice((d.getWorkPrice() + d.getComponentsPrice())/2);
+		d.setSumPrice(d.getWorkPrice() + d.getComponentsPrice() + d.getProfitPrice());
+		
+		try {
+			device_dao.updateDevice(d);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
+	
+	
+	
+	
+	//Метод для додавання компонентів до приладу
+	
+	public static void addComponentsToDevice(int device_id,int component_id, JTextField NumberAddField)
+	{
+		DeviceDao device_dao = new DeviceDao();
+		ComponentDevice record = new ComponentDevice();
+		record.setDeviceId(device_id);
+		record.setComponentId(component_id);
+		record.setNumber(Integer.valueOf(NumberAddField.getText()));
+		try {
+			device_dao.addComponentToDevice(record);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		changeComponentsCostBecauseAdd(device_id, component_id);
+	}
+	
+	
+	
+	//Метод для видалення компонентів з приладу
+	
+	public static void deleteComponentsFromDevice(int device_id,int component_id)
+	{
+		DeviceDao device_dao = new DeviceDao();
+		ComponentDevice record = null;
+		try {
+			record = device_dao.readComponentInDevice(device_id, component_id);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		changeComponentsCostBecauseDelete(device_id, component_id);
+		try {
+			device_dao.deleteComponentFromDevice(record);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
+	
+	
+	//Метод для зміни кількості компонентів в приладі
+	
+	public static void updateComponentsInDevice(int device_id, int component_id, JTextField NumberEditField)
+	{
+		DeviceDao device_dao = new DeviceDao();
+		ComponentDevice record = null;
+		try {
+			record = device_dao.readComponentInDevice(device_id, component_id);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		changeComponentsCostBecauseDelete(device_id, component_id);
+		
+		record.setNumber(Integer.valueOf(NumberEditField.getText()));
+		try {
+			device_dao.updateComponentInDevice(record);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		changeComponentsCostBecauseAdd(device_id, component_id);
+		
+	}
+	
+	
+	
 }

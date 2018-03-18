@@ -26,7 +26,7 @@ public class EditDeviceFrame extends JFrame {
 	private JTextField BorderRegulationTimeField;
 	private JTextField RatingField;
 	private JTextField StartDateField;
-	private JTextField PriceField;
+	private JTextField WorkPriceField;
 	
 	
 	/**
@@ -108,12 +108,12 @@ public class EditDeviceFrame extends JFrame {
 		contentPane.add(StartDateField);
 		StartDateField.setText(String.valueOf(d.getDate()));
 		
-		PriceField = new JTextField();
-		PriceField.setText("null");
-		PriceField.setColumns(10);
-		PriceField.setBounds(209, 343, 350, 22);
-		contentPane.add(PriceField);
-		PriceField.setText(String.valueOf(d.getPrice()));
+		WorkPriceField = new JTextField();
+		WorkPriceField.setText("null");
+		WorkPriceField.setColumns(10);
+		WorkPriceField.setBounds(209, 343, 350, 22);
+		contentPane.add(WorkPriceField);
+		WorkPriceField.setText(String.valueOf(d.getWorkPrice()));
 		
 		
 		
@@ -128,7 +128,9 @@ public class EditDeviceFrame extends JFrame {
 				d.setBorderRegulationTime(BorderRegulationTimeField.getText());
 				d.setRating(Integer.valueOf(RatingField.getText()));
 				d.setDate(Date.valueOf(StartDateField.getText()));
-				d.setPrice(Integer.valueOf(PriceField.getText()));
+				d.setWorkPrice(Integer.valueOf(WorkPriceField.getText()));
+				d.setProfitPrice((d.getWorkPrice() + d.getComponentsPrice())/2);
+				d.setSumPrice(d.getWorkPrice() + d.getComponentsPrice() + d.getProfitPrice());
 				try {
 					dd.updateDevice(d);
 				} catch (SQLException e1) {

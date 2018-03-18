@@ -21,7 +21,7 @@ public class DeviceDao
     /** @throws SQLException */
     public void addDevice(Device d) throws SQLException 
     {
-		String sql = "INSERT INTO device (device_id, name, supply_voltage, border_regulation_time, rating, date, price) VALUES (?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO device (device_id, name, supply_voltage, border_regulation_time, rating, date, work_price, components_price, profit_price, sum_price) VALUES (?,?,?,?,?,?,?,?,?,?)";
  	  	PreparedStatement stm = Main.conn.prepareStatement(sql);
 		int i = -1;
 		String sql_for_id = "SELECT MAX(device_id) from device";
@@ -38,7 +38,10 @@ public class DeviceDao
     	stm.setString(4, d.getBorderRegulationTime());
     	stm.setInt(5, d.getRating());
     	stm.setDate(6, d.getDate());
-    	stm.setInt(7, d.getPrice());
+    	stm.setInt(7, d.getWorkPrice());
+    	stm.setInt(8, d.getComponentsPrice());
+    	stm.setInt(9, d.getProfitPrice());
+    	stm.setInt(10, d.getSumPrice());
     	stm.executeUpdate();
     	JOptionPane.showMessageDialog (null, "Новий прилад додано до бази данних!" );
 	}
@@ -61,7 +64,10 @@ public class DeviceDao
             d.setBorderRegulationTime(rs.getString("border_regulation_time"));
             d.setRating(rs.getInt("rating"));
             d.setDate(rs.getDate("date"));
-            d.setPrice(rs.getInt("price"));
+            d.setWorkPrice(rs.getInt("work_price"));
+            d.setComponentsPrice(rs.getInt("components_price"));
+            d.setProfitPrice(rs.getInt("profit_price"));
+            d.setSumPrice(rs.getInt("sum_price"));
         }
         return d;
 	}
@@ -71,14 +77,18 @@ public class DeviceDao
     /**@throws SQLException */
     public void updateDevice(Device d) throws SQLException 
     {
-    	String sql = "update device set name = ?, supply_voltage = ?, border_regulation_time = ?, rating = ?, date = ?, price = ? where device_id = " +  d.getId();
+    	String sql = "update device set name = ?, supply_voltage = ?, border_regulation_time = ?, rating = ?, date = ?, "
+    			+ "work_price = ?, components_price = ?, profit_price = ?, sum_price = ? where device_id = " +  d.getId();
     	PreparedStatement stm = Main.conn.prepareStatement(sql);
     	stm.setString(1, d.getName());
     	stm.setString(2, d.getSupplyVoltage());
     	stm.setString(3, d.getBorderRegulationTime());
     	stm.setInt(4, d.getRating());
     	stm.setDate(5, d.getDate());
-    	stm.setInt(6, d.getPrice());
+    	stm.setInt(6, d.getWorkPrice());
+    	stm.setInt(7, d.getComponentsPrice());
+    	stm.setInt(8, d.getProfitPrice());
+    	stm.setInt(9, d.getSumPrice());
     	stm.executeUpdate();
     	JOptionPane.showMessageDialog (null, "Інформація про прилад відредагована!" ); 
 	}
@@ -111,7 +121,10 @@ public class DeviceDao
                 d.setBorderRegulationTime(rs.getString("border_regulation_time"));
                 d.setRating(rs.getInt("rating"));
                 d.setDate(rs.getDate("date"));
-                d.setPrice(rs.getInt("price"));
+                d.setWorkPrice(rs.getInt("work_price"));
+                d.setComponentsPrice(rs.getInt("components_price"));
+                d.setProfitPrice(rs.getInt("profit_price"));
+                d.setSumPrice(rs.getInt("sum_price"));
                 list.add(d);
             }
         }
@@ -184,7 +197,10 @@ public class DeviceDao
                 d.setBorderRegulationTime(rs.getString("border_regulation_time"));
                 d.setRating(rs.getInt("rating"));
                 d.setDate(rs.getDate("date"));
-                d.setPrice(rs.getInt("price"));
+                d.setWorkPrice(rs.getInt("work_price"));
+                d.setComponentsPrice(rs.getInt("components_price"));
+                d.setProfitPrice(rs.getInt("profit_price"));
+                d.setSumPrice(rs.getInt("sum_price"));
                 list.add(d);
             }
         }

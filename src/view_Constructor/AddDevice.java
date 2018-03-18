@@ -28,7 +28,7 @@ public class AddDevice extends JFrame
 	private JTextField BorderRegulationTimeField;
 	private JTextField RatingField;
 	private JTextField StartDateField;
-	private JTextField PriceField;
+	private JTextField WorkPriceField;
 
 
 	/**
@@ -74,7 +74,7 @@ public class AddDevice extends JFrame
 		StartDateLabel.setBounds(22, 301, 175, 22);
 		contentPane.add(StartDateLabel);
 		
-		JLabel PriceLabel = new JLabel("Ціна");
+		JLabel PriceLabel = new JLabel("Вартість зборки");
 		PriceLabel.setBounds(22, 346, 175, 22);
 		contentPane.add(PriceLabel);
 		
@@ -104,6 +104,12 @@ public class AddDevice extends JFrame
 		StartDateField.setBounds(209, 301, 350, 22);
 		contentPane.add(StartDateField);
 
+		WorkPriceField = new JTextField();
+		WorkPriceField.setColumns(10);
+		WorkPriceField.setBounds(209, 346, 350, 22);
+		contentPane.add(WorkPriceField);
+
+		
 		
 		JButton AddButton = new JButton("Додати");
 		AddButton.addActionListener(new ActionListener() 
@@ -116,7 +122,10 @@ public class AddDevice extends JFrame
 				d.setBorderRegulationTime(BorderRegulationTimeField.getText());
 				d.setRating(Integer.valueOf(RatingField.getText()));
 				d.setDate(Date.valueOf(StartDateField.getText()));
-				d.setPrice(Integer.valueOf(PriceField.getText()));
+				d.setWorkPrice(Integer.valueOf(WorkPriceField.getText()));
+				d.setComponentsPrice(0);
+				d.setProfitPrice((d.getWorkPrice() + d.getComponentsPrice())/2);
+				d.setSumPrice(d.getWorkPrice() + d.getComponentsPrice() + d.getProfitPrice());
 				try {
 					dd.addDevice(d);
 				} catch (SQLException e1) {
@@ -129,11 +138,6 @@ public class AddDevice extends JFrame
 				AddDevice.this.dispose();
 			}
 		});
-		
-		PriceField = new JTextField();
-		PriceField.setColumns(10);
-		PriceField.setBounds(209, 346, 350, 22);
-		contentPane.add(PriceField);
 		AddButton.setBounds(52, 427, 97, 25);
 		contentPane.add(AddButton);
 		

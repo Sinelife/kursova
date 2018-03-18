@@ -17,9 +17,6 @@ import domain.Device;
 import main.MethodsForFrames;
 import view.AuthorisationMenu;
 import view_director.ConstructDepartmentDirectorMenu;
-import view_workerbuycomponent.EditDeliveryComponent;
-import view_workerbuycomponent.InfoProvider;
-
 import java.awt.Color;
 
 public class DeviceInformation extends JFrame {
@@ -30,7 +27,10 @@ public class DeviceInformation extends JFrame {
 	private JTextField BorderRegulationTimeField;
 	private JTextField RatingField;
 	private JTextField StartDateField;
-	private JTextField PriceField;
+	private JTextField WorkPriceField;
+	private JTextField ComponentsPriceField;
+	private JTextField ProfitPriceField;
+	private JTextField SumPriceField;
 	
 	/**
 	 * Create the frame.
@@ -60,7 +60,7 @@ public class DeviceInformation extends JFrame {
 		}
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 646, 558);
+		setBounds(100, 100, 646, 598);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -74,34 +74,46 @@ public class DeviceInformation extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JLabel NameLabel_1 = new JLabel("Назва приладу");
-		NameLabel_1.setBounds(22, 129, 175, 22);
+		NameLabel_1.setBounds(12, 85, 175, 22);
 		contentPane.add(NameLabel_1);
 		
 		JLabel SupplyVoltageLabel = new JLabel("Напруга живлення");
-		SupplyVoltageLabel.setBounds(22, 171, 175, 22);
+		SupplyVoltageLabel.setBounds(12, 127, 175, 22);
 		contentPane.add(SupplyVoltageLabel);
 		
 		JLabel BorderRegulationtimeLabel = new JLabel("Границі регулювання часу");
-		BorderRegulationtimeLabel.setBounds(22, 217, 175, 22);
+		BorderRegulationtimeLabel.setBounds(12, 173, 175, 22);
 		contentPane.add(BorderRegulationtimeLabel);
 		
 		JLabel RatingLabel = new JLabel("Рейтинг приладу");
-		RatingLabel.setBounds(22, 261, 175, 22);
+		RatingLabel.setBounds(12, 217, 175, 22);
 		contentPane.add(RatingLabel);
 		
 		JLabel StartDateLabel = new JLabel("Дата створення");
-		StartDateLabel.setBounds(22, 301, 175, 22);
+		StartDateLabel.setBounds(12, 257, 175, 22);
 		contentPane.add(StartDateLabel);
 		
-		JLabel PriceLabel = new JLabel("Ціна");
-		PriceLabel.setBounds(22, 346, 175, 22);
-		contentPane.add(PriceLabel);
+		JLabel WorkPriceLabel = new JLabel("Вартість зборки");
+		WorkPriceLabel.setBounds(12, 302, 175, 22);
+		contentPane.add(WorkPriceLabel);
+		
+		JLabel ComponentsPriceLabel = new JLabel("Вартість компонентів");
+		ComponentsPriceLabel.setBounds(12, 346, 175, 22);
+		contentPane.add(ComponentsPriceLabel);
+		
+		JLabel ProfitPriceLabel = new JLabel("Профіт");
+		ProfitPriceLabel.setBounds(12, 394, 175, 22);
+		contentPane.add(ProfitPriceLabel);
+		
+		JLabel SumPriceLabel = new JLabel("Загальна ціна");
+		SumPriceLabel.setBounds(12, 440, 175, 22);
+		contentPane.add(SumPriceLabel);
 		
 		
 		NameField = new JTextField();
 		NameField.setBackground(Color.WHITE);
 		NameField.setEditable(false);
-		NameField.setBounds(209, 129, 350, 22);
+		NameField.setBounds(199, 85, 350, 22);
 		contentPane.add(NameField);
 		NameField.setColumns(10);
 		NameField.setText(d.getName());
@@ -109,7 +121,7 @@ public class DeviceInformation extends JFrame {
 		SupplyVoltageField = new JTextField();
 		SupplyVoltageField.setBackground(Color.WHITE);
 		SupplyVoltageField.setEditable(false);
-		SupplyVoltageField.setBounds(209, 171, 350, 22);
+		SupplyVoltageField.setBounds(199, 127, 350, 22);
 		contentPane.add(SupplyVoltageField);
 		SupplyVoltageField.setColumns(10);
 		SupplyVoltageField.setText(d.getSupplyVoltage());
@@ -118,7 +130,7 @@ public class DeviceInformation extends JFrame {
 		BorderRegulationTimeField.setBackground(Color.WHITE);
 		BorderRegulationTimeField.setEditable(false);
 		BorderRegulationTimeField.setColumns(10);
-		BorderRegulationTimeField.setBounds(209, 217, 350, 22);
+		BorderRegulationTimeField.setBounds(199, 173, 350, 22);
 		contentPane.add(BorderRegulationTimeField);
 		BorderRegulationTimeField.setText(d.getBorderRegulationTime());
 		
@@ -126,7 +138,7 @@ public class DeviceInformation extends JFrame {
 		RatingField.setBackground(Color.WHITE);
 		RatingField.setEditable(false);
 		RatingField.setColumns(10);
-		RatingField.setBounds(209, 261, 350, 22);
+		RatingField.setBounds(199, 217, 350, 22);
 		contentPane.add(RatingField);
 		RatingField.setText(String.valueOf(d.getRating()));
 		
@@ -134,18 +146,46 @@ public class DeviceInformation extends JFrame {
 		StartDateField.setBackground(Color.WHITE);
 		StartDateField.setEditable(false);
 		StartDateField.setColumns(10);
-		StartDateField.setBounds(209, 301, 350, 22);
+		StartDateField.setBounds(199, 257, 350, 22);
 		contentPane.add(StartDateField);
 		MethodsForFrames.DateToString(d.getDate(), StartDateField);
 		
 		
-		PriceField = new JTextField();
-		PriceField.setEditable(false);
-		PriceField.setColumns(10);
-		PriceField.setBackground(Color.WHITE);
-		PriceField.setBounds(209, 346, 350, 22);
-		contentPane.add(PriceField);
-		PriceField.setText(String.valueOf(d.getPrice()));
+		WorkPriceField = new JTextField();
+		WorkPriceField.setEditable(false);
+		WorkPriceField.setColumns(10);
+		WorkPriceField.setBackground(Color.WHITE);
+		WorkPriceField.setBounds(199, 302, 350, 22);
+		contentPane.add(WorkPriceField);
+		WorkPriceField.setText(String.valueOf(d.getWorkPrice()));
+		
+		ComponentsPriceField = new JTextField();
+		ComponentsPriceField.setText((String) null);
+		ComponentsPriceField.setEditable(false);
+		ComponentsPriceField.setColumns(10);
+		ComponentsPriceField.setBackground(Color.WHITE);
+		ComponentsPriceField.setBounds(199, 346, 350, 22);
+		contentPane.add(ComponentsPriceField);
+		ComponentsPriceField.setText(String.valueOf(d.getComponentsPrice()));
+		
+		ProfitPriceField = new JTextField();
+		ProfitPriceField.setText((String) null);
+		ProfitPriceField.setEditable(false);
+		ProfitPriceField.setColumns(10);
+		ProfitPriceField.setBackground(Color.WHITE);
+		ProfitPriceField.setBounds(199, 394, 350, 22);
+		contentPane.add(ProfitPriceField);
+		ProfitPriceField.setText(String.valueOf(d.getProfitPrice()));
+		
+		SumPriceField = new JTextField();
+		SumPriceField.setText((String) null);
+		SumPriceField.setEditable(false);
+		SumPriceField.setColumns(10);
+		SumPriceField.setBackground(Color.WHITE);
+		SumPriceField.setBounds(199, 440, 350, 22);
+		contentPane.add(SumPriceField);
+		SumPriceField.setText(String.valueOf(d.getSumPrice()));
+		
 		
 		
 		
@@ -158,7 +198,7 @@ public class DeviceInformation extends JFrame {
 				DeviceInformation.this.dispose();
 			}
 		});
-		btnBack.setBounds(489, 427, 97, 25);
+		btnBack.setBounds(519, 513, 97, 25);
 		contentPane.add(btnBack);
 	}
 

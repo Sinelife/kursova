@@ -33,17 +33,16 @@ public class EditSpecification extends JFrame {
 	private JTextField NumberAddField;
 	private JTextField NumberEditField;
 	
-	private List<Component> components_for_delete = null;
-	private List<Component> components_for_add = null;
-	private List<Component> components_for_edit = null;
+	private static List<Component> components_for_delete = null;
+	private static List<Component> components_for_add = null;
+	private static List<Component> components_for_edit = null;
 	
-	private DeviceDao dd = null;
-	
+	private static DeviceDao dd = null;
 	private List<Device> devices = null;
 	
-	JComboBox<String> DeleteComponentComboBox = new JComboBox<String>();
-	JComboBox<String> AddComponentComboBox = new JComboBox<String>();
-	JComboBox<String> EditComponentComboBox = new JComboBox<String>();
+	static JComboBox<String> DeleteComponentComboBox = new JComboBox<String>();
+	static JComboBox<String> AddComponentComboBox = new JComboBox<String>();
+	static JComboBox<String> EditComponentComboBox = new JComboBox<String>();
 	
 	public static String c_name;
 	public static int c_id;
@@ -100,42 +99,7 @@ public class EditSpecification extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				id_to_choose = MethodsForFrames.getDeviceIdByDeviceName(name_to_choose, id_to_choose, DeviceComboBox, devices);
-				
-				try {
-					components_for_delete = dd.getAllComponentsInDevice(id_to_choose);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				DeleteComponentComboBox.removeAllItems();
-				for(Component component : components_for_delete) 
-				{
-					DeleteComponentComboBox.addItem(component.getName());	
-				}
-				
-				try {
-					components_for_add = dd.getAllComponentsNotInDevice(id_to_choose);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				AddComponentComboBox.removeAllItems();
-				for(Component component : components_for_add) 
-				{
-					AddComponentComboBox.addItem(component.getName());	
-				}
-				
-				try {
-					components_for_edit = dd.getAllComponentsInDevice(id_to_choose);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				EditComponentComboBox.removeAllItems();
-				for(Component component : components_for_edit) 
-				{
-					EditComponentComboBox.addItem(component.getName());	
-				}
+				FillAdd_Edit_DeleteComboBoxesFromLists();
 			}
 		});
 		SelectButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -155,7 +119,6 @@ public class EditSpecification extends JFrame {
 				try {
 					new DeviceInformation(EditSpecification.this).setVisible(true);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -214,24 +177,13 @@ public class EditSpecification extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				c_id = MethodsForFrames.getComponentIdByComponentName(c_name, c_id, DeleteComponentComboBox, components_for_delete);
-				
-				ComponentDevice record = null;
-				try {
-					record = dd.readComponentInDevice(id_to_choose, c_id);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				try {
-					dd.deleteComponentFromDevice(record);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				MethodsForFrames.deleteComponentsFromDevice(id_to_choose, c_id);
 			}
 		});
 		DeleteComponentButton.setBounds(28, 465, 125, 28);
 		contentPane.add(DeleteComponentButton);
+		
+		
 		
 		
 		JButton AddComponentButton = new JButton("Додати");
@@ -240,21 +192,13 @@ public class EditSpecification extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				c_id = MethodsForFrames.getComponentIdByComponentName(c_name, c_id, AddComponentComboBox, components_for_add);
-				
-				ComponentDevice record = new ComponentDevice();
-				record.setDeviceId(id_to_choose);
-				record.setComponentId(c_id);
-				record.setNumber(Integer.valueOf(NumberAddField.getText()));
-				try {
-					dd.addComponentToDevice(record);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				MethodsForFrames.addComponentsToDevice(id_to_choose, c_id, NumberAddField);
 			}
 		});
 		AddComponentButton.setBounds(263, 467, 125, 28);
 		contentPane.add(AddComponentButton);
+		
+		
 		
 		
 		JButton EditComponentButton = new JButton("Редагувати");
@@ -263,25 +207,13 @@ public class EditSpecification extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				c_id = MethodsForFrames.getComponentIdByComponentName(c_name, c_id, EditComponentComboBox, components_for_edit);
-				
-				ComponentDevice record = null;
-				try {
-					record = dd.readComponentInDevice(id_to_choose, c_id);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				record.setNumber(Integer.valueOf(NumberEditField.getText()));
-				try {
-					dd.updateComponentInDevice(record);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				MethodsForFrames.updateComponentsInDevice(id_to_choose, c_id, NumberEditField);
 			}
 		});
 		EditComponentButton.setBounds(510, 467, 125, 28);
 		contentPane.add(EditComponentButton);
+		
+		
 		
 		
 		JButton btnBack = new JButton("BACK");
@@ -301,9 +233,50 @@ public class EditSpecification extends JFrame {
 	}
 
 	
+
+	public static void FillAdd_Edit_DeleteComboBoxesFromLists()
+	{
+		try {
+			components_for_delete = dd.getAllComponentsInDevice(id_to_choose);
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		DeleteComponentComboBox.removeAllItems();
+		for(Component component : components_for_delete) 
+		{
+			DeleteComponentComboBox.addItem(component.getName());	
+		}
+		
+		try {
+			components_for_add = dd.getAllComponentsNotInDevice(id_to_choose);
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		AddComponentComboBox.removeAllItems();
+		for(Component component : components_for_add) 
+		{
+			AddComponentComboBox.addItem(component.getName());	
+		}
+		
+		try {
+			components_for_edit = dd.getAllComponentsInDevice(id_to_choose);
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		EditComponentComboBox.removeAllItems();
+		for(Component component : components_for_edit) 
+		{
+			EditComponentComboBox.addItem(component.getName());	
+		}
+	}
 	
 	
-	class MyItemListener implements ItemListener {
+	
+	class MyItemListener implements ItemListener 
+	{
 		// This method is called only if a new item has been selected.
 		public void itemStateChanged(ItemEvent evt) {
 
@@ -317,7 +290,6 @@ public class EditSpecification extends JFrame {
 				try {
 					record = dd.readComponentInDevice(id_to_choose, c_id);
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				NumberEditField.setText(String.valueOf(record.getNumber()));

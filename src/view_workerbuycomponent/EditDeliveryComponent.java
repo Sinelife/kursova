@@ -306,12 +306,8 @@ public class EditDeliveryComponent extends JFrame {
 			if (evt.getStateChange() == ItemEvent.SELECTED) {
 				String component_name = String.valueOf(EditComboBox.getSelectedItem());
 				int component_id = 0;
-				for (Component component : ComponentsInDeliveryEdit) {
-					if (component.getName().equals(component_name)) 
-					{
-						component_id = component.getId();
-					}
-				}
+				component_id = MethodsForFrames.getComponentIdByComponentName(component_name, component_id, EditComboBox, ComponentsInDeliveryEdit);
+
 				DeliveryComponent record = null;
 				try {
 					record = dd.readComponentInDelivery(delivery_id_to_edit, component_id);
