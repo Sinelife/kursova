@@ -39,14 +39,22 @@ public class ConstructDepartmentDirectorMenu extends JFrame
 	JComboBox<String> ComponentsInDeviceComboBox;
 	
 	private JTextField ComponentNumberInDeviceField;
-	private JTextField CostOfComponentsInDeviceField;
+	private JTextField ComponentsPriceField;
 	private JTextField ComponentNumberField;
 	private JTextField CostOfComponentsField;
+	private JTextField WorkPriceField;
+	private JTextField ProfitPriceField;
+	private JTextField SumPriceField;
 	
 	private static int componentNumberInDevice;
-	private static int componentCostInDevice;
+	private static int componentPrice;
+	private static int workPrice;
+	private static int profitPrice;
+	private static int sumPrice;
+	
 	private static int componentNumber;
 	private static int componentCost;
+
 
 
 
@@ -121,14 +129,23 @@ public class ConstructDepartmentDirectorMenu extends JFrame
 				ComponentNumberInDeviceField.setText(String.valueOf(componentNumberInDevice));
 				
 				
+				Device d = null;
 				try {
-					componentCostInDevice = dd.getAllComponentCostInDevice(device_id_to_look);
+					d = dd.readDevice(device_id_to_look);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				CostOfComponentsInDeviceField.setText(String.valueOf(componentCostInDevice));
-
+				componentPrice = d.getComponentsPrice();
+				ComponentsPriceField.setText(String.valueOf(componentPrice));
+				
+				workPrice = d.getWorkPrice();
+				WorkPriceField.setText(String.valueOf(workPrice));
+				
+				profitPrice = d.getProfitPrice();
+				ProfitPriceField.setText(String.valueOf(profitPrice));
+				
+				sumPrice = d.getSumPrice();
+				SumPriceField.setText(String.valueOf(sumPrice));
 			}
 		});
 		SelectButton.setBounds(38, 109, 97, 25);
@@ -160,22 +177,47 @@ public class ConstructDepartmentDirectorMenu extends JFrame
 		ComponentNumberInDeviceLabel.setBounds(38, 165, 146, 25);
 		contentPane.add(ComponentNumberInDeviceLabel);
 		
-		JLabel CostOfComponentsInDeviceLabel = new JLabel("Вартість компонентів.");
-		CostOfComponentsInDeviceLabel.setBounds(38, 246, 146, 25);
-		contentPane.add(CostOfComponentsInDeviceLabel);
+		JLabel ComponentsPriceLabel = new JLabel("Вартість компонентів");
+		ComponentsPriceLabel.setBounds(38, 246, 146, 25);
+		contentPane.add(ComponentsPriceLabel);
+		
+		JLabel ProfitPriceabel = new JLabel("Прибуток");
+		ProfitPriceabel.setBounds(389, 246, 146, 25);
+		contentPane.add(ProfitPriceabel);
+		
+		JLabel WorkPriceLabel = new JLabel("Вартість зборки");
+		WorkPriceLabel.setBounds(216, 246, 146, 25);
+		contentPane.add(WorkPriceLabel);
+		
+		JLabel SumPriceLabel = new JLabel("Загальна вартість");
+		SumPriceLabel.setBounds(561, 246, 146, 25);
+		contentPane.add(SumPriceLabel);
 		
 		ComponentNumberInDeviceField = new JTextField();
 		ComponentNumberInDeviceField.setColumns(10);
 		ComponentNumberInDeviceField.setBounds(38, 194, 146, 22);
 		contentPane.add(ComponentNumberInDeviceField);
 		
-		CostOfComponentsInDeviceField = new JTextField();
-		CostOfComponentsInDeviceField.setColumns(10);
-		CostOfComponentsInDeviceField.setBounds(38, 275, 146, 22);
-		contentPane.add(CostOfComponentsInDeviceField);
-	
-	
+		ComponentsPriceField = new JTextField();
+		ComponentsPriceField.setColumns(10);
+		ComponentsPriceField.setBounds(38, 275, 146, 22);
+		contentPane.add(ComponentsPriceField);
 		
+		WorkPriceField = new JTextField();
+		WorkPriceField.setColumns(10);
+		WorkPriceField.setBounds(216, 275, 146, 22);
+		contentPane.add(WorkPriceField);
+		
+		ProfitPriceField = new JTextField();
+		ProfitPriceField.setColumns(10);
+		ProfitPriceField.setBounds(389, 275, 146, 22);
+		contentPane.add(ProfitPriceField);
+		
+		SumPriceField = new JTextField();
+		SumPriceField.setColumns(10);
+		SumPriceField.setBounds(561, 275, 146, 22);
+		contentPane.add(SumPriceField);
+	
 		
 		
 		JLabel ComponentInDeviceLabel = new JLabel("Список компонентів в приладі");
@@ -218,7 +260,6 @@ public class ConstructDepartmentDirectorMenu extends JFrame
 				try {
 					componentNumber = dd.getComponentNumberInDevice(device_id_to_look,component_id_to_look);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				ComponentNumberField.setText(String.valueOf(componentNumber));
@@ -272,6 +313,8 @@ public class ConstructDepartmentDirectorMenu extends JFrame
 		});
 		btnBack.setBounds(657, 570, 97, 25);
 		contentPane.add(btnBack);
+		
+
 
 	}
 	

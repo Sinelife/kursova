@@ -1,7 +1,5 @@
 package main;
 
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
