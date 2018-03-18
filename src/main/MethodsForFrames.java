@@ -12,6 +12,7 @@ import domain.Delivery;
 import domain.Device;
 import domain.Order;
 import domain.Provider;
+import domain.User;
 
 public class MethodsForFrames 
 {
@@ -141,5 +142,20 @@ public class MethodsForFrames
 	
 	
 	
-	//Метод для отримання айдішника користувача через ім'я користувача
+	//Метод для отримання айдішника користувача через ім'я і прізвище користувача
+	
+	public static int getUsertIdByUserSurnameAndName(String surname_name, int id, JComboBox<String> ComboBox,List<User> users)
+	{
+		surname_name = String.valueOf(ComboBox.getSelectedItem());
+		for(User user : users) 
+		{
+			id = user.getId();
+			String record = user.getSurname() + " " + user.getName();
+			if(record.equals(surname_name))
+			{
+				break;
+			}
+		}
+		return id;
+	}
 }

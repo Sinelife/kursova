@@ -10,12 +10,12 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import dao.UserDao;
 import domain.User;
+import main.MethodsForFrames;
 import view.AuthorisationMenu;
 
 public class DeleteUser extends JFrame {
@@ -24,15 +24,19 @@ public class DeleteUser extends JFrame {
 	public static String surname_name_to_delete;
 	public static int id_to_delete;
 	
-
+	UserDao ud;
+	List<User> users;
+	User u;
+	
 	/**
 	 * Create the frame.
 	 * @throws SQLException 
 	 */
 	public DeleteUser(JFrame parent) throws SQLException
 	{
-		UserDao ud = new UserDao();
-		List<User> users = ud.getAll();
+		ud = new UserDao();
+		users = ud.getAll();
+		u = new User();
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,19 +48,28 @@ public class DeleteUser extends JFrame {
 		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
 		
 
-		JComboBox comboBox = new JComboBox();
-		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		comboBox.setBounds(40, 121, 427, 34);
-		contentPane.add(comboBox);
-		for(User user : users) 
-		{
-			comboBox.addItem(user.getSurname() + " " + user.getName());
-		}
-		
 		JLabel lblNewLabel = new JLabel("Вибір акаунту працівника для видалення.");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		lblNewLabel.setBounds(46, 25, 559, 59);
 		contentPane.add(lblNewLabel);
+		
+		JComboBox UserComboBox = new JComboBox();
+		UserComboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		UserComboBox.setBounds(40, 121, 427, 34);
+		contentPane.add(UserComboBox);
+		for(User user : users) 
+		{
+			if(user.getRole().equals("admin"))
+			{
+				
+			}
+			else
+			{
+				UserComboBox.addItem(user.getSurname() + " " + user.getName());
+			}
+		}
+		
+
 		
 		
 		JButton DeleteButton = new JButton("Видалити");
@@ -64,42 +77,21 @@ public class DeleteUser extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				surname_name_to_delete = String.valueOf(comboBox.getSelectedItem());
-				String admin_role = "";
-				for(User user : users) 
-				{
-					id_to_delete = user.getId();
-					if(user.getRole().equals("admin"))
-					{
-						admin_role = user.getRole();
-						break;
-					}
-					String surname_name = user.getSurname() + " " + user.getName();
-					if(surname_name.equals(surname_name_to_delete))
-					{
-						break;
-					}
-				}
-				User u = null;
+				id_to_delete = MethodsForFrames.getUsertIdByUserSurnameAndName(surname_name_to_delete, id_to_delete, UserComboBox, users);
+
 				try {
 					u = ud.readUser(id_to_delete);
+				} catch (SQLException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+				try {
+					ud.delete(u);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				if(admin_role.equals("admin"))
-				{
-					JOptionPane.showMessageDialog (null, "Адміна видалити не можна!!!" );
-				}
-				else
-				{
-					try {
-						ud.delete(u);
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				}
+
 				if (parent != null)
 					parent.setVisible(true);
 				DeleteUser.this.setVisible(false);
@@ -117,16 +109,8 @@ public class DeleteUser extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				surname_name_to_delete = String.valueOf(comboBox.getSelectedItem());
-				for(User user : users) 
-				{
-					id_to_delete = user.getId();
-					String surname_name = user.getSurname() + " " + user.getName();
-					if(surname_name.equals(surname_name_to_delete))
-					{
-						break;
-					}
-				}
+				id_to_delete = MethodsForFrames.getUsertIdByUserSurnameAndName(surname_name_to_delete, id_to_delete, UserComboBox, users);
+
 				DeleteUser.this.setVisible(false);
 				try {
 					new UserInformation(DeleteUser.this).setVisible(true);

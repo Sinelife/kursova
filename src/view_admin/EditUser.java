@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 import dao.UserDao;
 import domain.User;
+import main.MethodsForFrames;
 import view.AuthorisationMenu;
 
 public class EditUser extends JFrame {
@@ -43,13 +44,13 @@ public class EditUser extends JFrame {
 		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
 		
 
-		JComboBox comboBox = new JComboBox();
-		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		comboBox.setBounds(40, 121, 504, 34);
-		contentPane.add(comboBox);
+		JComboBox UserComboBox = new JComboBox();
+		UserComboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		UserComboBox.setBounds(40, 121, 504, 34);
+		contentPane.add(UserComboBox);
 		for(User user : users) 
 		{
-			comboBox.addItem(user.getSurname() + " " + user.getName());
+			UserComboBox.addItem(user.getSurname() + " " + user.getName());
 		}
 		
 		JLabel lblNewLabel = new JLabel("Вибір акаунту працівника для редагування.");
@@ -64,16 +65,8 @@ public class EditUser extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				surname_name_to_edit = String.valueOf(comboBox.getSelectedItem());
-				for(User user : users) 
-				{
-					id_to_edit = user.getId();
-					String surname_name = user.getSurname() + " " + user.getName();
-					if(surname_name.equals(surname_name_to_edit))
-					{
-						break;
-					}
-				}
+				id_to_edit = MethodsForFrames.getUsertIdByUserSurnameAndName(surname_name_to_edit, id_to_edit, UserComboBox, users);
+				
 				EditUser.this.setVisible(false);
 				try {
 					new EditUserFrame(EditUser.this).setVisible(true);
