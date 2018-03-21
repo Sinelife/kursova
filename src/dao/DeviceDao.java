@@ -75,7 +75,7 @@ public class DeviceDao
 
     
     /**@throws SQLException */
-    public void updateDevice(Device d) throws SQLException 
+    public void updateDevice(Device d, boolean message) throws SQLException 
     {
     	String sql = "update device set name = ?, supply_voltage = ?, border_regulation_time = ?, rating = ?, date = ?, "
     			+ "work_price = ?, components_price = ?, profit_price = ?, sum_price = ? where device_id = " +  d.getId();
@@ -90,7 +90,10 @@ public class DeviceDao
     	stm.setInt(8, d.getProfitPrice());
     	stm.setInt(9, d.getSumPrice());
     	stm.executeUpdate();
-    	JOptionPane.showMessageDialog (null, "Інформація про прилад відредагована!" ); 
+    	if(message == true)
+    	{
+    		JOptionPane.showMessageDialog (null, "Інформація про прилад відредагована!" ); 
+    	}
 	}
 
     

@@ -100,7 +100,12 @@ public class EditComponentFrame extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				MethodsForFrames.updateComponent(c, TypeField, NameField, TechnicalInfoField, PriceField);
+				try {
+					MethodsForFrames.updateComponent(c, TypeField, NameField, TechnicalInfoField, PriceField);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				EditComponentFrame.this.setVisible(false);
 				EditComponentFrame.this.dispose();
 				new ComponentMenu().setVisible(true);

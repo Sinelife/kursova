@@ -201,7 +201,7 @@ public class MethodsForFrames
 		d.setProfitPrice((d.getWorkPrice() + d.getComponentsPrice())/2);
 		d.setSumPrice(d.getWorkPrice() + d.getComponentsPrice() + d.getProfitPrice());
 		try {
-			device_dao.updateDevice(d);
+			device_dao.updateDevice(d, false);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
@@ -232,7 +232,7 @@ public class MethodsForFrames
 		d.setSumPrice(d.getWorkPrice() + d.getComponentsPrice() + d.getProfitPrice());
 		
 		try {
-			device_dao.updateDevice(d);
+			device_dao.updateDevice(d, false);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
@@ -509,7 +509,7 @@ public class MethodsForFrames
 	//Метод для оновлення компоненту
 	
 	public static void updateComponent(Component c, JTextField TypeField, JTextField NameField,
-			JTextField TechnicalInfoField, JTextField PriceField) 
+			JTextField TechnicalInfoField, JTextField PriceField) throws SQLException 
 	{
 		ComponentDao cd = new ComponentDao();
 		c.setType(TypeField.getText());
@@ -520,6 +520,16 @@ public class MethodsForFrames
 			cd.updateComponent(c);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
+		}
+		
+		DeviceDao dd = new DeviceDao();
+		List<Device> devices = dd.getAllDeviceWhichHasComponent(c.getId());
+		for(Device device : devices)
+		{
+			device.setComponentsPrice(dd.getComponentCostInDevice(device.getId(), c.getId()));
+			device.setProfitPrice((device.getComponentsPrice() + device.getWorkPrice())/2);
+			device.setSumPrice(device.getComponentsPrice() + device.getWorkPrice() + device.getProfitPrice());
+			dd.updateDevice(device, false);
 		}
 	}
 	
@@ -540,7 +550,7 @@ public class MethodsForFrames
 		d.setProfitPrice((d.getWorkPrice() + d.getComponentsPrice())/2);
 		d.setSumPrice(d.getWorkPrice() + d.getComponentsPrice() + d.getProfitPrice());
 		try {
-			dd.updateDevice(d);
+			dd.updateDevice(d, true);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
