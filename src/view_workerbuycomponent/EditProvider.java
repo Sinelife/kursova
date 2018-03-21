@@ -70,7 +70,6 @@ public class EditProvider extends JFrame {
 				try {
 					new EditProviderFrame(EditProvider.this).setVisible(true);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}

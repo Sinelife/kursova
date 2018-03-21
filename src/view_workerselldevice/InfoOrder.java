@@ -14,7 +14,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import dao.OrderDao;
-import dao.OrderDeviceDao;
 import domain.Order;
 import domain.OrderDevice;
 import main.MethodsForFrames;
@@ -80,44 +79,8 @@ public class InfoOrder extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				DeviceInOrderComboBox.removeAllItems();
-				
 				order_id_to_look = MethodsForFrames.getOrderIdByOrderName(order_name_to_look, order_id_to_look, OrderComboBox, orders);
-				
-				OrderDeviceDao odd = new OrderDeviceDao();
-				try {
-					DevicesInfoInOrder = odd.getAllFromOrder(order_id_to_look);
-				} catch (SQLException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
-				}
-				for(OrderDevice order_device : DevicesInfoInOrder)
-				{
-					String device_name = null;
-					try {
-						device_name = odd.getDeviceNameById(order_id_to_look, order_device.getDeviceId());
-					} catch (SQLException e2) {
-						e2.printStackTrace();
-					}
-					String device_supply_voltage = null;
-					try {
-						device_supply_voltage = odd.getSupplyVoltageById(order_id_to_look, order_device.getDeviceId());
-					} catch (SQLException e1) {
-						e1.printStackTrace();
-					}
-					String border_regulation_time = null;
-					try {
-						border_regulation_time = odd.getBorderRegulationTimeById(order_id_to_look, order_device.getDeviceId());
-					} catch (SQLException e1) {
-						e1.printStackTrace();
-					}
-					String info = "Назва: " + device_name + 
-							"  Напруга живлення: " + device_supply_voltage +
-							"  Границі регулювання часу: " + border_regulation_time +
-							"  Кількість: " + order_device.getNumber();
-					DeviceInOrderComboBox.addItem(info);
-				}
-
+				MethodsForFrames.getDeviceInfoFromOrder(order_id_to_look, DevicesInfoInOrder, DeviceInOrderComboBox);
 			}
 		});
 		SelectOrderButton.setBounds(12, 201, 97, 25);

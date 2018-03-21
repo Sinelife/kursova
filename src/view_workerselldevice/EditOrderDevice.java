@@ -32,21 +32,21 @@ public class EditOrderDevice extends JFrame {
 	public static String order_name_to_edit;
 
 	List<Order> orders;
-	private List<Device> DevicesInOrderEdit = null;
-	private List<Device> DevicesInOrderDelete = null;
-	private List<Device> DevicesNotInOrder = null;
+	private static List<Device> DevicesInOrderEdit = null;
+	private static List<Device> DevicesInOrderDelete = null;
+	private static List<Device> DevicesNotInOrder = null;
 	
 	private JTextField NumberAddField;
 	private JTextField NumberEditField;
 	
-	JComboBox<String> AddComboBox = new JComboBox<String>();
-	JComboBox<String> DeleteComboBox = new JComboBox<String>();
-	JComboBox<String> EditComboBox = new JComboBox<String>();
+	static JComboBox<String> AddComboBox = new JComboBox<String>();
+	static JComboBox<String> DeleteComboBox = new JComboBox<String>();
+	static JComboBox<String> EditComboBox = new JComboBox<String>();
 	
 	public static String device_name;
 	public static int device_id;
 	
-	OrderDao od = new OrderDao();
+	static OrderDao od = new OrderDao();
 	
 	/**
 	 * Create the frame.
@@ -116,42 +116,7 @@ public class EditOrderDevice extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				order_id_to_edit = MethodsForFrames.getOrderIdByOrderName(order_name_to_edit, order_id_to_edit, OrderComboBox, orders);
-				
-				try {
-					DevicesInOrderEdit = od.getAllDevicesInOrder(order_id_to_edit);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				try {
-					DevicesInOrderDelete = od.getAllDevicesInOrder(order_id_to_edit);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				try {
-					DevicesNotInOrder = od.getAllDevicesNotInOrder(order_id_to_edit);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
-				AddComboBox.removeAllItems();
-				DeleteComboBox.removeAllItems();
-				EditComboBox.removeAllItems();
-				
-				for(Device device : DevicesNotInOrder)
-				{
-					AddComboBox.addItem(device.getName());
-				}
-				for(Device device : DevicesInOrderDelete)
-				{
-					DeleteComboBox.addItem(device.getName());
-				}
-				for(Device device : DevicesInOrderEdit)
-				{
-					EditComboBox.addItem(device.getName());
-				}
+				outputAllDeviceComboBoxes();
 			}
 		});
 		SelectButton.setBounds(39, 162, 97, 25);
@@ -188,17 +153,7 @@ public class EditOrderDevice extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				device_id = MethodsForFrames.getDeviceIdByDeviceName(device_name, device_id, AddComboBox, DevicesNotInOrder);
-				
-				OrderDevice record = new OrderDevice();
-				record.setOrderId(order_id_to_edit);;
-				record.setDeviceId(device_id);
-				record.setNumber(Integer.valueOf(NumberAddField.getText()));
-				try {
-					od.addDeviceInOrder(record);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				MethodsForFrames.addDevicesInOrder(order_id_to_edit, device_id, NumberAddField);
 			}
 		});
 		AddButton.setBounds(39, 433, 125, 28);
@@ -212,24 +167,13 @@ public class EditOrderDevice extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				device_id = MethodsForFrames.getDeviceIdByDeviceName(device_name, device_id, DeleteComboBox, DevicesInOrderDelete);
-				
-				OrderDevice record = null;
-				try {
-					record = od.readDeviceInOrder(order_id_to_edit, device_id);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				try {
-					od.deleteDeviceFromOrder(record);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				MethodsForFrames.deleteDevicesFromOrder(order_id_to_edit, device_id);
 			}
 		});
 		DeleteButton.setBounds(275, 435, 125, 28);
 		contentPane.add(DeleteButton);
+		
+		
 		
 		
 		
@@ -239,21 +183,7 @@ public class EditOrderDevice extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				device_id = MethodsForFrames.getDeviceIdByDeviceName(device_name, device_id, EditComboBox, DevicesInOrderEdit);
-				
-				OrderDevice record = null;
-				try {
-					record = od.readDeviceInOrder(order_id_to_edit, device_id);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				record.setNumber(Integer.valueOf(NumberEditField.getText()));
-				try {
-					od.updateDeviceInOrder(record);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				MethodsForFrames.updateDevicesInOrder(order_id_to_edit, device_id, NumberEditField);
 			}
 		});
 		EditButton.setBounds(508, 435, 125, 28);
@@ -266,13 +196,11 @@ public class EditOrderDevice extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				order_id_to_edit = MethodsForFrames.getOrderIdByOrderName(order_name_to_edit, order_id_to_edit, OrderComboBox, orders);
-				
+				order_id_to_edit = MethodsForFrames.getOrderIdByOrderName(order_name_to_edit, order_id_to_edit, OrderComboBox, orders);			
 				EditOrderDevice.this.setVisible(false);
 				try {
 					new OrderInformation(EditOrderDevice.this).setVisible(true);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -298,6 +226,47 @@ public class EditOrderDevice extends JFrame {
 	}
 	
 	
+	public static void outputAllDeviceComboBoxes()
+	{
+		
+		try {
+			DevicesInOrderEdit = od.getAllDevicesInOrder(order_id_to_edit);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			DevicesInOrderDelete = od.getAllDevicesInOrder(order_id_to_edit);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			DevicesNotInOrder = od.getAllDevicesNotInOrder(order_id_to_edit);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		
+		AddComboBox.removeAllItems();
+		DeleteComboBox.removeAllItems();
+		EditComboBox.removeAllItems();
+		
+		for(Device device : DevicesNotInOrder)
+		{
+			AddComboBox.addItem(device.getName());
+		}
+		for(Device device : DevicesInOrderDelete)
+		{
+			DeleteComboBox.addItem(device.getName());
+		}
+		for(Device device : DevicesInOrderEdit)
+		{
+			EditComboBox.addItem(device.getName());
+		}
+	}
+	
+	
+	
+	
+	
 	class MyItemListener implements ItemListener 
 	{
 		// This method is called only if a new item has been selected.
@@ -313,7 +282,6 @@ public class EditOrderDevice extends JFrame {
 				try {
 					record = od.readDeviceInOrder(order_id_to_edit, device_id);
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				NumberEditField.setText(String.valueOf(record.getNumber()));

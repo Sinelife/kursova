@@ -1,4 +1,4 @@
-package view_Constructor;
+package view_constructor;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -13,14 +13,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import dao.ComponentDao;
-import domain.Component;
+import dao.DeviceDao;
+import domain.Device;
 import main.MethodsForFrames;
 import view.AuthorisationMenu;
 
 
 
-public class EditComponent extends JFrame {
+public class EditDevice extends JFrame {
 
 	private JPanel contentPane;
 	public static String name_to_edit;
@@ -31,11 +31,10 @@ public class EditComponent extends JFrame {
 	 * Create the frame.
 	 * @throws SQLException 
 	 */
-	public EditComponent(JFrame parent) throws SQLException 
+	public EditDevice(JFrame parent) throws SQLException 
 	{
-		ComponentDao cd = new ComponentDao();
-		List<Component> components = cd.getAll();
-		
+		DeviceDao dd = new DeviceDao();
+		List<Device> devices = dd.getAll();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 646, 558);
@@ -45,19 +44,19 @@ public class EditComponent extends JFrame {
 		contentPane.setLayout(null);
 		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
 		
-		JLabel lblNewLabel = new JLabel("Меню вибору компоненту для редагування.");
+		JLabel lblNewLabel = new JLabel("Вибір приладу для редагування.");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		lblNewLabel.setBounds(46, 25, 559, 59);
 		contentPane.add(lblNewLabel);
 		
 
-		JComboBox<String> ComponentComboBox = new JComboBox<String>();
-		ComponentComboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		ComponentComboBox.setBounds(40, 121, 504, 34);
-		contentPane.add(ComponentComboBox);
-		for(Component component : components) 
+		JComboBox<String> DeviceComboBox = new JComboBox<String>();
+		DeviceComboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		DeviceComboBox.setBounds(40, 121, 504, 34);
+		contentPane.add(DeviceComboBox);
+		for(Device device : devices) 
 		{
-			ComponentComboBox.addItem(component.getName());
+			DeviceComboBox.addItem(device.getName());
 		}
 		
 		
@@ -66,11 +65,11 @@ public class EditComponent extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				id_to_edit = MethodsForFrames.getComponentIdByComponentName(name_to_edit, id_to_edit, ComponentComboBox, components);
+				id_to_edit = MethodsForFrames.getDeviceIdByDeviceName(name_to_edit, id_to_edit, DeviceComboBox, devices);
 				
-				EditComponent.this.setVisible(false);
+				EditDevice.this.setVisible(false);
 				try {
-					new EditComponentFrame(EditComponent.this).setVisible(true);
+					new EditDeviceFrame(EditDevice.this).setVisible(true);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -86,8 +85,8 @@ public class EditComponent extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (parent != null)
 					parent.setVisible(true);
-				EditComponent.this.setVisible(false);
-				EditComponent.this.dispose();
+				EditDevice.this.setVisible(false);
+				EditDevice.this.dispose();
 			}
 		});
 		btnBack.setBounds(489, 427, 97, 25);

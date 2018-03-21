@@ -32,21 +32,21 @@ public class EditDeliveryComponent extends JFrame {
 	public static String delivery_name_to_edit;
 
 	List<Delivery> deliveries;
-	private List<Component> ComponentsInDeliveryEdit = null;
-	private List<Component> ComponentsInDeliveryDelete = null;
-	private List<Component> ComponentsNotInDelivery = null;
+	private static List<Component> ComponentsInDeliveryEdit = null;
+	private static List<Component> ComponentsInDeliveryDelete = null;
+	private static List<Component> ComponentsNotInDelivery = null;
 	
 	private JTextField NumberAddField;
 	private JTextField NumberEditField;
 	
-	JComboBox<String> AddComboBox = new JComboBox<String>();
-	JComboBox<String> DeleteComboBox = new JComboBox<String>();
-	JComboBox<String> EditComboBox = new JComboBox<String>();
+	static JComboBox<String> AddComboBox = new JComboBox<String>();
+	static JComboBox<String> DeleteComboBox = new JComboBox<String>();
+	static JComboBox<String> EditComboBox = new JComboBox<String>();
 	
 	private int component_id;
 	private String component_name;
 	
-	DeliveryDao dd = new DeliveryDao();
+	static DeliveryDao dd = new DeliveryDao();
 	
 	/**
 	 * Create the frame.
@@ -116,42 +116,7 @@ public class EditDeliveryComponent extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				delivery_id_to_edit = MethodsForFrames.getDeliveryIdByDeliveryName(delivery_name_to_edit, delivery_id_to_edit, DeliveryComboBox, deliveries);		
-				
-				try {
-					ComponentsInDeliveryEdit = dd.getAllComponentsInDelivery(delivery_id_to_edit);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				try {
-					ComponentsInDeliveryDelete = dd.getAllComponentsInDelivery(delivery_id_to_edit);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				try {
-					ComponentsNotInDelivery = dd.getAllComponentsNotInDelivery(delivery_id_to_edit);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
-				AddComboBox.removeAllItems();
-				DeleteComboBox.removeAllItems();
-				EditComboBox.removeAllItems();
-				
-				for(Component component : ComponentsNotInDelivery)
-				{
-					AddComboBox.addItem(component.getName());
-				}
-				for(Component component : ComponentsInDeliveryDelete)
-				{
-					DeleteComboBox.addItem(component.getName());
-				}
-				for(Component component : ComponentsInDeliveryEdit)
-				{
-					EditComboBox.addItem(component.getName());
-				}
+				outputAllComponentsComboBoxes();
 			}
 		});
 		SelectButton.setBounds(39, 162, 97, 25);
@@ -188,17 +153,7 @@ public class EditDeliveryComponent extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				component_id = MethodsForFrames.getComponentIdByComponentName(component_name, component_id, AddComboBox, ComponentsNotInDelivery);
-				
-				DeliveryComponent record = new DeliveryComponent();
-				record.setDeliveryId(delivery_id_to_edit);;
-				record.setComponentId(component_id);
-				record.setNumber(Integer.valueOf(NumberAddField.getText()));
-				try {
-					dd.addComponentInDelivery(record);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				MethodsForFrames.addComponentsInDelivery(delivery_id_to_edit, component_id, NumberAddField);
 			}
 		});
 		AddButton.setBounds(39, 433, 125, 28);
@@ -212,20 +167,7 @@ public class EditDeliveryComponent extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				component_id = MethodsForFrames.getComponentIdByComponentName(component_name, component_id, DeleteComboBox, ComponentsInDeliveryDelete);
-
-				DeliveryComponent record = null;
-				try {
-					record = dd.readComponentInDelivery(delivery_id_to_edit, component_id);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				try {
-					dd.deleteComponentFromDelivery(record);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				MethodsForFrames.deleteComponentsFromDelivery(delivery_id_to_edit, component_id);
 			}
 		});
 		DeleteButton.setBounds(275, 435, 125, 28);
@@ -239,21 +181,7 @@ public class EditDeliveryComponent extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				component_id = MethodsForFrames.getComponentIdByComponentName(component_name, component_id, EditComboBox, ComponentsInDeliveryEdit);
-
-				DeliveryComponent record = null;
-				try {
-					record = dd.readComponentInDelivery(delivery_id_to_edit, component_id);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				record.setNumber(Integer.valueOf(NumberEditField.getText()));
-				try {
-					dd.updateComponentInDelivery(record);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				MethodsForFrames.updateComponentsInDelivery(delivery_id_to_edit, component_id, NumberEditField);
 			}
 		});
 		EditButton.setBounds(508, 435, 125, 28);
@@ -266,13 +194,11 @@ public class EditDeliveryComponent extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				delivery_id_to_edit = MethodsForFrames.getDeliveryIdByDeliveryName(delivery_name_to_edit, delivery_id_to_edit, DeliveryComboBox, deliveries);
-				
+				delivery_id_to_edit = MethodsForFrames.getDeliveryIdByDeliveryName(delivery_name_to_edit, delivery_id_to_edit, DeliveryComboBox, deliveries);			
 				EditDeliveryComponent.this.setVisible(false);
 				try {
 					new DeliveryInformation(EditDeliveryComponent.this).setVisible(true);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -298,6 +224,45 @@ public class EditDeliveryComponent extends JFrame {
 	}
 	
 	
+	public static void outputAllComponentsComboBoxes()
+	{
+		
+		try {
+			ComponentsInDeliveryEdit = dd.getAllComponentsInDelivery(delivery_id_to_edit);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			ComponentsInDeliveryDelete = dd.getAllComponentsInDelivery(delivery_id_to_edit);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			ComponentsNotInDelivery = dd.getAllComponentsNotInDelivery(delivery_id_to_edit);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		
+		AddComboBox.removeAllItems();
+		DeleteComboBox.removeAllItems();
+		EditComboBox.removeAllItems();
+		
+		for(Component component : ComponentsNotInDelivery)
+		{
+			AddComboBox.addItem(component.getName());
+		}
+		for(Component component : ComponentsInDeliveryDelete)
+		{
+			DeleteComboBox.addItem(component.getName());
+		}
+		for(Component component : ComponentsInDeliveryEdit)
+		{
+			EditComboBox.addItem(component.getName());
+		}
+	}
+	
+	
+	
 	class MyItemListener implements ItemListener 
 	{
 		// This method is called only if a new item has been selected.
@@ -312,7 +277,6 @@ public class EditDeliveryComponent extends JFrame {
 				try {
 					record = dd.readComponentInDelivery(delivery_id_to_edit, component_id);
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				NumberEditField.setText(String.valueOf(record.getNumber()));

@@ -14,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 
 import dao.UserDao;
 import domain.User;
+import main.MethodsForFrames;
 import view.AuthorisationMenu;
 import java.awt.Color;
 
@@ -116,17 +117,7 @@ public class EditUserFrame extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				u.setSurname(SurnameField.getText());
-				u.setName(NameField.getText());
-				u.setLogin(LoginField.getText());
-				u.setPassword(PasswordField.getText());
-				u.setRole(RoleField.getText());
-				try {
-					ud.updateUser(u);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				MethodsForFrames.updateUser(u, SurnameField, NameField, LoginField, PasswordField, RoleField);
 				EditUserFrame.this.setVisible(false);
 				EditUserFrame.this.dispose();
 				new UserMenu().setVisible(true);

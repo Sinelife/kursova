@@ -70,7 +70,7 @@ public class OrderDao
 	/**
 	 * @throws SQLException
 	 */
-	public void updateOrder(Order o) throws SQLException 
+	public void updateOrder(Order o, boolean message) throws SQLException 
 	{
 		String sql = "update orders set order_name = ?, client_id = ?, startdate = ?, paid = ?, shipped = ? where order_id = " + o.getId();
 		PreparedStatement stm = Main.conn.prepareStatement(sql);
@@ -80,7 +80,10 @@ public class OrderDao
 		stm.setBoolean(4, o.isPaid());
 		stm.setBoolean(5, o.isShipped());
 		stm.executeUpdate();
-		JOptionPane.showMessageDialog(null, "Інформація про замовлення на купівлю відредаговано!");
+		if(message == true)
+		{
+			JOptionPane.showMessageDialog(null, "Інформація про замовлення на купівлю відредаговано!");
+		}
 	}
 
 	

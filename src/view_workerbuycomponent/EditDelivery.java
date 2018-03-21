@@ -25,7 +25,6 @@ import javax.swing.JCheckBox;
 public class EditDelivery extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField NameField;
 	private JTextField StartDateField;
 	private JCheckBox PaidCheckBox;
 	private JCheckBox ShippedCheckBox;
@@ -46,7 +45,7 @@ public class EditDelivery extends JFrame {
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 759, 548);
+		setBounds(100, 100, 759, 458);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -60,7 +59,7 @@ public class EditDelivery extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JComboBox<String> DeliveryComboBox = new JComboBox<String>();
-		DeliveryComboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		DeliveryComboBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		DeliveryComboBox.setBounds(39, 85, 559, 34);
 		contentPane.add(DeliveryComboBox);
 		for(Delivery delivery : deliveries) 
@@ -68,39 +67,29 @@ public class EditDelivery extends JFrame {
 			DeliveryComboBox.addItem(delivery.getDeliveryName());
 		}
 		
-		JLabel NameLabel = new JLabel("Назва замовлення");
-		NameLabel.setBounds(39, 207, 133, 22);
-		contentPane.add(NameLabel);
-		
 		JLabel StartDateLabel = new JLabel("Дата початку");
-		StartDateLabel.setBounds(39, 249, 133, 22);
+		StartDateLabel.setBounds(39, 197, 133, 22);
 		contentPane.add(StartDateLabel);
 		
 		JLabel PaidLabel = new JLabel("Сплачено");
-		PaidLabel.setBounds(39, 295, 133, 22);
+		PaidLabel.setBounds(39, 243, 133, 22);
 		contentPane.add(PaidLabel);
 		
 		JLabel ShippedLabel = new JLabel("Відвантажено");
-		ShippedLabel.setBounds(39, 335, 129, 22);
+		ShippedLabel.setBounds(39, 283, 129, 22);
 		contentPane.add(ShippedLabel);
 		
-		
-		NameField = new JTextField();
-		NameField.setBounds(182, 207, 339, 22);
-		contentPane.add(NameField);
-		NameField.setColumns(10);
-		
 		StartDateField = new JTextField();
-		StartDateField.setBounds(184, 249, 337, 22);
+		StartDateField.setBounds(184, 197, 337, 22);
 		contentPane.add(StartDateField);
 		StartDateField.setColumns(10);
 		
 		PaidCheckBox = new JCheckBox();
-		PaidCheckBox.setBounds(180, 295, 113, 25);
+		PaidCheckBox.setBounds(180, 243, 113, 25);
 		contentPane.add(PaidCheckBox);
 		
 		ShippedCheckBox = new JCheckBox();
-		ShippedCheckBox.setBounds(180, 332, 113, 25);
+		ShippedCheckBox.setBounds(180, 280, 113, 25);
 		contentPane.add(ShippedCheckBox);
 
 		
@@ -115,10 +104,8 @@ public class EditDelivery extends JFrame {
 				try {
 					d = dd.readDelivery(delivery_id_to_edit);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				NameField.setText(d.getDeliveryName());
 				StartDateField.setText(String.valueOf(d.getStartDate()));
 				if(d.isPaid() == true)
 				{
@@ -148,23 +135,14 @@ public class EditDelivery extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				d.setDeliveryName(NameField.getText());
-				d.setStartDate(Date.valueOf(StartDateField.getText()));
-				d.setPaid(PaidCheckBox.isSelected());
-				d.setShipped(ShippedCheckBox.isSelected());
-				try {
-					dd.updateDelivery(d);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				MethodsForFrames.updateDelivery(d, StartDateField, PaidCheckBox, ShippedCheckBox);
 				EditDelivery.this.setVisible(false);
 				EditDelivery.this.dispose();
 				new DeliveryMenu().setVisible(true);
 			}
 		});
 		button.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		button.setBounds(35, 428, 123, 34);
+		button.setBounds(35, 359, 123, 34);
 		contentPane.add(button);
 		
 		
@@ -178,7 +156,7 @@ public class EditDelivery extends JFrame {
 				EditDelivery.this.dispose();
 			}
 		});
-		btnBack.setBounds(632, 434, 97, 25);
+		btnBack.setBounds(632, 365, 97, 25);
 		contentPane.add(btnBack);
 	}
 }

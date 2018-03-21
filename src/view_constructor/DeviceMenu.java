@@ -1,4 +1,4 @@
-package view_workerselldevice;
+package view_constructor;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -14,21 +14,20 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import view.AuthorisationMenu;
-import view_admin.WorkerSalesDepartmentAdminMenu;
+import view_admin.ConstructorAdminMenu;
 
-public class ClientMenu extends JFrame {
+public class DeviceMenu extends JFrame {
 
 	private JPanel contentPane;
-
 
 
 	/**
 	 * Create the frame.
 	 */
-	public ClientMenu() 
-	{
+	public DeviceMenu() 
+	{	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 610, 531);
+		setBounds(100, 100, 742, 619);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -36,36 +35,37 @@ public class ClientMenu extends JFrame {
 		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
 		
 		
-		JLabel MenuTitleLabel = new JLabel("Меню роботи з клієнтами");
+		JLabel MenuTitleLabel = new JLabel("Меню роботи з приладами");
 		MenuTitleLabel.setFont(new Font("Tahoma", Font.BOLD, 21));
 		MenuTitleLabel.setBounds(157, 13, 417, 38);
 		contentPane.add(MenuTitleLabel);
 		
-		JButton InfoButton = new JButton("1)Переглянути інформацію про наявних клієнтів");
+		JButton InfoButton = new JButton("1)Переглянути інформацію про наявні прилади.");
 		InfoButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				ClientMenu.this.setVisible(false);
+				DeviceMenu.this.setVisible(false);
 				try {
-					new InfoClient(ClientMenu.this).setVisible(true);
+					new InfoDevice(DeviceMenu.this).setVisible(true);
 				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}
+				} 
 			}
 		});
 		InfoButton.setHorizontalAlignment(SwingConstants.LEFT);
-		InfoButton.setForeground(Color.DARK_GRAY);
+		InfoButton.setForeground(Color.BLACK);
 		InfoButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		InfoButton.setBounds(42, 111, 456, 43);
 		contentPane.add(InfoButton);
 		
-		JButton AddButton = new JButton("2)Додати інформацію про нового клієнта");
+		JButton AddButton = new JButton("2)Додати інформацію про новий прилад.");
 		AddButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
-				ClientMenu.this.setVisible(false);
-				new AddClient(ClientMenu.this).setVisible(true); 
+				DeviceMenu.this.setVisible(false);
+				new AddDevice(DeviceMenu.this).setVisible(true); 
 			}
 		});
 		AddButton.setHorizontalAlignment(SwingConstants.LEFT);
@@ -74,15 +74,16 @@ public class ClientMenu extends JFrame {
 		AddButton.setBounds(42, 191, 456, 43);
 		contentPane.add(AddButton);
 		
-		JButton EditButton = new JButton("3)Редагувати інформацію про клієнта");
+		JButton EditButton = new JButton("3)Редагувати інформацію про прилад.");
 		EditButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				ClientMenu.this.setVisible(false);
+				DeviceMenu.this.setVisible(false);
 				try {
-					new EditClient(ClientMenu.this).setVisible(true);
+					new EditDevice(DeviceMenu.this).setVisible(true);
 				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} 
 			}
@@ -93,25 +94,44 @@ public class ClientMenu extends JFrame {
 		EditButton.setBounds(42, 271, 456, 43);
 		contentPane.add(EditButton);
 		
-		
-		JButton ChooseButton = new JButton("4)Обрати клієнта для подільшої роботи з ним");
-		ChooseButton.addActionListener(new ActionListener() 
+		JButton SpecificationButton = new JButton("4)Переглянути специфікацію прилада.");
+		SpecificationButton.addActionListener(new ActionListener() 
 		{
-			public void actionPerformed(ActionEvent e) 
+			public void actionPerformed(ActionEvent arg0) 
 			{
-				ClientMenu.this.setVisible(false);
+				DeviceMenu.this.setVisible(false);
 				try {
-					new ChooseClient().setVisible(true);
+					new SpecificationInformation(DeviceMenu.this).setVisible(true);
 				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} 
 			}
 		});
-		ChooseButton.setHorizontalAlignment(SwingConstants.LEFT);
-		ChooseButton.setForeground(Color.DARK_GRAY);
-		ChooseButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		ChooseButton.setBounds(42, 354, 456, 43);
-		contentPane.add(ChooseButton);
+		SpecificationButton.setHorizontalAlignment(SwingConstants.LEFT);
+		SpecificationButton.setForeground(Color.BLACK);
+		SpecificationButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		SpecificationButton.setBounds(42, 350, 456, 43);
+		contentPane.add(SpecificationButton);
+		
+		JButton EditSpecificationButton = new JButton("5)Змінити специфікацію приладу.");
+		EditSpecificationButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				DeviceMenu.this.setVisible(false);
+				try {
+					new EditSpecification(DeviceMenu.this).setVisible(true);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+			}
+		});
+		EditSpecificationButton.setHorizontalAlignment(SwingConstants.LEFT);
+		EditSpecificationButton.setForeground(Color.BLACK);
+		EditSpecificationButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		EditSpecificationButton.setBounds(42, 429, 456, 43);
+		contentPane.add(EditSpecificationButton);
 		
 		
 		
@@ -120,31 +140,30 @@ public class ClientMenu extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				if(AuthorisationMenu.user_role.equals("worker_of_sales_department"))
+				DeviceMenu.this.setVisible(false);
+				DeviceMenu.this.dispose();
+				if(AuthorisationMenu.user_role.equals("constructor"))
 				{
-					ClientMenu.this.setVisible(false);
-					ClientMenu.this.dispose();
 					try {
-						new WorkerSalesDepartmentMenu().setVisible(true);
+						new ConstructorMenu().setVisible(true);
 					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
 				if(AuthorisationMenu.user_role.equals("admin"))
 				{
-					ClientMenu.this.setVisible(false);
-					ClientMenu.this.dispose();
 					try {
-						new WorkerSalesDepartmentAdminMenu().setVisible(true);
+						new ConstructorAdminMenu().setVisible(true);
 					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
 			}
 		});
-		btnBack.setBounds(483, 434, 97, 25);
+		btnBack.setBounds(602, 534, 97, 25);
 		contentPane.add(btnBack);
-		
 	}
 
 }

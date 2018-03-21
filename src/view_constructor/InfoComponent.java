@@ -1,4 +1,4 @@
-package view_Constructor;
+package view_constructor;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -75,7 +75,6 @@ public class InfoComponent extends JFrame {
 				try {
 					new ComponentInformation(InfoComponent.this).setVisible(true);
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

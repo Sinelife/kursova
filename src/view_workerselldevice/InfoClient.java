@@ -14,7 +14,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import dao.ClientDao;
-import dao.OrderDeviceDao;
 import domain.Client;
 import domain.OrderDevice;
 import main.MethodsForFrames;
@@ -104,12 +103,10 @@ public class InfoClient extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				client_id_to_look = MethodsForFrames.getClientIdByClientName(client_name_to_look, client_id_to_look, ClientComboBox, clients);
-
 				InfoClient.this.setVisible(false);
 				try {
 					new ClientInformation(InfoClient.this).setVisible(true);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -124,21 +121,8 @@ public class InfoClient extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				OrderInClientComboBox.removeAllItems();
-				
 				client_id_to_look = MethodsForFrames.getClientIdByClientName(client_name_to_look, client_id_to_look, ClientComboBox, clients);
-				
-				try {
-					OrdersInClient = cd.getAllOrdersInClient(client_id_to_look);
-				} catch (SQLException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
-				}
-				for(Order order : OrdersInClient)
-				{
-					OrderInClientComboBox.addItem(order.getOrderName());
-				}
-
+				OrdersInClient = MethodsForFrames.getAllOrdersInClient(client_id_to_look, OrdersInClient, OrderInClientComboBox);
 			}
 		});
 		SelectClientButton.setBounds(40, 179, 106, 25);
@@ -153,44 +137,8 @@ public class InfoClient extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				DeviceInOrderComboBox.removeAllItems();
-				
 				order_id_to_look = MethodsForFrames.getOrderIdByOrderName(order_name_to_look, order_id_to_look, OrderInClientComboBox, OrdersInClient);
-				
-				
-				OrderDeviceDao odd = new OrderDeviceDao();
-				try {
-					DevicesInfoInOrder = odd.getAllFromOrder(order_id_to_look);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				for(OrderDevice order_device : DevicesInfoInOrder)
-				{
-					String device_name = null;
-					try {
-						device_name = odd.getDeviceNameById(order_id_to_look, order_device.getDeviceId());
-					} catch (SQLException e2) {
-						e2.printStackTrace();
-					}
-					String device_supply_voltage = null;
-					try {
-						device_supply_voltage = odd.getSupplyVoltageById(order_id_to_look, order_device.getDeviceId());
-					} catch (SQLException e1) {
-						e1.printStackTrace();
-					}
-					String border_regulation_time = null;
-					try {
-						border_regulation_time = odd.getBorderRegulationTimeById(order_id_to_look, order_device.getDeviceId());
-					} catch (SQLException e1) {
-						e1.printStackTrace();
-					}
-					String info = "Назва: " + device_name + 
-							"  Напруга живлення: " + device_supply_voltage +
-							"  Границі регулювання часу: " + border_regulation_time +
-							"  Кількість: " + order_device.getNumber();
-					DeviceInOrderComboBox.addItem(info);
-				}
+				MethodsForFrames.getDeviceInfoFromOrder(order_id_to_look, DevicesInfoInOrder, DeviceInOrderComboBox);
 			}
 		});
 		SelectOrderButton.setBounds(40, 340, 106, 25);
@@ -204,12 +152,10 @@ public class InfoClient extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				order_id_to_look = MethodsForFrames.getOrderIdByOrderName(order_name_to_look, order_id_to_look, OrderInClientComboBox, OrdersInClient);
-				
 				InfoClient.this.setVisible(false);
 				try {
 					new OrderInformation(InfoClient.this).setVisible(true);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}

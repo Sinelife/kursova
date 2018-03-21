@@ -14,7 +14,7 @@ import javax.swing.border.EmptyBorder;
 
 import dao.UserDao;
 import domain.User;
-import view_Constructor.ConstructorMenu;
+import view_constructor.ConstructorMenu;
 import view_workerbuycomponent.WorkerDeliveryDepartmentMenu;
 import view_workerselldevice.WorkerSalesDepartmentMenu;
 

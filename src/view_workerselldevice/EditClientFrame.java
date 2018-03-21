@@ -14,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 
 import dao.ClientDao;
 import domain.Client;
+import main.MethodsForFrames;
 import view.AuthorisationMenu;
 
 public class EditClientFrame extends JFrame {
@@ -46,7 +47,7 @@ public class EditClientFrame extends JFrame {
 		
 		
 		JLabel lblNewLabel = new JLabel("Редагування інформації клієнта");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		lblNewLabel.setBounds(52, 13, 472, 59);
 		contentPane.add(lblNewLabel);
 		
@@ -102,21 +103,14 @@ public class EditClientFrame extends JFrame {
 		CodeTaxpayerField.setText(c.getCodeTaxpayer());
 
 		
-		JButton AddButton = new JButton("Додати");
+		JButton AddButton = new JButton("Редагувати");
 		AddButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				
-				c.setName(NameField.getText());
-				c.setPhone(PhoneField.getText());
-				c.setContactPIB(ContactPIBField.getText());
-				c.setCodeERPOU(CodeERPOUField.getText());
-				c.setCodeTaxpayer(CodeTaxpayerField.getText());
 				try {
-					cd.updateClient(c);
+					MethodsForFrames.updateClient(c, NameField, PhoneField, ContactPIBField, CodeERPOUField, CodeTaxpayerField);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				EditClientFrame.this.setVisible(false);
@@ -124,7 +118,7 @@ public class EditClientFrame extends JFrame {
 				new ClientMenu().setVisible(true);
 			}
 		});
-		AddButton.setBounds(52, 427, 97, 25);
+		AddButton.setBounds(52, 427, 125, 25);
 		contentPane.add(AddButton);
 		
 		

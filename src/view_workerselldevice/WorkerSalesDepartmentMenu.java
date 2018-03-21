@@ -78,7 +78,6 @@ public class WorkerSalesDepartmentMenu extends JFrame
 				try {
 					new ChangeLoginPassword(WorkerSalesDepartmentMenu.this).setVisible(true);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} 
 			}

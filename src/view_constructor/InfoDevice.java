@@ -1,4 +1,4 @@
-package view_Constructor;
+package view_constructor;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -76,12 +76,10 @@ public class InfoDevice extends JFrame {
 			public void actionPerformed(ActionEvent arg0) 
 			{
 				id_to_look = MethodsForFrames.getDeviceIdByDeviceName(name_to_look, id_to_look, DeviceComboBox, devices);
-				
 				InfoDevice.this.setVisible(false);
 				try {
 					new DeviceInformation(InfoDevice.this).setVisible(true);
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

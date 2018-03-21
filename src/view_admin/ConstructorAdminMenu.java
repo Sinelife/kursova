@@ -7,8 +7,8 @@ import javax.swing.border.EmptyBorder;
 import dao.UserDao;
 import domain.User;
 import view.AuthorisationMenu;
-import view_Constructor.ComponentMenu;
-import view_Constructor.DeviceMenu;
+import view_constructor.ComponentMenu;
+import view_constructor.DeviceMenu;
 
 import javax.swing.JLabel;
 import java.awt.Font;

@@ -57,7 +57,6 @@ public class OrderMenu extends JFrame {
 				try {
 					new InfoOrder(OrderMenu.this).setVisible(true);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -95,7 +94,6 @@ public class OrderMenu extends JFrame {
 				try {
 					new EditOrder(OrderMenu.this).setVisible(true);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}	
 			}
@@ -116,7 +114,6 @@ public class OrderMenu extends JFrame {
 				try {
 					new EditOrderDevice(OrderMenu.this).setVisible(true);
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -139,7 +136,6 @@ public class OrderMenu extends JFrame {
 				try {
 					new ChooseClient().setVisible(true);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}

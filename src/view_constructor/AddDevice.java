@@ -1,11 +1,8 @@
-package view_Constructor;
+package view_constructor;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
-import java.sql.SQLException;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -13,8 +10,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 
-import dao.DeviceDao;
-import domain.Device;
+import main.MethodsForFrames;
 import view.AuthorisationMenu;
 
 import javax.swing.JButton;
@@ -36,10 +32,6 @@ public class AddDevice extends JFrame
 	 */
 	public AddDevice(JFrame parent)
 	{
-		DeviceDao dd = new DeviceDao();
-		Device d = new Device();
-		
-		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 646, 558);
 		contentPane = new JPanel();
@@ -116,22 +108,7 @@ public class AddDevice extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				
-				d.setName(NameField.getText());
-				d.setSupplyVoltage(SupplyVoltageField.getText());
-				d.setBorderRegulationTime(BorderRegulationTimeField.getText());
-				d.setRating(Integer.valueOf(RatingField.getText()));
-				d.setDate(Date.valueOf(StartDateField.getText()));
-				d.setWorkPrice(Integer.valueOf(WorkPriceField.getText()));
-				d.setComponentsPrice(0);
-				d.setProfitPrice((d.getWorkPrice() + d.getComponentsPrice())/2);
-				d.setSumPrice(d.getWorkPrice() + d.getComponentsPrice() + d.getProfitPrice());
-				try {
-					dd.addDevice(d);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				MethodsForFrames.addDevice(NameField, SupplyVoltageField, BorderRegulationTimeField, RatingField, StartDateField, WorkPriceField);
 				if (parent != null)
 					parent.setVisible(true);
 				AddDevice.this.setVisible(false);

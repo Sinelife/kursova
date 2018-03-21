@@ -3,8 +3,6 @@ package view_workerbuycomponent;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -12,8 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import dao.ProviderDao;
-import domain.Provider;
+import main.MethodsForFrames;
 import view.AuthorisationMenu;
 
 public class AddProvider extends JFrame {
@@ -31,10 +28,7 @@ public class AddProvider extends JFrame {
 	 * Create the frame.
 	 */
 	public AddProvider(JFrame parent) 
-	{
-		ProviderDao pd = new ProviderDao();
-		Provider p = new Provider();
-		
+	{	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 646, 558);
 		contentPane = new JPanel();
@@ -110,19 +104,7 @@ public class AddProvider extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				
-				p.setName(NameField.getText());
-				p.setPhone(PhoneField.getText());
-				p.setContactPIB(ContactPIBField.getText());
-				p.setCodeERPOU(CodeERPOUField.getText());
-				p.setCodeTaxpayer(CodeTaxpayerField.getText());
-				p.setSpecialization(SpecializationField.getText());
-				try {
-					pd.addProvider(p);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				MethodsForFrames.addProvider(NameField, PhoneField, ContactPIBField, CodeERPOUField, CodeTaxpayerField, SpecializationField);
 				if (parent != null)
 					parent.setVisible(true);
 				AddProvider.this.setVisible(false);

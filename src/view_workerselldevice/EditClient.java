@@ -72,7 +72,6 @@ public class EditClient extends JFrame
 				try {
 					new EditClientFrame(EditClient.this).setVisible(true);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}

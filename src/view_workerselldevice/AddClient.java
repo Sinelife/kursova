@@ -3,16 +3,13 @@ package view_workerselldevice;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import dao.ClientDao;
-import domain.Client;
+import main.MethodsForFrames;
 import view.AuthorisationMenu;
 
 import javax.swing.JButton;
@@ -33,10 +30,6 @@ public class AddClient extends JFrame
 	 */
 	public AddClient(JFrame parent)
 	{
-		ClientDao cd = new ClientDao();
-		Client c = new Client();
-		
-		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 646, 558);
 		contentPane = new JPanel();
@@ -103,18 +96,7 @@ public class AddClient extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				
-				c.setName(NameField.getText());
-				c.setPhone(PhoneField.getText());
-				c.setContactPIB(ContactPIBField.getText());
-				c.setCodeERPOU(CodeERPOUField.getText());
-				c.setCodeTaxpayer(CodeTaxpayerField.getText());
-				try {
-					cd.addClient(c);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				MethodsForFrames.addClient(NameField, PhoneField, ContactPIBField, CodeERPOUField, CodeTaxpayerField);
 				if (parent != null)
 					parent.setVisible(true);
 				AddClient.this.setVisible(false);

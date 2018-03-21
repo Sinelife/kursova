@@ -1,4 +1,4 @@
-package view_Constructor;
+package view_constructor;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -15,9 +15,11 @@ import javax.swing.border.EmptyBorder;
 import dao.ComponentDao;
 import domain.Component;
 import view.AuthorisationMenu;
+import view_director.ConstructDepartmentDirectorMenu;
 
+import java.awt.Color;
 
-public class EditComponentFrame extends JFrame {
+public class ComponentInformation extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField TypeField;
@@ -25,17 +27,28 @@ public class EditComponentFrame extends JFrame {
 	private JTextField TechnicalInfoField;
 	private JTextField PriceField;
 	
-	
+
+
 	/**
 	 * Create the frame.
 	 * @throws SQLException 
 	 */
-	public EditComponentFrame(JFrame parent) throws SQLException 
+	public ComponentInformation(JFrame parent) throws SQLException 
 	{
  	  	ComponentDao cd = new ComponentDao();
- 	  	Component c = cd.readComponent(EditComponent.id_to_edit);
+ 	  	Component c = new Component();
 		
-		
+ 	  	
+		if(AuthorisationMenu.user_role.equals("director"))
+		{
+			c = cd.readComponent(ConstructDepartmentDirectorMenu.component_id_to_look);		
+		}
+		else
+		{
+			c = cd.readComponent(InfoComponent.id_to_look);
+		}
+ 	  	
+ 	  	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 646, 558);
 		contentPane = new JPanel();
@@ -45,7 +58,7 @@ public class EditComponentFrame extends JFrame {
 		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
 		
 		
-		JLabel lblNewLabel = new JLabel("Редагування компонента");
+		JLabel lblNewLabel = new JLabel("Інформація про компонент");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblNewLabel.setBounds(103, 13, 421, 59);
 		contentPane.add(lblNewLabel);
@@ -63,60 +76,43 @@ public class EditComponentFrame extends JFrame {
 		contentPane.add(TechnicalInfoLabel);
 		
 		JLabel PriceLabel = new JLabel("Ціна");
-		PriceLabel.setBounds(36, 323, 136, 22);
+		PriceLabel.setBounds(36, 319, 136, 22);
 		contentPane.add(PriceLabel);
 		
 		
 		TypeField = new JTextField();
+		TypeField.setBackground(Color.WHITE);
+		TypeField.setEditable(false);
 		TypeField.setBounds(209, 157, 350, 22);
 		contentPane.add(TypeField);
 		TypeField.setColumns(10);
 		TypeField.setText(c.getType());
 		
 		NameField = new JTextField();
+		NameField.setBackground(Color.WHITE);
+		NameField.setEditable(false);
 		NameField.setBounds(209, 209, 350, 22);
 		contentPane.add(NameField);
 		NameField.setColumns(10);
 		NameField.setText(c.getName());
 		
 		TechnicalInfoField = new JTextField();
+		TechnicalInfoField.setBackground(Color.WHITE);
+		TechnicalInfoField.setEditable(false);
 		TechnicalInfoField.setColumns(10);
 		TechnicalInfoField.setBounds(209, 267, 350, 22);
 		contentPane.add(TechnicalInfoField);
 		TechnicalInfoField.setText(c.getTechnicalInfo());
 		
+		
 		PriceField = new JTextField();
 		PriceField.setText((String) null);
+		PriceField.setEditable(false);
 		PriceField.setColumns(10);
-		PriceField.setBounds(209, 323, 350, 22);
+		PriceField.setBackground(Color.WHITE);
+		PriceField.setBounds(209, 319, 350, 22);
 		contentPane.add(PriceField);
 		PriceField.setText(String.valueOf(c.getPrice()));
-		
-		
-		JButton EditButton = new JButton("Редагувати");
-		EditButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		EditButton.addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent e) 
-			{
-				c.setType(TypeField.getText());
-				c.setName(NameField.getText());
-				c.setTechnicalInfo(TechnicalInfoField.getText());
-				c.setPrice(Integer.valueOf(PriceField.getText()));
-				try {
-					cd.updateComponent(c);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				EditComponentFrame.this.setVisible(false);
-				EditComponentFrame.this.dispose();
-				new ComponentMenu().setVisible(true);
-			}
-		});
-		EditButton.setBounds(36, 427, 125, 25);
-		contentPane.add(EditButton);
-		
 		
 		
 		JButton btnBack = new JButton("BACK");
@@ -124,8 +120,8 @@ public class EditComponentFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (parent != null)
 					parent.setVisible(true);
-				EditComponentFrame.this.setVisible(false);
-				EditComponentFrame.this.dispose();
+				ComponentInformation.this.setVisible(false);
+				ComponentInformation.this.dispose();
 			}
 		});
 		btnBack.setBounds(489, 427, 97, 25);

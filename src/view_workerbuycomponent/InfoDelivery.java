@@ -13,7 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import dao.DeliveryComponentDao;
 import dao.DeliveryDao;
 import domain.Delivery;
 import domain.DeliveryComponent;
@@ -79,37 +78,8 @@ public class InfoDelivery extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				ComponentInDeliveryComboBox.removeAllItems();
-				
 				delivery_id_to_look = MethodsForFrames.getDeliveryIdByDeliveryName(delivery_name_to_look, delivery_id_to_look, DeliveryComboBox, deliveries);
-
-				DeliveryComponentDao dcd = new DeliveryComponentDao();
-				try {
-					ComponentsInfoInDelivery = dcd.getAllFromDelivery(delivery_id_to_look);
-				} catch (SQLException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
-				}
-				for(DeliveryComponent delivery_component : ComponentsInfoInDelivery)
-				{
-					String component_name = null;
-					try {
-						component_name = dcd.getComponentNameById(delivery_id_to_look, delivery_component.getComponentId());
-					} catch (SQLException e2) {
-						e2.printStackTrace();
-					}
-					String component_type = null;
-					try {
-						component_type = dcd.getComponentTypeById(delivery_id_to_look, delivery_component.getComponentId());
-					} catch (SQLException e1) {
-						e1.printStackTrace();
-					}
-					String info = "Назва: " + component_name + 
-							"  Тип: " + component_type +
-							"  Кількість: " + delivery_component.getNumber();
-					ComponentInDeliveryComboBox.addItem(info);
-				}
-
+				MethodsForFrames.getComponentInfoFromDelivery(delivery_id_to_look, ComponentsInfoInDelivery, ComponentInDeliveryComboBox);
 			}
 		});
 		SelectDeliveryButton.setBounds(12, 201, 97, 25);

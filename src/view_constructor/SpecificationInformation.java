@@ -1,4 +1,4 @@
-package view_Constructor;
+package view_constructor;
 
 import java.awt.Font;
 import java.sql.SQLException;
@@ -8,13 +8,10 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
-import dao.ComponentDao;
 import dao.DeviceDao;
 import domain.Component;
-import domain.ComponentDevice;
 import domain.Device;
 import main.MethodsForFrames;
 import view.AuthorisationMenu;
@@ -26,10 +23,11 @@ import java.awt.event.ActionEvent;
 public class SpecificationInformation extends JFrame {
 
 	private JPanel contentPane;
-	JTable table;
 	public static int id_to_choose;
 	public String name_to_choose;
 
+	List<Component> components = null;
+	
 	/**
 	 * Create the frame.
 	 * @throws SQLException 
@@ -38,7 +36,7 @@ public class SpecificationInformation extends JFrame {
 	{
 		DeviceDao dd = new DeviceDao();
 		List<Device> devices = dd.getAll();
-		ComponentDao cd = new ComponentDao();
+	
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 738, 558);
@@ -78,36 +76,9 @@ public class SpecificationInformation extends JFrame {
 		SelectButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent arg0) 
-			{
-				ComponentInfoComboBox.removeAllItems();	
-				List<Component> components = null;
-
+			{	
 				id_to_choose = MethodsForFrames.getDeviceIdByDeviceName(name_to_choose, id_to_choose, DeviceComboBox, devices);
-				
-				try {
-					components = dd.getAllComponentsInDevice(id_to_choose);
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				String info[] = new String[100];
-				int i = 0 ;
-				ComponentDevice c_d = null;
-				Component comp = null;
-				for(Component component : components)
-				{
-					try {
-						c_d = dd.readComponentInDevice(id_to_choose, component.getId());
-						comp = cd.readComponent(component.getId());
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					info[i] = "Назва: " + comp.getName() + "    Тип: " + comp.getType() + "    Кількість:" + c_d.getNumber();
-					ComponentInfoComboBox.addItem(info[i]);
-					i++;
-				}
-				
+				MethodsForFrames.getSpecificationInfo(id_to_choose, components, ComponentInfoComboBox);
 			}
 		});
 		SelectButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -122,12 +93,10 @@ public class SpecificationInformation extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				id_to_choose = MethodsForFrames.getDeviceIdByDeviceName(name_to_choose, id_to_choose, DeviceComboBox, devices);
-				
 				SpecificationInformation.this.setVisible(false);
 				try {
 					new DeviceInformation(SpecificationInformation.this).setVisible(true);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -135,6 +104,7 @@ public class SpecificationInformation extends JFrame {
 		InfoButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		InfoButton.setBounds(556, 121, 122, 34);
 		contentPane.add(InfoButton);
+		
 		
 		
 		JButton btnBack = new JButton("BACK");

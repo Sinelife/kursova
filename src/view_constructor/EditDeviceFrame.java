@@ -1,4 +1,4 @@
-package view_Constructor;
+package view_constructor;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 import dao.DeviceDao;
 import domain.Device;
+import main.MethodsForFrames;
 import view.AuthorisationMenu;
 
 
@@ -123,20 +124,7 @@ public class EditDeviceFrame extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				d.setName(NameField.getText());
-				d.setSupplyVoltage(SupplyVoltageField.getText());
-				d.setBorderRegulationTime(BorderRegulationTimeField.getText());
-				d.setRating(Integer.valueOf(RatingField.getText()));
-				d.setDate(Date.valueOf(StartDateField.getText()));
-				d.setWorkPrice(Integer.valueOf(WorkPriceField.getText()));
-				d.setProfitPrice((d.getWorkPrice() + d.getComponentsPrice())/2);
-				d.setSumPrice(d.getWorkPrice() + d.getComponentsPrice() + d.getProfitPrice());
-				try {
-					dd.updateDevice(d);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				MethodsForFrames.updateDevice(d, NameField, SupplyVoltageField, BorderRegulationTimeField, RatingField, StartDateField, WorkPriceField);
 				EditDeviceFrame.this.setVisible(false);
 				EditDeviceFrame.this.dispose();
 				new DeviceMenu().setVisible(true);

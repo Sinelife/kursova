@@ -1,4 +1,4 @@
-package view_Constructor;
+package view_constructor;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;

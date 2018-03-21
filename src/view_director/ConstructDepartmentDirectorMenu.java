@@ -18,8 +18,9 @@ import domain.Component;
 import domain.Device;
 import main.MethodsForFrames;
 import view.AuthorisationMenu;
-import view_Constructor.ComponentInformation;
-import view_Constructor.DeviceInformation;
+import view_constructor.ComponentInformation;
+import view_constructor.DeviceInformation;
+
 import javax.swing.JTextField;
 
 public class ConstructDepartmentDirectorMenu extends JFrame 

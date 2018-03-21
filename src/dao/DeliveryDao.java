@@ -70,7 +70,7 @@ public class DeliveryDao
 	/**
 	 * @throws SQLException
 	 */
-	public void updateDelivery(Delivery d) throws SQLException 
+	public void updateDelivery(Delivery d, boolean message) throws SQLException 
 	{
 		String sql = "update delivery set delivery_name = ?, provider_id = ?, startdate = ?, paid = ?, shipped = ? where delivery_id = " + d.getId();
 		PreparedStatement stm = Main.conn.prepareStatement(sql);
@@ -80,7 +80,10 @@ public class DeliveryDao
 		stm.setBoolean(4, d.isPaid());
 		stm.setBoolean(5, d.isShipped());
 		stm.executeUpdate();
-		JOptionPane.showMessageDialog(null, "Інформація про замовлення на постачання відредаговано!");
+		if(message == true)
+		{
+			JOptionPane.showMessageDialog(null, "Інформація про замовлення на постачання відредаговано!");
+		}
 	}
 
 	

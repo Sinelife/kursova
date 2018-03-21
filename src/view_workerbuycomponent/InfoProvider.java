@@ -13,7 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import dao.DeliveryComponentDao;
 import dao.ProviderDao;
 import domain.Provider;
 import main.MethodsForFrames;
@@ -101,20 +100,11 @@ public class InfoProvider extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				provider_name_to_look = String.valueOf(ProviderComboBox.getSelectedItem());
-				for(Provider provider : providers) 
-				{
-					provider_id_to_look = provider.getId();
-					if(provider.getName().equals(provider_name_to_look))
-					{
-						break;
-					}
-				}
+				provider_id_to_look = MethodsForFrames.getProviderIdByProviderName(provider_name_to_look, provider_id_to_look, ProviderComboBox, providers);
 				InfoProvider.this.setVisible(false);
 				try {
 					new ProviderInformation(InfoProvider.this).setVisible(true);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -131,20 +121,8 @@ public class InfoProvider extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				DeliveryInProviderComboBox.removeAllItems();
-				
 				provider_id_to_look = MethodsForFrames.getProviderIdByProviderName(provider_name_to_look, provider_id_to_look, ProviderComboBox, providers);
-				
-				try {
-					DeliveriesInProvider = pd.getAllDeliveriesInProvider(provider_id_to_look);
-				} catch (SQLException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
-				}
-				for(Delivery delivery : DeliveriesInProvider)
-				{
-					DeliveryInProviderComboBox.addItem(delivery.getDeliveryName());
-				}
+				DeliveriesInProvider = MethodsForFrames.getAllDeliveriesInProvider(provider_id_to_look, DeliveriesInProvider, DeliveryInProviderComboBox);
 
 			}
 		});
@@ -159,45 +137,8 @@ public class InfoProvider extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				ComponentInDeliveryComboBox.removeAllItems();
-				
-				
-				delivery_name_to_look = String.valueOf(DeliveryInProviderComboBox.getSelectedItem());
-				for(Delivery delivery : DeliveriesInProvider) 
-				{
-					delivery_id_to_look = delivery.getId();
-					if(delivery.getDeliveryName().equals(delivery_name_to_look))
-					{
-						break;
-					}
-				}
-				DeliveryComponentDao dcd = new DeliveryComponentDao();
-				
-				try {
-					ComponentsInfoInDelivery = dcd.getAllFromDelivery(delivery_id_to_look);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				for(DeliveryComponent delivery_component : ComponentsInfoInDelivery)
-				{
-					String component_name = null;
-					try {
-						component_name = dcd.getComponentNameById(delivery_id_to_look, delivery_component.getComponentId());
-					} catch (SQLException e2) {
-						e2.printStackTrace();
-					}
-					String component_type = null;
-					try {
-						component_type = dcd.getComponentTypeById(delivery_id_to_look, delivery_component.getComponentId());
-					} catch (SQLException e1) {
-						e1.printStackTrace();
-					}
-					String info = "Назва: " + component_name + 
-							"  Тип: " + component_type +
-							"  Кількість: " + delivery_component.getNumber();
-					ComponentInDeliveryComboBox.addItem(info);
-				}
+				delivery_id_to_look = MethodsForFrames.getDeliveryIdByDeliveryName(delivery_name_to_look, delivery_id_to_look, DeliveryInProviderComboBox, DeliveriesInProvider);
+				MethodsForFrames.getComponentInfoFromDelivery(delivery_id_to_look, ComponentsInfoInDelivery, ComponentInDeliveryComboBox);
 			}
 		});
 		SelectDeliveryButton.setBounds(40, 340, 97, 25);
@@ -210,20 +151,11 @@ public class InfoProvider extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				delivery_name_to_look = String.valueOf(DeliveryInProviderComboBox.getSelectedItem());
-				for(Delivery delivery : DeliveriesInProvider) 
-				{
-					delivery_id_to_look = delivery.getId();
-					if(delivery.getDeliveryName().equals(delivery_name_to_look))
-					{
-						break;
-					}
-				}
+				delivery_id_to_look = MethodsForFrames.getDeliveryIdByDeliveryName(delivery_name_to_look, delivery_id_to_look, DeliveryInProviderComboBox, DeliveriesInProvider);
 				InfoProvider.this.setVisible(false);
 				try {
 					new DeliveryInformation(InfoProvider.this).setVisible(true);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}

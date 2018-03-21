@@ -1,4 +1,4 @@
-package view_Constructor;
+package view_constructor;
 /*
  * TableDemo.java requires no other files.
  */

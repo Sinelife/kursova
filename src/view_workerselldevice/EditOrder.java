@@ -3,7 +3,6 @@ package view_workerselldevice;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -25,7 +24,6 @@ import javax.swing.JCheckBox;
 public class EditOrder extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField NameField;
 	private JTextField StartDateField;
 	private JCheckBox PaidCheckBox;
 	private JCheckBox ShippedCheckBox;
@@ -46,7 +44,7 @@ public class EditOrder extends JFrame {
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 759, 547);
+		setBounds(100, 100, 759, 447);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -60,7 +58,7 @@ public class EditOrder extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JComboBox<String> OrderComboBox = new JComboBox<String>();
-		OrderComboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		OrderComboBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		OrderComboBox.setBounds(39, 85, 559, 34);
 		contentPane.add(OrderComboBox);
 		for(Order order : orders) 
@@ -68,39 +66,29 @@ public class EditOrder extends JFrame {
 			OrderComboBox.addItem(order.getOrderName());
 		}
 		
-		JLabel NameLabel = new JLabel("Назва замовлення");
-		NameLabel.setBounds(39, 207, 133, 22);
-		contentPane.add(NameLabel);
-		
 		JLabel StartDateLabel = new JLabel("Дата початку");
-		StartDateLabel.setBounds(39, 249, 133, 22);
+		StartDateLabel.setBounds(39, 199, 133, 22);
 		contentPane.add(StartDateLabel);
 		
 		JLabel PaidLabel = new JLabel("Сплачено");
-		PaidLabel.setBounds(39, 295, 133, 22);
+		PaidLabel.setBounds(39, 245, 133, 22);
 		contentPane.add(PaidLabel);
 		
 		JLabel ShippedLabel = new JLabel("Відвантажено");
-		ShippedLabel.setBounds(39, 334, 129, 22);
+		ShippedLabel.setBounds(39, 284, 129, 22);
 		contentPane.add(ShippedLabel);
-	
-		
-		NameField = new JTextField();
-		NameField.setBounds(181, 207, 340, 22);
-		contentPane.add(NameField);
-		NameField.setColumns(10);
 		
 		StartDateField = new JTextField();
-		StartDateField.setBounds(184, 249, 337, 22);
+		StartDateField.setBounds(184, 199, 337, 22);
 		contentPane.add(StartDateField);
 		StartDateField.setColumns(10);
 		
 		PaidCheckBox = new JCheckBox();
-		PaidCheckBox.setBounds(180, 295, 113, 25);
+		PaidCheckBox.setBounds(180, 245, 113, 25);
 		contentPane.add(PaidCheckBox);
 		
 		ShippedCheckBox = new JCheckBox();
-		ShippedCheckBox.setBounds(180, 331, 113, 25);
+		ShippedCheckBox.setBounds(180, 281, 113, 25);
 		contentPane.add(ShippedCheckBox);
 		
 		
@@ -115,10 +103,8 @@ public class EditOrder extends JFrame {
 				try {
 					o = od.readOrder(order_id_to_edit);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				NameField.setText(o.getOrderName());
 				StartDateField.setText(String.valueOf(o.getStartDate()));
 				if(o.isPaid() == true)
 				{
@@ -148,23 +134,14 @@ public class EditOrder extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				o.setOrderName(NameField.getText());
-				o.setStartDate(Date.valueOf(StartDateField.getText()));
-				o.setPaid(PaidCheckBox.isSelected());
-				o.setShipped(ShippedCheckBox.isSelected());
-				try {
-					od.updateOrder(o);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				MethodsForFrames.updateOrder(o, StartDateField, PaidCheckBox, ShippedCheckBox);
 				EditOrder.this.setVisible(false);
 				EditOrder.this.dispose();
 				new OrderMenu().setVisible(true);
 			}
 		});
 		button.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		button.setBounds(39, 421, 123, 34);
+		button.setBounds(39, 356, 123, 34);
 		contentPane.add(button);
 		
 		
@@ -178,7 +155,7 @@ public class EditOrder extends JFrame {
 				EditOrder.this.dispose();
 			}
 		});
-		btnBack.setBounds(632, 430, 97, 25);
+		btnBack.setBounds(632, 365, 97, 25);
 		contentPane.add(btnBack);
 	}
 }

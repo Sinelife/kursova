@@ -1,54 +1,34 @@
-package view_Constructor;
+package view_constructor;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
-
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import dao.ComponentDao;
-import domain.Component;
+
+import main.MethodsForFrames;
 import view.AuthorisationMenu;
-import view_director.ConstructDepartmentDirectorMenu;
 
-import java.awt.Color;
+import javax.swing.JButton;
 
-public class ComponentInformation extends JFrame {
+public class AddComponent extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField TypeField;
 	private JTextField NameField;
 	private JTextField TechnicalInfoField;
 	private JTextField PriceField;
-	
 
 
 	/**
 	 * Create the frame.
-	 * @throws SQLException 
 	 */
-	public ComponentInformation(JFrame parent) throws SQLException 
+	public AddComponent(JFrame parent)
 	{
- 	  	ComponentDao cd = new ComponentDao();
- 	  	Component c = new Component();
-		
- 	  	
-		if(AuthorisationMenu.user_role.equals("director"))
-		{
-			c = cd.readComponent(ConstructDepartmentDirectorMenu.component_id_to_look);		
-		}
-		else
-		{
-			c = cd.readComponent(InfoComponent.id_to_look);
-		}
- 	  	
- 	  	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 646, 558);
 		contentPane = new JPanel();
@@ -58,7 +38,7 @@ public class ComponentInformation extends JFrame {
 		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
 		
 		
-		JLabel lblNewLabel = new JLabel("Інформація про компонент");
+		JLabel lblNewLabel = new JLabel("Додавання нового компонента");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblNewLabel.setBounds(103, 13, 421, 59);
 		contentPane.add(lblNewLabel);
@@ -76,43 +56,47 @@ public class ComponentInformation extends JFrame {
 		contentPane.add(TechnicalInfoLabel);
 		
 		JLabel PriceLabel = new JLabel("Ціна");
-		PriceLabel.setBounds(36, 319, 136, 22);
+		PriceLabel.setBounds(36, 318, 136, 22);
 		contentPane.add(PriceLabel);
 		
 		
 		TypeField = new JTextField();
-		TypeField.setBackground(Color.WHITE);
-		TypeField.setEditable(false);
 		TypeField.setBounds(209, 157, 350, 22);
 		contentPane.add(TypeField);
 		TypeField.setColumns(10);
-		TypeField.setText(c.getType());
 		
 		NameField = new JTextField();
-		NameField.setBackground(Color.WHITE);
-		NameField.setEditable(false);
 		NameField.setBounds(209, 209, 350, 22);
 		contentPane.add(NameField);
 		NameField.setColumns(10);
-		NameField.setText(c.getName());
 		
 		TechnicalInfoField = new JTextField();
-		TechnicalInfoField.setBackground(Color.WHITE);
-		TechnicalInfoField.setEditable(false);
 		TechnicalInfoField.setColumns(10);
 		TechnicalInfoField.setBounds(209, 267, 350, 22);
 		contentPane.add(TechnicalInfoField);
-		TechnicalInfoField.setText(c.getTechnicalInfo());
-		
-		
+				
 		PriceField = new JTextField();
-		PriceField.setText((String) null);
-		PriceField.setEditable(false);
 		PriceField.setColumns(10);
-		PriceField.setBackground(Color.WHITE);
-		PriceField.setBounds(209, 319, 350, 22);
+		PriceField.setBounds(209, 318, 350, 22);
 		contentPane.add(PriceField);
-		PriceField.setText(String.valueOf(c.getPrice()));
+
+		
+		
+		JButton AddButton = new JButton("Додати");
+		AddButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				MethodsForFrames.addComponent(TypeField, NameField, TechnicalInfoField, PriceField);
+				if (parent != null)
+					parent.setVisible(true);
+				AddComponent.this.setVisible(false);
+				AddComponent.this.dispose();
+			}
+		});
+		AddButton.setBounds(52, 427, 97, 25);
+		contentPane.add(AddButton);
+
 		
 		
 		JButton btnBack = new JButton("BACK");
@@ -120,12 +104,11 @@ public class ComponentInformation extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (parent != null)
 					parent.setVisible(true);
-				ComponentInformation.this.setVisible(false);
-				ComponentInformation.this.dispose();
+				AddComponent.this.setVisible(false);
+				AddComponent.this.dispose();
 			}
 		});
 		btnBack.setBounds(489, 427, 97, 25);
 		contentPane.add(btnBack);
 	}
-
 }

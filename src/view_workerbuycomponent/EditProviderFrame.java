@@ -14,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 
 import dao.ProviderDao;
 import domain.Provider;
+import main.MethodsForFrames;
 import view.AuthorisationMenu;
 
 
@@ -48,8 +49,8 @@ public class EditProviderFrame extends JFrame {
 		
 		
 		JLabel lblNewLabel = new JLabel("Редагування інформації постачальника");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		lblNewLabel.setBounds(52, 13, 472, 59);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		lblNewLabel.setBounds(50, 13, 480, 59);
 		contentPane.add(lblNewLabel);
 		
 		JLabel NameLabel = new JLabel("Ім'я");
@@ -114,22 +115,14 @@ public class EditProviderFrame extends JFrame {
 		SpecializationField.setText(p.getSpecialization());
 
 		
-		JButton AddButton = new JButton("Додати");
+		JButton AddButton = new JButton("Редагувати");
 		AddButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				
-				p.setName(NameField.getText());
-				p.setPhone(PhoneField.getText());
-				p.setContactPIB(ContactPIBField.getText());
-				p.setCodeERPOU(CodeERPOUField.getText());
-				p.setCodeTaxpayer(CodeTaxpayerField.getText());
-				p.setSpecialization(SpecializationField.getText());
 				try {
-					pd.updateProvider(p);
+					MethodsForFrames.updateProvider(p, NameField, PhoneField, ContactPIBField, CodeERPOUField, CodeTaxpayerField, SpecializationField);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				EditProviderFrame.this.setVisible(false);
@@ -137,7 +130,7 @@ public class EditProviderFrame extends JFrame {
 				new ProviderMenu().setVisible(true);
 			}
 		});
-		AddButton.setBounds(52, 427, 97, 25);
+		AddButton.setBounds(52, 427, 123, 25);
 		contentPane.add(AddButton);
 		
 

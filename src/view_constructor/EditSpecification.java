@@ -1,4 +1,4 @@
-package view_Constructor;
+package view_constructor;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -239,7 +239,6 @@ public class EditSpecification extends JFrame {
 		try {
 			components_for_delete = dd.getAllComponentsInDevice(id_to_choose);
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		DeleteComponentComboBox.removeAllItems();
@@ -251,7 +250,6 @@ public class EditSpecification extends JFrame {
 		try {
 			components_for_add = dd.getAllComponentsNotInDevice(id_to_choose);
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		AddComponentComboBox.removeAllItems();
@@ -263,7 +261,6 @@ public class EditSpecification extends JFrame {
 		try {
 			components_for_edit = dd.getAllComponentsInDevice(id_to_choose);
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		EditComponentComboBox.removeAllItems();

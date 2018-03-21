@@ -17,10 +17,6 @@ import dao.OrderDao;
 import domain.Order;
 import view.AuthorisationMenu;
 import view_director.SalesDepartmentDirectorMenu;
-import view_director.DeliveryDepartmentDirectorMenu;
-import view_workerbuycomponent.EditDeliveryComponent;
-import view_workerbuycomponent.InfoProvider;
-
 import java.awt.Color;
 
 public class OrderInformation extends JFrame {
