@@ -26,6 +26,7 @@ import domain.Device;
 import domain.Order;
 import domain.OrderDevice;
 import domain.Provider;
+import domain.Specialization;
 import domain.User;
 
 public class MethodsForFrames 
@@ -347,12 +348,12 @@ public class MethodsForFrames
 	
 	//Метод для додавання нового компоненту
 
-	public static void addComponent(JTextField TypeField, JTextField NameField,
-			JTextField TechnicalInfoField, JTextField PriceField) 
+	public static void addComponent(JComboBox<String> TypeComboBox, JTextField NameField,
+			JTextField TechnicalInfoField, JTextField PriceField) throws SQLException 
 	{
 		ComponentDao cd = new ComponentDao();
 		Component c = new Component();
-		c.setType(TypeField.getText());
+		c.setType(TypeComboBox.getSelectedItem().toString());
 		c.setName(NameField.getText());
 		c.setTechnicalInfo(TechnicalInfoField.getText());
 		c.setPrice(Integer.valueOf(PriceField.getText()));
@@ -508,11 +509,10 @@ public class MethodsForFrames
 	
 	//Метод для оновлення компоненту
 	
-	public static void updateComponent(Component c, JTextField TypeField, JTextField NameField,
+	public static void updateComponent(Component c, JTextField NameField,
 			JTextField TechnicalInfoField, JTextField PriceField) throws SQLException 
 	{
 		ComponentDao cd = new ComponentDao();
-		c.setType(TypeField.getText());
 		c.setName(NameField.getText());
 		c.setTechnicalInfo(TechnicalInfoField.getText());
 		c.setPrice(Integer.valueOf(PriceField.getText()));
@@ -799,117 +799,165 @@ public class MethodsForFrames
 	
 	
 	
-	//МЕТОДИ ДЛЯ РОБОТИ З КОМПОНЕНТАМИ В ЗАМОВЛЕННІ ПОСТАЧАННЯ
 	
-		//Метод для додавання компонентів до замовлення
-		
-		public static void addComponentsInDelivery(int delivery_id, int component_id, JTextField NumberAddField)
-		{
-			DeliveryDao dd = new DeliveryDao();
-			DeliveryComponent record = new DeliveryComponent();
-			record.setDeliveryId(delivery_id);
-			record.setComponentId(component_id);
-			record.setNumber(Integer.valueOf(NumberAddField.getText()));
-			try {
-				dd.addComponentInDelivery(record);
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
+	// МЕТОДИ ДЛЯ РОБОТИ З КОМПОНЕНТАМИ В ЗАМОВЛЕННІ ПОСТАЧАННЯ
+
+	// Метод для додавання компонентів до замовлення
+
+	public static void addComponentsInDelivery(int delivery_id, int component_id, JTextField NumberAddField) {
+		DeliveryDao dd = new DeliveryDao();
+		DeliveryComponent record = new DeliveryComponent();
+		record.setDeliveryId(delivery_id);
+		record.setComponentId(component_id);
+		record.setNumber(Integer.valueOf(NumberAddField.getText()));
+		try {
+			dd.addComponentInDelivery(record);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
 		}
+	}
 		
 		
-		//Метод для видалення компонентів з замовлення
-		
-		public static void deleteComponentsFromDelivery(int delivery_id, int component_id)
-		{
-			DeliveryDao dd = new DeliveryDao();
-			DeliveryComponent record = null;
-			try {
-				record = dd.readComponentInDelivery(delivery_id, component_id);
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-			try {
-				dd.deleteComponentFromDelivery(record);
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
+	// Метод для видалення компонентів з замовлення
+
+	public static void deleteComponentsFromDelivery(int delivery_id, int component_id) {
+		DeliveryDao dd = new DeliveryDao();
+		DeliveryComponent record = null;
+		try {
+			record = dd.readComponentInDelivery(delivery_id, component_id);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
 		}
-		
-		
-		//Метод для редагування кількості компонентів в замовленні
-		
-		public static void updateComponentsInDelivery(int delivery_id, int component_id, JTextField NumberEditField)
-		{
-			DeliveryDao dd = new DeliveryDao();
-			DeliveryComponent record = null;
-			try {
-				record = dd.readComponentInDelivery(delivery_id, component_id);
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-			record.setNumber(Integer.valueOf(NumberEditField.getText()));
-			try {
-				dd.updateComponentInDelivery(record);
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
+		try {
+			dd.deleteComponentFromDelivery(record);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
 		}
-		
-		
-		
-		
-		
-		//Метод для отримання всіх замовлень данного постачальника
-		
-		public static List<Delivery> getAllDeliveriesInProvider(int provider_id, List<Delivery> DeliveriesInProvider, JComboBox<String> DeliveryInProviderComboBox)
-		{
-			ProviderDao pd = new ProviderDao();
-			DeliveryInProviderComboBox.removeAllItems();
-			try {
-				DeliveriesInProvider = pd.getAllDeliveriesInProvider(provider_id);
-			} catch (SQLException e2) {
-				e2.printStackTrace();
-			}
-			for(Delivery delivery : DeliveriesInProvider)
-			{
-				DeliveryInProviderComboBox.addItem(delivery.getDeliveryName());
-			}
-			return DeliveriesInProvider;
+	}
+
+	// Метод для редагування кількості компонентів в замовленні
+
+	public static void updateComponentsInDelivery(int delivery_id, int component_id, JTextField NumberEditField) {
+		DeliveryDao dd = new DeliveryDao();
+		DeliveryComponent record = null;
+		try {
+			record = dd.readComponentInDelivery(delivery_id, component_id);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
 		}
+		record.setNumber(Integer.valueOf(NumberEditField.getText()));
+		try {
+			dd.updateComponentInDelivery(record);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+	}
+
+	// Метод для отримання всіх замовлень данного постачальника
+
+	public static List<Delivery> getAllDeliveriesInProvider(int provider_id, List<Delivery> DeliveriesInProvider,
+			JComboBox<String> DeliveryInProviderComboBox) {
+		ProviderDao pd = new ProviderDao();
+		DeliveryInProviderComboBox.removeAllItems();
+		try {
+			DeliveriesInProvider = pd.getAllDeliveriesInProvider(provider_id);
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+		}
+		for (Delivery delivery : DeliveriesInProvider) {
+			DeliveryInProviderComboBox.addItem(delivery.getDeliveryName());
+		}
+		return DeliveriesInProvider;
+	}
 
 		
 		
 		//Метод для отримання інформації про всі компоненти в замовленні
 		
-		public static void getComponentInfoFromDelivery(int delivery_id, List<DeliveryComponent> ComponentsInfoInDelivery, JComboBox<String> ComponentInDeliveryComboBox)
-		{
-			ComponentInDeliveryComboBox.removeAllItems();
-			DeliveryComponentDao dcd = new DeliveryComponentDao();
-			
+	public static void getComponentInfoFromDelivery(int delivery_id, List<DeliveryComponent> ComponentsInfoInDelivery,
+			JComboBox<String> ComponentInDeliveryComboBox) {
+		ComponentInDeliveryComboBox.removeAllItems();
+		DeliveryComponentDao dcd = new DeliveryComponentDao();
+
+		try {
+			ComponentsInfoInDelivery = dcd.getAllFromDelivery(delivery_id);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		for (DeliveryComponent delivery_component : ComponentsInfoInDelivery) {
+			String component_name = null;
 			try {
-				ComponentsInfoInDelivery = dcd.getAllFromDelivery(delivery_id);
+				component_name = dcd.getComponentNameById(delivery_id, delivery_component.getComponentId());
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+			String component_type = null;
+			try {
+				component_type = dcd.getComponentTypeById(delivery_id, delivery_component.getComponentId());
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-			for(DeliveryComponent delivery_component : ComponentsInfoInDelivery)
+			String info = "Назва: " + component_name + "  Тип: " + component_type + "  Кількість: "
+					+ delivery_component.getNumber();
+			ComponentInDeliveryComboBox.addItem(info);
+		}
+	}
+	
+	
+	
+	
+	//Метод виводу в JComboBox всіх спеціалізацій, які має постачальника
+	
+	public static JComboBox<String> specializationInProvider(Provider p) throws SQLException
+	{
+		ComponentDao cd = new ComponentDao();
+		JComboBox<String> in = new JComboBox<String>();
+		JComboBox<String> notin = new JComboBox<String>();
+		List<Specialization> specializationList = cd.getAllSpecializations();
+		String sp = p.getSpecialization();
+		String word = "";
+		String word1 = "";
+		for(Specialization specialization : specializationList)
+		{
+			word = specialization.getSpecialization();
+			word1 = word + ", ";
+			if(sp.toLowerCase().contains(word1.toLowerCase()))
 			{
-				String component_name = null;
-				try {
-					component_name = dcd.getComponentNameById(delivery_id, delivery_component.getComponentId());
-				} catch (SQLException e2) {
-					e2.printStackTrace();
-				}
-				String component_type = null;
-				try {
-					component_type = dcd.getComponentTypeById(delivery_id, delivery_component.getComponentId());
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-				String info = "Назва: " + component_name + 
-						"  Тип: " + component_type +
-						"  Кількість: " + delivery_component.getNumber();
-				ComponentInDeliveryComboBox.addItem(info);
+				in.addItem(specialization.getSpecialization());
+			}
+			else
+			{
+				notin.addItem(specialization.getSpecialization());
 			}
 		}
+		return in;
+	}
+	
+	
+	//Метод виводу в JComboBox всіх спеціалізацій, які не має постачальника
+	
+	public static JComboBox<String> specializationNotInProvider(Provider p) throws SQLException
+	{
+		ComponentDao cd = new ComponentDao();
+		JComboBox<String> in = new JComboBox<String>();
+		JComboBox<String> notin = new JComboBox<String>();
+		List<Specialization> specializationList = cd.getAllSpecializations();
+		String sp = p.getSpecialization();
+		String word = "";
+		String word1 = "";
+		for(Specialization specialization : specializationList)
+		{
+			word = specialization.getSpecialization();
+			word1 = word + ", ";
+			if(sp.toLowerCase().contains(word1.toLowerCase()))
+			{
+				in.addItem(specialization.getSpecialization());
+			}
+			else
+			{
+				notin.addItem(specialization.getSpecialization());
+			}
+		}
+		return notin;
+	}
 }

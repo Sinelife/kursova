@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 
 import domain.Component;
 import domain.Device;
+import domain.Specialization;
 import main.Main;
 
 
@@ -114,6 +115,22 @@ public class ComponentDao
         return list;
     }
     
+    public List<Specialization> getAllSpecializations() throws SQLException
+    {
+    	String sql = "SELECT * FROM provider_specialization";
+    	List<Specialization> list = new ArrayList<Specialization>();
+        try (PreparedStatement stm = Main.conn.prepareStatement(sql)) 
+        {
+            ResultSet rs = stm.executeQuery();
+            while (rs.next())
+            {
+                Specialization s = new Specialization();
+                s.setSpecialization(rs.getString("specialization_name"));
+                list.add(s);
+            }
+        }
+        return list;
+    }
     
 }
 

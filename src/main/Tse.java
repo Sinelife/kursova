@@ -1,28 +1,30 @@
 package main;
 
-import java.util.List;
+import java.util.Scanner;
 
-import javax.swing.JComboBox;
-
-import domain.Device;
-
-public class Tse {
-	
-	
-	
-	
-	public static int getDeviceIdByDeviceName(String name, int id, JComboBox<String> ComboBox,List<Device> devices)
+public class Tse 
+{
+	public static void main(String args[])
 	{
-		name = String.valueOf(ComboBox.getSelectedItem());
-		for(Device device : devices) 
-		{
-			id = device.getId();
-			if(device.getName().equals(name))
-			{
-				break;
-			}
-		}
-		return id;
+		//String s = "diod, resistor, indicator";
+		//s = s.replace("resistorj, ", "");
+		//System.out.println(s);
+		
+		
+		
+		String S = "diod, resistor, indicator";
+		String s = "dio, ";
+		S.toLowerCase().contains(s.toLowerCase());
+		System.out.println(S.toLowerCase().contains(s.toLowerCase()));
+    }
+	
+	
+	public static String deleteWord(String text, String word)
+	{
+		String regex = "\\b" + word + "\\b";
+		text = text.replaceAll(regex, "");
+		
+		return text;
 	}
-
 }
+

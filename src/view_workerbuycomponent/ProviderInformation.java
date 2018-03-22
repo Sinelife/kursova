@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -14,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 import dao.ProviderDao;
 import domain.Provider;
+import main.MethodsForFrames;
 import view.AuthorisationMenu;
 import view_director.DeliveryDepartmentDirectorMenu;
 
@@ -28,7 +30,7 @@ public class ProviderInformation extends JFrame
 	private JTextField ContactPIBField;
 	private JTextField CodeERPOUField;
 	private JTextField CodeTaxpayerField;
-	private JTextField SpecializationField;
+	private JComboBox SpecializationComboBox;
 
 
 	/**
@@ -43,11 +45,13 @@ public class ProviderInformation extends JFrame
 		
 		if(AuthorisationMenu.user_role.equals("director"))
 		{
-			p = pd.readProvider(DeliveryDepartmentDirectorMenu.provider_id_to_look);		
+			p = pd.readProvider(DeliveryDepartmentDirectorMenu.provider_id_to_look);	
+			SpecializationComboBox = MethodsForFrames.specializationInProvider(p);
 		}
 		else
 		{
 			p = pd.readProvider(InfoProvider.provider_id_to_look);
+			SpecializationComboBox = MethodsForFrames.specializationInProvider(p);
 		}
 
 		
@@ -130,13 +134,10 @@ public class ProviderInformation extends JFrame
 		contentPane.add(CodeTaxpayerField);
 		CodeTaxpayerField.setText(p.getCodeTaxpayer());
 		
-		SpecializationField = new JTextField();
-		SpecializationField.setBackground(Color.WHITE);
-		SpecializationField.setEditable(false);
-		SpecializationField.setColumns(10);
-		SpecializationField.setBounds(209, 342, 350, 22);
-		contentPane.add(SpecializationField);
-		SpecializationField.setText(p.getSpecialization());
+		SpecializationComboBox.setBackground(Color.WHITE);
+		SpecializationComboBox.setEditable(false);
+		SpecializationComboBox.setBounds(209, 342, 350, 22);
+		contentPane.add(SpecializationComboBox);
 		
 		
 		

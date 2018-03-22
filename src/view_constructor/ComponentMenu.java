@@ -67,7 +67,11 @@ public class ComponentMenu extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				ComponentMenu.this.setVisible(false);
-				new AddComponent(ComponentMenu.this).setVisible(true); 
+				try {
+					new AddComponent(ComponentMenu.this).setVisible(true);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				} 
 			}
 		});
 		AddButton.setHorizontalAlignment(SwingConstants.LEFT);

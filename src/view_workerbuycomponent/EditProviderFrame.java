@@ -1,11 +1,12 @@
 package view_workerbuycomponent;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -26,19 +27,21 @@ public class EditProviderFrame extends JFrame {
 	private JTextField ContactPIBField;
 	private JTextField CodeERPOUField;
 	private JTextField CodeTaxpayerField;
-	private JTextField SpecializationField;
+	private static JTextField SpecializationField;
 
-
+	ProviderDao pd = new ProviderDao();
+	Provider p = pd.readProvider(EditProvider.id_to_edit);
+	
+	JComboBox<String> NotInComboBox =  MethodsForFrames.specializationNotInProvider(p);
+	JComboBox<String> InComboBox =  MethodsForFrames.specializationInProvider(p);
+	
+	private static String result = "";
 	/**
 	 * Create the frame.
 	 * @throws SQLException 
 	 */
 	public EditProviderFrame(JFrame parent) throws SQLException 
-	{
-		ProviderDao pd = new ProviderDao();
-		Provider p = pd.readProvider(EditProvider.id_to_edit);
-		
-		
+	{		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 646, 558);
 		contentPane = new JPanel();
@@ -113,7 +116,57 @@ public class EditProviderFrame extends JFrame {
 		SpecializationField.setBounds(209, 342, 350, 22);
 		contentPane.add(SpecializationField);
 		SpecializationField.setText(p.getSpecialization());
+		result = SpecializationField.getText();
+		
+		
+		NotInComboBox.setBackground(Color.WHITE);
+		NotInComboBox.setBounds(209, 366, 175, 22);
+		contentPane.add(NotInComboBox);
+	
+		InComboBox.setBackground(Color.WHITE);
+		InComboBox.setBounds(384, 366, 175, 22);
+		contentPane.add(InComboBox);
+		
+		
 
+		
+		
+		
+		JButton PlusButton = new JButton("+");
+		PlusButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				String word = NotInComboBox.getSelectedItem().toString();
+				result = result.concat(word + ", ");
+				SpecializationField.setText(result);
+				NotInComboBox.removeItem(word);
+				InComboBox.addItem(word);
+			}
+		});
+		PlusButton.setBounds(273, 396, 47, 25);
+		contentPane.add(PlusButton);
+		
+		
+		
+		
+		JButton MinusButton = new JButton("-");
+		MinusButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				String word = InComboBox.getSelectedItem().toString();
+				InComboBox.removeItem(word);
+				NotInComboBox.addItem(word);
+				result = SpecializationField.getText();
+				result = result.replace(word + ", ", "");
+				SpecializationField.setText(result);
+			}
+		});
+		MinusButton.setBounds(429, 396, 47, 25);
+		contentPane.add(MinusButton);
+		
+		
 		
 		JButton AddButton = new JButton("Редагувати");
 		AddButton.addActionListener(new ActionListener() 
@@ -147,4 +200,7 @@ public class EditProviderFrame extends JFrame {
 		btnBack.setBounds(489, 427, 97, 25);
 		contentPane.add(btnBack);
 	}
+	
+	
+
 }

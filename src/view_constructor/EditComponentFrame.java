@@ -16,15 +16,16 @@ import dao.ComponentDao;
 import domain.Component;
 import main.MethodsForFrames;
 import view.AuthorisationMenu;
+import java.awt.Color;
 
 
 public class EditComponentFrame extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField TypeField;
 	private JTextField NameField;
 	private JTextField TechnicalInfoField;
 	private JTextField PriceField;
+	private JTextField TypeField;
 	
 	
 	/**
@@ -38,7 +39,7 @@ public class EditComponentFrame extends JFrame {
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 646, 558);
+		setBounds(100, 100, 646, 457);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -51,45 +52,48 @@ public class EditComponentFrame extends JFrame {
 		lblNewLabel.setBounds(103, 13, 421, 59);
 		contentPane.add(lblNewLabel);
 		
-		JLabel TypeLabel = new JLabel("Тип компоненту");
-		TypeLabel.setBounds(36, 157, 136, 22);
+		JLabel TypeLabel = new JLabel("Тип");
+		TypeLabel.setBounds(35, 131, 136, 22);
 		contentPane.add(TypeLabel);
 		
 		JLabel NameLabel = new JLabel("Назва компоненту");
-		NameLabel.setBounds(36, 209, 136, 22);
+		NameLabel.setBounds(35, 178, 136, 22);
 		contentPane.add(NameLabel);
 		
 		JLabel TechnicalInfoLabel = new JLabel("Технічна інформація");
-		TechnicalInfoLabel.setBounds(36, 267, 136, 22);
+		TechnicalInfoLabel.setBounds(35, 228, 136, 22);
 		contentPane.add(TechnicalInfoLabel);
 		
 		JLabel PriceLabel = new JLabel("Ціна");
-		PriceLabel.setBounds(36, 323, 136, 22);
+		PriceLabel.setBounds(35, 274, 136, 22);
 		contentPane.add(PriceLabel);
 		
 		
 		TypeField = new JTextField();
-		TypeField.setBounds(209, 157, 350, 22);
+		TypeField.setBackground(Color.WHITE);
+		TypeField.setEditable(false);
+		TypeField.setBounds(208, 131, 350, 22);
 		contentPane.add(TypeField);
 		TypeField.setColumns(10);
 		TypeField.setText(c.getType());
 		
 		NameField = new JTextField();
-		NameField.setBounds(209, 209, 350, 22);
+		NameField.setBackground(Color.WHITE);
+		NameField.setBounds(208, 178, 350, 22);
 		contentPane.add(NameField);
 		NameField.setColumns(10);
 		NameField.setText(c.getName());
 		
 		TechnicalInfoField = new JTextField();
 		TechnicalInfoField.setColumns(10);
-		TechnicalInfoField.setBounds(209, 267, 350, 22);
+		TechnicalInfoField.setBounds(209, 228, 350, 22);
 		contentPane.add(TechnicalInfoField);
 		TechnicalInfoField.setText(c.getTechnicalInfo());
 		
 		PriceField = new JTextField();
 		PriceField.setText((String) null);
 		PriceField.setColumns(10);
-		PriceField.setBounds(209, 323, 350, 22);
+		PriceField.setBounds(209, 274, 350, 22);
 		contentPane.add(PriceField);
 		PriceField.setText(String.valueOf(c.getPrice()));
 		
@@ -101,9 +105,8 @@ public class EditComponentFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				try {
-					MethodsForFrames.updateComponent(c, TypeField, NameField, TechnicalInfoField, PriceField);
+					MethodsForFrames.updateComponent(c, NameField, TechnicalInfoField, PriceField);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				EditComponentFrame.this.setVisible(false);
@@ -111,7 +114,7 @@ public class EditComponentFrame extends JFrame {
 				new ComponentMenu().setVisible(true);
 			}
 		});
-		EditButton.setBounds(36, 427, 125, 25);
+		EditButton.setBounds(35, 359, 125, 25);
 		contentPane.add(EditButton);
 		
 		
@@ -125,7 +128,7 @@ public class EditComponentFrame extends JFrame {
 				EditComponentFrame.this.dispose();
 			}
 		});
-		btnBack.setBounds(489, 427, 97, 25);
+		btnBack.setBounds(487, 360, 97, 25);
 		contentPane.add(btnBack);
 	}
 

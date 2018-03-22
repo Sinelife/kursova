@@ -3,32 +3,40 @@ package view_constructor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.List;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-
+import dao.ComponentDao;
+import domain.Specialization;
 import main.MethodsForFrames;
 import view.AuthorisationMenu;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import java.awt.Color;
 
 public class AddComponent extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField TypeField;
+	private JComboBox<String> TypeComboBox;
 	private JTextField NameField;
 	private JTextField TechnicalInfoField;
 	private JTextField PriceField;
 
-
 	/**
 	 * Create the frame.
+	 * @throws SQLException 
 	 */
-	public AddComponent(JFrame parent)
+	public AddComponent(JFrame parent) throws SQLException
 	{
+		ComponentDao cd = new ComponentDao();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 646, 558);
 		contentPane = new JPanel();
@@ -60,10 +68,18 @@ public class AddComponent extends JFrame {
 		contentPane.add(PriceLabel);
 		
 		
-		TypeField = new JTextField();
-		TypeField.setBounds(209, 157, 350, 22);
-		contentPane.add(TypeField);
-		TypeField.setColumns(10);
+		TypeComboBox = new JComboBox<String>();
+		TypeComboBox.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		TypeComboBox.setForeground(Color.BLACK);
+		TypeComboBox.setBackground(Color.WHITE);
+		TypeComboBox.setBounds(209, 157, 350, 22);
+		contentPane.add(TypeComboBox);
+		List<Specialization> list = cd.getAllSpecializations();
+		for(Specialization specialization : list)
+		{
+			TypeComboBox.addItem(specialization.getSpecialization());
+		}
+		
 		
 		NameField = new JTextField();
 		NameField.setBounds(209, 209, 350, 22);
@@ -87,7 +103,11 @@ public class AddComponent extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				MethodsForFrames.addComponent(TypeField, NameField, TechnicalInfoField, PriceField);
+				try {
+					MethodsForFrames.addComponent(TypeComboBox, NameField, TechnicalInfoField, PriceField);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 				if (parent != null)
 					parent.setVisible(true);
 				AddComponent.this.setVisible(false);

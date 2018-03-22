@@ -67,7 +67,11 @@ public class ProviderMenu extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				ProviderMenu.this.setVisible(false);
-				new AddProvider(ProviderMenu.this).setVisible(true); 
+				try {
+					new AddProvider(ProviderMenu.this).setVisible(true);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				} 
 			}
 		});
 		AddButton.setHorizontalAlignment(SwingConstants.LEFT);

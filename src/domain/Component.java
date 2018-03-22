@@ -1,9 +1,5 @@
 package domain;
 
-import java.sql.Date;
-
-;
-
 public class Component
 {
 
@@ -46,7 +42,7 @@ public class Component
 	
 	public void setType(String type) 
 	{
-		this.type = type;	
+		this.type = type;	 
 	}
 	
 	public String getName() 

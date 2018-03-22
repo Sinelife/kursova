@@ -67,12 +67,10 @@ public class EditComponent extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				id_to_edit = MethodsForFrames.getComponentIdByComponentName(name_to_edit, id_to_edit, ComponentComboBox, components);
-				
 				EditComponent.this.setVisible(false);
 				try {
 					new EditComponentFrame(EditComponent.this).setVisible(true);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}

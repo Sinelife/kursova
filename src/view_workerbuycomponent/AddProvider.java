@@ -3,6 +3,9 @@ package view_workerbuycomponent;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.List;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -10,8 +13,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import dao.ComponentDao;
+import domain.Specialization;
 import main.MethodsForFrames;
 import view.AuthorisationMenu;
+import javax.swing.JComboBox;
+import java.awt.Color;
 
 public class AddProvider extends JFrame {
 
@@ -22,15 +29,20 @@ public class AddProvider extends JFrame {
 	private JTextField CodeERPOUField;
 	private JTextField CodeTaxpayerField;
 	private JTextField SpecializationField;
-	
 
+	private String result = "";
+
+
+	JComboBox<String> NotInComboBox = new JComboBox<String>();
+	JComboBox<String> InComboBox = new JComboBox<String>();
 	/**
 	 * Create the frame.
+	 * @throws SQLException 
 	 */
-	public AddProvider(JFrame parent) 
-	{	
+	public AddProvider(JFrame parent) throws SQLException 
+	{		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 646, 558);
+		setBounds(100, 100, 690, 558);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -94,10 +106,66 @@ public class AddProvider extends JFrame {
 		contentPane.add(CodeTaxpayerField);
 		
 		SpecializationField = new JTextField();
+		SpecializationField.setBackground(Color.WHITE);
+		SpecializationField.setEditable(false);
 		SpecializationField.setColumns(10);
 		SpecializationField.setBounds(209, 343, 350, 22);
 		contentPane.add(SpecializationField);
 
+		
+		NotInComboBox.setBackground(Color.WHITE);
+		NotInComboBox.setBounds(209, 366, 175, 22);
+		contentPane.add(NotInComboBox);
+		ComponentDao cd = new ComponentDao();
+		List<Specialization> specializationList = cd.getAllSpecializations();
+		for(Specialization specialization : specializationList)
+		{
+			NotInComboBox.addItem(specialization.getSpecialization());
+		}
+	
+		InComboBox.setBackground(Color.WHITE);
+		InComboBox.setBounds(384, 366, 175, 22);
+		contentPane.add(InComboBox);
+
+		
+		
+		JButton PlusButton = new JButton("+");
+		PlusButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				String word = NotInComboBox.getSelectedItem().toString();
+				result = result.concat(word + ", ");
+				SpecializationField.setText(result);
+				NotInComboBox.removeItem(word);
+				InComboBox.addItem(word);
+			}
+		});
+		PlusButton.setBounds(273, 396, 47, 25);
+		contentPane.add(PlusButton);
+		
+		
+		
+		
+		JButton MinusButton = new JButton("-");
+		MinusButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				String word = InComboBox.getSelectedItem().toString();
+				InComboBox.removeItem(word);
+				NotInComboBox.addItem(word);
+				result = SpecializationField.getText();
+				result = result.replace(word + ", ", "");
+				SpecializationField.setText(result);
+			}
+		});
+		MinusButton.setBounds(429, 396, 47, 25);
+		contentPane.add(MinusButton);
+		
+		
+		
+		
 		
 		JButton AddButton = new JButton("Додати");
 		AddButton.addActionListener(new ActionListener() 
@@ -111,8 +179,9 @@ public class AddProvider extends JFrame {
 				AddProvider.this.dispose();
 			}
 		});
-		AddButton.setBounds(52, 427, 97, 25);
+		AddButton.setBounds(12, 473, 97, 25);
 		contentPane.add(AddButton);
+
 
 		
 		JButton btnBack = new JButton("BACK");
@@ -124,8 +193,11 @@ public class AddProvider extends JFrame {
 				AddProvider.this.dispose();
 			}
 		});
-		btnBack.setBounds(489, 427, 97, 25);
+		btnBack.setBounds(504, 473, 97, 25);
 		contentPane.add(btnBack);
-	}
+		
 
+
+	}
+	
 }
