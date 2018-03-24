@@ -18,6 +18,7 @@ import domain.Order;
 import domain.OrderDevice;
 import main.MethodsForFrames;
 import view.AuthorisationMenu;
+import javax.swing.SwingConstants;
 
 public class InfoOrder extends JFrame 
 {
@@ -39,7 +40,7 @@ public class InfoOrder extends JFrame
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 784, 507);
+		setBounds(100, 100, 784, 488);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -48,11 +49,13 @@ public class InfoOrder extends JFrame
 		
 		
 		JLabel lblNewLabel = new JLabel("Перегляд інформації про замовлення на купівлю");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lblNewLabel.setBounds(88, 25, 615, 59);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		lblNewLabel.setBounds(0, 25, 766, 59);
 		contentPane.add(lblNewLabel);
 		
 		JLabel OrderLabel = new JLabel("Список замовлень на купівлю");
+		OrderLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		OrderLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		OrderLabel.setBounds(12, 113, 724, 25);
 		contentPane.add(OrderLabel);
@@ -74,7 +77,7 @@ public class InfoOrder extends JFrame
 		
 		
 		
-		JButton SelectOrderButton = new JButton("Вибрати");
+		JButton SelectOrderButton = new JButton("ВИБРАТИ");
 		SelectOrderButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -83,7 +86,7 @@ public class InfoOrder extends JFrame
 				MethodsForFrames.getDeviceInfoFromOrder(order_id_to_look, DevicesInfoInOrder, DeviceInOrderComboBox);
 			}
 		});
-		SelectOrderButton.setBounds(12, 201, 97, 25);
+		SelectOrderButton.setBounds(284, 205, 97, 25);
 		contentPane.add(SelectOrderButton);
 		
 		
@@ -97,7 +100,7 @@ public class InfoOrder extends JFrame
 				InfoOrder.this.dispose();
 			}
 		});
-		btnBack.setBounds(657, 422, 97, 25);
+		btnBack.setBounds(639, 396, 97, 25);
 		contentPane.add(btnBack);
 	}
 

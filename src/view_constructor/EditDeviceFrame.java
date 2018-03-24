@@ -17,6 +17,7 @@ import dao.DeviceDao;
 import domain.Device;
 import main.MethodsForFrames;
 import view.AuthorisationMenu;
+import javax.swing.SwingConstants;
 
 
 public class EditDeviceFrame extends JFrame {
@@ -41,7 +42,7 @@ public class EditDeviceFrame extends JFrame {
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 646, 558);
+		setBounds(100, 100, 622, 538);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -50,8 +51,9 @@ public class EditDeviceFrame extends JFrame {
 		
 		
 		JLabel lblNewLabel = new JLabel("Редагування інформаціх про прилад");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 26));
-		lblNewLabel.setBounds(51, 13, 473, 59);
+		lblNewLabel.setBounds(60, 13, 473, 59);
 		contentPane.add(lblNewLabel);
 		
 		JLabel NameLabel_1 = new JLabel("Назва приладу");
@@ -118,8 +120,8 @@ public class EditDeviceFrame extends JFrame {
 		
 		
 		
-		JButton EditButton = new JButton("Редагувати");
-		EditButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		JButton EditButton = new JButton("РЕДАГУВАТИ");
+		EditButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		EditButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -130,7 +132,7 @@ public class EditDeviceFrame extends JFrame {
 				new DeviceMenu().setVisible(true);
 			}
 		});
-		EditButton.setBounds(36, 427, 125, 25);
+		EditButton.setBounds(209, 393, 118, 25);
 		contentPane.add(EditButton);
 		
 		
@@ -144,7 +146,7 @@ public class EditDeviceFrame extends JFrame {
 				EditDeviceFrame.this.dispose();
 			}
 		});
-		btnBack.setBounds(489, 427, 97, 25);
+		btnBack.setBounds(462, 450, 97, 25);
 		contentPane.add(btnBack);
 	}
 

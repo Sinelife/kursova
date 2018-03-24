@@ -13,6 +13,7 @@ import javax.swing.border.EmptyBorder;
 
 import main.MethodsForFrames;
 import view.AuthorisationMenu;
+import javax.swing.SwingConstants;
 
 public class AddDelivery extends JFrame 
 {
@@ -25,7 +26,7 @@ public class AddDelivery extends JFrame
 	public AddDelivery(JFrame parent) 
 	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 646, 365);
+		setBounds(100, 100, 646, 399);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -34,8 +35,9 @@ public class AddDelivery extends JFrame
 		
 		
 		JLabel lblNewLabel = new JLabel("Додавання нового замовлення постачання");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lblNewLabel.setBounds(29, 13, 533, 59);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		lblNewLabel.setBounds(0, 13, 628, 59);
 		contentPane.add(lblNewLabel);
 		
 		JLabel StartDateLabel = new JLabel("Дата початку");
@@ -64,7 +66,7 @@ public class AddDelivery extends JFrame
 		contentPane.add(ShippedCheckBox);
 		
 		
-		JButton AddButton = new JButton("Додати");
+		JButton AddButton = new JButton("ДОДАТИ");
 		AddButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -76,7 +78,7 @@ public class AddDelivery extends JFrame
 				AddDelivery.this.dispose();
 			}
 		});
-		AddButton.setBounds(51, 269, 97, 25);
+		AddButton.setBounds(161, 244, 97, 25);
 		contentPane.add(AddButton);
 		
 		
@@ -90,7 +92,7 @@ public class AddDelivery extends JFrame
 				AddDelivery.this.dispose();
 			}
 		});
-		btnBack.setBounds(488, 269, 97, 25);
+		btnBack.setBounds(505, 314, 97, 25);
 		contentPane.add(btnBack);
 	}
 

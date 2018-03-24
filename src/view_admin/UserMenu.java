@@ -26,7 +26,7 @@ public class UserMenu extends JFrame {
 	public UserMenu() 
 	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 635, 526);
+		setBounds(100, 100, 488, 472);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -34,12 +34,13 @@ public class UserMenu extends JFrame {
 		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
 		
 		
-		JLabel MenuTitleLabel = new JLabel("Меню роботи з користувачами");
-		MenuTitleLabel.setFont(new Font("Tahoma", Font.PLAIN, 21));
-		MenuTitleLabel.setBounds(128, 13, 456, 38);
+		JLabel MenuTitleLabel = new JLabel("Робота з користувачами");
+		MenuTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		MenuTitleLabel.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		MenuTitleLabel.setBounds(0, 13, 470, 38);
 		contentPane.add(MenuTitleLabel);
 		
-		JButton AddUserButton = new JButton("1)Додати працівника");
+		JButton AddUserButton = new JButton("Додати працівника");
 		AddUserButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
@@ -48,12 +49,11 @@ public class UserMenu extends JFrame {
 			}
 		});
 		AddUserButton.setForeground(Color.BLACK);
-		AddUserButton.setHorizontalAlignment(SwingConstants.LEFT);
 		AddUserButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		AddUserButton.setBounds(53, 103, 390, 43);
+		AddUserButton.setBounds(94, 113, 281, 43);
 		contentPane.add(AddUserButton);
 		
-		JButton DeleteUserButton = new JButton("2)Видалити працівника");
+		JButton DeleteUserButton = new JButton("Видалити працівника");
 		DeleteUserButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -68,12 +68,11 @@ public class UserMenu extends JFrame {
 			}
 		});
 		DeleteUserButton.setForeground(Color.BLACK);
-		DeleteUserButton.setHorizontalAlignment(SwingConstants.LEFT);
 		DeleteUserButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		DeleteUserButton.setBounds(53, 197, 390, 43);
+		DeleteUserButton.setBounds(94, 207, 281, 43);
 		contentPane.add(DeleteUserButton);
 		
-		JButton EditUserButton = new JButton("3)Редагувати працівника");
+		JButton EditUserButton = new JButton("Редагувати працівника");
 		EditUserButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e)
@@ -87,10 +86,9 @@ public class UserMenu extends JFrame {
 				}
 			}
 		});
-		EditUserButton.setHorizontalAlignment(SwingConstants.LEFT);
 		EditUserButton.setForeground(Color.BLACK);
 		EditUserButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		EditUserButton.setBounds(53, 295, 390, 43);
+		EditUserButton.setBounds(94, 305, 281, 43);
 		contentPane.add(EditUserButton);
 		
 		
@@ -107,7 +105,7 @@ public class UserMenu extends JFrame {
 				}
 			}
 		});
-		btnBack.setBounds(496, 429, 97, 25);
+		btnBack.setBounds(361, 388, 97, 25);
 		contentPane.add(btnBack);
 	}
 }

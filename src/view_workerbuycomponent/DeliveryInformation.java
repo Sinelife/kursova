@@ -19,6 +19,7 @@ import view.AuthorisationMenu;
 import view_director.DeliveryDepartmentDirectorMenu;
 
 import java.awt.Color;
+import javax.swing.SwingConstants;
 
 public class DeliveryInformation extends JFrame {
 
@@ -53,7 +54,7 @@ public class DeliveryInformation extends JFrame {
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 646, 454);
+		setBounds(100, 100, 646, 408);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -62,31 +63,32 @@ public class DeliveryInformation extends JFrame {
 		
 		
 		JLabel lblNewLabel = new JLabel("Інформація про замовлення постачання");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblNewLabel.setBounds(29, 13, 556, 59);
+		lblNewLabel.setBounds(0, 13, 628, 59);
 		contentPane.add(lblNewLabel);
 		
 		JLabel NameLabel = new JLabel("Назва замовлення");
-		NameLabel.setBounds(29, 143, 129, 22);
+		NameLabel.setBounds(69, 123, 129, 22);
 		contentPane.add(NameLabel);
 		
 		JLabel StartDateLabel = new JLabel("Дата початку");
-		StartDateLabel.setBounds(29, 185, 129, 22);
+		StartDateLabel.setBounds(69, 165, 129, 22);
 		contentPane.add(StartDateLabel);
 		
 		JLabel PaidLabel = new JLabel("Сплачено");
-		PaidLabel.setBounds(29, 231, 129, 22);
+		PaidLabel.setBounds(69, 211, 129, 22);
 		contentPane.add(PaidLabel);
 		
 		JLabel ShippedLabel = new JLabel("Відвантажено");
-		ShippedLabel.setBounds(29, 265, 129, 22);
+		ShippedLabel.setBounds(69, 245, 129, 22);
 		contentPane.add(ShippedLabel);
 
 		
 		NameField = new JTextField();
 		NameField.setBackground(Color.WHITE);
 		NameField.setEditable(false);
-		NameField.setBounds(161, 143, 350, 22);
+		NameField.setBounds(201, 123, 350, 22);
 		contentPane.add(NameField);
 		NameField.setColumns(10);
 		NameField.setText(d.getDeliveryName());
@@ -94,14 +96,14 @@ public class DeliveryInformation extends JFrame {
 		StartDateField = new JTextField();
 		StartDateField.setBackground(Color.WHITE);
 		StartDateField.setEditable(false);
-		StartDateField.setBounds(161, 185, 350, 22);
+		StartDateField.setBounds(201, 165, 350, 22);
 		contentPane.add(StartDateField);
 		StartDateField.setColumns(10);
 		StartDateField.setText(String.valueOf(d.getStartDate()));
 		
 		PaidCheckBox = new JCheckBox();
 		PaidCheckBox.setEnabled(false);
-		PaidCheckBox.setBounds(161, 228, 32, 25);
+		PaidCheckBox.setBounds(201, 208, 32, 25);
 		contentPane.add(PaidCheckBox);
 		if(d.isPaid() == true)
 		{
@@ -114,7 +116,7 @@ public class DeliveryInformation extends JFrame {
 		
 		ShippedCheckBox = new JCheckBox();
 		ShippedCheckBox.setEnabled(false);
-		ShippedCheckBox.setBounds(161, 262, 32, 25);
+		ShippedCheckBox.setBounds(201, 242, 32, 25);
 		contentPane.add(ShippedCheckBox);
 		ShippedCheckBox.setSelected(d.isPaid());
 		if(d.isShipped() == true)
@@ -138,7 +140,7 @@ public class DeliveryInformation extends JFrame {
 				DeliveryInformation.this.dispose();
 			}
 		});
-		btnBack.setBounds(488, 364, 97, 25);
+		btnBack.setBounds(499, 303, 97, 25);
 		contentPane.add(btnBack);
 	}
 

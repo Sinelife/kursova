@@ -19,6 +19,7 @@ import domain.OrderDevice;
 import main.MethodsForFrames;
 import view.AuthorisationMenu;
 import domain.Order;
+import javax.swing.SwingConstants;
 
 public class InfoClient extends JFrame {
 
@@ -54,13 +55,15 @@ public class InfoClient extends JFrame {
 		
 		
 		JLabel lblNewLabel = new JLabel("Перегляд інформації про клієнта");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lblNewLabel.setBounds(211, 25, 400, 59);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblNewLabel.setBounds(0, 13, 932, 49);
 		contentPane.add(lblNewLabel);
 		
 		JLabel ClientLabel = new JLabel("Список клієнтів");
+		ClientLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		ClientLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		ClientLabel.setBounds(40, 82, 615, 25);
+		ClientLabel.setBounds(40, 82, 732, 25);
 		contentPane.add(ClientLabel);
 
 		JComboBox<String> ClientComboBox = new JComboBox<String>();
@@ -74,8 +77,9 @@ public class InfoClient extends JFrame {
 		
 		
 		JLabel OrderLabel = new JLabel("Список замовлень на купівлю обраного клієнта");
+		OrderLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		OrderLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		OrderLabel.setBounds(40, 259, 615, 25);
+		OrderLabel.setBounds(40, 259, 732, 25);
 		contentPane.add(OrderLabel);
 
 		
@@ -85,8 +89,9 @@ public class InfoClient extends JFrame {
 		contentPane.add(OrderInClientComboBox);
 		
 		JLabel DeviceInfoLabel = new JLabel("Інформація про прилади в замовленні на купівлю");
+		DeviceInfoLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		DeviceInfoLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		DeviceInfoLabel.setBounds(40, 448, 615, 25);
+		DeviceInfoLabel.setBounds(40, 448, 732, 25);
 		contentPane.add(DeviceInfoLabel);
 		
 		
@@ -116,7 +121,7 @@ public class InfoClient extends JFrame {
 		contentPane.add(ClientInfoButton);
 		
 		
-		JButton SelectClientButton = new JButton("Вибрати");
+		JButton SelectClientButton = new JButton("ВИБРАТИ");
 		SelectClientButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -125,14 +130,14 @@ public class InfoClient extends JFrame {
 				OrdersInClient = MethodsForFrames.getAllOrdersInClient(client_id_to_look, OrdersInClient, OrderInClientComboBox);
 			}
 		});
-		SelectClientButton.setBounds(40, 179, 106, 25);
+		SelectClientButton.setBounds(326, 171, 106, 25);
 		contentPane.add(SelectClientButton);
 		
 		
 		
 		
 		
-		JButton SelectOrderButton = new JButton("Вибрати");
+		JButton SelectOrderButton = new JButton("ВИБРАТИ");
 		SelectOrderButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -141,7 +146,7 @@ public class InfoClient extends JFrame {
 				MethodsForFrames.getDeviceInfoFromOrder(order_id_to_look, DevicesInfoInOrder, DeviceInOrderComboBox);
 			}
 		});
-		SelectOrderButton.setBounds(40, 340, 106, 25);
+		SelectOrderButton.setBounds(326, 346, 106, 25);
 		contentPane.add(SelectOrderButton);
 		
 		
@@ -175,7 +180,7 @@ public class InfoClient extends JFrame {
 				InfoClient.this.dispose();
 			}
 		});
-		btnBack.setBounds(823, 525, 97, 25);
+		btnBack.setBounds(810, 525, 97, 25);
 		contentPane.add(btnBack);
 		
 	}

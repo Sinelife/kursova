@@ -20,6 +20,7 @@ import view.AuthorisationMenu;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import java.awt.Color;
+import javax.swing.SwingConstants;
 
 public class AddComponent extends JFrame {
 
@@ -38,7 +39,7 @@ public class AddComponent extends JFrame {
 		ComponentDao cd = new ComponentDao();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 646, 558);
+		setBounds(100, 100, 609, 535);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -47,8 +48,9 @@ public class AddComponent extends JFrame {
 		
 		
 		JLabel lblNewLabel = new JLabel("Додавання нового компонента");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		lblNewLabel.setBounds(103, 13, 421, 59);
+		lblNewLabel.setBounds(80, 13, 421, 59);
 		contentPane.add(lblNewLabel);
 		
 		JLabel TypeLabel = new JLabel("Тип компоненту");
@@ -98,7 +100,7 @@ public class AddComponent extends JFrame {
 
 		
 		
-		JButton AddButton = new JButton("Додати");
+		JButton AddButton = new JButton("ДОДАТИ");
 		AddButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -114,7 +116,7 @@ public class AddComponent extends JFrame {
 				AddComponent.this.dispose();
 			}
 		});
-		AddButton.setBounds(52, 427, 97, 25);
+		AddButton.setBounds(209, 378, 97, 25);
 		contentPane.add(AddButton);
 
 		
@@ -128,7 +130,7 @@ public class AddComponent extends JFrame {
 				AddComponent.this.dispose();
 			}
 		});
-		btnBack.setBounds(489, 427, 97, 25);
+		btnBack.setBounds(462, 450, 97, 25);
 		contentPane.add(btnBack);
 	}
 }

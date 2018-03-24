@@ -17,6 +17,7 @@ import dao.UserDao;
 import domain.User;
 import main.MethodsForFrames;
 import view.AuthorisationMenu;
+import javax.swing.SwingConstants;
 
 public class EditUser extends JFrame {
 
@@ -36,7 +37,7 @@ public class EditUser extends JFrame {
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 646, 558);
+		setBounds(100, 100, 646, 354);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -44,23 +45,24 @@ public class EditUser extends JFrame {
 		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
 		
 
-		JComboBox UserComboBox = new JComboBox();
+		JComboBox<String> UserComboBox = new JComboBox<String>();
 		UserComboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		UserComboBox.setBounds(40, 121, 504, 34);
+		UserComboBox.setBounds(62, 120, 504, 34);
 		contentPane.add(UserComboBox);
 		for(User user : users) 
 		{
 			UserComboBox.addItem(user.getSurname() + " " + user.getName());
 		}
 		
-		JLabel lblNewLabel = new JLabel("Вибір акаунту працівника для редагування.");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lblNewLabel.setBounds(46, 25, 559, 59);
+		JLabel lblNewLabel = new JLabel("Вибір працівника для редагування");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		lblNewLabel.setBounds(0, 25, 628, 59);
 		contentPane.add(lblNewLabel);
 		
 		
 		
-		JButton SelectButton = new JButton("Вибрати");
+		JButton SelectButton = new JButton("ВИБРАТИ");
 		SelectButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -71,12 +73,11 @@ public class EditUser extends JFrame {
 				try {
 					new EditUserFrame(EditUser.this).setVisible(true);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
 		});
-		SelectButton.setBounds(46, 427, 97, 25);
+		SelectButton.setBounds(219, 205, 97, 25);
 		contentPane.add(SelectButton);
 		
 		
@@ -91,7 +92,7 @@ public class EditUser extends JFrame {
 				EditUser.this.dispose();
 			}
 		});
-		btnBack.setBounds(489, 427, 97, 25);
+		btnBack.setBounds(490, 259, 97, 25);
 		contentPane.add(btnBack);
 	}
 

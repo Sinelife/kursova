@@ -19,6 +19,7 @@ import view.AuthorisationMenu;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 
 public class SpecificationInformation extends JFrame {
 
@@ -39,7 +40,7 @@ public class SpecificationInformation extends JFrame {
 	
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 738, 558);
+		setBounds(100, 100, 738, 507);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -49,8 +50,9 @@ public class SpecificationInformation extends JFrame {
 		
 		
 		JLabel lblNewLabel = new JLabel("Специфікації приладів");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lblNewLabel.setBounds(46, 25, 411, 59);
+		lblNewLabel.setBounds(147, 27, 412, 59);
 		contentPane.add(lblNewLabel);
 		
 
@@ -67,12 +69,12 @@ public class SpecificationInformation extends JFrame {
 		
 		JComboBox<String> ComponentInfoComboBox = new JComboBox<String>();
 		ComponentInfoComboBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		ComponentInfoComboBox.setBounds(40, 324, 504, 34);
+		ComponentInfoComboBox.setBounds(40, 288, 504, 34);
 		contentPane.add(ComponentInfoComboBox);
 		
 		
 						
-		JButton SelectButton = new JButton("Вибрати");
+		JButton SelectButton = new JButton("ВИБРАТИ");
 		SelectButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent arg0) 
@@ -81,8 +83,8 @@ public class SpecificationInformation extends JFrame {
 				MethodsForFrames.getSpecificationInfo(id_to_choose, components, ComponentInfoComboBox);
 			}
 		});
-		SelectButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		SelectButton.setBounds(331, 197, 119, 25);
+		SelectButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		SelectButton.setBounds(248, 203, 105, 25);
 		contentPane.add(SelectButton);
 		
 
@@ -118,7 +120,7 @@ public class SpecificationInformation extends JFrame {
 				SpecificationInformation.this.dispose();
 			}
 		});
-		btnBack.setBounds(611, 473, 97, 25);
+		btnBack.setBounds(581, 403, 97, 25);
 		contentPane.add(btnBack);
 		
 

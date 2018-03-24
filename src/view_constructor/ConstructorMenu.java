@@ -36,25 +36,32 @@ public class ConstructorMenu extends JFrame {
 		String UserSurnameName = u.getSurname() + " " + u.getName();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 547, 491);
+		setBounds(100, 100, 500, 491);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
 		
+		JLabel lblNewLabel = new JLabel("Робота з ...");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblNewLabel.setBounds(76, 133, 363, 29);
+		contentPane.add(lblNewLabel);
 		
-		JLabel MenuTitleLabel = new JLabel("Меню члена конструкторського відділу");
+		
+		JLabel MenuTitleLabel = new JLabel("Член конструкторського бюро");
 		MenuTitleLabel.setFont(new Font("Tahoma", Font.BOLD, 21));
-		MenuTitleLabel.setBounds(53, 13, 456, 38);
+		MenuTitleLabel.setBounds(76, 13, 363, 38);
 		contentPane.add(MenuTitleLabel);
 		
 		JLabel UserPIBLabel = new JLabel(UserSurnameName);
+		UserPIBLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		UserPIBLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		UserPIBLabel.setBounds(130, 64, 267, 38);
+		UserPIBLabel.setBounds(76, 64, 363, 38);
 		contentPane.add(UserPIBLabel);
 		
-		JButton DeviceMenuButton = new JButton("1)Меню роботи з приладами");
+		JButton DeviceMenuButton = new JButton("приладами");
 		DeviceMenuButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
 			{
@@ -63,12 +70,11 @@ public class ConstructorMenu extends JFrame {
 			}
 		});
 		DeviceMenuButton.setForeground(Color.BLACK);
-		DeviceMenuButton.setHorizontalAlignment(SwingConstants.LEFT);
 		DeviceMenuButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		DeviceMenuButton.setBounds(84, 154, 287, 43);
+		DeviceMenuButton.setBounds(110, 188, 287, 43);
 		contentPane.add(DeviceMenuButton);
 		
-		JButton ComponentMenuButton = new JButton("2)Меню роботи з компонентами");
+		JButton ComponentMenuButton = new JButton("компонентами");
 		ComponentMenuButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
@@ -77,12 +83,11 @@ public class ConstructorMenu extends JFrame {
 			}
 		});
 		ComponentMenuButton.setForeground(Color.BLACK);
-		ComponentMenuButton.setHorizontalAlignment(SwingConstants.LEFT);
 		ComponentMenuButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		ComponentMenuButton.setBounds(84, 246, 287, 43);
+		ComponentMenuButton.setBounds(110, 280, 287, 43);
 		contentPane.add(ComponentMenuButton);
 		
-		JButton ChangeLoginPasswordButton = new JButton("3)Змінити пароль та логін");
+		JButton ChangeLoginPasswordButton = new JButton("Змінити пароль та логін");
 		ChangeLoginPasswordButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -91,15 +96,14 @@ public class ConstructorMenu extends JFrame {
 				try {
 					new ChangeLoginPassword(ConstructorMenu.this).setVisible(true);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} 
 			}
 		});
 		ChangeLoginPasswordButton.setForeground(Color.BLACK);
 		ChangeLoginPasswordButton.setHorizontalAlignment(SwingConstants.LEFT);
-		ChangeLoginPasswordButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		ChangeLoginPasswordButton.setBounds(84, 338, 287, 43);
+		ChangeLoginPasswordButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		ChangeLoginPasswordButton.setBounds(12, 406, 187, 25);
 		contentPane.add(ChangeLoginPasswordButton);
 		
 		
@@ -112,7 +116,8 @@ public class ConstructorMenu extends JFrame {
 				new AuthorisationMenu().setVisible(true);
 			}
 		});
-		btnBack.setBounds(369, 410, 140, 25);
+		btnBack.setBounds(330, 406, 140, 25);
 		contentPane.add(btnBack);
+		
 	}
 }

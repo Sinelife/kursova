@@ -19,6 +19,7 @@ import main.MethodsForFrames;
 import view.AuthorisationMenu;
 import domain.Delivery;
 import domain.DeliveryComponent;
+import javax.swing.SwingConstants;
 
 public class InfoProvider extends JFrame {
 
@@ -42,7 +43,7 @@ public class InfoProvider extends JFrame {
 		List<Provider> providers = pd.getAll();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 724, 612);
+		setBounds(100, 100, 724, 651);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -52,19 +53,20 @@ public class InfoProvider extends JFrame {
 		
 		
 		JLabel lblNewLabel = new JLabel("Перегляд інформації про постачальника");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lblNewLabel.setBounds(46, 25, 559, 59);
+		lblNewLabel.setBounds(0, 11, 706, 59);
 		contentPane.add(lblNewLabel);
 		
 		JLabel ProviderLabel = new JLabel("Список постачальників");
 		ProviderLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		ProviderLabel.setBounds(40, 83, 198, 25);
+		ProviderLabel.setBounds(71, 83, 198, 25);
 		contentPane.add(ProviderLabel);
 		
 		
 		JComboBox<String> ProviderComboBox = new JComboBox<String>();
 		ProviderComboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		ProviderComboBox.setBounds(40, 121, 430, 34);
+		ProviderComboBox.setBounds(71, 121, 430, 34);
 		contentPane.add(ProviderComboBox);
 		for(Provider provider : providers) 
 		{
@@ -73,24 +75,24 @@ public class InfoProvider extends JFrame {
 		
 		JLabel DeliveryLabel = new JLabel("Список замовлень на постачання обраного постачальника");
 		DeliveryLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		DeliveryLabel.setBounds(40, 259, 447, 25);
+		DeliveryLabel.setBounds(71, 259, 447, 25);
 		contentPane.add(DeliveryLabel);
 
 		
 		JComboBox<String> DeliveryInProviderComboBox = new JComboBox<String>();
 		DeliveryInProviderComboBox.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		DeliveryInProviderComboBox.setBounds(40, 293, 430, 34);
+		DeliveryInProviderComboBox.setBounds(71, 293, 430, 34);
 		contentPane.add(DeliveryInProviderComboBox);
 		
 		JLabel ComponentInfoLabel = new JLabel("Інформація про компоненти в замовленні постачання");
 		ComponentInfoLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		ComponentInfoLabel.setBounds(40, 448, 447, 25);
+		ComponentInfoLabel.setBounds(71, 448, 447, 25);
 		contentPane.add(ComponentInfoLabel);
 		
 		
 		JComboBox<String> ComponentInDeliveryComboBox = new JComboBox<String>();
 		ComponentInDeliveryComboBox.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		ComponentInDeliveryComboBox.setBounds(40, 480, 430, 34);
+		ComponentInDeliveryComboBox.setBounds(71, 480, 430, 34);
 		contentPane.add(ComponentInDeliveryComboBox);
 		
 		
@@ -110,7 +112,7 @@ public class InfoProvider extends JFrame {
 			}
 		});
 		ProviderInfoButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		ProviderInfoButton.setBounds(483, 121, 122, 34);
+		ProviderInfoButton.setBounds(514, 121, 122, 34);
 		contentPane.add(ProviderInfoButton);
 		
 		
@@ -126,7 +128,7 @@ public class InfoProvider extends JFrame {
 
 			}
 		});
-		SelectProviderButton.setBounds(40, 179, 97, 25);
+		SelectProviderButton.setBounds(71, 179, 97, 25);
 		contentPane.add(SelectProviderButton);
 		
 		
@@ -141,7 +143,7 @@ public class InfoProvider extends JFrame {
 				MethodsForFrames.getComponentInfoFromDelivery(delivery_id_to_look, ComponentsInfoInDelivery, ComponentInDeliveryComboBox);
 			}
 		});
-		SelectDeliveryButton.setBounds(40, 340, 97, 25);
+		SelectDeliveryButton.setBounds(71, 340, 97, 25);
 		contentPane.add(SelectDeliveryButton);
 
 		
@@ -161,7 +163,7 @@ public class InfoProvider extends JFrame {
 			}
 		});
 		DeliveryInfoButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		DeliveryInfoButton.setBounds(482, 293, 122, 34);
+		DeliveryInfoButton.setBounds(513, 293, 122, 34);
 		contentPane.add(DeliveryInfoButton);
 		
 		
@@ -175,7 +177,7 @@ public class InfoProvider extends JFrame {
 				InfoProvider.this.dispose();
 			}
 		});
-		btnBack.setBounds(597, 527, 97, 25);
+		btnBack.setBounds(579, 555, 97, 25);
 		contentPane.add(btnBack);
 		
 	}

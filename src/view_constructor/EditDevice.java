@@ -17,6 +17,7 @@ import dao.DeviceDao;
 import domain.Device;
 import main.MethodsForFrames;
 import view.AuthorisationMenu;
+import javax.swing.SwingConstants;
 
 
 
@@ -37,16 +38,17 @@ public class EditDevice extends JFrame {
 		List<Device> devices = dd.getAll();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 646, 558);
+		setBounds(100, 100, 603, 423);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
 		
-		JLabel lblNewLabel = new JLabel("Вибір приладу для редагування.");
+		JLabel lblNewLabel = new JLabel("Вибір приладу для редагування");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lblNewLabel.setBounds(46, 25, 559, 59);
+		lblNewLabel.setBounds(46, 25, 504, 59);
 		contentPane.add(lblNewLabel);
 		
 
@@ -60,7 +62,7 @@ public class EditDevice extends JFrame {
 		}
 		
 		
-		JButton SelectButton = new JButton("Вибрати");
+		JButton SelectButton = new JButton("ВИБРАТИ");
 		SelectButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -71,12 +73,11 @@ public class EditDevice extends JFrame {
 				try {
 					new EditDeviceFrame(EditDevice.this).setVisible(true);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
 		});
-		SelectButton.setBounds(46, 427, 97, 25);
+		SelectButton.setBounds(226, 202, 97, 25);
 		contentPane.add(SelectButton);
 		
 		
@@ -89,7 +90,7 @@ public class EditDevice extends JFrame {
 				EditDevice.this.dispose();
 			}
 		});
-		btnBack.setBounds(489, 427, 97, 25);
+		btnBack.setBounds(453, 324, 97, 25);
 		contentPane.add(btnBack);
 	}
 

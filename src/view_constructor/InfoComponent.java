@@ -19,6 +19,7 @@ import main.MethodsForFrames;
 import view.AuthorisationMenu;
 
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class InfoComponent extends JFrame {
 
@@ -40,7 +41,7 @@ public class InfoComponent extends JFrame {
 		List<Component> components = cd.getAll();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 646, 558);
+		setBounds(100, 100, 652, 472);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -50,7 +51,7 @@ public class InfoComponent extends JFrame {
 
 		JComboBox<String> ComponentComboBox = new JComboBox<String>();
 		ComponentComboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		ComponentComboBox.setBounds(46, 244, 438, 34);
+		ComponentComboBox.setBounds(37, 107, 438, 34);
 		contentPane.add(ComponentComboBox);
 		for(Component component : components) 
 		{
@@ -59,8 +60,9 @@ public class InfoComponent extends JFrame {
 		
 		
 		JLabel lblNewLabel = new JLabel("Пошук та перегляд інформації про компоненти");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		lblNewLabel.setBounds(46, 25, 559, 59);
+		lblNewLabel.setBounds(27, 25, 559, 59);
 		contentPane.add(lblNewLabel);
 		
 		
@@ -80,11 +82,11 @@ public class InfoComponent extends JFrame {
 			}
 		});
 		InfoButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		InfoButton.setBounds(496, 244, 122, 34);
+		InfoButton.setBounds(489, 110, 122, 34);
 		contentPane.add(InfoButton);
 		
 		FindField = new JTextField();
-		FindField.setBounds(92, 123, 152, 22);
+		FindField.setBounds(200, 217, 152, 22);
 		contentPane.add(FindField);
 		FindField.setColumns(10);
 		
@@ -106,7 +108,7 @@ public class InfoComponent extends JFrame {
 				}
 			}
 		});
-		FindNameButton.setBounds(301, 122, 151, 25);
+		FindNameButton.setBounds(200, 287, 151, 25);
 		contentPane.add(FindNameButton);
 		
 		JButton FindTypeButton = new JButton("Пошук за типом");
@@ -126,7 +128,7 @@ public class InfoComponent extends JFrame {
 				}
 			}
 		});
-		FindTypeButton.setBounds(301, 97, 151, 25);
+		FindTypeButton.setBounds(200, 264, 151, 25);
 		contentPane.add(FindTypeButton);
 		
 		
@@ -140,7 +142,7 @@ public class InfoComponent extends JFrame {
 				InfoComponent.this.dispose();
 			}
 		});
-		btnBack.setBounds(489, 427, 97, 25);
+		btnBack.setBounds(514, 390, 97, 25);
 		contentPane.add(btnBack);
 
 	}

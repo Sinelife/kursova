@@ -13,6 +13,7 @@ import javax.swing.border.EmptyBorder;
 
 import main.MethodsForFrames;
 import view.AuthorisationMenu;
+import javax.swing.SwingConstants;
 
 public class AddOrder extends JFrame 
 {
@@ -34,39 +35,40 @@ public class AddOrder extends JFrame
 		
 		
 		JLabel lblNewLabel = new JLabel("Додавання нового замовлення на купівлю");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lblNewLabel.setBounds(29, 13, 568, 59);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblNewLabel.setBounds(0, 13, 628, 59);
 		contentPane.add(lblNewLabel);
 
 		
 		JLabel StartDateLabel = new JLabel("Дата початку");
-		StartDateLabel.setBounds(29, 118, 129, 22);
+		StartDateLabel.setBounds(60, 116, 129, 22);
 		contentPane.add(StartDateLabel);
 		
 		JLabel PaidLabel = new JLabel("Сплачено");
-		PaidLabel.setBounds(29, 164, 129, 22);
+		PaidLabel.setBounds(60, 162, 129, 22);
 		contentPane.add(PaidLabel);
 		
 		JLabel ShippedLabel = new JLabel("Відвантажено");
-		ShippedLabel.setBounds(29, 198, 129, 22);
+		ShippedLabel.setBounds(60, 196, 129, 22);
 		contentPane.add(ShippedLabel);
 		
 		
 		StartDateField = new JTextField();
-		StartDateField.setBounds(161, 118, 350, 22);
+		StartDateField.setBounds(192, 116, 350, 22);
 		contentPane.add(StartDateField);
 		StartDateField.setColumns(10);
 		
 		PaidCheckBox = new JCheckBox();
-		PaidCheckBox.setBounds(161, 161, 113, 25);
+		PaidCheckBox.setBounds(192, 159, 25, 25);
 		contentPane.add(PaidCheckBox);
 		
 		ShippedCheckBox = new JCheckBox();
-		ShippedCheckBox.setBounds(161, 195, 113, 25);
+		ShippedCheckBox.setBounds(192, 193, 25, 25);
 		contentPane.add(ShippedCheckBox);
 
 		
-		JButton AddButton = new JButton("Додати");
+		JButton AddButton = new JButton("ДОДАТИ");
 		AddButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -78,7 +80,7 @@ public class AddOrder extends JFrame
 				AddOrder.this.dispose();
 			}
 		});
-		AddButton.setBounds(29, 295, 97, 25);
+		AddButton.setBounds(192, 251, 97, 25);
 		contentPane.add(AddButton);
 		
 		
@@ -92,7 +94,7 @@ public class AddOrder extends JFrame
 				AddOrder.this.dispose();
 			}
 		});
-		btnBack.setBounds(481, 295, 97, 25);
+		btnBack.setBounds(496, 295, 97, 25);
 		contentPane.add(btnBack);
 	}
 

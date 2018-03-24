@@ -16,6 +16,7 @@ import dao.ClientDao;
 import domain.Client;
 import main.MethodsForFrames;
 import view.AuthorisationMenu;
+import javax.swing.SwingConstants;
 
 public class EditClientFrame extends JFrame {
 
@@ -38,7 +39,7 @@ public class EditClientFrame extends JFrame {
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 646, 558);
+		setBounds(100, 100, 646, 480);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -47,63 +48,64 @@ public class EditClientFrame extends JFrame {
 		
 		
 		JLabel lblNewLabel = new JLabel("Редагування інформації клієнта");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lblNewLabel.setBounds(52, 13, 472, 59);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		lblNewLabel.setBounds(0, 13, 628, 49);
 		contentPane.add(lblNewLabel);
 		
 		JLabel NameLabel = new JLabel("Ім'я");
-		NameLabel.setBounds(22, 129, 175, 22);
+		NameLabel.setBounds(52, 107, 175, 22);
 		contentPane.add(NameLabel);
 		
 		JLabel PhoneLabel = new JLabel("Телефон");
-		PhoneLabel.setBounds(22, 171, 175, 22);
+		PhoneLabel.setBounds(52, 149, 175, 22);
 		contentPane.add(PhoneLabel);
 		
 		JLabel ContactPIBLabel = new JLabel("Контактна особа");
-		ContactPIBLabel.setBounds(22, 217, 175, 22);
+		ContactPIBLabel.setBounds(52, 195, 175, 22);
 		contentPane.add(ContactPIBLabel);
 		
 		JLabel CodeERPOULabel = new JLabel("Код ЕДРПОУ");
-		CodeERPOULabel.setBounds(22, 261, 175, 22);
+		CodeERPOULabel.setBounds(52, 239, 175, 22);
 		contentPane.add(CodeERPOULabel);
 		
 		JLabel CodeTaxpayerLabel = new JLabel("Код платника податків");
-		CodeTaxpayerLabel.setBounds(22, 301, 175, 22);
+		CodeTaxpayerLabel.setBounds(52, 279, 175, 22);
 		contentPane.add(CodeTaxpayerLabel);
 		
 		
 		NameField = new JTextField();
-		NameField.setBounds(209, 129, 350, 22);
+		NameField.setBounds(239, 107, 350, 22);
 		contentPane.add(NameField);
 		NameField.setColumns(10);
 		NameField.setText(c.getName());
 		
 		PhoneField = new JTextField();
-		PhoneField.setBounds(209, 171, 350, 22);
+		PhoneField.setBounds(239, 149, 350, 22);
 		contentPane.add(PhoneField);
 		PhoneField.setColumns(10);
 		PhoneField.setText(c.getPhone());
 		
 		ContactPIBField = new JTextField();
 		ContactPIBField.setColumns(10);
-		ContactPIBField.setBounds(209, 217, 350, 22);
+		ContactPIBField.setBounds(239, 195, 350, 22);
 		contentPane.add(ContactPIBField);
 		ContactPIBField.setText(c.getContactPIB());
 		
 		CodeERPOUField = new JTextField();
 		CodeERPOUField.setColumns(10);
-		CodeERPOUField.setBounds(209, 261, 350, 22);
+		CodeERPOUField.setBounds(239, 239, 350, 22);
 		contentPane.add(CodeERPOUField);
 		CodeERPOUField.setText(c.getCodeERPOU());
 		
 		CodeTaxpayerField = new JTextField();
 		CodeTaxpayerField.setColumns(10);
-		CodeTaxpayerField.setBounds(209, 301, 350, 22);
+		CodeTaxpayerField.setBounds(239, 279, 350, 22);
 		contentPane.add(CodeTaxpayerField);
 		CodeTaxpayerField.setText(c.getCodeTaxpayer());
 
 		
-		JButton AddButton = new JButton("Редагувати");
+		JButton AddButton = new JButton("РЕДАГУВАТИ");
 		AddButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -118,7 +120,7 @@ public class EditClientFrame extends JFrame {
 				new ClientMenu().setVisible(true);
 			}
 		});
-		AddButton.setBounds(52, 427, 125, 25);
+		AddButton.setBounds(239, 330, 125, 25);
 		contentPane.add(AddButton);
 		
 		
@@ -132,7 +134,7 @@ public class EditClientFrame extends JFrame {
 				EditClientFrame.this.dispose();
 			}
 		});
-		btnBack.setBounds(489, 427, 97, 25);
+		btnBack.setBounds(492, 388, 97, 25);
 		contentPane.add(btnBack);
 	}
 

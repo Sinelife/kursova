@@ -18,6 +18,7 @@ import main.MethodsForFrames;
 import view.AuthorisationMenu;
 import view_director.ConstructDepartmentDirectorMenu;
 import java.awt.Color;
+import javax.swing.SwingConstants;
 
 public class DeviceInformation extends JFrame {
 
@@ -60,7 +61,7 @@ public class DeviceInformation extends JFrame {
 		}
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 646, 598);
+		setBounds(100, 100, 600, 598);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -69,8 +70,9 @@ public class DeviceInformation extends JFrame {
 		
 		
 		JLabel lblNewLabel = new JLabel("Інформація про прилад");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		lblNewLabel.setBounds(103, 13, 421, 59);
+		lblNewLabel.setBounds(83, 0, 421, 59);
 		contentPane.add(lblNewLabel);
 		
 		JLabel NameLabel_1 = new JLabel("Назва приладу");
@@ -198,7 +200,7 @@ public class DeviceInformation extends JFrame {
 				DeviceInformation.this.dispose();
 			}
 		});
-		btnBack.setBounds(519, 513, 97, 25);
+		btnBack.setBounds(452, 513, 97, 25);
 		contentPane.add(btnBack);
 	}
 

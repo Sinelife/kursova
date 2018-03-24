@@ -45,7 +45,7 @@ public class InfoDevice extends JFrame {
 		List<Device> devices = dd.getAll();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 646, 558);
+		setBounds(100, 100, 668, 455);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -56,7 +56,7 @@ public class InfoDevice extends JFrame {
 
 		JComboBox<String> DeviceComboBox = new JComboBox<String>();
 		DeviceComboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		DeviceComboBox.setBounds(46, 283, 438, 34);
+		DeviceComboBox.setBounds(46, 111, 438, 34);
 		contentPane.add(DeviceComboBox);
 		for(Device device : devices) 
 		{
@@ -65,6 +65,7 @@ public class InfoDevice extends JFrame {
 		
 		
 		JLabel lblNewLabel = new JLabel("Пошук та перегляд інформації про прилади");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		lblNewLabel.setBounds(46, 25, 559, 59);
 		contentPane.add(lblNewLabel);
@@ -85,14 +86,14 @@ public class InfoDevice extends JFrame {
 			}
 		});
 		InfoButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		InfoButton.setBounds(496, 283, 122, 34);
+		InfoButton.setBounds(496, 111, 122, 34);
 		contentPane.add(InfoButton);
 		
 		
 		
 		
 		textField = new JTextField();
-		textField.setBounds(92, 123, 152, 22);
+		textField.setBounds(205, 211, 152, 22);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
@@ -113,7 +114,7 @@ public class InfoDevice extends JFrame {
 				}
 			}
 		});
-		FindNameButton.setBounds(301, 122, 151, 25);
+		FindNameButton.setBounds(206, 259, 151, 25);
 		contentPane.add(FindNameButton);
 		
 		JButton FindVoltageButton = new JButton("Пошук за напругою");
@@ -132,14 +133,14 @@ public class InfoDevice extends JFrame {
 				}
 			}
 		});
-		FindVoltageButton.setBounds(301, 97, 151, 25);
+		FindVoltageButton.setBounds(206, 234, 151, 25);
 		contentPane.add(FindVoltageButton);
 		
 		
 
 		JLabel FindRatingLabel = new JLabel("Пошук за рейтингом");
 		FindRatingLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		FindRatingLabel.setBounds(301, 147, 151, 22);
+		FindRatingLabel.setBounds(206, 284, 151, 22);
 		contentPane.add(FindRatingLabel);
 		
 		JButton FindRatingSmallButton = new JButton("Менше");
@@ -158,7 +159,7 @@ public class InfoDevice extends JFrame {
 				}
 			}
 		});
-		FindRatingSmallButton.setBounds(301, 169, 77, 25);
+		FindRatingSmallButton.setBounds(206, 306, 77, 25);
 		contentPane.add(FindRatingSmallButton);
 		
 		JButton FindRatingBigButton = new JButton("Більше");
@@ -177,7 +178,7 @@ public class InfoDevice extends JFrame {
 				}
 			}
 		});
-		FindRatingBigButton.setBounds(375, 169, 77, 25);
+		FindRatingBigButton.setBounds(280, 306, 77, 25);
 		contentPane.add(FindRatingBigButton);
 		
 		
@@ -193,7 +194,7 @@ public class InfoDevice extends JFrame {
 				InfoDevice.this.dispose();
 			}
 		});
-		btnBack.setBounds(489, 427, 97, 25);
+		btnBack.setBounds(521, 364, 97, 25);
 		contentPane.add(btnBack);
 
 	}

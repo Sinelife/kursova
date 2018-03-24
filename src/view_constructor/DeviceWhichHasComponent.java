@@ -17,6 +17,7 @@ import domain.Component;
 import domain.Device;
 import main.MethodsForFrames;
 import view.AuthorisationMenu;
+import javax.swing.SwingConstants;
 
 public class DeviceWhichHasComponent extends JFrame {
 
@@ -37,7 +38,7 @@ public class DeviceWhichHasComponent extends JFrame {
 
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 646, 558);
+		setBounds(100, 100, 582, 461);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -47,8 +48,9 @@ public class DeviceWhichHasComponent extends JFrame {
 		
 		
 		JLabel lblNewLabel = new JLabel("Прилади, що містять данний компонент");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		lblNewLabel.setBounds(34, 13, 557, 59);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		lblNewLabel.setBounds(12, 13, 522, 59);
 		contentPane.add(lblNewLabel);
 		
 		JComboBox<String> ComponentComboBox = new JComboBox<String>();
@@ -68,7 +70,7 @@ public class DeviceWhichHasComponent extends JFrame {
 		
 
 		
-		JButton btnNewButton = new JButton("Вибрати");
+		JButton btnNewButton = new JButton("ВИБРАТИ");
 		btnNewButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -78,7 +80,6 @@ public class DeviceWhichHasComponent extends JFrame {
 				try {
 					devices = dd.getAllDeviceWhichHasComponent(id_to_look);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				DeviceComboBox.removeAllItems();
@@ -88,7 +89,7 @@ public class DeviceWhichHasComponent extends JFrame {
 				}
 			}
 		});
-		btnNewButton.setBounds(441, 187, 97, 25);
+		btnNewButton.setBounds(219, 167, 97, 25);
 		contentPane.add(btnNewButton);
 		
 		
@@ -102,7 +103,7 @@ public class DeviceWhichHasComponent extends JFrame {
 				DeviceWhichHasComponent.this.dispose();
 			}
 		});
-		btnBack.setBounds(489, 427, 97, 25);
+		btnBack.setBounds(441, 359, 97, 25);
 		contentPane.add(btnBack);
 
 	}

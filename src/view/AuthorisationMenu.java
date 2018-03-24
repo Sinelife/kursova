@@ -23,13 +23,15 @@ import java.sql.SQLException;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import javax.swing.JPasswordField;
+import javax.swing.SwingConstants;
 
 public class AuthorisationMenu extends JFrame 
 {
 
 	private JPanel contentPane;
 	private JTextField LoginField;
-	private JTextField PasswordField;
+	private JPasswordField PasswordField;
 	private JLabel LoginMenuTitle;
 	private JButton button;
 	public static int user_id_to_choose;
@@ -41,36 +43,41 @@ public class AuthorisationMenu extends JFrame
 	public AuthorisationMenu() 
 	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 666, 387);
+		setBounds(500, 300, 470, 485);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.LIGHT_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		int h = contentPane.getHeight();
+		int w = contentPane.getWidth();
 		
 		LoginMenuTitle = new JLabel("Меню залогінювання");
+		LoginMenuTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		LoginMenuTitle.setFont(new Font("Tahoma", Font.BOLD, 22));
-		LoginMenuTitle.setBounds(148, 24, 338, 33);
+		LoginMenuTitle.setBounds(0, 24, 452, 47);
 		contentPane.add(LoginMenuTitle);
 		
 		JLabel LoginLabel = new JLabel("Логін");
+		LoginLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		LoginLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		LoginLabel.setBounds(53, 140, 94, 27);
+		LoginLabel.setBounds(91, 101, 275, 27);
 		contentPane.add(LoginLabel);
 		
 		JLabel PasswordLabel = new JLabel("Пароль");
+		PasswordLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		PasswordLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		PasswordLabel.setBounds(53, 193, 94, 27);
+		PasswordLabel.setBounds(91, 202, 275, 27);
 		contentPane.add(PasswordLabel);
 		
 		LoginField = new JTextField();
-		LoginField.setBounds(191, 140, 275, 27);
+		LoginField.setBounds(91, 141, 275, 27);
 		contentPane.add(LoginField);
 		LoginField.setColumns(10);
 		
-		PasswordField = new JTextField();
+		PasswordField = new JPasswordField();
 		PasswordField.setColumns(10);
-		PasswordField.setBounds(191, 193, 275, 27);
+		PasswordField.setBounds(91, 242, 275, 27);
 		contentPane.add(PasswordField);
 		
 		button = new JButton("Залогінитися");
@@ -83,7 +90,6 @@ public class AuthorisationMenu extends JFrame
 				try {
 					users = ud.getAll();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
@@ -104,7 +110,6 @@ public class AuthorisationMenu extends JFrame
 							try {
 								new ConstructorMenu().setVisible(true);
 							} catch (SQLException e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 							} 
 						}
@@ -116,7 +121,6 @@ public class AuthorisationMenu extends JFrame
 							try {
 								new WorkerSalesDepartmentMenu().setVisible(true);
 							} catch (SQLException e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 							} 
 						}
@@ -128,7 +132,6 @@ public class AuthorisationMenu extends JFrame
 							try {
 								new WorkerDeliveryDepartmentMenu().setVisible(true);
 							} catch (SQLException e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 							} 
 						}
@@ -140,7 +143,6 @@ public class AuthorisationMenu extends JFrame
 							try {
 								new AdminMenu().setVisible(true);
 							} catch (SQLException e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 							} 
 						}
@@ -152,7 +154,6 @@ public class AuthorisationMenu extends JFrame
 							try {
 								new DirectorMenu().setVisible(true);
 							} catch (SQLException e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 							} 
 						}
@@ -165,7 +166,7 @@ public class AuthorisationMenu extends JFrame
 			}
 		});
 		button.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		button.setBounds(284, 270, 144, 33);
+		button.setBounds(159, 340, 144, 33);
 		contentPane.add(button);
 	}
 	

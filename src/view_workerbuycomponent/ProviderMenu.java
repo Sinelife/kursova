@@ -28,7 +28,7 @@ public class ProviderMenu extends JFrame {
 	public ProviderMenu() 
 	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 674, 531);
+		setBounds(100, 100, 603, 531);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -36,12 +36,13 @@ public class ProviderMenu extends JFrame {
 		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
 		
 		
-		JLabel MenuTitleLabel = new JLabel("Меню роботи з постачальниками");
+		JLabel MenuTitleLabel = new JLabel("Робота з постачальниками");
+		MenuTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		MenuTitleLabel.setFont(new Font("Tahoma", Font.BOLD, 21));
-		MenuTitleLabel.setBounds(157, 13, 417, 38);
+		MenuTitleLabel.setBounds(46, 13, 486, 38);
 		contentPane.add(MenuTitleLabel);
 		
-		JButton InfoButton = new JButton("1)Переглянути інформацію про наявних постачальників");
+		JButton InfoButton = new JButton("Переглянути інформацію про наявних постачальників");
 		InfoButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -50,18 +51,16 @@ public class ProviderMenu extends JFrame {
 				try {
 					new InfoProvider(ProviderMenu.this).setVisible(true);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
 		});
-		InfoButton.setHorizontalAlignment(SwingConstants.LEFT);
 		InfoButton.setForeground(Color.DARK_GRAY);
 		InfoButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		InfoButton.setBounds(42, 111, 514, 43);
+		InfoButton.setBounds(46, 97, 486, 43);
 		contentPane.add(InfoButton);
 		
-		JButton AddButton = new JButton("2)Додати інформацію про нового постачальника");
+		JButton AddButton = new JButton("Додати нового постачальника");
 		AddButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -74,13 +73,12 @@ public class ProviderMenu extends JFrame {
 				} 
 			}
 		});
-		AddButton.setHorizontalAlignment(SwingConstants.LEFT);
 		AddButton.setForeground(Color.BLACK);
 		AddButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		AddButton.setBounds(42, 191, 514, 43);
+		AddButton.setBounds(46, 177, 486, 43);
 		contentPane.add(AddButton);
 		
-		JButton EditButton = new JButton("3)Редагувати інформацію про постачальника");
+		JButton EditButton = new JButton("Редагувати інформацію про постачальника");
 		EditButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -89,19 +87,17 @@ public class ProviderMenu extends JFrame {
 				try {
 					new EditProvider(ProviderMenu.this).setVisible(true);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} 
 			}
 		});
-		EditButton.setHorizontalAlignment(SwingConstants.LEFT);
 		EditButton.setForeground(Color.BLACK);
 		EditButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		EditButton.setBounds(42, 271, 514, 43);
+		EditButton.setBounds(46, 257, 486, 43);
 		contentPane.add(EditButton);
 		
 		
-		JButton ChooseButton = new JButton("4)Обрати постачальника для подальшої роботи з ним");
+		JButton ChooseButton = new JButton("Обрати постачальника для подальшої роботи з ним");
 		ChooseButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -110,15 +106,13 @@ public class ProviderMenu extends JFrame {
 				try {
 					new ChooseProvider().setVisible(true);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} 
 			}
 		});
-		ChooseButton.setHorizontalAlignment(SwingConstants.LEFT);
 		ChooseButton.setForeground(Color.BLACK);
 		ChooseButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		ChooseButton.setBounds(42, 354, 514, 43);
+		ChooseButton.setBounds(46, 340, 486, 43);
 		contentPane.add(ChooseButton);
 		
 		
@@ -135,7 +129,6 @@ public class ProviderMenu extends JFrame {
 					try {
 						new WorkerSalesDepartmentMenu().setVisible(true);
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
@@ -146,13 +139,12 @@ public class ProviderMenu extends JFrame {
 					try {
 						new WorkerSalesDepartmentAdminMenu().setVisible(true);
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
 			}
 		});
-		btnBack.setBounds(535, 439, 97, 25);
+		btnBack.setBounds(435, 429, 97, 25);
 		contentPane.add(btnBack);
 		
 	}

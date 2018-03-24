@@ -18,6 +18,7 @@ import view.AuthorisationMenu;
 import view_director.ConstructDepartmentDirectorMenu;
 
 import java.awt.Color;
+import javax.swing.SwingConstants;
 
 public class ComponentInformation extends JFrame {
 
@@ -50,7 +51,7 @@ public class ComponentInformation extends JFrame {
  	  	
  	  	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 646, 558);
+		setBounds(100, 100, 604, 492);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -59,8 +60,9 @@ public class ComponentInformation extends JFrame {
 		
 		
 		JLabel lblNewLabel = new JLabel("Інформація про компонент");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		lblNewLabel.setBounds(103, 13, 421, 59);
+		lblNewLabel.setBounds(85, 13, 421, 59);
 		contentPane.add(lblNewLabel);
 		
 		JLabel TypeLabel = new JLabel("Тип компоненту");
@@ -124,7 +126,7 @@ public class ComponentInformation extends JFrame {
 				ComponentInformation.this.dispose();
 			}
 		});
-		btnBack.setBounds(489, 427, 97, 25);
+		btnBack.setBounds(462, 404, 97, 25);
 		contentPane.add(btnBack);
 	}
 

@@ -28,7 +28,7 @@ public class ClientMenu extends JFrame {
 	public ClientMenu() 
 	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 610, 531);
+		setBounds(100, 100, 548, 531);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -36,12 +36,13 @@ public class ClientMenu extends JFrame {
 		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
 		
 		
-		JLabel MenuTitleLabel = new JLabel("Меню роботи з клієнтами");
+		JLabel MenuTitleLabel = new JLabel("Робота з клієнтами");
+		MenuTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		MenuTitleLabel.setFont(new Font("Tahoma", Font.BOLD, 21));
-		MenuTitleLabel.setBounds(157, 13, 417, 38);
+		MenuTitleLabel.setBounds(0, 13, 530, 38);
 		contentPane.add(MenuTitleLabel);
 		
-		JButton InfoButton = new JButton("1)Переглянути інформацію про наявних клієнтів");
+		JButton InfoButton = new JButton("Переглянути інформацію про наявних клієнтів");
 		InfoButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -54,13 +55,12 @@ public class ClientMenu extends JFrame {
 				}
 			}
 		});
-		InfoButton.setHorizontalAlignment(SwingConstants.LEFT);
 		InfoButton.setForeground(Color.DARK_GRAY);
 		InfoButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		InfoButton.setBounds(42, 111, 456, 43);
+		InfoButton.setBounds(42, 111, 438, 43);
 		contentPane.add(InfoButton);
 		
-		JButton AddButton = new JButton("2)Додати інформацію про нового клієнта");
+		JButton AddButton = new JButton("Додати нового клієнта");
 		AddButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
@@ -68,13 +68,12 @@ public class ClientMenu extends JFrame {
 				new AddClient(ClientMenu.this).setVisible(true); 
 			}
 		});
-		AddButton.setHorizontalAlignment(SwingConstants.LEFT);
 		AddButton.setForeground(Color.BLACK);
 		AddButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		AddButton.setBounds(42, 191, 456, 43);
+		AddButton.setBounds(42, 191, 438, 43);
 		contentPane.add(AddButton);
 		
-		JButton EditButton = new JButton("3)Редагувати інформацію про клієнта");
+		JButton EditButton = new JButton("Редагувати інформацію про клієнта");
 		EditButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -87,14 +86,13 @@ public class ClientMenu extends JFrame {
 				} 
 			}
 		});
-		EditButton.setHorizontalAlignment(SwingConstants.LEFT);
 		EditButton.setForeground(Color.BLACK);
 		EditButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		EditButton.setBounds(42, 271, 456, 43);
+		EditButton.setBounds(42, 271, 438, 43);
 		contentPane.add(EditButton);
 		
 		
-		JButton ChooseButton = new JButton("4)Обрати клієнта для подільшої роботи з ним");
+		JButton ChooseButton = new JButton("Обрати клієнта для подільшої роботи з ним");
 		ChooseButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -107,10 +105,9 @@ public class ClientMenu extends JFrame {
 				} 
 			}
 		});
-		ChooseButton.setHorizontalAlignment(SwingConstants.LEFT);
 		ChooseButton.setForeground(Color.DARK_GRAY);
 		ChooseButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		ChooseButton.setBounds(42, 354, 456, 43);
+		ChooseButton.setBounds(42, 354, 438, 43);
 		contentPane.add(ChooseButton);
 		
 		
@@ -142,7 +139,7 @@ public class ClientMenu extends JFrame {
 				}
 			}
 		});
-		btnBack.setBounds(483, 434, 97, 25);
+		btnBack.setBounds(383, 446, 97, 25);
 		contentPane.add(btnBack);
 		
 	}

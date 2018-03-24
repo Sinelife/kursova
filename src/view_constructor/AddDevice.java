@@ -14,6 +14,7 @@ import main.MethodsForFrames;
 import view.AuthorisationMenu;
 
 import javax.swing.JButton;
+import javax.swing.SwingConstants;
 
 public class AddDevice extends JFrame
 {
@@ -33,7 +34,7 @@ public class AddDevice extends JFrame
 	public AddDevice(JFrame parent)
 	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 646, 558);
+		setBounds(100, 100, 612, 558);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -42,8 +43,9 @@ public class AddDevice extends JFrame
 		
 		
 		JLabel lblNewLabel = new JLabel("Додавання нового приладу");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		lblNewLabel.setBounds(103, 13, 421, 59);
+		lblNewLabel.setBounds(116, 13, 421, 59);
 		contentPane.add(lblNewLabel);
 		
 		JLabel NameLabel_1 = new JLabel("Назва приладу");
@@ -103,7 +105,7 @@ public class AddDevice extends JFrame
 
 		
 		
-		JButton AddButton = new JButton("Додати");
+		JButton AddButton = new JButton("ДОДАТИ");
 		AddButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -115,7 +117,7 @@ public class AddDevice extends JFrame
 				AddDevice.this.dispose();
 			}
 		});
-		AddButton.setBounds(52, 427, 97, 25);
+		AddButton.setBounds(209, 405, 97, 25);
 		contentPane.add(AddButton);
 		
 		
@@ -129,7 +131,7 @@ public class AddDevice extends JFrame
 				AddDevice.this.dispose();
 			}
 		});
-		btnBack.setBounds(489, 427, 97, 25);
+		btnBack.setBounds(462, 473, 97, 25);
 		contentPane.add(btnBack);
 	}
 }

@@ -21,6 +21,7 @@ import main.MethodsForFrames;
 import view.AuthorisationMenu;
 
 import javax.swing.JCheckBox;
+import javax.swing.SwingConstants;
 
 public class EditDelivery extends JFrame {
 
@@ -45,7 +46,7 @@ public class EditDelivery extends JFrame {
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 759, 458);
+		setBounds(100, 100, 759, 461);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -54,13 +55,14 @@ public class EditDelivery extends JFrame {
 		
 		
 		JLabel lblNewLabel = new JLabel("Редагування замовлення постачання");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lblNewLabel.setBounds(145, 13, 525, 59);
+		lblNewLabel.setBounds(0, 13, 741, 59);
 		contentPane.add(lblNewLabel);
 		
 		JComboBox<String> DeliveryComboBox = new JComboBox<String>();
-		DeliveryComboBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		DeliveryComboBox.setBounds(39, 85, 559, 34);
+		DeliveryComboBox.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		DeliveryComboBox.setBounds(41, 85, 667, 34);
 		contentPane.add(DeliveryComboBox);
 		for(Delivery delivery : deliveries) 
 		{
@@ -68,33 +70,33 @@ public class EditDelivery extends JFrame {
 		}
 		
 		JLabel StartDateLabel = new JLabel("Дата початку");
-		StartDateLabel.setBounds(39, 197, 133, 22);
+		StartDateLabel.setBounds(103, 199, 133, 22);
 		contentPane.add(StartDateLabel);
 		
 		JLabel PaidLabel = new JLabel("Сплачено");
-		PaidLabel.setBounds(39, 243, 133, 22);
+		PaidLabel.setBounds(103, 245, 133, 22);
 		contentPane.add(PaidLabel);
 		
 		JLabel ShippedLabel = new JLabel("Відвантажено");
-		ShippedLabel.setBounds(39, 283, 129, 22);
+		ShippedLabel.setBounds(103, 285, 129, 22);
 		contentPane.add(ShippedLabel);
 		
 		StartDateField = new JTextField();
-		StartDateField.setBounds(184, 197, 337, 22);
+		StartDateField.setBounds(248, 199, 337, 22);
 		contentPane.add(StartDateField);
 		StartDateField.setColumns(10);
 		
 		PaidCheckBox = new JCheckBox();
-		PaidCheckBox.setBounds(180, 243, 113, 25);
+		PaidCheckBox.setBounds(244, 245, 25, 25);
 		contentPane.add(PaidCheckBox);
 		
 		ShippedCheckBox = new JCheckBox();
-		ShippedCheckBox.setBounds(180, 280, 113, 25);
+		ShippedCheckBox.setBounds(244, 282, 25, 25);
 		contentPane.add(ShippedCheckBox);
 
 		
 		
-		JButton SelectButton = new JButton("Вибрати");
+		JButton SelectButton = new JButton("ВИБРАТИ");
 		SelectButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -125,12 +127,12 @@ public class EditDelivery extends JFrame {
 				}
 			}
 		});
-		SelectButton.setBounds(39, 142, 97, 25);
+		SelectButton.setBounds(293, 145, 97, 25);
 		contentPane.add(SelectButton);
 		
 		
 		
-		JButton button = new JButton("Редагувати");
+		JButton button = new JButton("РЕДАГУВАТИ");
 		button.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -141,8 +143,8 @@ public class EditDelivery extends JFrame {
 				new DeliveryMenu().setVisible(true);
 			}
 		});
-		button.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		button.setBounds(35, 359, 123, 34);
+		button.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		button.setBounds(284, 328, 123, 25);
 		contentPane.add(button);
 		
 		
@@ -156,7 +158,7 @@ public class EditDelivery extends JFrame {
 				EditDelivery.this.dispose();
 			}
 		});
-		btnBack.setBounds(632, 365, 97, 25);
+		btnBack.setBounds(632, 374, 97, 25);
 		contentPane.add(btnBack);
 	}
 }

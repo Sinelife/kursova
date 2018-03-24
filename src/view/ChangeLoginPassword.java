@@ -19,6 +19,7 @@ import view_workerbuycomponent.WorkerDeliveryDepartmentMenu;
 import view_workerselldevice.WorkerSalesDepartmentMenu;
 
 import java.awt.Color;
+import javax.swing.SwingConstants;
 
 public class ChangeLoginPassword extends JFrame {
 
@@ -39,7 +40,7 @@ public class ChangeLoginPassword extends JFrame {
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 627, 370);
+		setBounds(100, 100, 597, 391);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -47,37 +48,38 @@ public class ChangeLoginPassword extends JFrame {
 		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
 		
 		JLabel lblNewLabel = new JLabel("«Ï≥Ì‡ ÎÓ„≥ÌÛ ≥ Ô‡ÓÎ˛");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		lblNewLabel.setBounds(103, 13, 421, 59);
+		lblNewLabel.setBounds(0, 13, 579, 59);
 		contentPane.add(lblNewLabel);
 		
 		
 		JLabel LoginLabel = new JLabel("ÀÓ„≥Ì");
-		LoginLabel.setBounds(36, 144, 91, 22);
+		LoginLabel.setBounds(84, 121, 91, 22);
 		contentPane.add(LoginLabel);
 		
 		JLabel PasswordLabel = new JLabel("œ‡ÓÎ¸");
-		PasswordLabel.setBounds(36, 195, 91, 22);
+		PasswordLabel.setBounds(84, 172, 91, 22);
 		contentPane.add(PasswordLabel);
 		
 		LoginField = new JTextField();
 		LoginField.setBackground(Color.WHITE);
 		LoginField.setColumns(10);
-		LoginField.setBounds(143, 144, 333, 22);
+		LoginField.setBounds(191, 121, 333, 22);
 		contentPane.add(LoginField);
 		LoginField.setText(u.getLogin());
 		
 		PasswordField = new JTextField();
 		PasswordField.setBackground(Color.WHITE);
 		PasswordField.setColumns(10);
-		PasswordField.setBounds(143, 195, 333, 22);
+		PasswordField.setBounds(191, 172, 333, 22);
 		contentPane.add(PasswordField);
 		PasswordField.setText(u.getPassword());
 		
 		
 		
-		JButton EditButton = new JButton("–Â‰‡„Û‚‡ÚË");
-		EditButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		JButton EditButton = new JButton("–≈ƒ¿√”¬¿“»");
+		EditButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		EditButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -87,7 +89,6 @@ public class ChangeLoginPassword extends JFrame {
 				try {
 					ud.updateUser(u);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				ChangeLoginPassword.this.setVisible(false);
@@ -97,7 +98,6 @@ public class ChangeLoginPassword extends JFrame {
 					try {
 						new ConstructorMenu().setVisible(true);
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
@@ -106,7 +106,6 @@ public class ChangeLoginPassword extends JFrame {
 					try {
 						new WorkerSalesDepartmentMenu().setVisible(true);
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
@@ -115,13 +114,12 @@ public class ChangeLoginPassword extends JFrame {
 					try {
 						new WorkerDeliveryDepartmentMenu().setVisible(true);
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
 			}
 		});
-		EditButton.setBounds(27, 275, 125, 25);
+		EditButton.setBounds(191, 229, 117, 25);
 		contentPane.add(EditButton);
 		
 		
@@ -136,7 +134,7 @@ public class ChangeLoginPassword extends JFrame {
 				ChangeLoginPassword.this.dispose();
 			}
 		});
-		btnBack.setBounds(477, 276, 97, 25);
+		btnBack.setBounds(427, 289, 97, 25);
 		contentPane.add(btnBack);
 	}
 

@@ -17,6 +17,7 @@ import dao.UserDao;
 import domain.User;
 import main.MethodsForFrames;
 import view.AuthorisationMenu;
+import javax.swing.SwingConstants;
 
 public class DeleteUser extends JFrame {
 
@@ -40,7 +41,7 @@ public class DeleteUser extends JFrame {
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 646, 558);
+		setBounds(100, 100, 646, 365);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -48,9 +49,10 @@ public class DeleteUser extends JFrame {
 		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
 		
 
-		JLabel lblNewLabel = new JLabel("Вибір акаунту працівника для видалення.");
+		JLabel lblNewLabel = new JLabel("Вибір працівника для видалення");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lblNewLabel.setBounds(46, 25, 559, 59);
+		lblNewLabel.setBounds(0, 25, 628, 59);
 		contentPane.add(lblNewLabel);
 		
 		JComboBox UserComboBox = new JComboBox();
@@ -72,7 +74,7 @@ public class DeleteUser extends JFrame {
 
 		
 		
-		JButton DeleteButton = new JButton("Видалити");
+		JButton DeleteButton = new JButton("ВИДАЛИТИ");
 		DeleteButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -98,7 +100,7 @@ public class DeleteUser extends JFrame {
 				DeleteUser.this.dispose();
 			}
 		});
-		DeleteButton.setBounds(46, 427, 97, 25);
+		DeleteButton.setBounds(202, 201, 97, 25);
 		contentPane.add(DeleteButton);
 		
 		
@@ -136,7 +138,7 @@ public class DeleteUser extends JFrame {
 				DeleteUser.this.dispose();
 			}
 		});
-		btnBack.setBounds(489, 427, 97, 25);
+		btnBack.setBounds(504, 276, 97, 25);
 		contentPane.add(btnBack);
 	}
 

@@ -34,7 +34,7 @@ public class WorkerDeliveryDepartmentMenu extends JFrame {
 		String UserSurnameName = u.getSurname() + " " + u.getName();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 608, 436);
+		setBounds(100, 100, 524, 436);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -43,16 +43,18 @@ public class WorkerDeliveryDepartmentMenu extends JFrame {
 		
 		
 		JLabel UserPIBLabel = new JLabel(UserSurnameName);
+		UserPIBLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		UserPIBLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		UserPIBLabel.setBounds(205, 64, 267, 38);
+		UserPIBLabel.setBounds(0, 64, 506, 38);
 		contentPane.add(UserPIBLabel);
 		
-		JLabel MenuTitleLabel = new JLabel("ћеню члена в≥дд≥лу постачанн€");
+		JLabel MenuTitleLabel = new JLabel("„лен в≥дд≥лу постачанн€");
+		MenuTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		MenuTitleLabel.setFont(new Font("Tahoma", Font.BOLD, 21));
-		MenuTitleLabel.setBounds(93, 13, 379, 38);
+		MenuTitleLabel.setBounds(0, 13, 506, 38);
 		contentPane.add(MenuTitleLabel);
 		
-		JButton ProviderMenuButton = new JButton("1)ћеню роботи з постачальниками");
+		JButton ProviderMenuButton = new JButton("постачальниками");
 		ProviderMenuButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -62,12 +64,11 @@ public class WorkerDeliveryDepartmentMenu extends JFrame {
 			}
 		});
 		ProviderMenuButton.setForeground(Color.BLACK);
-		ProviderMenuButton.setHorizontalAlignment(SwingConstants.LEFT);
 		ProviderMenuButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		ProviderMenuButton.setBounds(53, 177, 419, 43);
+		ProviderMenuButton.setBounds(137, 201, 235, 43);
 		contentPane.add(ProviderMenuButton);
 		
-		JButton DeliveryMenuButton = new JButton("2)«м≥нити лог≥н та пароль");
+		JButton DeliveryMenuButton = new JButton("«м≥нити лог≥н та пароль");
 		DeliveryMenuButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -76,15 +77,14 @@ public class WorkerDeliveryDepartmentMenu extends JFrame {
 				try {
 					new ChangeLoginPassword(WorkerDeliveryDepartmentMenu.this).setVisible(true);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} 
 			}
 		});
 		DeliveryMenuButton.setForeground(Color.BLACK);
 		DeliveryMenuButton.setHorizontalAlignment(SwingConstants.LEFT);
-		DeliveryMenuButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		DeliveryMenuButton.setBounds(53, 269, 419, 43);
+		DeliveryMenuButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		DeliveryMenuButton.setBounds(25, 351, 173, 25);
 		contentPane.add(DeliveryMenuButton);
 		
 		
@@ -97,8 +97,14 @@ public class WorkerDeliveryDepartmentMenu extends JFrame {
 				new AuthorisationMenu().setVisible(true);
 			}
 		});
-		LogOutButtton.setBounds(448, 357, 130, 25);
+		LogOutButtton.setBounds(345, 351, 130, 25);
 		contentPane.add(LogOutButtton);
+		
+		JLabel label = new JLabel("\u0420\u043E\u0431\u043E\u0442\u0430 \u0437 ...");
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		label.setBounds(0, 153, 506, 29);
+		contentPane.add(label);
 	}
 
 }

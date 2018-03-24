@@ -17,6 +17,7 @@ import dao.ComponentDao;
 import domain.Component;
 import main.MethodsForFrames;
 import view.AuthorisationMenu;
+import javax.swing.SwingConstants;
 
 
 
@@ -38,22 +39,23 @@ public class EditComponent extends JFrame {
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 646, 558);
+		setBounds(100, 100, 573, 396);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
 		
-		JLabel lblNewLabel = new JLabel("Меню вибору компоненту для редагування.");
+		JLabel lblNewLabel = new JLabel("Вибір компоненту для редагування");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lblNewLabel.setBounds(46, 25, 559, 59);
+		lblNewLabel.setBounds(23, 25, 498, 59);
 		contentPane.add(lblNewLabel);
 		
 
 		JComboBox<String> ComponentComboBox = new JComboBox<String>();
 		ComponentComboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		ComponentComboBox.setBounds(40, 121, 504, 34);
+		ComponentComboBox.setBounds(23, 121, 504, 34);
 		contentPane.add(ComponentComboBox);
 		for(Component component : components) 
 		{
@@ -61,7 +63,7 @@ public class EditComponent extends JFrame {
 		}
 		
 		
-		JButton SelectButton = new JButton("Вибрати");
+		JButton SelectButton = new JButton("ВИБРАТИ");
 		SelectButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -75,7 +77,7 @@ public class EditComponent extends JFrame {
 				}
 			}
 		});
-		SelectButton.setBounds(46, 427, 97, 25);
+		SelectButton.setBounds(212, 200, 97, 25);
 		contentPane.add(SelectButton);
 		
 		
@@ -88,7 +90,7 @@ public class EditComponent extends JFrame {
 				EditComponent.this.dispose();
 			}
 		});
-		btnBack.setBounds(489, 427, 97, 25);
+		btnBack.setBounds(430, 306, 97, 25);
 		contentPane.add(btnBack);
 	}
 

@@ -36,7 +36,7 @@ public class WorkerSalesDepartmentMenu extends JFrame
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 612, 459);
+		setBounds(100, 100, 570, 409);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -45,16 +45,18 @@ public class WorkerSalesDepartmentMenu extends JFrame
 		
 		
 		JLabel UserPIBLabel = new JLabel(UserSurnameName);
+		UserPIBLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		UserPIBLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		UserPIBLabel.setBounds(205, 64, 267, 38);
+		UserPIBLabel.setBounds(0, 64, 545, 38);
 		contentPane.add(UserPIBLabel);
 		
-		JLabel MenuTitleLabel = new JLabel("ћеню члена в≥дд≥лу продажу");
+		JLabel MenuTitleLabel = new JLabel("„лен в≥дд≥лу продажу");
+		MenuTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		MenuTitleLabel.setFont(new Font("Tahoma", Font.BOLD, 21));
-		MenuTitleLabel.setBounds(128, 13, 456, 38);
+		MenuTitleLabel.setBounds(0, 13, 545, 38);
 		contentPane.add(MenuTitleLabel);
 		
-		JButton ClientMenuButton = new JButton("1)ћеню роботи з кл≥ентами");
+		JButton ClientMenuButton = new JButton("кл≥ентами");
 		ClientMenuButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -64,12 +66,11 @@ public class WorkerSalesDepartmentMenu extends JFrame
 			}
 		});
 		ClientMenuButton.setForeground(Color.BLACK);
-		ClientMenuButton.setHorizontalAlignment(SwingConstants.LEFT);
 		ClientMenuButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		ClientMenuButton.setBounds(53, 177, 390, 43);
+		ClientMenuButton.setBounds(171, 177, 200, 43);
 		contentPane.add(ClientMenuButton);
 		
-		JButton OrderMenuButton = new JButton("2)«м≥нити лог≥н та пароль");
+		JButton OrderMenuButton = new JButton("«м≥нити лог≥н та пароль");
 		OrderMenuButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -84,8 +85,8 @@ public class WorkerSalesDepartmentMenu extends JFrame
 		});
 		OrderMenuButton.setForeground(Color.BLACK);
 		OrderMenuButton.setHorizontalAlignment(SwingConstants.LEFT);
-		OrderMenuButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		OrderMenuButton.setBounds(53, 269, 390, 43);
+		OrderMenuButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		OrderMenuButton.setBounds(12, 313, 186, 25);
 		contentPane.add(OrderMenuButton);
 		
 		
@@ -98,8 +99,14 @@ public class WorkerSalesDepartmentMenu extends JFrame
 				new AuthorisationMenu().setVisible(true);
 			}
 		});
-		LogOutButtton.setBounds(444, 383, 140, 25);
+		LogOutButtton.setBounds(411, 313, 129, 25);
 		contentPane.add(LogOutButtton);
+		
+		JLabel label = new JLabel("\u0420\u043E\u0431\u043E\u0442\u0430 \u0437 ...");
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		label.setBounds(0, 135, 545, 29);
+		contentPane.add(label);
 	}
 
 }

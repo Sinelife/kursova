@@ -20,6 +20,7 @@ import view.AuthorisationMenu;
 import view_director.DeliveryDepartmentDirectorMenu;
 
 import java.awt.Color;
+import javax.swing.SwingConstants;
 
 public class ProviderInformation extends JFrame 
 {
@@ -30,7 +31,7 @@ public class ProviderInformation extends JFrame
 	private JTextField ContactPIBField;
 	private JTextField CodeERPOUField;
 	private JTextField CodeTaxpayerField;
-	private JComboBox SpecializationComboBox;
+	private JComboBox<?> SpecializationComboBox;
 
 
 	/**
@@ -56,7 +57,7 @@ public class ProviderInformation extends JFrame
 
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 646, 558);
+		setBounds(100, 100, 646, 486);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -65,8 +66,9 @@ public class ProviderInformation extends JFrame
 		
 		
 		JLabel lblNewLabel = new JLabel("Інформація постачальника");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		lblNewLabel.setBounds(52, 13, 472, 59);
+		lblNewLabel.setBounds(0, 13, 628, 59);
 		contentPane.add(lblNewLabel);
 		
 		JLabel NameLabel = new JLabel("Ім'я");
@@ -150,7 +152,7 @@ public class ProviderInformation extends JFrame
 				ProviderInformation.this.dispose();
 			}
 		});
-		btnBack.setBounds(489, 427, 97, 25);
+		btnBack.setBounds(491, 401, 97, 25);
 		contentPane.add(btnBack);
 	}
 

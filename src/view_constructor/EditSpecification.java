@@ -23,6 +23,7 @@ import main.MethodsForFrames;
 import view.AuthorisationMenu;
 
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class EditSpecification extends JFrame {
 
@@ -68,8 +69,9 @@ public class EditSpecification extends JFrame {
 		
 		
 		JLabel lblNewLabel = new JLabel("Вибір приладу для редагування специфікації");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lblNewLabel.setBounds(46, 25, 559, 59);
+		lblNewLabel.setBounds(0, 25, 752, 59);
 		contentPane.add(lblNewLabel);
 
 		JComboBox<String> DeviceComboBox = new JComboBox<String>();
@@ -94,7 +96,7 @@ public class EditSpecification extends JFrame {
 
 		
 		
-		JButton SelectButton = new JButton("Вибрати");
+		JButton SelectButton = new JButton("ВИБРАТИ");
 		SelectButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
@@ -102,8 +104,8 @@ public class EditSpecification extends JFrame {
 				FillAdd_Edit_DeleteComboBoxesFromLists();
 			}
 		});
-		SelectButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		SelectButton.setBounds(425, 180, 119, 25);
+		SelectButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		SelectButton.setBounds(242, 186, 106, 28);
 		contentPane.add(SelectButton);
 		
 		
@@ -227,7 +229,7 @@ public class EditSpecification extends JFrame {
 				EditSpecification.this.dispose();
 			}
 		});
-		btnBack.setBounds(643, 550, 97, 25);
+		btnBack.setBounds(593, 549, 97, 25);
 		contentPane.add(btnBack);
 
 	}

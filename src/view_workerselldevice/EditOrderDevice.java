@@ -23,6 +23,7 @@ import main.MethodsForFrames;
 import view.AuthorisationMenu;
 
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class EditOrderDevice extends JFrame {
 
@@ -58,7 +59,7 @@ public class EditOrderDevice extends JFrame {
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 759, 576);
+		setBounds(100, 100, 759, 561);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -68,8 +69,9 @@ public class EditOrderDevice extends JFrame {
 		
 		
 		JLabel lblNewLabel = new JLabel("Редагування замовлення на купівлю");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lblNewLabel.setBounds(162, 13, 518, 59);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		lblNewLabel.setBounds(0, 13, 741, 49);
 		contentPane.add(lblNewLabel);
 		
 		JComboBox<String> OrderComboBox = new JComboBox<String>();
@@ -83,34 +85,34 @@ public class EditOrderDevice extends JFrame {
 		
 		
 		JLabel AddLabel = new JLabel("Додавання");
-		AddLabel.setBounds(39, 272, 141, 16);
+		AddLabel.setBounds(59, 235, 141, 16);
 		contentPane.add(AddLabel);
 		
 		JLabel DeleteLabel = new JLabel("Видалення");
-		DeleteLabel.setBounds(275, 275, 141, 16);
+		DeleteLabel.setBounds(295, 238, 141, 16);
 		contentPane.add(DeleteLabel);
 		
 		JLabel EditLabel = new JLabel("Редагування");
-		EditLabel.setBounds(508, 275, 141, 16);
+		EditLabel.setBounds(528, 238, 141, 16);
 		contentPane.add(EditLabel);
 		
 		
 		AddComboBox.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		AddComboBox.setBounds(39, 304, 141, 22);
+		AddComboBox.setBounds(59, 267, 141, 22);
 		contentPane.add(AddComboBox);
 		
 		DeleteComboBox.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		DeleteComboBox.setBounds(275, 304, 141, 22);
+		DeleteComboBox.setBounds(295, 267, 141, 22);
 		contentPane.add(DeleteComboBox);
 		
 		EditComboBox.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		EditComboBox.setBounds(508, 304, 141, 22);
+		EditComboBox.setBounds(528, 267, 141, 22);
 		contentPane.add(EditComboBox);	
 		MyItemListener actionListener = new MyItemListener();
 		EditComboBox.addItemListener(actionListener);		
 		
 		
-		JButton SelectButton = new JButton("Вибрати");
+		JButton SelectButton = new JButton("ВИБРАТИ");
 		SelectButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -119,30 +121,30 @@ public class EditOrderDevice extends JFrame {
 				outputAllDeviceComboBoxes();
 			}
 		});
-		SelectButton.setBounds(39, 162, 97, 25);
+		SelectButton.setBounds(270, 146, 97, 25);
 		contentPane.add(SelectButton);
 		
 		
 	
 		
 		NumberAddField = new JTextField();
-		NumberAddField.setBounds(39, 372, 141, 25);
+		NumberAddField.setBounds(59, 335, 141, 25);
 		contentPane.add(NumberAddField);
 		NumberAddField.setColumns(10);
 		
 		JLabel NumberAddLabel = new JLabel("Кількість");
 		NumberAddLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		NumberAddLabel.setBounds(39, 342, 141, 28);
+		NumberAddLabel.setBounds(59, 305, 141, 28);
 		contentPane.add(NumberAddLabel);
 		
 		NumberEditField = new JTextField();
 		NumberEditField.setColumns(10);
-		NumberEditField.setBounds(508, 372, 141, 25);
+		NumberEditField.setBounds(528, 335, 141, 25);
 		contentPane.add(NumberEditField);
 		
 		JLabel NumberEditLabel = new JLabel("Кількість");
 		NumberEditLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		NumberEditLabel.setBounds(508, 342, 141, 28);
+		NumberEditLabel.setBounds(528, 305, 141, 28);
 		contentPane.add(NumberEditLabel);
 		
 		
@@ -156,7 +158,7 @@ public class EditOrderDevice extends JFrame {
 				MethodsForFrames.addDevicesInOrder(order_id_to_edit, device_id, NumberAddField);
 			}
 		});
-		AddButton.setBounds(39, 433, 125, 28);
+		AddButton.setBounds(59, 396, 125, 28);
 		contentPane.add(AddButton);
 		
 		
@@ -170,7 +172,7 @@ public class EditOrderDevice extends JFrame {
 				MethodsForFrames.deleteDevicesFromOrder(order_id_to_edit, device_id);
 			}
 		});
-		DeleteButton.setBounds(275, 435, 125, 28);
+		DeleteButton.setBounds(295, 398, 125, 28);
 		contentPane.add(DeleteButton);
 		
 		
@@ -186,7 +188,7 @@ public class EditOrderDevice extends JFrame {
 				MethodsForFrames.updateDevicesInOrder(order_id_to_edit, device_id, NumberEditField);
 			}
 		});
-		EditButton.setBounds(508, 435, 125, 28);
+		EditButton.setBounds(528, 398, 125, 28);
 		contentPane.add(EditButton);
 		
 		
@@ -221,7 +223,7 @@ public class EditOrderDevice extends JFrame {
 				EditOrderDevice.this.dispose();
 			}
 		});
-		btnBack.setBounds(632, 491, 97, 25);
+		btnBack.setBounds(632, 472, 97, 25);
 		contentPane.add(btnBack);
 	}
 	

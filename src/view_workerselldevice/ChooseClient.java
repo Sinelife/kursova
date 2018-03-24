@@ -17,6 +17,7 @@ import dao.ClientDao;
 import domain.Client;
 import main.MethodsForFrames;
 import view.AuthorisationMenu;
+import javax.swing.SwingConstants;
 
 public class ChooseClient extends JFrame {
 
@@ -35,7 +36,7 @@ public class ChooseClient extends JFrame {
 		List<Client> clients = cd.getAll();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 563, 410);
+		setBounds(100, 100, 563, 351);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -44,14 +45,15 @@ public class ChooseClient extends JFrame {
 		
 		
 		JLabel lblNewLabel = new JLabel("Вибір клієнта для подальшої роботи з ним");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		lblNewLabel.setBounds(40, 29, 470, 59);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel.setBounds(0, 29, 545, 59);
 		contentPane.add(lblNewLabel);
 
 
 		JComboBox<String> ClientComboBox = new JComboBox<String>();
-		ClientComboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		ClientComboBox.setBounds(40, 121, 427, 34);
+		ClientComboBox.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		ClientComboBox.setBounds(40, 101, 458, 34);
 		contentPane.add(ClientComboBox);
 		for(Client client : clients) 
 		{
@@ -61,7 +63,7 @@ public class ChooseClient extends JFrame {
 		
 		
 		
-		JButton SelectButton = new JButton("Вибрати");
+		JButton SelectButton = new JButton("ВИБРАТИ");
 		SelectButton.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
@@ -73,7 +75,7 @@ public class ChooseClient extends JFrame {
 				new OrderMenu().setVisible(true);
 			}
 		});
-		SelectButton.setBounds(40, 311, 118, 25);
+		SelectButton.setBounds(189, 166, 118, 25);
 		contentPane.add(SelectButton);
 		
 		
@@ -86,7 +88,7 @@ public class ChooseClient extends JFrame {
 				new ClientMenu().setVisible(true);
 			}
 		});
-		btnBack.setBounds(436, 311, 97, 25);
+		btnBack.setBounds(401, 261, 97, 25);
 		contentPane.add(btnBack);
 	}
 

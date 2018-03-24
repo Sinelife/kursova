@@ -18,6 +18,7 @@ import domain.Delivery;
 import domain.DeliveryComponent;
 import main.MethodsForFrames;
 import view.AuthorisationMenu;
+import javax.swing.SwingConstants;
 
 public class InfoDelivery extends JFrame 
 {
@@ -38,7 +39,7 @@ public class InfoDelivery extends JFrame
 		List<Delivery> deliveries = od.getAllFromProvider(ChooseProvider.id_to_choose);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 784, 507);
+		setBounds(100, 100, 784, 480);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -47,8 +48,9 @@ public class InfoDelivery extends JFrame
 		
 		
 		JLabel lblNewLabel = new JLabel("Перегляд інформації про замовлення постачання");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lblNewLabel.setBounds(88, 25, 615, 59);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		lblNewLabel.setBounds(0, 25, 766, 59);
 		contentPane.add(lblNewLabel);
 		
 		JLabel DeliveryLabel = new JLabel("Список замовлень постачання");
@@ -57,7 +59,7 @@ public class InfoDelivery extends JFrame
 		contentPane.add(DeliveryLabel);
 
 		JComboBox<String> DeliveryComboBox = new JComboBox<String>();
-		DeliveryComboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		DeliveryComboBox.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		DeliveryComboBox.setBounds(12, 149, 724, 34);
 		contentPane.add(DeliveryComboBox);
 		for(Delivery delivery : deliveries) 
@@ -73,7 +75,7 @@ public class InfoDelivery extends JFrame
 		
 		
 		
-		JButton SelectDeliveryButton = new JButton("Вибрати");
+		JButton SelectDeliveryButton = new JButton("ВИБРАТИ");
 		SelectDeliveryButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -82,7 +84,7 @@ public class InfoDelivery extends JFrame
 				MethodsForFrames.getComponentInfoFromDelivery(delivery_id_to_look, ComponentsInfoInDelivery, ComponentInDeliveryComboBox);
 			}
 		});
-		SelectDeliveryButton.setBounds(12, 201, 97, 25);
+		SelectDeliveryButton.setBounds(316, 208, 97, 25);
 		contentPane.add(SelectDeliveryButton);
 		
 		
@@ -96,7 +98,7 @@ public class InfoDelivery extends JFrame
 				InfoDelivery.this.dispose();
 			}
 		});
-		btnBack.setBounds(657, 422, 97, 25);
+		btnBack.setBounds(657, 392, 97, 25);
 		contentPane.add(btnBack);
 	}
 

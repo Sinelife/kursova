@@ -13,6 +13,7 @@ import main.MethodsForFrames;
 import view.AuthorisationMenu;
 
 import javax.swing.JButton;
+import javax.swing.SwingConstants;
 
 public class AddClient extends JFrame
 {
@@ -31,7 +32,7 @@ public class AddClient extends JFrame
 	public AddClient(JFrame parent)
 	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 646, 558);
+		setBounds(100, 100, 602, 495);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -40,8 +41,9 @@ public class AddClient extends JFrame
 		
 		
 		JLabel lblNewLabel = new JLabel("Додавання нового клієнта");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		lblNewLabel.setBounds(103, 13, 421, 59);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		lblNewLabel.setBounds(0, 13, 584, 59);
 		contentPane.add(lblNewLabel);
 		
 		JLabel NameLabel = new JLabel("Ім'я");
@@ -91,7 +93,7 @@ public class AddClient extends JFrame
 		contentPane.add(CodeTaxpayerField);
 
 		
-		JButton AddButton = new JButton("Додати");
+		JButton AddButton = new JButton("ДОДАТИ");
 		AddButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -103,7 +105,7 @@ public class AddClient extends JFrame
 				AddClient.this.dispose();
 			}
 		});
-		AddButton.setBounds(52, 427, 97, 25);
+		AddButton.setBounds(209, 355, 97, 25);
 		contentPane.add(AddButton);
 		
 		
@@ -117,7 +119,7 @@ public class AddClient extends JFrame
 				AddClient.this.dispose();
 			}
 		});
-		btnBack.setBounds(489, 427, 97, 25);
+		btnBack.setBounds(462, 405, 97, 25);
 		contentPane.add(btnBack);
 	}
 }

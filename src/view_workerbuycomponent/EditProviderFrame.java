@@ -17,6 +17,7 @@ import dao.ProviderDao;
 import domain.Provider;
 import main.MethodsForFrames;
 import view.AuthorisationMenu;
+import javax.swing.SwingConstants;
 
 
 public class EditProviderFrame extends JFrame {
@@ -43,7 +44,7 @@ public class EditProviderFrame extends JFrame {
 	public EditProviderFrame(JFrame parent) throws SQLException 
 	{		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 646, 558);
+		setBounds(100, 100, 646, 598);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -52,79 +53,80 @@ public class EditProviderFrame extends JFrame {
 		
 		
 		JLabel lblNewLabel = new JLabel("Редагування інформації постачальника");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lblNewLabel.setBounds(50, 13, 480, 59);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		lblNewLabel.setBounds(0, 13, 628, 59);
 		contentPane.add(lblNewLabel);
 		
 		JLabel NameLabel = new JLabel("Ім'я");
-		NameLabel.setBounds(22, 129, 175, 22);
+		NameLabel.setBounds(49, 128, 175, 22);
 		contentPane.add(NameLabel);
 		
 		JLabel PhoneLabel = new JLabel("Телефон");
-		PhoneLabel.setBounds(22, 171, 175, 22);
+		PhoneLabel.setBounds(49, 170, 175, 22);
 		contentPane.add(PhoneLabel);
 		
 		JLabel ContactPIBLabel = new JLabel("Контактна особа");
-		ContactPIBLabel.setBounds(22, 217, 175, 22);
+		ContactPIBLabel.setBounds(49, 216, 175, 22);
 		contentPane.add(ContactPIBLabel);
 		
 		JLabel CodeERPOULabel = new JLabel("Код ЕДРПОУ");
-		CodeERPOULabel.setBounds(22, 261, 175, 22);
+		CodeERPOULabel.setBounds(49, 260, 175, 22);
 		contentPane.add(CodeERPOULabel);
 		
 		JLabel CodeTaxpayerLabel = new JLabel("Код платника податків");
-		CodeTaxpayerLabel.setBounds(22, 301, 175, 22);
+		CodeTaxpayerLabel.setBounds(49, 300, 175, 22);
 		contentPane.add(CodeTaxpayerLabel);
 		
 		JLabel SpecializationLabel = new JLabel("Спеціалізація");
-		SpecializationLabel.setBounds(22, 342, 175, 22);
+		SpecializationLabel.setBounds(49, 341, 175, 22);
 		contentPane.add(SpecializationLabel);
 		
 		
 		NameField = new JTextField();
-		NameField.setBounds(209, 129, 350, 22);
+		NameField.setBounds(236, 128, 350, 22);
 		contentPane.add(NameField);
 		NameField.setColumns(10);
 		NameField.setText(p.getName());
 		
 		PhoneField = new JTextField();
-		PhoneField.setBounds(209, 171, 350, 22);
+		PhoneField.setBounds(236, 170, 350, 22);
 		contentPane.add(PhoneField);
 		PhoneField.setColumns(10);
 		PhoneField.setText(p.getPhone());
 		
 		ContactPIBField = new JTextField();
 		ContactPIBField.setColumns(10);
-		ContactPIBField.setBounds(209, 217, 350, 22);
+		ContactPIBField.setBounds(236, 216, 350, 22);
 		contentPane.add(ContactPIBField);
 		ContactPIBField.setText(p.getContactPIB());
 		
 		CodeERPOUField = new JTextField();
 		CodeERPOUField.setColumns(10);
-		CodeERPOUField.setBounds(209, 261, 350, 22);
+		CodeERPOUField.setBounds(236, 260, 350, 22);
 		contentPane.add(CodeERPOUField);
 		CodeERPOUField.setText(p.getCodeERPOU());
 		
 		CodeTaxpayerField = new JTextField();
 		CodeTaxpayerField.setColumns(10);
-		CodeTaxpayerField.setBounds(209, 301, 350, 22);
+		CodeTaxpayerField.setBounds(236, 300, 350, 22);
 		contentPane.add(CodeTaxpayerField);
 		CodeTaxpayerField.setText(p.getCodeTaxpayer());
 		
 		SpecializationField = new JTextField();
 		SpecializationField.setColumns(10);
-		SpecializationField.setBounds(209, 342, 350, 22);
+		SpecializationField.setBounds(236, 341, 350, 22);
 		contentPane.add(SpecializationField);
 		SpecializationField.setText(p.getSpecialization());
 		result = SpecializationField.getText();
 		
 		
 		NotInComboBox.setBackground(Color.WHITE);
-		NotInComboBox.setBounds(209, 366, 175, 22);
+		NotInComboBox.setBounds(236, 366, 170, 22);
 		contentPane.add(NotInComboBox);
 	
 		InComboBox.setBackground(Color.WHITE);
-		InComboBox.setBounds(384, 366, 175, 22);
+		InComboBox.setBounds(415, 366, 170, 22);
 		contentPane.add(InComboBox);
 		
 		
@@ -144,7 +146,7 @@ public class EditProviderFrame extends JFrame {
 				InComboBox.addItem(word);
 			}
 		});
-		PlusButton.setBounds(273, 396, 47, 25);
+		PlusButton.setBounds(363, 402, 47, 25);
 		contentPane.add(PlusButton);
 		
 		
@@ -163,12 +165,12 @@ public class EditProviderFrame extends JFrame {
 				SpecializationField.setText(result);
 			}
 		});
-		MinusButton.setBounds(429, 396, 47, 25);
+		MinusButton.setBounds(410, 402, 47, 25);
 		contentPane.add(MinusButton);
 		
 		
 		
-		JButton AddButton = new JButton("Редагувати");
+		JButton AddButton = new JButton("РЕДАГУВАТИ");
 		AddButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -183,7 +185,7 @@ public class EditProviderFrame extends JFrame {
 				new ProviderMenu().setVisible(true);
 			}
 		});
-		AddButton.setBounds(52, 427, 123, 25);
+		AddButton.setBounds(236, 457, 123, 25);
 		contentPane.add(AddButton);
 		
 
@@ -197,7 +199,7 @@ public class EditProviderFrame extends JFrame {
 				EditProviderFrame.this.dispose();
 			}
 		});
-		btnBack.setBounds(489, 427, 97, 25);
+		btnBack.setBounds(489, 513, 97, 25);
 		contentPane.add(btnBack);
 	}
 	

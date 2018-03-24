@@ -18,6 +18,7 @@ import domain.Order;
 import view.AuthorisationMenu;
 import view_director.SalesDepartmentDirectorMenu;
 import java.awt.Color;
+import javax.swing.SwingConstants;
 
 public class OrderInformation extends JFrame {
 
@@ -53,7 +54,7 @@ public class OrderInformation extends JFrame {
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 646, 454);
+		setBounds(100, 100, 646, 374);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -62,31 +63,32 @@ public class OrderInformation extends JFrame {
 		
 		
 		JLabel lblNewLabel = new JLabel("Інформація про замовлення на купівлю");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblNewLabel.setBounds(29, 13, 556, 59);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblNewLabel.setBounds(0, 13, 628, 59);
 		contentPane.add(lblNewLabel);
 		
 		JLabel NameLabel = new JLabel("Назва замовлення");
-		NameLabel.setBounds(29, 143, 482, 22);
+		NameLabel.setBounds(68, 109, 120, 22);
 		contentPane.add(NameLabel);
 		
 		JLabel StartDateLabel = new JLabel("Дата початку");
-		StartDateLabel.setBounds(29, 185, 482, 22);
+		StartDateLabel.setBounds(68, 151, 120, 22);
 		contentPane.add(StartDateLabel);
 		
 		JLabel PaidLabel = new JLabel("Сплачено");
-		PaidLabel.setBounds(29, 231, 482, 22);
+		PaidLabel.setBounds(68, 197, 120, 22);
 		contentPane.add(PaidLabel);
 		
 		JLabel ShippedLabel = new JLabel("Відвантажено");
-		ShippedLabel.setBounds(29, 265, 482, 22);
+		ShippedLabel.setBounds(68, 231, 120, 22);
 		contentPane.add(ShippedLabel);
 
 		
 		NameField = new JTextField();
 		NameField.setBackground(Color.WHITE);
 		NameField.setEditable(false);
-		NameField.setBounds(161, 143, 350, 22);
+		NameField.setBounds(200, 109, 350, 22);
 		contentPane.add(NameField);
 		NameField.setColumns(10);
 		NameField.setText(o.getOrderName());
@@ -94,14 +96,14 @@ public class OrderInformation extends JFrame {
 		StartDateField = new JTextField();
 		StartDateField.setBackground(Color.WHITE);
 		StartDateField.setEditable(false);
-		StartDateField.setBounds(161, 185, 350, 22);
+		StartDateField.setBounds(200, 151, 350, 22);
 		contentPane.add(StartDateField);
 		StartDateField.setColumns(10);
 		StartDateField.setText(String.valueOf(o.getStartDate()));
 		
 		PaidCheckBox = new JCheckBox();
 		PaidCheckBox.setEnabled(false);
-		PaidCheckBox.setBounds(161, 228, 350, 25);
+		PaidCheckBox.setBounds(200, 194, 25, 25);
 		contentPane.add(PaidCheckBox);
 		if(o.isPaid() == true)
 		{
@@ -114,7 +116,7 @@ public class OrderInformation extends JFrame {
 		
 		ShippedCheckBox = new JCheckBox();
 		ShippedCheckBox.setEnabled(false);
-		ShippedCheckBox.setBounds(161, 262, 350, 25);
+		ShippedCheckBox.setBounds(200, 228, 25, 25);
 		contentPane.add(ShippedCheckBox);
 		if(o.isShipped() == true)
 		{
@@ -135,7 +137,7 @@ public class OrderInformation extends JFrame {
 				OrderInformation.this.dispose();
 			}
 		});
-		btnBack.setBounds(488, 364, 97, 25);
+		btnBack.setBounds(453, 281, 97, 25);
 		contentPane.add(btnBack);
 	}
 

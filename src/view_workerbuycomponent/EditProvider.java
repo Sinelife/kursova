@@ -17,6 +17,7 @@ import dao.ProviderDao;
 import domain.Provider;
 import main.MethodsForFrames;
 import view.AuthorisationMenu;
+import javax.swing.SwingConstants;
 
 
 public class EditProvider extends JFrame {
@@ -36,7 +37,7 @@ public class EditProvider extends JFrame {
 		List<Provider> providers = pd.getAll();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 646, 558);
+		setBounds(100, 100, 646, 363);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -46,7 +47,7 @@ public class EditProvider extends JFrame {
 
 		JComboBox<String> ProviderComboBox = new JComboBox<String>();
 		ProviderComboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		ProviderComboBox.setBounds(40, 121, 437, 34);
+		ProviderComboBox.setBounds(59, 118, 509, 34);
 		contentPane.add(ProviderComboBox);
 		for(Provider provider : providers) 
 		{
@@ -54,12 +55,13 @@ public class EditProvider extends JFrame {
 		}
 		
 		JLabel lblNewLabel = new JLabel("Вибір постачальника для редагування");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lblNewLabel.setBounds(46, 25, 559, 59);
+		lblNewLabel.setBounds(0, 25, 628, 59);
 		contentPane.add(lblNewLabel);
 		
 		
-		JButton SelectButton = new JButton("Вибрати");
+		JButton SelectButton = new JButton("ВИБРАТИ");
 		SelectButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -74,7 +76,7 @@ public class EditProvider extends JFrame {
 				}
 			}
 		});
-		SelectButton.setBounds(46, 427, 97, 25);
+		SelectButton.setBounds(247, 188, 97, 25);
 		contentPane.add(SelectButton);
 		
 		
@@ -87,7 +89,7 @@ public class EditProvider extends JFrame {
 				EditProvider.this.dispose();
 			}
 		});
-		btnBack.setBounds(489, 427, 97, 25);
+		btnBack.setBounds(502, 265, 97, 25);
 		contentPane.add(btnBack);
 	}
 }

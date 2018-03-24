@@ -16,6 +16,7 @@ import javax.swing.border.EmptyBorder;
 import dao.UserDao;
 import domain.User;
 import view.AuthorisationMenu;
+import javax.swing.SwingConstants;
 
 public class UserInformation extends JFrame {
 
@@ -39,7 +40,7 @@ public class UserInformation extends JFrame {
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 627, 590);
+		setBounds(100, 100, 627, 477);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -48,36 +49,37 @@ public class UserInformation extends JFrame {
 		
 		
 		JLabel lblNewLabel = new JLabel("Інформація про працівника");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		lblNewLabel.setBounds(103, 13, 421, 59);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblNewLabel.setBounds(0, 13, 609, 59);
 		contentPane.add(lblNewLabel);
 		
 		
 		JLabel SurnameLabel = new JLabel("Прізвище");
-		SurnameLabel.setBounds(36, 157, 91, 22);
+		SurnameLabel.setBounds(82, 98, 91, 22);
 		contentPane.add(SurnameLabel);
 		
 		JLabel NameLabel = new JLabel("Ім'я");
-		NameLabel.setBounds(36, 209, 91, 22);
+		NameLabel.setBounds(82, 150, 91, 22);
 		contentPane.add(NameLabel);
 		
 		JLabel LoginLabel = new JLabel("Логін");
-		LoginLabel.setBounds(36, 267, 91, 22);
+		LoginLabel.setBounds(82, 208, 91, 22);
 		contentPane.add(LoginLabel);
 		
 		JLabel PasswordLabel = new JLabel("Пароль");
-		PasswordLabel.setBounds(36, 318, 91, 22);
+		PasswordLabel.setBounds(82, 259, 91, 22);
 		contentPane.add(PasswordLabel);
 		
 		JLabel RoleLabel = new JLabel("Роль");
-		RoleLabel.setBounds(36, 370, 91, 22);
+		RoleLabel.setBounds(82, 311, 91, 22);
 		contentPane.add(RoleLabel);
 		
 		
 		SurnameField = new JTextField();
 		SurnameField.setEditable(false);
 		SurnameField.setBackground(Color.WHITE);
-		SurnameField.setBounds(143, 157, 333, 22);
+		SurnameField.setBounds(189, 98, 333, 22);
 		contentPane.add(SurnameField);
 		SurnameField.setColumns(10);
 		SurnameField.setText(u.getSurname());
@@ -85,7 +87,7 @@ public class UserInformation extends JFrame {
 		NameField = new JTextField();
 		NameField.setBackground(Color.WHITE);
 		NameField.setEditable(false);
-		NameField.setBounds(143, 209, 333, 22);
+		NameField.setBounds(189, 150, 333, 22);
 		contentPane.add(NameField);
 		NameField.setColumns(10);
 		NameField.setText(u.getName());
@@ -94,7 +96,7 @@ public class UserInformation extends JFrame {
 		LoginField.setBackground(Color.WHITE);
 		LoginField.setEditable(false);
 		LoginField.setColumns(10);
-		LoginField.setBounds(143, 267, 333, 22);
+		LoginField.setBounds(189, 208, 333, 22);
 		contentPane.add(LoginField);
 		LoginField.setText(u.getLogin());
 		
@@ -102,7 +104,7 @@ public class UserInformation extends JFrame {
 		PasswordField.setBackground(Color.WHITE);
 		PasswordField.setEditable(false);
 		PasswordField.setColumns(10);
-		PasswordField.setBounds(143, 318, 333, 22);
+		PasswordField.setBounds(189, 259, 333, 22);
 		contentPane.add(PasswordField);
 		PasswordField.setText(u.getPassword());
 		
@@ -110,7 +112,7 @@ public class UserInformation extends JFrame {
 		RoleField.setBackground(Color.WHITE);
 		RoleField.setEditable(false);
 		RoleField.setColumns(10);
-		RoleField.setBounds(143, 370, 333, 22);
+		RoleField.setBounds(189, 311, 333, 22);
 		contentPane.add(RoleField);
 		RoleField.setText(u.getRole());
 		
@@ -126,7 +128,7 @@ public class UserInformation extends JFrame {
 				UserInformation.this.dispose();
 			}
 		});
-		btnBack.setBounds(482, 473, 97, 25);
+		btnBack.setBounds(479, 382, 97, 25);
 		contentPane.add(btnBack);
 	}
 

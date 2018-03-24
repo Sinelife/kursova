@@ -17,6 +17,7 @@ import domain.Component;
 import main.MethodsForFrames;
 import view.AuthorisationMenu;
 import java.awt.Color;
+import javax.swing.SwingConstants;
 
 
 public class EditComponentFrame extends JFrame {
@@ -39,7 +40,7 @@ public class EditComponentFrame extends JFrame {
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 646, 457);
+		setBounds(100, 100, 628, 484);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -48,8 +49,9 @@ public class EditComponentFrame extends JFrame {
 		
 		
 		JLabel lblNewLabel = new JLabel("Редагування компонента");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		lblNewLabel.setBounds(103, 13, 421, 59);
+		lblNewLabel.setBounds(86, 13, 421, 59);
 		contentPane.add(lblNewLabel);
 		
 		JLabel TypeLabel = new JLabel("Тип");
@@ -98,8 +100,8 @@ public class EditComponentFrame extends JFrame {
 		PriceField.setText(String.valueOf(c.getPrice()));
 		
 		
-		JButton EditButton = new JButton("Редагувати");
-		EditButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		JButton EditButton = new JButton("РЕДАГУВАТИ");
+		EditButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		EditButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -114,7 +116,7 @@ public class EditComponentFrame extends JFrame {
 				new ComponentMenu().setVisible(true);
 			}
 		});
-		EditButton.setBounds(35, 359, 125, 25);
+		EditButton.setBounds(208, 327, 125, 25);
 		contentPane.add(EditButton);
 		
 		
@@ -128,7 +130,7 @@ public class EditComponentFrame extends JFrame {
 				EditComponentFrame.this.dispose();
 			}
 		});
-		btnBack.setBounds(487, 360, 97, 25);
+		btnBack.setBounds(461, 399, 97, 25);
 		contentPane.add(btnBack);
 	}
 
