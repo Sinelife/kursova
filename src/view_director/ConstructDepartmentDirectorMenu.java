@@ -22,6 +22,7 @@ import view_constructor.ComponentInformation;
 import view_constructor.DeviceInformation;
 
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class ConstructDepartmentDirectorMenu extends JFrame 
 {
@@ -78,8 +79,9 @@ public class ConstructDepartmentDirectorMenu extends JFrame
 		
 		
 		JLabel DeviceLabel = new JLabel("Список приладів");
+		DeviceLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		DeviceLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		DeviceLabel.setBounds(38, 13, 198, 25);
+		DeviceLabel.setBounds(38, 13, 479, 25);
 		contentPane.add(DeviceLabel);
 		
 		DeviceComboBox = new JComboBox<String>();
@@ -100,7 +102,7 @@ public class ConstructDepartmentDirectorMenu extends JFrame
 		
 		
 		
-		JButton SelectButton = new JButton("Вибрати");
+		JButton SelectButton = new JButton("ВИБРАТИ");
 		SelectButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -111,7 +113,6 @@ public class ConstructDepartmentDirectorMenu extends JFrame
 				try {
 					componentsInDevice = dd.getAllComponentsInDevice(device_id_to_look);
 				} catch (SQLException e2) {
-					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				}
 				for(Component component : componentsInDevice) 
@@ -124,7 +125,6 @@ public class ConstructDepartmentDirectorMenu extends JFrame
 				try {
 					componentNumberInDevice = dd.getAllComponentNumberInDevice(device_id_to_look);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				ComponentNumberInDeviceField.setText(String.valueOf(componentNumberInDevice));
@@ -165,7 +165,6 @@ public class ConstructDepartmentDirectorMenu extends JFrame
 				try {
 					new DeviceInformation(ConstructDepartmentDirectorMenu.this).setVisible(true);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -175,46 +174,56 @@ public class ConstructDepartmentDirectorMenu extends JFrame
 		contentPane.add(DeviceInfoButton);
 		
 		JLabel ComponentNumberInDeviceLabel = new JLabel("Кількість компонентів");
+		ComponentNumberInDeviceLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		ComponentNumberInDeviceLabel.setBounds(38, 165, 146, 25);
 		contentPane.add(ComponentNumberInDeviceLabel);
 		
 		JLabel ComponentsPriceLabel = new JLabel("Вартість компонентів");
+		ComponentsPriceLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		ComponentsPriceLabel.setBounds(38, 246, 146, 25);
 		contentPane.add(ComponentsPriceLabel);
 		
 		JLabel ProfitPriceabel = new JLabel("Прибуток");
+		ProfitPriceabel.setHorizontalAlignment(SwingConstants.CENTER);
 		ProfitPriceabel.setBounds(389, 246, 146, 25);
 		contentPane.add(ProfitPriceabel);
 		
 		JLabel WorkPriceLabel = new JLabel("Вартість зборки");
+		WorkPriceLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		WorkPriceLabel.setBounds(216, 246, 146, 25);
 		contentPane.add(WorkPriceLabel);
 		
 		JLabel SumPriceLabel = new JLabel("Загальна вартість");
+		SumPriceLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		SumPriceLabel.setBounds(561, 246, 146, 25);
 		contentPane.add(SumPriceLabel);
 		
 		ComponentNumberInDeviceField = new JTextField();
+		ComponentNumberInDeviceField.setHorizontalAlignment(SwingConstants.CENTER);
 		ComponentNumberInDeviceField.setColumns(10);
 		ComponentNumberInDeviceField.setBounds(38, 194, 146, 22);
 		contentPane.add(ComponentNumberInDeviceField);
 		
 		ComponentsPriceField = new JTextField();
+		ComponentsPriceField.setHorizontalAlignment(SwingConstants.CENTER);
 		ComponentsPriceField.setColumns(10);
 		ComponentsPriceField.setBounds(38, 275, 146, 22);
 		contentPane.add(ComponentsPriceField);
 		
 		WorkPriceField = new JTextField();
+		WorkPriceField.setHorizontalAlignment(SwingConstants.CENTER);
 		WorkPriceField.setColumns(10);
 		WorkPriceField.setBounds(216, 275, 146, 22);
 		contentPane.add(WorkPriceField);
 		
 		ProfitPriceField = new JTextField();
+		ProfitPriceField.setHorizontalAlignment(SwingConstants.CENTER);
 		ProfitPriceField.setColumns(10);
 		ProfitPriceField.setBounds(389, 275, 146, 22);
 		contentPane.add(ProfitPriceField);
 		
 		SumPriceField = new JTextField();
+		SumPriceField.setHorizontalAlignment(SwingConstants.CENTER);
 		SumPriceField.setColumns(10);
 		SumPriceField.setBounds(561, 275, 146, 22);
 		contentPane.add(SumPriceField);
@@ -222,8 +231,9 @@ public class ConstructDepartmentDirectorMenu extends JFrame
 		
 		
 		JLabel ComponentInDeviceLabel = new JLabel("Список компонентів в приладі");
+		ComponentInDeviceLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		ComponentInDeviceLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		ComponentInDeviceLabel.setBounds(38, 349, 249, 25);
+		ComponentInDeviceLabel.setBounds(38, 349, 479, 25);
 		contentPane.add(ComponentInDeviceLabel);
 
 		
@@ -239,7 +249,6 @@ public class ConstructDepartmentDirectorMenu extends JFrame
 				try {
 					new ComponentInformation(ConstructDepartmentDirectorMenu.this).setVisible(true);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -251,7 +260,7 @@ public class ConstructDepartmentDirectorMenu extends JFrame
 		
 		
 		
-		JButton SelectComponentButton = new JButton("Вибрати");
+		JButton SelectComponentButton = new JButton("ВИБРАТИ");
 		SelectComponentButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -269,7 +278,6 @@ public class ConstructDepartmentDirectorMenu extends JFrame
 				try {
 					componentCost = dd.getComponentCostInDevice(device_id_to_look,component_id_to_look);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				CostOfComponentsField.setText(String.valueOf(componentCost));
@@ -282,10 +290,12 @@ public class ConstructDepartmentDirectorMenu extends JFrame
 		
 		
 		JLabel ComponentNumberLabel = new JLabel("Кількість компонентів");
+		ComponentNumberLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		ComponentNumberLabel.setBounds(38, 476, 146, 25);
 		contentPane.add(ComponentNumberLabel);
 		
 		JLabel CostOfComponentsLabel = new JLabel("Вартість компонентів");
+		CostOfComponentsLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		CostOfComponentsLabel.setBounds(38, 557, 146, 25);
 		contentPane.add(CostOfComponentsLabel);
 		

@@ -38,7 +38,7 @@ public class ConstructorAdminMenu extends JFrame {
 		String UserSurnameName = u.getSurname() + " " + u.getName();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 643, 403);
+		setBounds(100, 100, 595, 446);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -47,16 +47,18 @@ public class ConstructorAdminMenu extends JFrame {
 		
 		
 		JLabel MenuTitleLabel = new JLabel("Меню адміна(як члена конструкторського бюро)");
+		MenuTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		MenuTitleLabel.setFont(new Font("Tahoma", Font.BOLD, 21));
-		MenuTitleLabel.setBounds(60, 13, 630, 38);
+		MenuTitleLabel.setBounds(0, 13, 580, 38);
 		contentPane.add(MenuTitleLabel);
 		
 		JLabel UserPIBLabel = new JLabel(UserSurnameName);
+		UserPIBLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		UserPIBLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		UserPIBLabel.setBounds(205, 64, 267, 38);
+		UserPIBLabel.setBounds(0, 64, 580, 38);
 		contentPane.add(UserPIBLabel);
 		
-		JButton DeviceMenuButton = new JButton("1)Меню роботи з приладами");
+		JButton DeviceMenuButton = new JButton("приладами");
 		DeviceMenuButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
 			{
@@ -65,12 +67,11 @@ public class ConstructorAdminMenu extends JFrame {
 			}
 		});
 		DeviceMenuButton.setForeground(Color.BLACK);
-		DeviceMenuButton.setHorizontalAlignment(SwingConstants.LEFT);
 		DeviceMenuButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		DeviceMenuButton.setBounds(52, 147, 390, 43);
+		DeviceMenuButton.setBounds(189, 180, 197, 43);
 		contentPane.add(DeviceMenuButton);
 		
-		JButton ComponentMenuButton = new JButton("2)Меню роботи з компонентами");
+		JButton ComponentMenuButton = new JButton("компонентами");
 		ComponentMenuButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
@@ -79,9 +80,8 @@ public class ConstructorAdminMenu extends JFrame {
 			}
 		});
 		ComponentMenuButton.setForeground(Color.BLACK);
-		ComponentMenuButton.setHorizontalAlignment(SwingConstants.LEFT);
 		ComponentMenuButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		ComponentMenuButton.setBounds(52, 239, 390, 43);
+		ComponentMenuButton.setBounds(189, 269, 197, 43);
 		contentPane.add(ComponentMenuButton);
 		
 		
@@ -94,12 +94,17 @@ public class ConstructorAdminMenu extends JFrame {
 				try {
 					new AdminMenu().setVisible(true);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
 		});
-		btnBack.setBounds(477, 313, 103, 25);
+		btnBack.setBounds(467, 361, 103, 25);
 		contentPane.add(btnBack);
+		
+		JLabel label = new JLabel("\u0420\u043E\u0431\u043E\u0442\u0430 \u0437 ...");
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		label.setBounds(0, 133, 570, 25);
+		contentPane.add(label);
 	}
 }

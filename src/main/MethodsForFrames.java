@@ -906,7 +906,7 @@ public class MethodsForFrames
 	
 	
 	
-	//Метод виводу в JComboBox всіх спеціалізацій, які має постачальника
+	//Метод виводу в JComboBox всіх спеціалізацій, які має постачальник
 	
 	public static JComboBox<String> specializationInProvider(Provider p) throws SQLException
 	{
@@ -934,7 +934,7 @@ public class MethodsForFrames
 	}
 	
 	
-	//Метод виводу в JComboBox всіх спеціалізацій, які не має постачальника
+	//Метод виводу в JComboBox всіх спеціалізацій, які не має постачальник
 	
 	public static JComboBox<String> specializationNotInProvider(Provider p) throws SQLException
 	{
@@ -960,4 +960,91 @@ public class MethodsForFrames
 		}
 		return notin;
 	}
+	
+	
+	
+	
+	
+	
+	
+	//МЕТОДИ ДЛЯ ОСОБЛИВИХ ЗАПИТІВ
+	
+	//Метод для отримання всіх приладів,що містять всі ті компоненти, що містить обраний
+	
+	public static void getAllDeviceWhichHasAllComponentsWhichHasChosenDevice(int device_id, List<Device> devicesAllInChoosen,
+			JComboBox<String> DeviceAllInChoosenComboBox) 
+	{
+		DeviceDao dd = new DeviceDao();
+		DeviceAllInChoosenComboBox.removeAllItems();
+		try {
+			devicesAllInChoosen = dd.getAllDeviceWhichHasAllComponentsWhichHasChosenDevice(device_id);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		for(Device device : devicesAllInChoosen)
+		{
+			DeviceAllInChoosenComboBox.addItem(device.getName());
+		}
+	}
+	
+	
+	//Метод для отримання всіх приладів,що містять всі ті компоненти, що не містить обраний
+	
+	public static void getAllDeviceWhichHasAllComponentsWhichHasNotChosenDevice(int device_id, List<Device> devicesAllNotInChoosen,
+			JComboBox<String> DeviceAllNotInChoosenComboBox) 
+	{
+		DeviceDao dd = new DeviceDao();
+		DeviceAllNotInChoosenComboBox.removeAllItems();
+		try {
+			devicesAllNotInChoosen = dd.getAllDeviceWhichHasAllComponentsWhichHasNotChosenDevice(device_id);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		for(Device device : devicesAllNotInChoosen)
+		{
+			DeviceAllNotInChoosenComboBox.addItem(device.getName());
+		}
+	}
+	
+	
+	
+	//Метод для отримання всіх приладів,що містять хочаб один компонент, що містить обраний
+	
+	public static void getAllDeviceWhichHasAtLeastOneComponentWhichHasChosenDevice(int device_id,
+			List<Device> devicesOneInChoosen, JComboBox<String> DeviceOneInChoosenComboBox) 
+	{
+		DeviceDao dd = new DeviceDao();
+		DeviceOneInChoosenComboBox.removeAllItems();
+		try {
+			devicesOneInChoosen = dd.getAllDeviceWhichHasAtLeastOneComponentWhichHasChosenDevice(device_id);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		for(Device device : devicesOneInChoosen)
+		{
+			DeviceOneInChoosenComboBox.addItem(device.getName());
+		}
+	}
+	
+	
+	
+	//Метод для отримання всіх приладів,що містять всі і тільки ті компоненти, що містить обраний
+	
+	public static void getAllDeviceWhichHasOnlyAllComponentsWhichHasChosenDevice(int device_id, List<Device> devicesOnlyAllInChoosen,
+			JComboBox<String> DeviceOnlyAllInChoosenComboBox) 
+	{
+		DeviceDao dd = new DeviceDao();
+		DeviceOnlyAllInChoosenComboBox.removeAllItems();
+		try {
+			devicesOnlyAllInChoosen = dd.getAllDeviceWhichHasOnlyAllComponentsWhichHasChosenDevice(device_id);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		for(Device device : devicesOnlyAllInChoosen)
+		{
+			DeviceOnlyAllInChoosenComboBox.addItem(device.getName());
+		}
+	}
+	
+	
 }

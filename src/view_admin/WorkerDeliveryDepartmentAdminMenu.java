@@ -34,7 +34,7 @@ public class WorkerDeliveryDepartmentAdminMenu extends JFrame {
 		String UserSurnameName = u.getSurname() + " " + u.getName();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 608, 331);
+		setBounds(100, 100, 547, 331);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -43,16 +43,18 @@ public class WorkerDeliveryDepartmentAdminMenu extends JFrame {
 		
 		
 		JLabel UserPIBLabel = new JLabel(UserSurnameName);
+		UserPIBLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		UserPIBLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		UserPIBLabel.setBounds(205, 64, 267, 38);
+		UserPIBLabel.setBounds(0, 64, 529, 38);
 		contentPane.add(UserPIBLabel);
 		
 		JLabel MenuTitleLabel = new JLabel("Меню адміна(як члена відділу постачання)");
+		MenuTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		MenuTitleLabel.setFont(new Font("Tahoma", Font.BOLD, 21));
-		MenuTitleLabel.setBounds(35, 13, 531, 38);
+		MenuTitleLabel.setBounds(0, 13, 529, 38);
 		contentPane.add(MenuTitleLabel);
 		
-		JButton ProviderMenuButton = new JButton("1)Меню роботи з постачальниками");
+		JButton ProviderMenuButton = new JButton("постачальниками");
 		ProviderMenuButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -62,9 +64,8 @@ public class WorkerDeliveryDepartmentAdminMenu extends JFrame {
 			}
 		});
 		ProviderMenuButton.setForeground(Color.BLACK);
-		ProviderMenuButton.setHorizontalAlignment(SwingConstants.LEFT);
 		ProviderMenuButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		ProviderMenuButton.setBounds(53, 177, 368, 43);
+		ProviderMenuButton.setBounds(149, 164, 229, 43);
 		contentPane.add(ProviderMenuButton);
 		
 		
@@ -82,8 +83,14 @@ public class WorkerDeliveryDepartmentAdminMenu extends JFrame {
 				}
 			}
 		});
-		LogOutButtton.setBounds(471, 247, 86, 25);
+		LogOutButtton.setBounds(420, 246, 86, 25);
 		contentPane.add(LogOutButtton);
+		
+		JLabel label = new JLabel("\u0420\u043E\u0431\u043E\u0442\u0430 \u0437 ...");
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		label.setBounds(0, 126, 529, 25);
+		contentPane.add(label);
 	}
 
 }

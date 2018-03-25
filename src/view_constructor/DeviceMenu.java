@@ -27,7 +27,7 @@ public class DeviceMenu extends JFrame {
 	public DeviceMenu() 
 	{	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 499, 598);
+		setBounds(100, 100, 503, 664);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -125,6 +125,27 @@ public class DeviceMenu extends JFrame {
 		EditSpecificationButton.setBounds(42, 429, 410, 43);
 		contentPane.add(EditSpecificationButton);
 		
+		JButton SpecialInfoButton = new JButton("Особлива інформація");
+		SpecialInfoButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				DeviceMenu.this.setVisible(false);
+				try {
+					new SpecialDeviceInfo(DeviceMenu.this).setVisible(true);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				} 
+			}
+		});
+		SpecialInfoButton.setForeground(Color.BLACK);
+		SpecialInfoButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		SpecialInfoButton.setBounds(42, 505, 410, 43);
+		contentPane.add(SpecialInfoButton);
+		
+		
+		
+		
 		
 		
 		JButton btnBack = new JButton("BACK");
@@ -152,8 +173,7 @@ public class DeviceMenu extends JFrame {
 				}
 			}
 		});
-		btnBack.setBounds(355, 516, 97, 25);
+		btnBack.setBounds(355, 579, 97, 25);
 		contentPane.add(btnBack);
 	}
-
 }

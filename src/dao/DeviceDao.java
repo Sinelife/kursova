@@ -341,6 +341,159 @@ public class DeviceDao
  	  	}
         return result;
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //ОСОБЛИВІ ЗАПИТИ
+    
+    //Всі прилади , що містять тіж компоненти що і прилад обраний
+    
+    public List<Device> getAllDeviceWhichHasAllComponentsWhichHasChosenDevice(int device_id) throws SQLException 
+    {
+    	String sql = "select * from device as d where d.device_id in " + 
+    			"(select cd.device_id from component_device as cd where not exists " + 
+    			"(select c1.component_id from component as c1 where c1.component_id in " + 
+    			"(select cd1.component_id from component_device as cd1 where cd1.device_id in " + 
+    			"(select d1.device_id from device as d1 where d1.device_id = " + device_id + " and not exists " + 
+    			"(select cd2.component_id from component_device as cd2 where d.device_id = cd2.device_id "
+    			+ "and c1.component_id = cd2.component_id and d.device_id <> " + device_id + ")))))";
+        List<Device> list = new ArrayList<Device>();
+        try (PreparedStatement stm = Main.conn.prepareStatement(sql)) 
+        {
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) 
+            {
+                Device d = new Device();
+                d.setId(rs.getInt("device_id"));
+                d.setName(rs.getString("name"));
+                d.setSupplyVoltage(rs.getString("supply_voltage"));
+                d.setBorderRegulationTime(rs.getString("border_regulation_time"));
+                d.setRating(rs.getInt("rating"));
+                d.setDate(rs.getDate("date"));
+                d.setWorkPrice(rs.getInt("work_price"));
+                d.setComponentsPrice(rs.getInt("components_price"));
+                d.setProfitPrice(rs.getInt("profit_price"));
+                d.setSumPrice(rs.getInt("sum_price"));
+                list.add(d);
+            }
+        }
+        return list; 	
+    }
+    
+    
+    
+    
+    public List<Device> getAllDeviceWhichHasAllComponentsWhichHasNotChosenDevice(int device_id) throws SQLException 
+    {
+    	String sql = "select * from device as d where d.device_id in " + 
+    			"(select cd.device_id from component_device as cd where not exists " + 
+    			"(select c1.component_id from component as c1 where c1.component_id in " + 
+    			"(select cd1.component_id from component_device as cd1 where cd1.device_id in " + 
+    			"(select d1.device_id from device as d1 where d1.device_id = " + device_id + " and exists " + 
+    			"(select cd2.component_id from component_device as cd2 where d.device_id = cd2.device_id "
+    			+ "and c1.component_id = cd2.component_id and d.device_id)))))";
+        List<Device> list = new ArrayList<Device>();
+        try (PreparedStatement stm = Main.conn.prepareStatement(sql)) 
+        {
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) 
+            {
+                Device d = new Device();
+                d.setId(rs.getInt("device_id"));
+                d.setName(rs.getString("name"));
+                d.setSupplyVoltage(rs.getString("supply_voltage"));
+                d.setBorderRegulationTime(rs.getString("border_regulation_time"));
+                d.setRating(rs.getInt("rating"));
+                d.setDate(rs.getDate("date"));
+                d.setWorkPrice(rs.getInt("work_price"));
+                d.setComponentsPrice(rs.getInt("components_price"));
+                d.setProfitPrice(rs.getInt("profit_price"));
+                d.setSumPrice(rs.getInt("sum_price"));
+                list.add(d);
+            }
+        }
+        return list; 	
+    }
+    
+    
+    
+    public List<Device> getAllDeviceWhichHasAtLeastOneComponentWhichHasChosenDevice(int device_id) throws SQLException 
+    {
+       	String sql = "select * from device as d where d.device_id in " + 
+    			"(select cd.device_id from component_device as cd where exists " + 
+    			"(select c1.component_id from component as c1 where c1.component_id in " + 
+    			"(select cd1.component_id from component_device as cd1 where cd1.device_id in " + 
+    			"(select d1.device_id from device as d1 where d1.device_id = " + device_id + " and exists " + 
+    			"(select cd2.component_id from component_device as cd2 where d.device_id = cd2.device_id "
+    			+ "and c1.component_id = cd2.component_id and d.device_id <> " + device_id + ")))))";
+        List<Device> list = new ArrayList<Device>();
+        try (PreparedStatement stm = Main.conn.prepareStatement(sql)) 
+        {
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) 
+            {
+                Device d = new Device();
+                d.setId(rs.getInt("device_id"));
+                d.setName(rs.getString("name"));
+                d.setSupplyVoltage(rs.getString("supply_voltage"));
+                d.setBorderRegulationTime(rs.getString("border_regulation_time"));
+                d.setRating(rs.getInt("rating"));
+                d.setDate(rs.getDate("date"));
+                d.setWorkPrice(rs.getInt("work_price"));
+                d.setComponentsPrice(rs.getInt("components_price"));
+                d.setProfitPrice(rs.getInt("profit_price"));
+                d.setSumPrice(rs.getInt("sum_price"));
+                list.add(d);
+            }
+        }
+        return list; 	
+    }
+    
+    
+    
+    public List<Device> getAllDeviceWhichHasOnlyAllComponentsWhichHasChosenDevice(int device_id) throws SQLException 
+    {
+       	String sql = "select * from device as d where d.device_id in " + 
+       			"(select cd.device_id from component_device as cd where not exists " + 
+       			"(select c1.component_id from component as c1 where c1.component_id in " + 
+       			"(select cd1.component_id from component_device as cd1 where cd1.device_id in " + 
+       			"(select d1.device_id from device as d1 where d1.device_id = " + device_id + " and not exists " + 
+       			"(select cd2.component_id from component_device as cd2 where d.device_id = cd2.device_id and c1.component_id = cd2.component_id and d.device_id <> " + device_id + "))))\r\n" + 
+       			"group by cd.device_id " + 
+       			"having count(*) = (select count(*) from component as c2 where c2.component_id in " + 
+       			"				  (select cd2.component_id from component_device as cd2 where cd2.device_id in " + 
+       			"                  (select d2.device_id from device as d2 where d2.device_id = " + device_id + "))))";
+        List<Device> list = new ArrayList<Device>();
+        try (PreparedStatement stm = Main.conn.prepareStatement(sql)) 
+        {
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) 
+            {
+                Device d = new Device();
+                d.setId(rs.getInt("device_id"));
+                d.setName(rs.getString("name"));
+                d.setSupplyVoltage(rs.getString("supply_voltage"));
+                d.setBorderRegulationTime(rs.getString("border_regulation_time"));
+                d.setRating(rs.getInt("rating"));
+                d.setDate(rs.getDate("date"));
+                d.setWorkPrice(rs.getInt("work_price"));
+                d.setComponentsPrice(rs.getInt("components_price"));
+                d.setProfitPrice(rs.getInt("profit_price"));
+                d.setSumPrice(rs.getInt("sum_price"));
+                list.add(d);
+            }
+        }
+        return list; 	
+    }
+    
 }
 
 

@@ -35,7 +35,7 @@ public class AdminMenu extends JFrame {
 		String UserSurnameName = u.getSurname() + " " + u.getName();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 740, 527);
+		setBounds(100, 100, 454, 573);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -44,16 +44,25 @@ public class AdminMenu extends JFrame {
 		
 		
 		JLabel MenuTitleLabel = new JLabel("ћеню адм≥н≥стратора");
+		MenuTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		MenuTitleLabel.setFont(new Font("Tahoma", Font.BOLD, 21));
-		MenuTitleLabel.setBounds(128, 13, 456, 38);
+		MenuTitleLabel.setBounds(0, 13, 436, 38);
 		contentPane.add(MenuTitleLabel);
 		
 		JLabel UserPIBLabel = new JLabel(UserSurnameName);
+		UserPIBLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		UserPIBLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		UserPIBLabel.setBounds(205, 64, 267, 38);
+		UserPIBLabel.setBounds(0, 64, 436, 38);
 		contentPane.add(UserPIBLabel);
 		
-		JButton UserMenuButton = new JButton("1)ћеню роботи з користувачами");
+		JLabel lblNewLabel = new JLabel("–обота з ...");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(0, 139, 436, 25);
+		contentPane.add(lblNewLabel);
+		
+		
+		JButton UserMenuButton = new JButton("користувачами");
 		UserMenuButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
 			{
@@ -62,13 +71,12 @@ public class AdminMenu extends JFrame {
 			}
 		});
 		UserMenuButton.setForeground(Color.BLACK);
-		UserMenuButton.setHorizontalAlignment(SwingConstants.LEFT);
 		UserMenuButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		UserMenuButton.setBounds(51, 125, 466, 43);
+		UserMenuButton.setBounds(50, 183, 328, 43);
 		contentPane.add(UserMenuButton);
 		
 
-		JButton ConstructorTablesButton = new JButton("2)ћеню роботи з таблиц€ми конструктора");
+		JButton ConstructorTablesButton = new JButton("з конструкторським бюро");
 		ConstructorTablesButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -77,19 +85,17 @@ public class AdminMenu extends JFrame {
 				try {
 					new ConstructorAdminMenu().setVisible(true);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} 
 			}
 		});
-		ConstructorTablesButton.setHorizontalAlignment(SwingConstants.LEFT);
 		ConstructorTablesButton.setForeground(new Color(0, 0, 0));
 		ConstructorTablesButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		ConstructorTablesButton.setBounds(51, 201, 466, 43);
+		ConstructorTablesButton.setBounds(50, 259, 328, 43);
 		contentPane.add(ConstructorTablesButton);
 		
 		
-		JButton SalesDepartmentWorkerTablesButton = new JButton("3)ћеню роботи з таблиц€ми в≥дд≥лу продажу");
+		JButton SalesDepartmentWorkerTablesButton = new JButton("з в≥дд≥лом продаж≥в");
 		SalesDepartmentWorkerTablesButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -98,19 +104,17 @@ public class AdminMenu extends JFrame {
 				try {
 					new WorkerSalesDepartmentAdminMenu().setVisible(true);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} 
 			}
 		});
-		SalesDepartmentWorkerTablesButton.setHorizontalAlignment(SwingConstants.LEFT);
 		SalesDepartmentWorkerTablesButton.setForeground(Color.BLACK);
 		SalesDepartmentWorkerTablesButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		SalesDepartmentWorkerTablesButton.setBounds(51, 276, 466, 43);
+		SalesDepartmentWorkerTablesButton.setBounds(50, 334, 328, 43);
 		contentPane.add(SalesDepartmentWorkerTablesButton);
 		
 		
-		JButton DeliveryDepartmentWorkerTablesButton = new JButton("4)ћеню роботи з таблиц€ми в≥дд≥лу постачанн€");
+		JButton DeliveryDepartmentWorkerTablesButton = new JButton("з в≥дд≥лом постачанн€");
 		DeliveryDepartmentWorkerTablesButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -119,15 +123,13 @@ public class AdminMenu extends JFrame {
 				try {
 					new WorkerDeliveryDepartmentAdminMenu().setVisible(true);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} 
 			}
 		});
-		DeliveryDepartmentWorkerTablesButton.setHorizontalAlignment(SwingConstants.LEFT);
 		DeliveryDepartmentWorkerTablesButton.setForeground(Color.BLACK);
 		DeliveryDepartmentWorkerTablesButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		DeliveryDepartmentWorkerTablesButton.setBounds(51, 352, 466, 43);
+		DeliveryDepartmentWorkerTablesButton.setBounds(50, 410, 328, 43);
 		contentPane.add(DeliveryDepartmentWorkerTablesButton);
 		
 		
@@ -139,13 +141,8 @@ public class AdminMenu extends JFrame {
 				new AuthorisationMenu().setVisible(true);
 			}
 		});
-		btnBack.setBounds(567, 429, 127, 25);
+		btnBack.setBounds(297, 492, 127, 25);
 		contentPane.add(btnBack);
 		
-
-		
-
-		
-
 	}
 }

@@ -23,6 +23,7 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 
 public class DeliveryDepartmentDirectorMenu extends JFrame {
 
@@ -70,7 +71,7 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 		DeliveryDao dd = new DeliveryDao();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 784, 612);
+		setBounds(100, 100, 812, 628);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -79,13 +80,14 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 		
 		
 		JLabel ProviderLabel = new JLabel("Список постачальників");
+		ProviderLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		ProviderLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		ProviderLabel.setBounds(38, 13, 198, 25);
+		ProviderLabel.setBounds(38, 13, 546, 25);
 		contentPane.add(ProviderLabel);
 		
 		ProviderComboBox = new JComboBox<String>();
 		ProviderComboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		ProviderComboBox.setBounds(38, 51, 479, 34);
+		ProviderComboBox.setBounds(38, 51, 546, 34);
 		contentPane.add(ProviderComboBox);
 		for(Provider provider : providers) 
 		{
@@ -93,18 +95,19 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 		}
 		
 		JLabel DeliveryInProviderLabel = new JLabel("Список замовлень постачання");
+		DeliveryInProviderLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		DeliveryInProviderLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		DeliveryInProviderLabel.setBounds(38, 425, 198, 25);
+		DeliveryInProviderLabel.setBounds(38, 425, 546, 25);
 		contentPane.add(DeliveryInProviderLabel);
 		
 		DeliveryInProviderComboBox = new JComboBox<String>();
 		DeliveryInProviderComboBox.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		DeliveryInProviderComboBox.setBounds(38, 463, 479, 34);
+		DeliveryInProviderComboBox.setBounds(38, 463, 546, 34);
 		contentPane.add(DeliveryInProviderComboBox);
 		
 		
 		
-		JButton SelectButton = new JButton("Вибрати");
+		JButton SelectButton = new JButton("ВИБРАТИ");
 		SelectButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -225,13 +228,13 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 			}
 		});
 		InfoButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		InfoButton.setBounds(529, 54, 122, 34);
+		InfoButton.setBounds(596, 54, 122, 34);
 		contentPane.add(InfoButton);
 
 		
 		
 		
-		JButton SelectAllButton = new JButton("Вибрати всіх");
+		JButton SelectAllButton = new JButton("ВИБРАТИ ВСІХ");
 		SelectAllButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -326,89 +329,107 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 				ShippedComponentNumberField.setText(String.valueOf(shippedComponentNumber));
 			}
 		});
-		SelectAllButton.setBounds(171, 109, 127, 25);
+		SelectAllButton.setBounds(171, 109, 135, 25);
 		contentPane.add(SelectAllButton);
 
 		
 		
 		
 		JLabel DeliveryNumberLabel = new JLabel("Кількість замовлень");
+		DeliveryNumberLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		DeliveryNumberLabel.setBounds(38, 156, 198, 25);
 		contentPane.add(DeliveryNumberLabel);
 		
 		JLabel PaidDeliveryNumberLabel = new JLabel("Кількість оплачених замовлень");
+		PaidDeliveryNumberLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		PaidDeliveryNumberLabel.setBounds(265, 156, 198, 25);
 		contentPane.add(PaidDeliveryNumberLabel);
 		
 		JLabel ShippedDeliveryNumberLabel = new JLabel("Кількість відвантажених замовлень");
+		ShippedDeliveryNumberLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		ShippedDeliveryNumberLabel.setBounds(506, 160, 230, 25);
 		contentPane.add(ShippedDeliveryNumberLabel);
 		
 		JLabel ComponentNumberLabel = new JLabel("Кількість компонентів");
+		ComponentNumberLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		ComponentNumberLabel.setBounds(38, 253, 198, 25);
 		contentPane.add(ComponentNumberLabel);
 		
 		JLabel PaidComponentNumberLabel = new JLabel("Кількість куплених компонентів");
+		PaidComponentNumberLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		PaidComponentNumberLabel.setBounds(265, 253, 198, 25);
 		contentPane.add(PaidComponentNumberLabel);
 		
 		JLabel ShippedComponentNumberLabel = new JLabel("Кількість відвантажених компонентів");
+		ShippedComponentNumberLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		ShippedComponentNumberLabel.setBounds(506, 257, 230, 25);
 		contentPane.add(ShippedComponentNumberLabel);
 		
 		JLabel SummaryMoneyLabel = new JLabel("Загальна вартість замовлень");
+		SummaryMoneyLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		SummaryMoneyLabel.setBounds(38, 348, 198, 25);
 		contentPane.add(SummaryMoneyLabel);
 		
 		JLabel PaidMoneyLabel = new JLabel("Вартість оплачених замовлень");
+		PaidMoneyLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		PaidMoneyLabel.setBounds(265, 348, 198, 25);
 		contentPane.add(PaidMoneyLabel);
 		
 		JLabel ShippedMoneyLabel = new JLabel("Вартість відвантажених замовлень");
+		ShippedMoneyLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		ShippedMoneyLabel.setBounds(506, 352, 230, 25);
 		contentPane.add(ShippedMoneyLabel);
 		
 		DeliveryNumberField = new JTextField();
+		DeliveryNumberField.setHorizontalAlignment(SwingConstants.CENTER);
 		DeliveryNumberField.setBounds(38, 185, 198, 22);
 		contentPane.add(DeliveryNumberField);
 		DeliveryNumberField.setColumns(10);
 		
 		PaidDeliveryNumberField = new JTextField();
+		PaidDeliveryNumberField.setHorizontalAlignment(SwingConstants.CENTER);
 		PaidDeliveryNumberField.setColumns(10);
 		PaidDeliveryNumberField.setBounds(265, 185, 198, 22);
 		contentPane.add(PaidDeliveryNumberField);
 		
 		ShippedDeliveryNumberField = new JTextField();
+		ShippedDeliveryNumberField.setHorizontalAlignment(SwingConstants.CENTER);
 		ShippedDeliveryNumberField.setColumns(10);
 		ShippedDeliveryNumberField.setBounds(506, 185, 230, 22);
 		contentPane.add(ShippedDeliveryNumberField);
 		
 		ComponentNumberField = new JTextField();
+		ComponentNumberField.setHorizontalAlignment(SwingConstants.CENTER);
 		ComponentNumberField.setColumns(10);
 		ComponentNumberField.setBounds(38, 282, 198, 22);
 		contentPane.add(ComponentNumberField);
 		
 		PaidComponentNumberField = new JTextField();
+		PaidComponentNumberField.setHorizontalAlignment(SwingConstants.CENTER);
 		PaidComponentNumberField.setColumns(10);
 		PaidComponentNumberField.setBounds(265, 282, 198, 22);
 		contentPane.add(PaidComponentNumberField);
 		
 		ShippedComponentNumberField = new JTextField();
+		ShippedComponentNumberField.setHorizontalAlignment(SwingConstants.CENTER);
 		ShippedComponentNumberField.setColumns(10);
 		ShippedComponentNumberField.setBounds(506, 282, 230, 22);
 		contentPane.add(ShippedComponentNumberField);
 		
 		AllMoneyField = new JTextField();
+		AllMoneyField.setHorizontalAlignment(SwingConstants.CENTER);
 		AllMoneyField.setColumns(10);
 		AllMoneyField.setBounds(38, 377, 198, 22);
 		contentPane.add(AllMoneyField);
 		
 		PaidMoneyField = new JTextField();
+		PaidMoneyField.setHorizontalAlignment(SwingConstants.CENTER);
 		PaidMoneyField.setColumns(10);
 		PaidMoneyField.setBounds(265, 377, 198, 22);
 		contentPane.add(PaidMoneyField);
 		
 		ShippedMoneyField = new JTextField();
+		ShippedMoneyField.setHorizontalAlignment(SwingConstants.CENTER);
 		ShippedMoneyField.setColumns(10);
 		ShippedMoneyField.setBounds(506, 377, 230, 22);
 		contentPane.add(ShippedMoneyField);
@@ -433,7 +454,7 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 			}
 		});
 		DeliveryInfoButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		DeliveryInfoButton.setBounds(529, 463, 122, 34);
+		DeliveryInfoButton.setBounds(596, 463, 122, 34);
 		contentPane.add(DeliveryInfoButton);
 		
 		
@@ -447,7 +468,7 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 				DeliveryDepartmentDirectorMenu.this.dispose();
 			}
 		});
-		btnBack.setBounds(657, 527, 97, 25);
+		btnBack.setBounds(685, 543, 97, 25);
 		contentPane.add(btnBack);
 	}
 

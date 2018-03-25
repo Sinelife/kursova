@@ -34,7 +34,7 @@ public class DirectorMenu extends JFrame {
 		String UserSurnameName = u.getSurname() + " " + u.getName();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 731, 537);
+		setBounds(100, 100, 424, 554);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -43,16 +43,25 @@ public class DirectorMenu extends JFrame {
 		
 		
 		JLabel MenuTitleLabel = new JLabel("Меню директора");
+		MenuTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		MenuTitleLabel.setFont(new Font("Tahoma", Font.BOLD, 21));
-		MenuTitleLabel.setBounds(192, 13, 267, 38);
+		MenuTitleLabel.setBounds(0, 13, 406, 38);
 		contentPane.add(MenuTitleLabel);
 		
 		JLabel UserPIBLabel = new JLabel(UserSurnameName);
+		UserPIBLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		UserPIBLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		UserPIBLabel.setBounds(213, 64, 267, 38);
+		UserPIBLabel.setBounds(0, 64, 406, 38);
 		contentPane.add(UserPIBLabel);
 		
-		JButton ConstructDepartmentButton = new JButton("1)Меню роботи з данними конструкторського бюро");
+		JLabel lblNewLabel = new JLabel("Перегляд звітних данних по ...");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblNewLabel.setBounds(0, 148, 406, 25);
+		contentPane.add(lblNewLabel);
+		
+		
+		JButton ConstructDepartmentButton = new JButton("конструкторському бюро");
 		ConstructDepartmentButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -61,18 +70,16 @@ public class DirectorMenu extends JFrame {
 				try {
 					new ConstructDepartmentDirectorMenu(DirectorMenu.this).setVisible(true);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} 
 			}
 		});
 		ConstructDepartmentButton.setForeground(Color.BLACK);
-		ConstructDepartmentButton.setHorizontalAlignment(SwingConstants.LEFT);
 		ConstructDepartmentButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		ConstructDepartmentButton.setBounds(65, 115, 537, 43);
+		ConstructDepartmentButton.setBounds(60, 192, 295, 43);
 		contentPane.add(ConstructDepartmentButton);
 		
-		JButton SalesDepartmentButton = new JButton("2)Меню роботи з данними відділу продажу");
+		JButton SalesDepartmentButton = new JButton("відділу продажів");
 		SalesDepartmentButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -81,18 +88,16 @@ public class DirectorMenu extends JFrame {
 				try {
 					new SalesDepartmentDirectorMenu(DirectorMenu.this).setVisible(true);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} 
 			}
 		});
 		SalesDepartmentButton.setForeground(Color.BLACK);
-		SalesDepartmentButton.setHorizontalAlignment(SwingConstants.LEFT);
 		SalesDepartmentButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		SalesDepartmentButton.setBounds(65, 207, 537, 43);
+		SalesDepartmentButton.setBounds(60, 284, 295, 43);
 		contentPane.add(SalesDepartmentButton);
 		
-		JButton DeliveryDepartmentButton = new JButton("3)Меню роботи з данними відділу постачання");
+		JButton DeliveryDepartmentButton = new JButton("відділу постачання");
 		DeliveryDepartmentButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -101,15 +106,13 @@ public class DirectorMenu extends JFrame {
 				try {
 					new DeliveryDepartmentDirectorMenu(DirectorMenu.this).setVisible(true);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} 
 			}
 		});
 		DeliveryDepartmentButton.setForeground(Color.BLACK);
-		DeliveryDepartmentButton.setHorizontalAlignment(SwingConstants.LEFT);
 		DeliveryDepartmentButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		DeliveryDepartmentButton.setBounds(65, 299, 537, 43);
+		DeliveryDepartmentButton.setBounds(60, 376, 295, 43);
 		contentPane.add(DeliveryDepartmentButton);
 		
 		
@@ -122,7 +125,8 @@ public class DirectorMenu extends JFrame {
 				new AuthorisationMenu().setVisible(true);
 			}
 		});
-		btnBack.setBounds(550, 452, 140, 25);
+		btnBack.setBounds(254, 469, 140, 25);
 		contentPane.add(btnBack);
+		
 	}
 }
