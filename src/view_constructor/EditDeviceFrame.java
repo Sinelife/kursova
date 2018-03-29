@@ -126,7 +126,11 @@ public class EditDeviceFrame extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				MethodsForFrames.updateDevice(d, NameField, SupplyVoltageField, BorderRegulationTimeField, RatingField, StartDateField, WorkPriceField);
+				try {
+					MethodsForFrames.updateDevice(d, NameField, SupplyVoltageField, BorderRegulationTimeField, RatingField, StartDateField, WorkPriceField);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 				EditDeviceFrame.this.setVisible(false);
 				EditDeviceFrame.this.dispose();
 				new DeviceMenu().setVisible(true);

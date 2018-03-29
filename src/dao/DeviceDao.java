@@ -21,7 +21,7 @@ public class DeviceDao
     /** @throws SQLException */
     public void addDevice(Device d) throws SQLException 
     {
-		String sql = "INSERT INTO device (device_id, name, supply_voltage, border_regulation_time, rating, date, work_price, components_price, profit_price, sum_price) VALUES (?,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO device (device_id, name, supply_voltage, border_regulation_time, rating, date, work_price, sum_price) VALUES (?,?,?,?,?,?,?,?)";
  	  	PreparedStatement stm = Main.conn.prepareStatement(sql);
 		int i = -1;
 		String sql_for_id = "SELECT MAX(device_id) from device";
@@ -39,9 +39,7 @@ public class DeviceDao
     	stm.setInt(5, d.getRating());
     	stm.setDate(6, d.getDate());
     	stm.setInt(7, d.getWorkPrice());
-    	stm.setInt(8, d.getComponentsPrice());
-    	stm.setInt(9, d.getProfitPrice());
-    	stm.setInt(10, d.getSumPrice());
+    	stm.setInt(8, d.getSumPrice());
     	stm.executeUpdate();
     	JOptionPane.showMessageDialog (null, "Новий прилад додано до бази данних!" );
 	}
@@ -65,8 +63,6 @@ public class DeviceDao
             d.setRating(rs.getInt("rating"));
             d.setDate(rs.getDate("date"));
             d.setWorkPrice(rs.getInt("work_price"));
-            d.setComponentsPrice(rs.getInt("components_price"));
-            d.setProfitPrice(rs.getInt("profit_price"));
             d.setSumPrice(rs.getInt("sum_price"));
         }
         return d;
@@ -78,7 +74,7 @@ public class DeviceDao
     public void updateDevice(Device d, boolean message) throws SQLException 
     {
     	String sql = "update device set name = ?, supply_voltage = ?, border_regulation_time = ?, rating = ?, date = ?, "
-    			+ "work_price = ?, components_price = ?, profit_price = ?, sum_price = ? where device_id = " +  d.getId();
+    			+ "work_price = ?, sum_price = ? where device_id = " +  d.getId();
     	PreparedStatement stm = Main.conn.prepareStatement(sql);
     	stm.setString(1, d.getName());
     	stm.setString(2, d.getSupplyVoltage());
@@ -86,9 +82,7 @@ public class DeviceDao
     	stm.setInt(4, d.getRating());
     	stm.setDate(5, d.getDate());
     	stm.setInt(6, d.getWorkPrice());
-    	stm.setInt(7, d.getComponentsPrice());
-    	stm.setInt(8, d.getProfitPrice());
-    	stm.setInt(9, d.getSumPrice());
+    	stm.setInt(7, d.getSumPrice());
     	stm.executeUpdate();
     	if(message == true)
     	{
@@ -125,8 +119,6 @@ public class DeviceDao
                 d.setRating(rs.getInt("rating"));
                 d.setDate(rs.getDate("date"));
                 d.setWorkPrice(rs.getInt("work_price"));
-                d.setComponentsPrice(rs.getInt("components_price"));
-                d.setProfitPrice(rs.getInt("profit_price"));
                 d.setSumPrice(rs.getInt("sum_price"));
                 list.add(d);
             }
@@ -201,8 +193,6 @@ public class DeviceDao
                 d.setRating(rs.getInt("rating"));
                 d.setDate(rs.getDate("date"));
                 d.setWorkPrice(rs.getInt("work_price"));
-                d.setComponentsPrice(rs.getInt("components_price"));
-                d.setProfitPrice(rs.getInt("profit_price"));
                 d.setSumPrice(rs.getInt("sum_price"));
                 list.add(d);
             }
@@ -344,10 +334,41 @@ public class DeviceDao
     
     
     
+    public int getAllComponentCostInDevice(int device_id) throws SQLException
+    {
+    	String sql = "select sum(component_device.number * component.price) " +
+    				"from component,component_device " + 
+    				"where component.component_id = component_device.component_id " + 
+    				"and component_device.device_id = " + device_id;
+    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+    	ResultSet rs = stm.executeQuery(sql);
+    	int result = 0;
+ 	  	while(rs.next())
+ 	  	{
+ 	  		result = rs.getInt("sum(component_device.number * component.price)");
+ 	  	}
+        return result;
+    }
+    
+    public int getProfitPrice(Device d) throws SQLException
+    {
+    	DeviceDao dd = new DeviceDao();
+    	int work_price = d.getWorkPrice();
+    	int components_price = dd.getAllComponentCostInDevice(d.getId());
+    	int profit_price = (work_price + components_price)/2;
+        return profit_price;
+    }
     
     
-    
-    
+    public int getSumPrice(Device d) throws SQLException
+    {
+    	DeviceDao dd = new DeviceDao();
+    	int work_price = d.getWorkPrice();
+    	int components_price = dd.getAllComponentCostInDevice(d.getId());
+    	int profit_price = (work_price + components_price)/2;
+    	int sum_price = work_price + components_price + profit_price;
+        return sum_price;
+    }
     
     
     
@@ -379,8 +400,6 @@ public class DeviceDao
                 d.setRating(rs.getInt("rating"));
                 d.setDate(rs.getDate("date"));
                 d.setWorkPrice(rs.getInt("work_price"));
-                d.setComponentsPrice(rs.getInt("components_price"));
-                d.setProfitPrice(rs.getInt("profit_price"));
                 d.setSumPrice(rs.getInt("sum_price"));
                 list.add(d);
             }
@@ -414,8 +433,6 @@ public class DeviceDao
                 d.setRating(rs.getInt("rating"));
                 d.setDate(rs.getDate("date"));
                 d.setWorkPrice(rs.getInt("work_price"));
-                d.setComponentsPrice(rs.getInt("components_price"));
-                d.setProfitPrice(rs.getInt("profit_price"));
                 d.setSumPrice(rs.getInt("sum_price"));
                 list.add(d);
             }
@@ -448,8 +465,6 @@ public class DeviceDao
                 d.setRating(rs.getInt("rating"));
                 d.setDate(rs.getDate("date"));
                 d.setWorkPrice(rs.getInt("work_price"));
-                d.setComponentsPrice(rs.getInt("components_price"));
-                d.setProfitPrice(rs.getInt("profit_price"));
                 d.setSumPrice(rs.getInt("sum_price"));
                 list.add(d);
             }
@@ -485,8 +500,6 @@ public class DeviceDao
                 d.setRating(rs.getInt("rating"));
                 d.setDate(rs.getDate("date"));
                 d.setWorkPrice(rs.getInt("work_price"));
-                d.setComponentsPrice(rs.getInt("components_price"));
-                d.setProfitPrice(rs.getInt("profit_price"));
                 d.setSumPrice(rs.getInt("sum_price"));
                 list.add(d);
             }

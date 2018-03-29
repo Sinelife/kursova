@@ -3,6 +3,8 @@ package view_constructor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -110,7 +112,11 @@ public class AddDevice extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				MethodsForFrames.addDevice(NameField, SupplyVoltageField, BorderRegulationTimeField, RatingField, StartDateField, WorkPriceField);
+				try {
+					MethodsForFrames.addDevice(NameField, SupplyVoltageField, BorderRegulationTimeField, RatingField, StartDateField, WorkPriceField);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 				if (parent != null)
 					parent.setVisible(true);
 				AddDevice.this.setVisible(false);

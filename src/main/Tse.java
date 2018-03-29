@@ -13,9 +13,12 @@ public class Tse
 		
 		
 		String S = "diod, resistor, indicator";
-		String s = "dio, ";
-		S.toLowerCase().contains(s.toLowerCase());
-		System.out.println(S.toLowerCase().contains(s.toLowerCase()));
+		String s = "diod,";
+		if(S.contains(s))
+		{
+			S = S.replace(s, "");
+		}
+		System.out.println(S);
     }
 	
 	

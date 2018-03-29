@@ -168,7 +168,7 @@ public class DeviceInformation extends JFrame {
 		ComponentsPriceField.setBackground(Color.WHITE);
 		ComponentsPriceField.setBounds(199, 346, 350, 22);
 		contentPane.add(ComponentsPriceField);
-		ComponentsPriceField.setText(String.valueOf(d.getComponentsPrice()));
+		ComponentsPriceField.setText(String.valueOf(dd.getAllComponentCostInDevice(d.getId())));
 		
 		ProfitPriceField = new JTextField();
 		ProfitPriceField.setText((String) null);
@@ -177,7 +177,7 @@ public class DeviceInformation extends JFrame {
 		ProfitPriceField.setBackground(Color.WHITE);
 		ProfitPriceField.setBounds(199, 394, 350, 22);
 		contentPane.add(ProfitPriceField);
-		ProfitPriceField.setText(String.valueOf(d.getProfitPrice()));
+		ProfitPriceField.setText(String.valueOf(dd.getProfitPrice(d)));
 		
 		SumPriceField = new JTextField();
 		SumPriceField.setText((String) null);
@@ -186,7 +186,7 @@ public class DeviceInformation extends JFrame {
 		SumPriceField.setBackground(Color.WHITE);
 		SumPriceField.setBounds(199, 440, 350, 22);
 		contentPane.add(SumPriceField);
-		SumPriceField.setText(String.valueOf(d.getSumPrice()));
+		SumPriceField.setText(String.valueOf(dd.getSumPrice(d)));
 		
 		
 		

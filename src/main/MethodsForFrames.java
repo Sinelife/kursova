@@ -179,66 +179,6 @@ public class MethodsForFrames
 	
 	//МЕТОДИ ДЛЯ РОБОТИ З СПЕЦИФІКАЦІЄЮ ПРИЛАДУ
 	
-	//Метод для зміни вартості компонентів приладу через додавання нових приладів
-	
-	public static void changeComponentsCostBecauseAdd(int device_id, int component_id)
-	{
-		DeviceDao device_dao = new DeviceDao();
-		Device d = null;
-		try {
-			d = device_dao.readDevice(device_id);
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-		int old_components_price = d.getComponentsPrice();
-		int change_components_price = 0;
-		try {
-			change_components_price = device_dao.getComponentCostInDevice(device_id, component_id);
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-		int new_components_price = old_components_price + change_components_price;
-		d.setComponentsPrice(new_components_price);
-		d.setProfitPrice((d.getWorkPrice() + d.getComponentsPrice())/2);
-		d.setSumPrice(d.getWorkPrice() + d.getComponentsPrice() + d.getProfitPrice());
-		try {
-			device_dao.updateDevice(d, false);
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-	}
-	
-	
-	//Метод для зміни вартості компонентів приладу через видалення приладів
-	
-	public static void changeComponentsCostBecauseDelete(int device_id, int component_id)
-	{
-		DeviceDao device_dao = new DeviceDao();
-		Device d = null;
-		try {
-			d = device_dao.readDevice(device_id);
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-		int old_components_price = d.getComponentsPrice();
-		int change_components_price = 0;
-		try {
-			change_components_price = device_dao.getComponentCostInDevice(device_id, component_id);
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-		int new_components_price = old_components_price - change_components_price;
-		d.setComponentsPrice(new_components_price);
-		d.setProfitPrice((d.getWorkPrice() + d.getComponentsPrice())/2);
-		d.setSumPrice(d.getWorkPrice() + d.getComponentsPrice() + d.getProfitPrice());
-		
-		try {
-			device_dao.updateDevice(d, false);
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-	}
-	
 	
 	
 	
@@ -257,7 +197,6 @@ public class MethodsForFrames
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
-		changeComponentsCostBecauseAdd(device_id, component_id);
 	}
 	
 	
@@ -273,7 +212,6 @@ public class MethodsForFrames
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
-		changeComponentsCostBecauseDelete(device_id, component_id);
 		try {
 			device_dao.deleteComponentFromDevice(record);
 		} catch (SQLException e1) {
@@ -294,16 +232,12 @@ public class MethodsForFrames
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
-		changeComponentsCostBecauseDelete(device_id, component_id);
-		
 		record.setNumber(Integer.valueOf(NumberEditField.getText()));
 		try {
 			device_dao.updateComponentInDevice(record);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
-		}
-		changeComponentsCostBecauseAdd(device_id, component_id);
-		
+		}		
 	}
 	
 	
@@ -369,7 +303,7 @@ public class MethodsForFrames
 	
 	public static void addDevice(JTextField NameField, JTextField SupplyVoltageField,
 			JTextField BorderRegulationTimeField, JTextField RatingField, JTextField StartDateField,
-			JTextField WorkPriceField) 
+			JTextField WorkPriceField) throws SQLException 
 	{
 		DeviceDao dd = new DeviceDao();
 		Device d = new Device();
@@ -379,9 +313,7 @@ public class MethodsForFrames
 		d.setRating(Integer.valueOf(RatingField.getText()));
 		d.setDate(Date.valueOf(StartDateField.getText()));
 		d.setWorkPrice(Integer.valueOf(WorkPriceField.getText()));
-		d.setComponentsPrice(0);
-		d.setProfitPrice((d.getWorkPrice() + d.getComponentsPrice())/2);
-		d.setSumPrice(d.getWorkPrice() + d.getComponentsPrice() + d.getProfitPrice());
+		d.setSumPrice(dd.getSumPrice(d));
 		try {
 			dd.addDevice(d);
 		} catch (SQLException e1) {
@@ -526,9 +458,7 @@ public class MethodsForFrames
 		List<Device> devices = dd.getAllDeviceWhichHasComponent(c.getId());
 		for(Device device : devices)
 		{
-			device.setComponentsPrice(dd.getComponentCostInDevice(device.getId(), c.getId()));
-			device.setProfitPrice((device.getComponentsPrice() + device.getWorkPrice())/2);
-			device.setSumPrice(device.getComponentsPrice() + device.getWorkPrice() + device.getProfitPrice());
+			device.setSumPrice(dd.getSumPrice(device));
 			dd.updateDevice(device, false);
 		}
 	}
@@ -538,7 +468,7 @@ public class MethodsForFrames
 	
 	public static void updateDevice(Device d, JTextField NameField, JTextField SupplyVoltageField,
 			JTextField BorderRegulationTimeField, JTextField RatingField, JTextField StartDateField,
-			JTextField WorkPriceField) 
+			JTextField WorkPriceField) throws SQLException 
 	{
 		DeviceDao dd = new DeviceDao();
 		d.setName(NameField.getText());
@@ -546,9 +476,7 @@ public class MethodsForFrames
 		d.setBorderRegulationTime(BorderRegulationTimeField.getText());
 		d.setRating(Integer.valueOf(RatingField.getText()));
 		d.setDate(Date.valueOf(StartDateField.getText()));
-		d.setWorkPrice(Integer.valueOf(WorkPriceField.getText()));
-		d.setProfitPrice((d.getWorkPrice() + d.getComponentsPrice())/2);
-		d.setSumPrice(d.getWorkPrice() + d.getComponentsPrice() + d.getProfitPrice());
+		d.setSumPrice(dd.getSumPrice(d));
 		try {
 			dd.updateDevice(d, true);
 		} catch (SQLException e1) {
