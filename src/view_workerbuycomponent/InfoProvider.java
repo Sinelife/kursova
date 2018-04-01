@@ -32,7 +32,6 @@ public class InfoProvider extends JFrame {
 	public List<Delivery> DeliveriesInProvider;
 	public List<DeliveryComponent> ComponentsInfoInDelivery;
 	
-	public static int information_check;
 	/**
 	 * Create the frame.
 	 * @throws SQLException 
@@ -49,7 +48,7 @@ public class InfoProvider extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
-		information_check = 1;
+		
 		
 		
 		JLabel lblNewLabel = new JLabel("Перегляд інформації про постачальника");
@@ -154,6 +153,7 @@ public class InfoProvider extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				delivery_id_to_look = MethodsForFrames.getDeliveryIdByDeliveryName(delivery_name_to_look, delivery_id_to_look, DeliveryInProviderComboBox, DeliveriesInProvider);
+				ProviderMenu.delivery_information_check = 1;
 				InfoProvider.this.setVisible(false);
 				try {
 					new DeliveryInformation(InfoProvider.this).setVisible(true);

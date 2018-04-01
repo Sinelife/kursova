@@ -78,7 +78,7 @@ public class OrderDao
 		PreparedStatement stm = Main.conn.prepareStatement(sql);
 		OrderDao od = new OrderDao();
 		stm.setBoolean(1, o.isShipped());
-		stm.setInt(2, od.getAllDeviceCost(o.getId()));
+		stm.setInt(2, od.getCostOfOrder(o.getId()));
 		stm.executeUpdate();
 		if(message == true)
 		{
@@ -285,7 +285,7 @@ public class OrderDao
     
     
     
-    public int getAllDeviceCost(int order_id) throws SQLException
+    public int getCostOfOrder(int order_id) throws SQLException
     {
     	String sql = "select sum(device.sum_price * order_device.number) " + 
     				"from device,order_device,orders " + 

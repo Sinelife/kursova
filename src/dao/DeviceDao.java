@@ -77,13 +77,14 @@ public class DeviceDao
     	String sql = "update device set name = ?, supply_voltage = ?, border_regulation_time = ?, rating = ?, date = ?, "
     			+ "work_price = ?, sum_price = ? where device_id = " +  d.getId();
     	PreparedStatement stm = Main.conn.prepareStatement(sql);
+    	DeviceDao dd = new DeviceDao();
     	stm.setString(1, d.getName());
     	stm.setString(2, d.getSupplyVoltage());
     	stm.setString(3, d.getBorderRegulationTime());
     	stm.setInt(4, d.getRating());
     	stm.setDate(5, d.getDate());
     	stm.setInt(6, d.getWorkPrice());
-    	stm.setInt(7, d.getSumPrice());
+    	stm.setInt(7, dd.getSumPrice(d));
     	stm.executeUpdate();
     	if(message == true)
     	{

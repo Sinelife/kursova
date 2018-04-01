@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 
 import domain.Delivery;
 import domain.DeliveryComponent;
+import domain.Order;
 import domain.Component;
 import main.Main;
 
@@ -33,8 +34,8 @@ public class DeliveryDao
 		stm.setString(2, d.getDeliveryName());
 		stm.setInt(3, d.getProviderId());
 		stm.setDate(4, d.getStartDate());
-		stm.setBoolean(5, d.isPaid());
-		stm.setBoolean(6, d.isShipped());
+		stm.setBoolean(5, false);
+		stm.setBoolean(6, false);
 		stm.executeUpdate();
 		JOptionPane.showMessageDialog(null, "Нове замовлення на постачання додано до бази данних!");
 	}
@@ -60,6 +61,8 @@ public class DeliveryDao
 			d.setStartDate(rs.getDate("startdate"));
 			d.setPaid(rs.getBoolean("paid"));
 			d.setShipped(rs.getBoolean("shipped"));
+			d.setEndDate(rs.getDate("enddate"));
+			d.setSumCost(rs.getInt("sum_cost"));
 		}
 		return d;
 	}
@@ -72,13 +75,11 @@ public class DeliveryDao
 	 */
 	public void updateDelivery(Delivery d, boolean message) throws SQLException 
 	{
-		String sql = "update delivery set delivery_name = ?, provider_id = ?, startdate = ?, paid = ?, shipped = ? where delivery_id = " + d.getId();
+		String sql = "update delivery set shipped = ?, sum_cost = ? where delivery_id = " + d.getId();
 		PreparedStatement stm = Main.conn.prepareStatement(sql);
-		stm.setString(1, d.getDeliveryName());
-		stm.setInt(2, d.getProviderId());
-		stm.setDate(3, d.getStartDate());
-		stm.setBoolean(4, d.isPaid());
-		stm.setBoolean(5, d.isShipped());
+		DeliveryDao dd = new DeliveryDao();
+		stm.setBoolean(1, d.isShipped());
+		stm.setInt(2, dd.getCostOfDelivery(d.getId()));
 		stm.executeUpdate();
 		if(message == true)
 		{
@@ -86,6 +87,20 @@ public class DeliveryDao
 		}
 	}
 
+	
+	
+	public void makeDeliveryPaid(Delivery d, boolean message) throws SQLException 
+	{
+		String sql = "update delivery set paid = ?, enddate = ? where delivery_id = " + d.getId();
+		PreparedStatement stm = Main.conn.prepareStatement(sql);
+		stm.setBoolean(1, d.isPaid());
+		stm.setDate(2, d.getEndDate());
+		stm.executeUpdate();
+		if(message == true)
+		{
+			JOptionPane.showMessageDialog(null, "Замовлення на постачання відмічено як оплачене!");
+		}
+	}
 	
 	
 	
@@ -148,6 +163,29 @@ public class DeliveryDao
 		return list;
 	}
 	
+	
+	public List<Delivery> getAllFromProviderNotPaid(int provider_id) throws SQLException 
+	{
+		String sql = "SELECT * FROM delivery WHERE paid = 0 and provider_id = " + provider_id;
+		List<Delivery> list = new ArrayList<Delivery>();
+		try (PreparedStatement stm = Main.conn.prepareStatement(sql)) 
+		{
+			ResultSet rs = stm.executeQuery();
+			while (rs.next()) {
+				Delivery d = new Delivery();
+				d.setId(rs.getInt("delivery_id"));
+				d.setDeliveryName(rs.getString("delivery_name"));
+				d.setProviderId(rs.getInt("provider_id"));
+				d.setStartDate(rs.getDate("startdate"));
+				d.setPaid(rs.getBoolean("paid"));
+				d.setShipped(rs.getBoolean("shipped"));
+				d.setEndDate(rs.getDate("enddate"));
+				d.setSumCost(rs.getInt("sum_cost"));
+				list.add(d);
+			}
+		}
+		return list;
+	}
 	
 	public List<Component> getAllComponentsInDelivery(int delivery_id) throws SQLException 
 	{
@@ -239,5 +277,71 @@ public class DeliveryDao
             dc.setNumber(rs.getInt("number"));
         }
         return dc;
+	}
+    
+    
+    public int getCostOfDelivery(int delivery_id) throws SQLException
+    {
+    	String sql = "select sum(component.price * delivery_component.number) " + 
+    				"from component,delivery_component,delivery " + 
+    				"where component.component_id = delivery_component.component_id " + 
+    				"and delivery_component.delivery_id = delivery.delivery_id " + 
+    				"and delivery.delivery_id = " + delivery_id;
+    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+    	ResultSet rs = stm.executeQuery(sql);
+    	int result = 0;
+ 	  	while(rs.next())
+ 	  	{
+ 	  		result = rs.getInt("sum(component.price * delivery_component.number)");
+ 	  	}
+        return result;
+    }
+    
+    
+	public List<Delivery> getAllNotPaidWhichHasComponent(int component_id) throws SQLException 
+	{
+		String sql = "SELECT * FROM delivery WHERE paid = 0 and delivery_id in "
+				+ "(SELECT delivery_id FROM delivery_component WHERE component_id = " + component_id + ")";
+		List<Delivery> list = new ArrayList<Delivery>();
+		try (PreparedStatement stm = Main.conn.prepareStatement(sql)) 
+		{
+			ResultSet rs = stm.executeQuery();
+			while (rs.next()) {
+				Delivery d = new Delivery();
+				d.setId(rs.getInt("delivery_id"));
+				d.setDeliveryName(rs.getString("delivery_name"));
+				d.setProviderId(rs.getInt("provider_id"));
+				d.setStartDate(rs.getDate("startdate"));
+				d.setPaid(rs.getBoolean("paid"));
+				d.setShipped(rs.getBoolean("shipped"));
+				d.setEndDate(rs.getDate("enddate"));
+				d.setSumCost(rs.getInt("sum_cost"));
+				list.add(d);
+			}
+		}
+		return list;
+	}
+	
+	public List<Delivery> getAllNotPaid() throws SQLException 
+	{
+		String sql = "SELECT * FROM delivery WHERE paid = 0 ";
+		List<Delivery> list = new ArrayList<Delivery>();
+		try (PreparedStatement stm = Main.conn.prepareStatement(sql)) 
+		{
+			ResultSet rs = stm.executeQuery();
+			while (rs.next()) {
+				Delivery d = new Delivery();
+				d.setId(rs.getInt("delivery_id"));
+				d.setDeliveryName(rs.getString("delivery_name"));
+				d.setProviderId(rs.getInt("provider_id"));
+				d.setStartDate(rs.getDate("startdate"));
+				d.setPaid(rs.getBoolean("paid"));
+				d.setShipped(rs.getBoolean("shipped"));
+				d.setEndDate(rs.getDate("enddate"));
+				d.setSumCost(rs.getInt("sum_cost"));
+				list.add(d);
+			}
+		}
+		return list;
 	}
 }

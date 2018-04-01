@@ -55,7 +55,7 @@ public class EditDeliveryComponent extends JFrame {
 	 */
 	public EditDeliveryComponent(JFrame parent) throws SQLException 
 	{
-		deliveries = dd.getAllFromProvider(ChooseProvider.id_to_choose);
+		deliveries = dd.getAllFromProviderNotPaid(ChooseProvider.id_to_choose);
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -65,7 +65,6 @@ public class EditDeliveryComponent extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
-		InfoProvider.information_check = 2;
 		
 		
 		JLabel lblNewLabel = new JLabel("Редагування замовлення постачання");
@@ -85,28 +84,28 @@ public class EditDeliveryComponent extends JFrame {
 		
 		
 		JLabel AddLabel = new JLabel("Додавання");
-		AddLabel.setBounds(39, 244, 141, 16);
+		AddLabel.setBounds(39, 244, 170, 16);
 		contentPane.add(AddLabel);
 		
 		JLabel DeleteLabel = new JLabel("Видалення");
-		DeleteLabel.setBounds(275, 247, 141, 16);
+		DeleteLabel.setBounds(275, 247, 170, 16);
 		contentPane.add(DeleteLabel);
 		
 		JLabel EditLabel = new JLabel("Редагування");
-		EditLabel.setBounds(508, 247, 141, 16);
+		EditLabel.setBounds(508, 247, 170, 16);
 		contentPane.add(EditLabel);
 		
 		
-		AddComboBox.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		AddComboBox.setBounds(39, 276, 141, 22);
+		AddComboBox.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		AddComboBox.setBounds(39, 276, 170, 22);
 		contentPane.add(AddComboBox);
 		
-		DeleteComboBox.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		DeleteComboBox.setBounds(275, 276, 141, 22);
+		DeleteComboBox.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		DeleteComboBox.setBounds(275, 276, 170, 22);
 		contentPane.add(DeleteComboBox);
 		
-		EditComboBox.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		EditComboBox.setBounds(508, 276, 141, 22);
+		EditComboBox.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		EditComboBox.setBounds(508, 276, 170, 22);
 		contentPane.add(EditComboBox);	
 		MyItemListener actionListener = new MyItemListener();
 		EditComboBox.addItemListener(actionListener);		
@@ -128,23 +127,23 @@ public class EditDeliveryComponent extends JFrame {
 	
 		
 		NumberAddField = new JTextField();
-		NumberAddField.setBounds(39, 344, 141, 25);
+		NumberAddField.setBounds(39, 344, 170, 25);
 		contentPane.add(NumberAddField);
 		NumberAddField.setColumns(10);
 		
 		JLabel NumberAddLabel = new JLabel("Кількість");
 		NumberAddLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		NumberAddLabel.setBounds(39, 314, 141, 28);
+		NumberAddLabel.setBounds(39, 314, 170, 28);
 		contentPane.add(NumberAddLabel);
 		
 		NumberEditField = new JTextField();
 		NumberEditField.setColumns(10);
-		NumberEditField.setBounds(508, 344, 141, 25);
+		NumberEditField.setBounds(508, 344, 170, 25);
 		contentPane.add(NumberEditField);
 		
 		JLabel NumberEditLabel = new JLabel("Кількість");
 		NumberEditLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		NumberEditLabel.setBounds(508, 314, 141, 28);
+		NumberEditLabel.setBounds(508, 314, 170, 28);
 		contentPane.add(NumberEditLabel);
 		
 		
@@ -155,7 +154,11 @@ public class EditDeliveryComponent extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				component_id = MethodsForFrames.getComponentIdByComponentName(component_name, component_id, AddComboBox, ComponentsNotInDelivery);
-				MethodsForFrames.addComponentsInDelivery(delivery_id_to_edit, component_id, NumberAddField);
+				try {
+					MethodsForFrames.addComponentsInDelivery(delivery_id_to_edit, component_id, NumberAddField);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		AddButton.setBounds(39, 405, 125, 28);
@@ -169,7 +172,11 @@ public class EditDeliveryComponent extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				component_id = MethodsForFrames.getComponentIdByComponentName(component_name, component_id, DeleteComboBox, ComponentsInDeliveryDelete);
-				MethodsForFrames.deleteComponentsFromDelivery(delivery_id_to_edit, component_id);
+				try {
+					MethodsForFrames.deleteComponentsFromDelivery(delivery_id_to_edit, component_id);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		DeleteButton.setBounds(275, 407, 125, 28);
@@ -183,7 +190,11 @@ public class EditDeliveryComponent extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				component_id = MethodsForFrames.getComponentIdByComponentName(component_name, component_id, EditComboBox, ComponentsInDeliveryEdit);
-				MethodsForFrames.updateComponentsInDelivery(delivery_id_to_edit, component_id, NumberEditField);
+				try {
+					MethodsForFrames.updateComponentsInDelivery(delivery_id_to_edit, component_id, NumberEditField);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		EditButton.setBounds(508, 407, 125, 28);
@@ -197,6 +208,7 @@ public class EditDeliveryComponent extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				delivery_id_to_edit = MethodsForFrames.getDeliveryIdByDeliveryName(delivery_name_to_edit, delivery_id_to_edit, DeliveryComboBox, deliveries);			
+				ProviderMenu.delivery_information_check = 2;
 				EditDeliveryComponent.this.setVisible(false);
 				try {
 					new DeliveryInformation(EditDeliveryComponent.this).setVisible(true);

@@ -28,6 +28,8 @@ public class DeliveryInformation extends JFrame {
 	private JTextField StartDateField;
 	private JCheckBox PaidCheckBox;
 	private JCheckBox ShippedCheckBox;
+	private JTextField EndDateField;
+	private JTextField SumCostField;
 	
 
 	/**
@@ -43,18 +45,22 @@ public class DeliveryInformation extends JFrame {
 		{
 			d = dd.readDelivery(DeliveryDepartmentDirectorMenu.delivery_id_to_look);		
 		}
-		else if(InfoProvider.information_check == 1)
+		if(ProviderMenu.delivery_information_check == 1)
 		{
 			d = dd.readDelivery(InfoProvider.delivery_id_to_look);
 		}
-		else
+		if(ProviderMenu.delivery_information_check == 2)
 		{
 			d = dd.readDelivery(EditDeliveryComponent.delivery_id_to_edit);
+		}
+		if(ProviderMenu.delivery_information_check == 3)
+		{
+			d = dd.readDelivery(InfoDelivery.delivery_id_to_look);
 		}
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 646, 408);
+		setBounds(100, 100, 634, 437);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -65,30 +71,38 @@ public class DeliveryInformation extends JFrame {
 		JLabel lblNewLabel = new JLabel("Інформація про замовлення постачання");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblNewLabel.setBounds(0, 13, 628, 59);
+		lblNewLabel.setBounds(0, 13, 616, 59);
 		contentPane.add(lblNewLabel);
 		
 		JLabel NameLabel = new JLabel("Назва замовлення");
-		NameLabel.setBounds(69, 123, 129, 22);
+		NameLabel.setBounds(68, 109, 120, 22);
 		contentPane.add(NameLabel);
 		
 		JLabel StartDateLabel = new JLabel("Дата початку");
-		StartDateLabel.setBounds(69, 165, 129, 22);
+		StartDateLabel.setBounds(68, 151, 120, 22);
 		contentPane.add(StartDateLabel);
 		
 		JLabel PaidLabel = new JLabel("Сплачено");
-		PaidLabel.setBounds(69, 211, 129, 22);
+		PaidLabel.setBounds(68, 197, 120, 22);
 		contentPane.add(PaidLabel);
 		
 		JLabel ShippedLabel = new JLabel("Відвантажено");
-		ShippedLabel.setBounds(69, 245, 129, 22);
-		contentPane.add(ShippedLabel);
+		ShippedLabel.setBounds(68, 231, 120, 22);
+		contentPane.add(ShippedLabel);	
+		
+		JLabel EndLabel = new JLabel("Дата кінця");
+		EndLabel.setBounds(68, 266, 120, 22);
+		contentPane.add(EndLabel);
+		
+		JLabel SumCostLabel = new JLabel("Сумарна вартість");
+		SumCostLabel.setBounds(68, 301, 120, 22);
+		contentPane.add(SumCostLabel);
 
 		
 		NameField = new JTextField();
 		NameField.setBackground(Color.WHITE);
 		NameField.setEditable(false);
-		NameField.setBounds(201, 123, 350, 22);
+		NameField.setBounds(200, 109, 350, 22);
 		contentPane.add(NameField);
 		NameField.setColumns(10);
 		NameField.setText(d.getDeliveryName());
@@ -96,14 +110,14 @@ public class DeliveryInformation extends JFrame {
 		StartDateField = new JTextField();
 		StartDateField.setBackground(Color.WHITE);
 		StartDateField.setEditable(false);
-		StartDateField.setBounds(201, 165, 350, 22);
+		StartDateField.setBounds(200, 151, 350, 22);
 		contentPane.add(StartDateField);
 		StartDateField.setColumns(10);
 		StartDateField.setText(String.valueOf(d.getStartDate()));
 		
 		PaidCheckBox = new JCheckBox();
 		PaidCheckBox.setEnabled(false);
-		PaidCheckBox.setBounds(201, 208, 32, 25);
+		PaidCheckBox.setBounds(200, 194, 25, 25);
 		contentPane.add(PaidCheckBox);
 		if(d.isPaid() == true)
 		{
@@ -116,9 +130,8 @@ public class DeliveryInformation extends JFrame {
 		
 		ShippedCheckBox = new JCheckBox();
 		ShippedCheckBox.setEnabled(false);
-		ShippedCheckBox.setBounds(201, 242, 32, 25);
+		ShippedCheckBox.setBounds(200, 228, 25, 25);
 		contentPane.add(ShippedCheckBox);
-		ShippedCheckBox.setSelected(d.isPaid());
 		if(d.isShipped() == true)
 		{
 			ShippedCheckBox.setSelected(true);
@@ -127,6 +140,26 @@ public class DeliveryInformation extends JFrame {
 		{
 			ShippedCheckBox.setSelected(false);
 		}
+		
+		
+		EndDateField = new JTextField();
+		EndDateField.setText("null");
+		EndDateField.setEditable(false);
+		EndDateField.setColumns(10);
+		EndDateField.setBackground(Color.WHITE);
+		EndDateField.setBounds(200, 266, 350, 22);
+		contentPane.add(EndDateField);
+		EndDateField.setText(String.valueOf(d.getEndDate()));
+		
+		
+		SumCostField = new JTextField();
+		SumCostField.setText("null");
+		SumCostField.setEditable(false);
+		SumCostField.setColumns(10);
+		SumCostField.setBackground(Color.WHITE);
+		SumCostField.setBounds(200, 301, 350, 22);
+		contentPane.add(SumCostField);
+		SumCostField.setText(String.valueOf(d.getSumCost()));
 		
 		
 		
@@ -140,7 +173,7 @@ public class DeliveryInformation extends JFrame {
 				DeliveryInformation.this.dispose();
 			}
 		});
-		btnBack.setBounds(499, 303, 97, 25);
+		btnBack.setBounds(507, 352, 97, 25);
 		contentPane.add(btnBack);
 	}
 

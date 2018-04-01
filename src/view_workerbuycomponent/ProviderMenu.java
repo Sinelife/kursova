@@ -21,7 +21,8 @@ public class ProviderMenu extends JFrame {
 
 	private JPanel contentPane;
 
-
+	public static int delivery_information_check;
+	
 	/**
 	 * Create the frame.
 	 */

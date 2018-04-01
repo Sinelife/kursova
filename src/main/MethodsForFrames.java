@@ -222,6 +222,16 @@ public class MethodsForFrames
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
+		
+		Device d = dd.readDevice(device_id);
+		dd.updateDevice(d, false);
+		
+		OrderDao od = new OrderDao();
+		List<Order> orders = od.getAllNotPaid();
+		for(Order order : orders)
+		{
+			od.updateOrder(order, false);
+		}
 
 	}
 	
@@ -242,6 +252,16 @@ public class MethodsForFrames
 			dd.deleteComponentFromDevice(record);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
+		}
+		
+		Device d = dd.readDevice(device_id);
+		dd.updateDevice(d, false);
+		
+		OrderDao od = new OrderDao();
+		List<Order> orders = od.getAllNotPaid();
+		for(Order order : orders)
+		{
+			od.updateOrder(order, false);
 		}
 
 	}
@@ -265,6 +285,16 @@ public class MethodsForFrames
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}		
+		
+		Device d = dd.readDevice(device_id);
+		dd.updateDevice(d, false);
+		
+		OrderDao od = new OrderDao();
+		List<Order> orders = od.getAllNotPaid();
+		for(Order order : orders)
+		{
+			od.updateOrder(order, false);
+		}
 
 	}
 	
@@ -375,7 +405,7 @@ public class MethodsForFrames
 	
 	//Метод для додавання нового замовлення постачання
 	
-	public static void addDelivery(String provider_name, int provider_id, JTextField StartDateField, JCheckBox PaidCheckBox, JCheckBox ShippedCheckBox) 
+	public static void addDelivery(String provider_name, int provider_id, JTextField StartDateField) 
 	{
 		DeliveryDao dd = new DeliveryDao();
 		Delivery d = new Delivery();
@@ -388,8 +418,6 @@ public class MethodsForFrames
 			e2.printStackTrace();
 		}
 		d.setStartDate(Date.valueOf(StartDateField.getText()));
-		d.setPaid(PaidCheckBox.isSelected());
-		d.setShipped(ShippedCheckBox.isSelected());
 		try {
 			dd.addDelivery(d);
 		} catch (SQLException e1) {
@@ -487,11 +515,17 @@ public class MethodsForFrames
 			device.setSumPrice(dd.getSumPrice(device));
 			dd.updateDevice(device, false);
 		}
-		OrderDao od = new OrderDao();
-		List<Order> orders = od.getAllNotPaid();
+		OrderDao order_dao = new OrderDao();
+		List<Order> orders = order_dao.getAllNotPaid();
 		for(Order order : orders)
 		{
-			od.updateOrder(order, false);
+			order_dao.updateOrder(order, false);
+		}
+		DeliveryDao delivery_dao = new DeliveryDao();
+		List<Delivery> deliveries = delivery_dao.getAllNotPaid();
+		for(Delivery delivery : deliveries)
+		{
+			delivery_dao.updateDelivery(delivery, false);
 		}
 	}
 	
@@ -556,7 +590,7 @@ public class MethodsForFrames
 	
 	//Метод для оновлення замовлення на купівлю
 	
-	public static void updateOrder(Order o, JTextField StartDateField, JCheckBox ShippedCheckBox) 
+	public static void updateOrder(Order o, JCheckBox ShippedCheckBox) 
 	{
 		OrderDao od = new OrderDao();
 		o.setShipped(ShippedCheckBox.isSelected());
@@ -618,14 +652,28 @@ public class MethodsForFrames
 	
 	//Метод для оновлення замовлення постачання
 	
-	public static void updateDelivery(Delivery d, JTextField StartDateField, JCheckBox PaidCheckBox, JCheckBox ShippedCheckBox) 
+	public static void updateDelivery(Delivery d, JCheckBox ShippedCheckBox) 
 	{
 		DeliveryDao dd = new DeliveryDao();
-		d.setStartDate(Date.valueOf(StartDateField.getText()));
-		d.setPaid(PaidCheckBox.isSelected());
 		d.setShipped(ShippedCheckBox.isSelected());
 		try {
 			dd.updateDelivery(d, true);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
+	
+	//Метод для відмічання замовлення на постачання як оплаченого
+	
+	public static void makeDeliveryPaid(Delivery d) 
+	{
+		DeliveryDao dd = new DeliveryDao();
+		d.setPaid(true);
+		String date = getCurrentDate();
+		d.setEndDate(Date.valueOf(date));
+		try {
+			dd.makeDeliveryPaid(d,true);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
@@ -792,7 +840,7 @@ public class MethodsForFrames
 
 	// Метод для додавання компонентів до замовлення
 
-	public static void addComponentsInDelivery(int delivery_id, int component_id, JTextField NumberAddField) {
+	public static void addComponentsInDelivery(int delivery_id, int component_id, JTextField NumberAddField) throws SQLException {
 		DeliveryDao dd = new DeliveryDao();
 		DeliveryComponent record = new DeliveryComponent();
 		record.setDeliveryId(delivery_id);
@@ -803,12 +851,14 @@ public class MethodsForFrames
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
+		Delivery d = dd.readDelivery(delivery_id);
+		dd.updateDelivery(d, false);
 	}
 		
 		
 	// Метод для видалення компонентів з замовлення
 
-	public static void deleteComponentsFromDelivery(int delivery_id, int component_id) {
+	public static void deleteComponentsFromDelivery(int delivery_id, int component_id) throws SQLException {
 		DeliveryDao dd = new DeliveryDao();
 		DeliveryComponent record = null;
 		try {
@@ -821,11 +871,13 @@ public class MethodsForFrames
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
+		Delivery d = dd.readDelivery(delivery_id);
+		dd.updateDelivery(d, false);
 	}
 
 	// Метод для редагування кількості компонентів в замовленні
 
-	public static void updateComponentsInDelivery(int delivery_id, int component_id, JTextField NumberEditField) {
+	public static void updateComponentsInDelivery(int delivery_id, int component_id, JTextField NumberEditField) throws SQLException {
 		DeliveryDao dd = new DeliveryDao();
 		DeliveryComponent record = null;
 		try {
@@ -839,6 +891,8 @@ public class MethodsForFrames
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
+		Delivery d = dd.readDelivery(delivery_id);
+		dd.updateDelivery(d, false);
 	}
 
 	// Метод для отримання всіх замовлень данного постачальника

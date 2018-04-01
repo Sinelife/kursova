@@ -52,7 +52,7 @@ public class MakeOrderPaid extends JFrame {
 		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
 	
 		
-		JLabel lblNewLabel = new JLabel("Відмічання замовлення як оплаченого");
+		JLabel lblNewLabel = new JLabel("Відмічання замовлення продажу як оплаченого");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		lblNewLabel.setBounds(0, 13, 741, 59);

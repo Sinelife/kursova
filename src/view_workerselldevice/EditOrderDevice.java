@@ -84,28 +84,28 @@ public class EditOrderDevice extends JFrame {
 		
 		
 		JLabel AddLabel = new JLabel("Додавання");
-		AddLabel.setBounds(59, 235, 141, 16);
+		AddLabel.setBounds(59, 235, 173, 16);
 		contentPane.add(AddLabel);
 		
 		JLabel DeleteLabel = new JLabel("Видалення");
-		DeleteLabel.setBounds(295, 238, 141, 16);
+		DeleteLabel.setBounds(295, 238, 178, 16);
 		contentPane.add(DeleteLabel);
 		
 		JLabel EditLabel = new JLabel("Редагування");
-		EditLabel.setBounds(528, 238, 141, 16);
+		EditLabel.setBounds(528, 238, 173, 16);
 		contentPane.add(EditLabel);
 		
 		
-		AddComboBox.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		AddComboBox.setBounds(59, 267, 141, 22);
+		AddComboBox.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		AddComboBox.setBounds(59, 267, 173, 22);
 		contentPane.add(AddComboBox);
 		
-		DeleteComboBox.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		DeleteComboBox.setBounds(295, 267, 141, 22);
+		DeleteComboBox.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		DeleteComboBox.setBounds(295, 267, 178, 22);
 		contentPane.add(DeleteComboBox);
 		
-		EditComboBox.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		EditComboBox.setBounds(528, 267, 141, 22);
+		EditComboBox.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		EditComboBox.setBounds(528, 267, 173, 22);
 		contentPane.add(EditComboBox);	
 		MyItemListener actionListener = new MyItemListener();
 		EditComboBox.addItemListener(actionListener);		
@@ -127,23 +127,23 @@ public class EditOrderDevice extends JFrame {
 	
 		
 		NumberAddField = new JTextField();
-		NumberAddField.setBounds(59, 335, 141, 25);
+		NumberAddField.setBounds(59, 335, 173, 25);
 		contentPane.add(NumberAddField);
 		NumberAddField.setColumns(10);
 		
 		JLabel NumberAddLabel = new JLabel("Кількість");
 		NumberAddLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		NumberAddLabel.setBounds(59, 305, 141, 28);
+		NumberAddLabel.setBounds(59, 305, 173, 28);
 		contentPane.add(NumberAddLabel);
 		
 		NumberEditField = new JTextField();
 		NumberEditField.setColumns(10);
-		NumberEditField.setBounds(528, 335, 141, 25);
+		NumberEditField.setBounds(528, 335, 173, 25);
 		contentPane.add(NumberEditField);
 		
 		JLabel NumberEditLabel = new JLabel("Кількість");
 		NumberEditLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		NumberEditLabel.setBounds(528, 305, 141, 28);
+		NumberEditLabel.setBounds(528, 305, 173, 28);
 		contentPane.add(NumberEditLabel);
 		
 		

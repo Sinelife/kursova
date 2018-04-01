@@ -22,12 +22,12 @@ import view.AuthorisationMenu;
 
 import javax.swing.JCheckBox;
 import javax.swing.SwingConstants;
+import java.awt.Color;
 
 public class EditDelivery extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField StartDateField;
-	private JCheckBox PaidCheckBox;
 	private JCheckBox ShippedCheckBox;
 
 	public static int delivery_id_to_edit;
@@ -42,11 +42,11 @@ public class EditDelivery extends JFrame {
 	public EditDelivery(JFrame parent) throws SQLException 
 	{
 		DeliveryDao dd = new DeliveryDao();
-		List<Delivery> deliveries = dd.getAllFromProvider(ChooseProvider.id_to_choose);
+		List<Delivery> deliveries = dd.getAllFromProviderNotPaid(ChooseProvider.id_to_choose);
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 759, 461);
+		setBounds(100, 100, 759, 433);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -73,25 +73,19 @@ public class EditDelivery extends JFrame {
 		StartDateLabel.setBounds(103, 199, 133, 22);
 		contentPane.add(StartDateLabel);
 		
-		JLabel PaidLabel = new JLabel("Сплачено");
-		PaidLabel.setBounds(103, 245, 133, 22);
-		contentPane.add(PaidLabel);
-		
 		JLabel ShippedLabel = new JLabel("Відвантажено");
-		ShippedLabel.setBounds(103, 285, 129, 22);
+		ShippedLabel.setBounds(103, 253, 166, 22);
 		contentPane.add(ShippedLabel);
 		
 		StartDateField = new JTextField();
+		StartDateField.setBackground(Color.WHITE);
+		StartDateField.setEditable(false);
 		StartDateField.setBounds(248, 199, 337, 22);
 		contentPane.add(StartDateField);
 		StartDateField.setColumns(10);
 		
-		PaidCheckBox = new JCheckBox();
-		PaidCheckBox.setBounds(244, 245, 25, 25);
-		contentPane.add(PaidCheckBox);
-		
 		ShippedCheckBox = new JCheckBox();
-		ShippedCheckBox.setBounds(244, 282, 25, 25);
+		ShippedCheckBox.setBounds(244, 250, 25, 25);
 		contentPane.add(ShippedCheckBox);
 
 		
@@ -109,14 +103,6 @@ public class EditDelivery extends JFrame {
 					e1.printStackTrace();
 				}
 				StartDateField.setText(String.valueOf(d.getStartDate()));
-				if(d.isPaid() == true)
-				{
-					PaidCheckBox.setSelected(true);
-				}
-				else
-				{
-					PaidCheckBox.setSelected(false);
-				}
 				if(d.isShipped() == true)
 				{
 					ShippedCheckBox.setSelected(true);
@@ -127,7 +113,7 @@ public class EditDelivery extends JFrame {
 				}
 			}
 		});
-		SelectButton.setBounds(293, 145, 97, 25);
+		SelectButton.setBounds(248, 146, 97, 25);
 		contentPane.add(SelectButton);
 		
 		
@@ -137,14 +123,14 @@ public class EditDelivery extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				MethodsForFrames.updateDelivery(d, StartDateField, PaidCheckBox, ShippedCheckBox);
+				MethodsForFrames.updateDelivery(d, ShippedCheckBox);
 				EditDelivery.this.setVisible(false);
 				EditDelivery.this.dispose();
 				new DeliveryMenu().setVisible(true);
 			}
 		});
 		button.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		button.setBounds(284, 328, 123, 25);
+		button.setBounds(248, 304, 123, 25);
 		contentPane.add(button);
 		
 		
@@ -158,7 +144,7 @@ public class EditDelivery extends JFrame {
 				EditDelivery.this.dispose();
 			}
 		});
-		btnBack.setBounds(632, 374, 97, 25);
+		btnBack.setBounds(632, 346, 97, 25);
 		contentPane.add(btnBack);
 	}
 }

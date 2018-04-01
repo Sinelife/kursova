@@ -20,13 +20,11 @@ public class AddDelivery extends JFrame
 
 	private JPanel contentPane;
 	private JTextField StartDateField;
-	private JCheckBox PaidCheckBox;
-	private JCheckBox ShippedCheckBox;
 
 	public AddDelivery(JFrame parent) 
 	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 646, 399);
+		setBounds(100, 100, 646, 303);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -44,26 +42,10 @@ public class AddDelivery extends JFrame
 		StartDateLabel.setBounds(29, 115, 129, 22);
 		contentPane.add(StartDateLabel);
 		
-		JLabel PaidLabel = new JLabel("Сплачено");
-		PaidLabel.setBounds(29, 161, 129, 22);
-		contentPane.add(PaidLabel);
-		
-		JLabel ShippedLabel = new JLabel("Відвантажено");
-		ShippedLabel.setBounds(29, 195, 129, 22);
-		contentPane.add(ShippedLabel);
-		
 		StartDateField = new JTextField();
 		StartDateField.setBounds(161, 115, 350, 22);
 		contentPane.add(StartDateField);
 		StartDateField.setColumns(10);
-		
-		PaidCheckBox = new JCheckBox();
-		PaidCheckBox.setBounds(161, 158, 113, 25);
-		contentPane.add(PaidCheckBox);
-
-		ShippedCheckBox = new JCheckBox();
-		ShippedCheckBox.setBounds(161, 192, 113, 25);
-		contentPane.add(ShippedCheckBox);
 		
 		
 		JButton AddButton = new JButton("ДОДАТИ");
@@ -71,14 +53,14 @@ public class AddDelivery extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				MethodsForFrames.addDelivery(ChooseProvider.name_to_choose, ChooseProvider.id_to_choose, StartDateField, PaidCheckBox, ShippedCheckBox);
+				MethodsForFrames.addDelivery(ChooseProvider.name_to_choose, ChooseProvider.id_to_choose, StartDateField);
 				if (parent != null)
 					parent.setVisible(true);
 				AddDelivery.this.setVisible(false);
 				AddDelivery.this.dispose();
 			}
 		});
-		AddButton.setBounds(161, 244, 97, 25);
+		AddButton.setBounds(29, 188, 97, 25);
 		contentPane.add(AddButton);
 		
 		
@@ -92,7 +74,7 @@ public class AddDelivery extends JFrame
 				AddDelivery.this.dispose();
 			}
 		});
-		btnBack.setBounds(505, 314, 97, 25);
+		btnBack.setBounds(496, 188, 97, 25);
 		contentPane.add(btnBack);
 	}
 

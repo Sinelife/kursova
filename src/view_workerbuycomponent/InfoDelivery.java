@@ -18,6 +18,10 @@ import domain.Delivery;
 import domain.DeliveryComponent;
 import main.MethodsForFrames;
 import view.AuthorisationMenu;
+import view_workerselldevice.ClientMenu;
+import view_workerselldevice.InfoOrder;
+import view_workerselldevice.OrderInformation;
+
 import javax.swing.SwingConstants;
 
 public class InfoDelivery extends JFrame 
@@ -39,7 +43,7 @@ public class InfoDelivery extends JFrame
 		List<Delivery> deliveries = od.getAllFromProvider(ChooseProvider.id_to_choose);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 784, 480);
+		setBounds(100, 100, 899, 480);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -89,6 +93,28 @@ public class InfoDelivery extends JFrame
 		
 		
 		
+		JButton DeliveryInfoButton = new JButton("Інформація");
+		DeliveryInfoButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				delivery_id_to_look = MethodsForFrames.getDeliveryIdByDeliveryName(delivery_name_to_look, delivery_id_to_look, DeliveryComboBox, deliveries);
+				ProviderMenu.delivery_information_check = 3;
+				InfoDelivery.this.setVisible(false);
+				try {
+					new DeliveryInformation(InfoDelivery.this).setVisible(true);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		DeliveryInfoButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		DeliveryInfoButton.setBounds(748, 149, 122, 34);
+		contentPane.add(DeliveryInfoButton);
+		
+		
+		
+		
 		JButton btnBack = new JButton("BACK");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -98,7 +124,7 @@ public class InfoDelivery extends JFrame
 				InfoDelivery.this.dispose();
 			}
 		});
-		btnBack.setBounds(657, 392, 97, 25);
+		btnBack.setBounds(773, 379, 97, 25);
 		contentPane.add(btnBack);
 	}
 

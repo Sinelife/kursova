@@ -14,6 +14,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import view.AuthorisationMenu;
+import view_workerselldevice.MakeOrderPaid;
+import view_workerselldevice.OrderMenu;
 
 
 public class DeliveryMenu extends JFrame {
@@ -26,7 +28,7 @@ public class DeliveryMenu extends JFrame {
 	public DeliveryMenu() 
 	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 626, 597);
+		setBounds(100, 100, 626, 623);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -63,7 +65,7 @@ public class DeliveryMenu extends JFrame {
 		});
 		InfoDeliveryButton.setForeground(Color.DARK_GRAY);
 		InfoDeliveryButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		InfoDeliveryButton.setBounds(105, 124, 400, 43);
+		InfoDeliveryButton.setBounds(105, 111, 400, 43);
 		contentPane.add(InfoDeliveryButton);
 		
 		
@@ -78,7 +80,7 @@ public class DeliveryMenu extends JFrame {
 		});
 		AddDeliveryButton.setForeground(Color.BLACK);
 		AddDeliveryButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		AddDeliveryButton.setBounds(105, 213, 400, 43);
+		AddDeliveryButton.setBounds(105, 200, 400, 43);
 		contentPane.add(AddDeliveryButton);
 		
 		
@@ -98,7 +100,7 @@ public class DeliveryMenu extends JFrame {
 		});
 		EditDeliveryButton.setForeground(Color.BLACK);
 		EditDeliveryButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		EditDeliveryButton.setBounds(105, 303, 400, 43);
+		EditDeliveryButton.setBounds(105, 290, 400, 43);
 		contentPane.add(EditDeliveryButton);
 		
 		
@@ -117,10 +119,32 @@ public class DeliveryMenu extends JFrame {
 		});
 		EditDeliveryDeviceButton.setForeground(Color.DARK_GRAY);
 		EditDeliveryDeviceButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		EditDeliveryDeviceButton.setBounds(105, 393, 400, 43);
+		EditDeliveryDeviceButton.setBounds(105, 380, 400, 43);
 		contentPane.add(EditDeliveryDeviceButton);
 		
 		
+		
+		
+		JButton FinishButton = new JButton("Відмітити замовлення як сплачене");
+		FinishButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				DeliveryMenu.this.setVisible(false);
+				try {
+					new MakeDeliveryPaid(DeliveryMenu.this).setVisible(true);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		FinishButton.setForeground(Color.DARK_GRAY);
+		FinishButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		FinishButton.setBounds(105, 468, 400, 43);
+		contentPane.add(FinishButton);
+		
+		
+	
 		
 		JButton btnBack = new JButton("BACK");
 		btnBack.addActionListener(new ActionListener() 
@@ -136,7 +160,7 @@ public class DeliveryMenu extends JFrame {
 				}
 			}
 		});
-		btnBack.setBounds(452, 499, 97, 25);
+		btnBack.setBounds(481, 538, 97, 25);
 		contentPane.add(btnBack);
 		
 	}
