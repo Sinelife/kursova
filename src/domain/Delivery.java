@@ -10,8 +10,10 @@ public class Delivery
 	private Date startDate;
 	private boolean paid;
 	private boolean shipped;
+	private Date endDate;
+	private int sum_cost;
 	
-	Delivery(int delivery_id, String delivery_name, int provider_id, Date startDate, boolean paid, boolean shipped)
+	Delivery(int delivery_id, String delivery_name, int provider_id, Date startDate, boolean paid, boolean shipped, Date endDate, int sum_cost)
 	{
 		this.delivery_id = delivery_id;
 		this.delivery_name = delivery_name;
@@ -19,6 +21,8 @@ public class Delivery
 		this.startDate = startDate;
 		this.paid = paid;
 		this.shipped = shipped;
+		this.endDate = endDate;
+		this.sum_cost = sum_cost;
 	}
 	
 	
@@ -85,6 +89,26 @@ public class Delivery
 	public void setShipped(boolean shipped) 
 	{
 		this.shipped = shipped;
+	}
+	
+	public Date getEndDate() 
+	{
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) 
+	{
+		this.endDate = endDate;
+	}
+
+	public int getSumCost() 
+	{
+		return sum_cost;
+	}
+
+	public void setSumCost(int sum_cost) 
+	{
+		this.sum_cost = sum_cost;
 	}
 
 }

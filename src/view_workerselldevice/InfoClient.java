@@ -32,7 +32,7 @@ public class InfoClient extends JFrame {
 	public List<Order> OrdersInClient;
 	public List<OrderDevice> DevicesInfoInOrder;
 	
-	public static int order_information_check;
+	
 	
 	/**
 	 * Create the frame.
@@ -51,7 +51,7 @@ public class InfoClient extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
-		order_information_check = 1;
+
 		
 		
 		JLabel lblNewLabel = new JLabel("Перегляд інформації про клієнта");
@@ -157,6 +157,7 @@ public class InfoClient extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				order_id_to_look = MethodsForFrames.getOrderIdByOrderName(order_name_to_look, order_id_to_look, OrderInClientComboBox, OrdersInClient);
+				ClientMenu.order_information_check = 1;
 				InfoClient.this.setVisible(false);
 				try {
 					new OrderInformation(InfoClient.this).setVisible(true);

@@ -27,6 +27,8 @@ public class OrderInformation extends JFrame {
 	private JTextField StartDateField;
 	private JCheckBox PaidCheckBox;
 	private JCheckBox ShippedCheckBox;
+	private JTextField EndDateField;
+	private JTextField SumCostField;
 	
 
 	/**
@@ -43,18 +45,22 @@ public class OrderInformation extends JFrame {
 		{
 			o = od.readOrder(SalesDepartmentDirectorMenu.order_id_to_look);		
 		}
-		else if(InfoClient.order_information_check == 1)
+		if(ClientMenu.order_information_check == 1)
 		{
 			o = od.readOrder(InfoClient.order_id_to_look);
 		}
-		else
+		if(ClientMenu.order_information_check == 2)
 		{
 			o = od.readOrder(EditOrderDevice.order_id_to_edit);
+		}
+		if(ClientMenu.order_information_check == 3)
+		{
+			o = od.readOrder(InfoOrder.order_id_to_look);
 		}
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 646, 374);
+		setBounds(100, 100, 646, 443);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -82,8 +88,17 @@ public class OrderInformation extends JFrame {
 		
 		JLabel ShippedLabel = new JLabel("Відвантажено");
 		ShippedLabel.setBounds(68, 231, 120, 22);
-		contentPane.add(ShippedLabel);
+		contentPane.add(ShippedLabel);	
+		
+		JLabel EndLabel = new JLabel("Дата кінця");
+		EndLabel.setBounds(68, 266, 120, 22);
+		contentPane.add(EndLabel);
+		
+		JLabel SumCostLabel = new JLabel("Сумарна вартість");
+		SumCostLabel.setBounds(68, 301, 120, 22);
+		contentPane.add(SumCostLabel);
 
+		
 		
 		NameField = new JTextField();
 		NameField.setBackground(Color.WHITE);
@@ -128,6 +143,28 @@ public class OrderInformation extends JFrame {
 		}
 		
 		
+		EndDateField = new JTextField();
+		EndDateField.setText("null");
+		EndDateField.setEditable(false);
+		EndDateField.setColumns(10);
+		EndDateField.setBackground(Color.WHITE);
+		EndDateField.setBounds(200, 266, 350, 22);
+		contentPane.add(EndDateField);
+		EndDateField.setText(String.valueOf(o.getEndDate()));
+		
+		
+		SumCostField = new JTextField();
+		SumCostField.setText("null");
+		SumCostField.setEditable(false);
+		SumCostField.setColumns(10);
+		SumCostField.setBackground(Color.WHITE);
+		SumCostField.setBounds(200, 301, 350, 22);
+		contentPane.add(SumCostField);
+		SumCostField.setText(String.valueOf(o.getSumCost()));
+		
+		
+		
+		
 		JButton btnBack = new JButton("BACK");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -137,7 +174,7 @@ public class OrderInformation extends JFrame {
 				OrderInformation.this.dispose();
 			}
 		});
-		btnBack.setBounds(453, 281, 97, 25);
+		btnBack.setBounds(503, 358, 97, 25);
 		contentPane.add(btnBack);
 	}
 

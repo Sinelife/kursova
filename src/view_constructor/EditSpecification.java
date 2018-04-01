@@ -179,7 +179,11 @@ public class EditSpecification extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				c_id = MethodsForFrames.getComponentIdByComponentName(c_name, c_id, DeleteComponentComboBox, components_for_delete);
-				MethodsForFrames.deleteComponentsFromDevice(id_to_choose, c_id);
+				try {
+					MethodsForFrames.deleteComponentsFromDevice(id_to_choose, c_id);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		DeleteComponentButton.setBounds(28, 465, 125, 28);
@@ -194,7 +198,11 @@ public class EditSpecification extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				c_id = MethodsForFrames.getComponentIdByComponentName(c_name, c_id, AddComponentComboBox, components_for_add);
-				MethodsForFrames.addComponentsToDevice(id_to_choose, c_id, NumberAddField);
+				try {
+					MethodsForFrames.addComponentsToDevice(id_to_choose, c_id, NumberAddField);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		AddComponentButton.setBounds(263, 467, 125, 28);
@@ -209,7 +217,11 @@ public class EditSpecification extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				c_id = MethodsForFrames.getComponentIdByComponentName(c_name, c_id, EditComponentComboBox, components_for_edit);
-				MethodsForFrames.updateComponentsInDevice(id_to_choose, c_id, NumberEditField);
+				try {
+					MethodsForFrames.updateComponentsInDevice(id_to_choose, c_id, NumberEditField);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		EditComponentButton.setBounds(510, 467, 125, 28);

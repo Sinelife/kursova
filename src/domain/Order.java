@@ -10,9 +10,11 @@ public class Order
 	private Date startDate;
 	private boolean paid;
 	private boolean shipped;
+	private Date endDate;
+	private int sum_cost;
 	
 	
-	Order(int order_id, String order_name, int client_id, Date startDate, boolean paid, boolean shipped)
+	Order(int order_id, String order_name, int client_id, Date startDate, boolean paid, boolean shipped, Date endDate, int sum_cost)
 	{
 		this.order_id = order_id;
 		this.order_name = order_name;
@@ -20,6 +22,8 @@ public class Order
 		this.startDate = startDate;
 		this.paid = paid;
 		this.shipped = shipped;
+		this.endDate = endDate;
+		this.sum_cost = sum_cost;
 	}
 	
 	
@@ -86,5 +90,25 @@ public class Order
 	public void setShipped(boolean shipped) 
 	{
 		this.shipped = shipped;
+	}
+
+	public Date getEndDate() 
+	{
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) 
+	{
+		this.endDate = endDate;
+	}
+
+	public int getSumCost() 
+	{
+		return sum_cost;
+	}
+
+	public void setSumCost(int sum_cost) 
+	{
+		this.sum_cost = sum_cost;
 	}
 }

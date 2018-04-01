@@ -20,6 +20,7 @@ public class ClientMenu extends JFrame {
 
 	private JPanel contentPane;
 
+	public static int order_information_check;
 
 
 	/**

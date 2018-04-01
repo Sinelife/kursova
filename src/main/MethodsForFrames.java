@@ -31,6 +31,31 @@ import domain.User;
 
 public class MethodsForFrames 
 {
+	
+	@SuppressWarnings("deprecation")
+	public static String getCurrentDate()
+	{
+		java.util.Date date = new java.util.Date();
+		String result = "";
+		String day = String.valueOf(date.getDate());
+		String year = String.valueOf(date.getYear() + 1900);
+		String month = "";
+		String s = String.valueOf(date.getMonth() + 1);
+		if((Integer.valueOf(s)) < 10)
+		{
+			String s1 = "0";
+			month = s1.concat(s);
+		}
+		else
+		{
+			month = s;
+		} 
+		result = year.concat("-").concat(month).concat("-").concat(day);
+		return result;
+	}
+	
+	
+	
 	public static void DateToString(Date d,JTextField t)
 	{
 		String res = null;
@@ -185,59 +210,62 @@ public class MethodsForFrames
 	
 	//Метод для додавання компонентів до приладу
 	
-	public static void addComponentsToDevice(int device_id,int component_id, JTextField NumberAddField)
+	public static void addComponentsToDevice(int device_id,int component_id, JTextField NumberAddField) throws SQLException
 	{
-		DeviceDao device_dao = new DeviceDao();
+		DeviceDao dd = new DeviceDao();
 		ComponentDevice record = new ComponentDevice();
 		record.setDeviceId(device_id);
 		record.setComponentId(component_id);
 		record.setNumber(Integer.valueOf(NumberAddField.getText()));
 		try {
-			device_dao.addComponentToDevice(record);
+			dd.addComponentToDevice(record);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
+
 	}
 	
 	
 	
 	//Метод для видалення компонентів з приладу
 	
-	public static void deleteComponentsFromDevice(int device_id,int component_id)
+	public static void deleteComponentsFromDevice(int device_id,int component_id) throws SQLException
 	{
-		DeviceDao device_dao = new DeviceDao();
+		DeviceDao dd = new DeviceDao();
 		ComponentDevice record = null;
 		try {
-			record = device_dao.readComponentInDevice(device_id, component_id);
+			record = dd.readComponentInDevice(device_id, component_id);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
 		try {
-			device_dao.deleteComponentFromDevice(record);
+			dd.deleteComponentFromDevice(record);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
+
 	}
 	
 	
 	
 	//Метод для зміни кількості компонентів в приладі
 	
-	public static void updateComponentsInDevice(int device_id, int component_id, JTextField NumberEditField)
+	public static void updateComponentsInDevice(int device_id, int component_id, JTextField NumberEditField) throws SQLException
 	{
-		DeviceDao device_dao = new DeviceDao();
+		DeviceDao dd = new DeviceDao();
 		ComponentDevice record = null;
 		try {
-			record = device_dao.readComponentInDevice(device_id, component_id);
+			record = dd.readComponentInDevice(device_id, component_id);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
 		record.setNumber(Integer.valueOf(NumberEditField.getText()));
 		try {
-			device_dao.updateComponentInDevice(record);
+			dd.updateComponentInDevice(record);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}		
+
 	}
 	
 	
@@ -392,7 +420,7 @@ public class MethodsForFrames
 	
 	//Метод для додавання нового замовлення постачання
 	
-	public static void addOrder(String client_name, int client_id, JTextField StartDateField, JCheckBox PaidCheckBox, JCheckBox ShippedCheckBox) 
+	public static void addOrder(String client_name, int client_id, JTextField StartDateField) 
 	{
 		OrderDao od = new OrderDao();
 		ClientDao cd = new ClientDao();
@@ -404,8 +432,6 @@ public class MethodsForFrames
 			e2.printStackTrace();
 		}
 		o.setStartDate(Date.valueOf(StartDateField.getText()));
-		o.setPaid(PaidCheckBox.isSelected());
-		o.setShipped(ShippedCheckBox.isSelected());
 		try {
 			od.addOrder(o);
 		} catch (SQLException e1) {
@@ -461,6 +487,12 @@ public class MethodsForFrames
 			device.setSumPrice(dd.getSumPrice(device));
 			dd.updateDevice(device, false);
 		}
+		OrderDao od = new OrderDao();
+		List<Order> orders = od.getAllNotPaid();
+		for(Order order : orders)
+		{
+			od.updateOrder(order, false);
+		}
 	}
 	
 	
@@ -476,11 +508,19 @@ public class MethodsForFrames
 		d.setBorderRegulationTime(BorderRegulationTimeField.getText());
 		d.setRating(Integer.valueOf(RatingField.getText()));
 		d.setDate(Date.valueOf(StartDateField.getText()));
+		d.setWorkPrice(Integer.valueOf(WorkPriceField.getText()));
 		d.setSumPrice(dd.getSumPrice(d));
 		try {
 			dd.updateDevice(d, true);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
+		}
+		
+		OrderDao od = new OrderDao();
+		List<Order> orders = od.getAllNotPaidWhichHasDevice(d.getId());
+		for(Order order : orders)
+		{
+			od.updateOrder(order, false);
 		}
 	}
 	
@@ -516,14 +556,28 @@ public class MethodsForFrames
 	
 	//Метод для оновлення замовлення на купівлю
 	
-	public static void updateOrder(Order o, JTextField StartDateField, JCheckBox PaidCheckBox, JCheckBox ShippedCheckBox) 
+	public static void updateOrder(Order o, JTextField StartDateField, JCheckBox ShippedCheckBox) 
 	{
 		OrderDao od = new OrderDao();
-		o.setStartDate(Date.valueOf(StartDateField.getText()));
-		o.setPaid(PaidCheckBox.isSelected());
 		o.setShipped(ShippedCheckBox.isSelected());
 		try {
 			od.updateOrder(o,true);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
+	
+	//Метод для відмічання замовлення на купівлю як оплаченого
+	
+	public static void makeOrderPaid(Order o) 
+	{
+		OrderDao od = new OrderDao();
+		o.setPaid(true);
+		String date = getCurrentDate();
+		o.setEndDate(Date.valueOf(date));
+		try {
+			od.makeOrderPaid(o,true);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
@@ -604,7 +658,7 @@ public class MethodsForFrames
 	
 	//Метод для додавання приладів до замовлення
 	
-	public static void addDevicesInOrder(int order_id, int device_id, JTextField NumberAddField)
+	public static void addDevicesInOrder(int order_id, int device_id, JTextField NumberAddField) throws SQLException
 	{
 		OrderDao od = new OrderDao();
 		OrderDevice record = new OrderDevice();
@@ -616,12 +670,14 @@ public class MethodsForFrames
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
+		Order o = od.readOrder(order_id);
+		od.updateOrder(o, false);
 	}
 	
 	
 	//Метод для видалення приладів з замовлення
 	
-	public static void deleteDevicesFromOrder(int order_id, int device_id)
+	public static void deleteDevicesFromOrder(int order_id, int device_id) throws SQLException
 	{
 		OrderDao od = new OrderDao();
 		OrderDevice record = null;
@@ -635,12 +691,14 @@ public class MethodsForFrames
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
+		Order o = od.readOrder(order_id);
+		od.updateOrder(o, false);
 	}
 	
 	
 	//Метод для редагування кількості приладів в замовленні
 	
-	public static void updateDevicesInOrder(int order_id, int device_id, JTextField NumberEditField)
+	public static void updateDevicesInOrder(int order_id, int device_id, JTextField NumberEditField) throws SQLException
 	{
 		OrderDao od = new OrderDao();
 		OrderDevice record = null;
@@ -655,6 +713,8 @@ public class MethodsForFrames
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
+		Order o = od.readOrder(order_id);
+		od.updateOrder(o, false);
 	}
 	
 	

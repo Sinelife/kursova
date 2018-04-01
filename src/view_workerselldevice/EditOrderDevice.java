@@ -55,7 +55,7 @@ public class EditOrderDevice extends JFrame {
 	 */
 	public EditOrderDevice(JFrame parent) throws SQLException 
 	{
-		orders = od.getAllFromClient(ChooseClient.id_to_choose);
+		orders = od.getAllFromClientNotPaid(ChooseClient.id_to_choose);
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -65,7 +65,6 @@ public class EditOrderDevice extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
-		InfoClient.order_information_check = 2;
 		
 		
 		JLabel lblNewLabel = new JLabel("Редагування замовлення на купівлю");
@@ -75,7 +74,7 @@ public class EditOrderDevice extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JComboBox<String> OrderComboBox = new JComboBox<String>();
-		OrderComboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		OrderComboBox.setFont(new Font("Tahoma", Font.PLAIN, 19));
 		OrderComboBox.setBounds(39, 85, 559, 34);
 		contentPane.add(OrderComboBox);
 		for(Order order : orders) 
@@ -155,7 +154,11 @@ public class EditOrderDevice extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				device_id = MethodsForFrames.getDeviceIdByDeviceName(device_name, device_id, AddComboBox, DevicesNotInOrder);
-				MethodsForFrames.addDevicesInOrder(order_id_to_edit, device_id, NumberAddField);
+				try {
+					MethodsForFrames.addDevicesInOrder(order_id_to_edit, device_id, NumberAddField);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		AddButton.setBounds(59, 396, 125, 28);
@@ -169,7 +172,11 @@ public class EditOrderDevice extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				device_id = MethodsForFrames.getDeviceIdByDeviceName(device_name, device_id, DeleteComboBox, DevicesInOrderDelete);
-				MethodsForFrames.deleteDevicesFromOrder(order_id_to_edit, device_id);
+				try {
+					MethodsForFrames.deleteDevicesFromOrder(order_id_to_edit, device_id);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		DeleteButton.setBounds(295, 398, 125, 28);
@@ -185,7 +192,11 @@ public class EditOrderDevice extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				device_id = MethodsForFrames.getDeviceIdByDeviceName(device_name, device_id, EditComboBox, DevicesInOrderEdit);
-				MethodsForFrames.updateDevicesInOrder(order_id_to_edit, device_id, NumberEditField);
+				try {
+					MethodsForFrames.updateDevicesInOrder(order_id_to_edit, device_id, NumberEditField);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		EditButton.setBounds(528, 398, 125, 28);
@@ -199,6 +210,7 @@ public class EditOrderDevice extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				order_id_to_edit = MethodsForFrames.getOrderIdByOrderName(order_name_to_edit, order_id_to_edit, OrderComboBox, orders);			
+				ClientMenu.order_information_check = 2;
 				EditOrderDevice.this.setVisible(false);
 				try {
 					new OrderInformation(EditOrderDevice.this).setVisible(true);

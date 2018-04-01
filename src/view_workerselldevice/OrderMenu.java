@@ -27,7 +27,7 @@ public class OrderMenu extends JFrame {
 	public OrderMenu() 
 	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 590, 575);
+		setBounds(100, 100, 590, 628);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -64,7 +64,7 @@ public class OrderMenu extends JFrame {
 		});
 		InfoOrderButton.setForeground(Color.DARK_GRAY);
 		InfoOrderButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		InfoOrderButton.setBounds(106, 125, 357, 43);
+		InfoOrderButton.setBounds(106, 109, 357, 43);
 		contentPane.add(InfoOrderButton);
 		
 		
@@ -79,7 +79,7 @@ public class OrderMenu extends JFrame {
 		});
 		AddOrderButton.setForeground(Color.BLACK);
 		AddOrderButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		AddOrderButton.setBounds(106, 214, 357, 43);
+		AddOrderButton.setBounds(106, 197, 357, 43);
 		contentPane.add(AddOrderButton);
 		
 		
@@ -99,7 +99,7 @@ public class OrderMenu extends JFrame {
 		});
 		EditOrderButton.setForeground(Color.BLACK);
 		EditOrderButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		EditOrderButton.setBounds(106, 304, 357, 43);
+		EditOrderButton.setBounds(106, 283, 357, 43);
 		contentPane.add(EditOrderButton);
 		
 		
@@ -118,8 +118,28 @@ public class OrderMenu extends JFrame {
 		});
 		EditOrderDeviceButton.setForeground(Color.DARK_GRAY);
 		EditOrderDeviceButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		EditOrderDeviceButton.setBounds(106, 394, 357, 43);
+		EditOrderDeviceButton.setBounds(106, 367, 357, 43);
 		contentPane.add(EditOrderDeviceButton);
+		
+		
+
+		JButton FinishButton = new JButton("Відмітити замовлення як сплачене");
+		FinishButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				OrderMenu.this.setVisible(false);
+				try {
+					new MakeOrderPaid(OrderMenu.this).setVisible(true);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		FinishButton.setForeground(Color.DARK_GRAY);
+		FinishButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		FinishButton.setBounds(106, 450, 357, 43);
+		contentPane.add(FinishButton);
 		
 		
 		
@@ -137,7 +157,7 @@ public class OrderMenu extends JFrame {
 				}
 			}
 		});
-		btnBack.setBounds(448, 485, 97, 25);
+		btnBack.setBounds(463, 543, 97, 25);
 		contentPane.add(btnBack);
 		
 	}

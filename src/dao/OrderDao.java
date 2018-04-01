@@ -33,8 +33,8 @@ public class OrderDao
 		stm.setString(2, o.getOrderName());
 		stm.setInt(3, o.getClientId());
 		stm.setDate(4, o.getStartDate());
-		stm.setBoolean(5, o.isPaid());
-		stm.setBoolean(6, o.isShipped());
+		stm.setBoolean(5, false);
+		stm.setBoolean(6, false);
 		stm.executeUpdate();
 		JOptionPane.showMessageDialog(null, "Нове замовлення на купівлю додано до бази данних!");
 	}
@@ -60,6 +60,8 @@ public class OrderDao
 			o.setStartDate(rs.getDate("startdate"));
 			o.setPaid(rs.getBoolean("paid"));
 			o.setShipped(rs.getBoolean("shipped"));
+			o.setEndDate(rs.getDate("enddate"));
+			o.setSumCost(rs.getInt("sum_cost"));
 		}
 		return o;
 	}
@@ -72,13 +74,11 @@ public class OrderDao
 	 */
 	public void updateOrder(Order o, boolean message) throws SQLException 
 	{
-		String sql = "update orders set order_name = ?, client_id = ?, startdate = ?, paid = ?, shipped = ? where order_id = " + o.getId();
+		String sql = "update orders set shipped = ?, sum_cost = ? where order_id = " + o.getId();
 		PreparedStatement stm = Main.conn.prepareStatement(sql);
-		stm.setString(1, o.getOrderName());
-		stm.setInt(2, o.getClientId());
-		stm.setDate(3, o.getStartDate());
-		stm.setBoolean(4, o.isPaid());
-		stm.setBoolean(5, o.isShipped());
+		OrderDao od = new OrderDao();
+		stm.setBoolean(1, o.isShipped());
+		stm.setInt(2, od.getAllDeviceCost(o.getId()));
 		stm.executeUpdate();
 		if(message == true)
 		{
@@ -86,6 +86,19 @@ public class OrderDao
 		}
 	}
 
+	
+	public void makeOrderPaid(Order o, boolean message) throws SQLException 
+	{
+		String sql = "update orders set paid = ?, enddate = ? where order_id = " + o.getId();
+		PreparedStatement stm = Main.conn.prepareStatement(sql);
+		stm.setBoolean(1, o.isPaid());
+		stm.setDate(2, o.getEndDate());
+		stm.executeUpdate();
+		if(message == true)
+		{
+			JOptionPane.showMessageDialog(null, "Замовлення на купівлю відмічено як оплачене!");
+		}
+	}
 	
 	
 	
@@ -115,6 +128,32 @@ public class OrderDao
 				o.setStartDate(rs.getDate("startdate"));
 				o.setPaid(rs.getBoolean("paid"));
 				o.setShipped(rs.getBoolean("shipped"));
+				o.setEndDate(rs.getDate("enddate"));
+				o.setSumCost(rs.getInt("sum_cost"));
+				list.add(o);
+			}
+		}
+		return list;
+	}
+	
+	
+	public List<Order> getAllFromClientNotPaid(int client_id) throws SQLException 
+	{
+		String sql = "SELECT * FROM orders WHERE paid = 0 and client_id = " + client_id;
+		List<Order> list = new ArrayList<Order>();
+		try (PreparedStatement stm = Main.conn.prepareStatement(sql)) 
+		{
+			ResultSet rs = stm.executeQuery();
+			while (rs.next()) {
+				Order o = new Order();
+				o.setId(rs.getInt("order_id"));
+				o.setOrderName(rs.getString("order_name"));
+				o.setClientId(rs.getInt("client_id"));
+				o.setStartDate(rs.getDate("startdate"));
+				o.setPaid(rs.getBoolean("paid"));
+				o.setShipped(rs.getBoolean("shipped"));
+				o.setEndDate(rs.getDate("enddate"));
+				o.setSumCost(rs.getInt("sum_cost"));
 				list.add(o);
 			}
 		}
@@ -137,6 +176,8 @@ public class OrderDao
 				o.setStartDate(rs.getDate("startdate"));
 				o.setPaid(rs.getBoolean("paid"));
 				o.setShipped(rs.getBoolean("shipped"));
+				o.setEndDate(rs.getDate("enddate"));
+				o.setSumCost(rs.getInt("sum_cost"));
 				list.add(o);
 			}
 		}
@@ -161,8 +202,6 @@ public class OrderDao
                 d.setRating(rs.getInt("rating"));
                 d.setDate(rs.getDate("date"));
                 d.setWorkPrice(rs.getInt("work_price"));
-                d.setComponentsPrice(rs.getInt("components_price"));
-                d.setProfitPrice(rs.getInt("profit_price"));
                 d.setSumPrice(rs.getInt("sum_price"));
                 list.add(d);
 			}
@@ -187,8 +226,6 @@ public class OrderDao
                 d.setRating(rs.getInt("rating"));
                 d.setDate(rs.getDate("date"));
                 d.setWorkPrice(rs.getInt("work_price"));
-                d.setComponentsPrice(rs.getInt("components_price"));
-                d.setProfitPrice(rs.getInt("profit_price"));
                 d.setSumPrice(rs.getInt("sum_price"));
                 list.add(d);
 			}
@@ -243,5 +280,73 @@ public class OrderDao
             od.setNumber(rs.getInt("number"));
         }
         return od;
+	}
+    
+    
+    
+    
+    public int getAllDeviceCost(int order_id) throws SQLException
+    {
+    	String sql = "select sum(device.sum_price * order_device.number) " + 
+    				"from device,order_device,orders " + 
+    				"where device.device_id = order_device.device_id " + 
+    				"and order_device.order_id = orders.order_id " + 
+    				"and orders.order_id = " + order_id;
+    	PreparedStatement stm = Main.conn.prepareStatement(sql);
+    	ResultSet rs = stm.executeQuery(sql);
+    	int result = 0;
+ 	  	while(rs.next())
+ 	  	{
+ 	  		result = rs.getInt("sum(device.sum_price * order_device.number)");
+ 	  	}
+        return result;
+    }
+    
+    
+	public List<Order> getAllNotPaidWhichHasDevice(int device_id) throws SQLException 
+	{
+		String sql = "SELECT * FROM orders WHERE paid = 0 and order_id in "
+				+ "(SELECT order_id FROM order_device WHERE device_id = " + device_id + ")";
+		List<Order> list = new ArrayList<Order>();
+		try (PreparedStatement stm = Main.conn.prepareStatement(sql)) 
+		{
+			ResultSet rs = stm.executeQuery();
+			while (rs.next()) {
+				Order o = new Order();
+				o.setId(rs.getInt("order_id"));
+				o.setOrderName(rs.getString("order_name"));
+				o.setClientId(rs.getInt("client_id"));
+				o.setStartDate(rs.getDate("startdate"));
+				o.setPaid(rs.getBoolean("paid"));
+				o.setShipped(rs.getBoolean("shipped"));
+				o.setEndDate(rs.getDate("enddate"));
+				o.setSumCost(rs.getInt("sum_cost"));
+				list.add(o);
+			}
+		}
+		return list;
+	}
+	
+	public List<Order> getAllNotPaid() throws SQLException 
+	{
+		String sql = "SELECT * FROM orders WHERE paid = 0 ";
+		List<Order> list = new ArrayList<Order>();
+		try (PreparedStatement stm = Main.conn.prepareStatement(sql)) 
+		{
+			ResultSet rs = stm.executeQuery();
+			while (rs.next()) {
+				Order o = new Order();
+				o.setId(rs.getInt("order_id"));
+				o.setOrderName(rs.getString("order_name"));
+				o.setClientId(rs.getInt("client_id"));
+				o.setStartDate(rs.getDate("startdate"));
+				o.setPaid(rs.getBoolean("paid"));
+				o.setShipped(rs.getBoolean("shipped"));
+				o.setEndDate(rs.getDate("enddate"));
+				o.setSumCost(rs.getInt("sum_cost"));
+				list.add(o);
+			}
+		}
+		return list;
 	}
 }

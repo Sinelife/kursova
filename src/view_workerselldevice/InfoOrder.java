@@ -40,7 +40,7 @@ public class InfoOrder extends JFrame
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 784, 488);
+		setBounds(100, 100, 902, 488);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -51,7 +51,7 @@ public class InfoOrder extends JFrame
 		JLabel lblNewLabel = new JLabel("Перегляд інформації про замовлення на купівлю");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		lblNewLabel.setBounds(0, 25, 766, 59);
+		lblNewLabel.setBounds(0, 25, 884, 59);
 		contentPane.add(lblNewLabel);
 		
 		JLabel OrderLabel = new JLabel("Список замовлень на купівлю");
@@ -61,7 +61,7 @@ public class InfoOrder extends JFrame
 		contentPane.add(OrderLabel);
 
 		JComboBox<String> OrderComboBox = new JComboBox<String>();
-		OrderComboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		OrderComboBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		OrderComboBox.setBounds(12, 149, 724, 34);
 		contentPane.add(OrderComboBox);
 		for(Order order : orders) 
@@ -90,6 +90,28 @@ public class InfoOrder extends JFrame
 		contentPane.add(SelectOrderButton);
 		
 		
+
+		JButton InfoButton = new JButton("Інформація");
+		InfoButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				order_id_to_look = MethodsForFrames.getOrderIdByOrderName(order_name_to_look, order_id_to_look, OrderComboBox, orders);
+				ClientMenu.order_information_check = 3;
+				InfoOrder.this.setVisible(false);
+				try {
+					new OrderInformation(InfoOrder.this).setVisible(true);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		InfoButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		InfoButton.setBounds(750, 149, 122, 34);
+		contentPane.add(InfoButton);
+		
+		
+		
 		
 		JButton btnBack = new JButton("BACK");
 		btnBack.addActionListener(new ActionListener() {
@@ -100,7 +122,7 @@ public class InfoOrder extends JFrame
 				InfoOrder.this.dispose();
 			}
 		});
-		btnBack.setBounds(639, 396, 97, 25);
+		btnBack.setBounds(775, 403, 97, 25);
 		contentPane.add(btnBack);
 	}
 

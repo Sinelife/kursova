@@ -1,5 +1,6 @@
 package view_workerselldevice;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,11 +8,13 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import dao.OrderDao;
@@ -19,11 +22,7 @@ import domain.Order;
 import main.MethodsForFrames;
 import view.AuthorisationMenu;
 
-import javax.swing.JCheckBox;
-import javax.swing.SwingConstants;
-import java.awt.Color;
-
-public class EditOrder extends JFrame {
+public class MakeOrderPaid extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField StartDateField;
@@ -33,17 +32,17 @@ public class EditOrder extends JFrame {
 	public static String order_name_to_edit;
 	
 	Order o;
-	
+
 	/**
 	 * Create the frame.
 	 * @throws SQLException 
 	 */
-	public EditOrder(JFrame parent) throws SQLException 
+	public MakeOrderPaid(JFrame parent) throws SQLException 
 	{
 		OrderDao od = new OrderDao();
 		List<Order> orders = od.getAllFromClientNotPaid(ChooseClient.id_to_choose);
 		
-		
+	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 759, 431);
 		contentPane = new JPanel();
@@ -53,7 +52,7 @@ public class EditOrder extends JFrame {
 		AuthorisationMenu.setColorOfFrame(contentPane, AuthorisationMenu.user_role);
 	
 		
-		JLabel lblNewLabel = new JLabel("Редагування замовлення на купівлю");
+		JLabel lblNewLabel = new JLabel("Відмічання замовлення як оплаченого");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		lblNewLabel.setBounds(0, 13, 741, 59);
@@ -84,6 +83,7 @@ public class EditOrder extends JFrame {
 		StartDateField.setColumns(10);
 		
 		ShippedCheckBox = new JCheckBox();
+		ShippedCheckBox.setEnabled(false);
 		ShippedCheckBox.setBounds(247, 254, 32, 25);
 		contentPane.add(ShippedCheckBox);
 		
@@ -116,15 +116,14 @@ public class EditOrder extends JFrame {
 		contentPane.add(SelectButton);
 		
 		
-		
-		JButton button = new JButton("РЕДАГУВАТИ");
+		JButton button = new JButton("ОПЛАЧЕНЕ");
 		button.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				MethodsForFrames.updateOrder(o, StartDateField, ShippedCheckBox);
-				EditOrder.this.setVisible(false);
-				EditOrder.this.dispose();
+				MethodsForFrames.makeOrderPaid(o);
+				MakeOrderPaid.this.setVisible(false);
+				MakeOrderPaid.this.dispose();
 				new OrderMenu().setVisible(true);
 			}
 		});
@@ -139,11 +138,12 @@ public class EditOrder extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (parent != null)
 					parent.setVisible(true);
-				EditOrder.this.setVisible(false);
-				EditOrder.this.dispose();
+				MakeOrderPaid.this.setVisible(false);
+				MakeOrderPaid.this.dispose();
 			}
 		});
 		btnBack.setBounds(588, 333, 97, 25);
 		contentPane.add(btnBack);
 	}
+
 }

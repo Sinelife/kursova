@@ -162,6 +162,9 @@ public class ProviderDao
 				d.setProviderId(rs.getInt("provider_id"));
 				d.setStartDate(rs.getDate("startdate"));
 				d.setPaid(rs.getBoolean("paid"));
+				d.setShipped(rs.getBoolean("shipped"));
+				d.setEndDate(rs.getDate("enddate"));
+				d.setSumCost(rs.getInt("sum_cost"));
                 list.add(d);
             }
         }

@@ -130,9 +130,7 @@ public class ClientDao
 	                d.setBorderRegulationTime(rs.getString("border_regulation_time"));
 	                d.setRating(rs.getInt("rating"));
 	                d.setDate(rs.getDate("date"));
-	                d.setWorkPrice(rs.getInt("work_price"));
-	                d.setComponentsPrice(rs.getInt("components_price"));
-	                d.setProfitPrice(rs.getInt("profit_price"));
+	                d.setWorkPrice(rs.getInt("work_price"));;
 	                d.setSumPrice(rs.getInt("sum_price"));
 	                list.add(d);
 	            }
@@ -156,6 +154,9 @@ public class ClientDao
 					o.setClientId(rs.getInt("client_id"));
 					o.setStartDate(rs.getDate("startdate"));
 					o.setPaid(rs.getBoolean("paid"));
+					o.setShipped(rs.getBoolean("shipped"));
+					o.setEndDate(rs.getDate("enddate"));
+					o.setSumCost(rs.getInt("sum_cost"));
 	                list.add(o);
 	            }
 	        }
