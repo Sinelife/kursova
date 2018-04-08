@@ -30,7 +30,6 @@ public class EditDeliveryComponent extends JFrame {
 	private JPanel contentPane;
 
 	public static int delivery_id_to_edit;
-	public static String delivery_name_to_edit;
 
 	List<Delivery> deliveries;
 	private static List<Component> ComponentsInDeliveryEdit = null;
@@ -45,7 +44,6 @@ public class EditDeliveryComponent extends JFrame {
 	static JComboBox<String> EditComboBox = new JComboBox<String>();
 	
 	private int component_id;
-	private String component_name;
 	
 	static DeliveryDao dd = new DeliveryDao();
 	
@@ -116,7 +114,7 @@ public class EditDeliveryComponent extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				delivery_id_to_edit = MethodsForFrames.getDeliveryIdByDeliveryName(delivery_name_to_edit, delivery_id_to_edit, DeliveryComboBox, deliveries);		
+				delivery_id_to_edit = MethodsForFrames.getDeliveryIdByDeliveryName(DeliveryComboBox, deliveries);		
 				outputAllComponentsComboBoxes();
 			}
 		});
@@ -153,7 +151,7 @@ public class EditDeliveryComponent extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				component_id = MethodsForFrames.getComponentIdByComponentName(component_name, component_id, AddComboBox, ComponentsNotInDelivery);
+				component_id = MethodsForFrames.getComponentIdByComponentName(AddComboBox, ComponentsNotInDelivery);
 				try {
 					MethodsForFrames.addComponentsInDelivery(delivery_id_to_edit, component_id, NumberAddField);
 				} catch (SQLException e1) {
@@ -171,7 +169,7 @@ public class EditDeliveryComponent extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				component_id = MethodsForFrames.getComponentIdByComponentName(component_name, component_id, DeleteComboBox, ComponentsInDeliveryDelete);
+				component_id = MethodsForFrames.getComponentIdByComponentName(DeleteComboBox, ComponentsInDeliveryDelete);
 				try {
 					MethodsForFrames.deleteComponentsFromDelivery(delivery_id_to_edit, component_id);
 				} catch (SQLException e1) {
@@ -189,7 +187,7 @@ public class EditDeliveryComponent extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				component_id = MethodsForFrames.getComponentIdByComponentName(component_name, component_id, EditComboBox, ComponentsInDeliveryEdit);
+				component_id = MethodsForFrames.getComponentIdByComponentName(EditComboBox, ComponentsInDeliveryEdit);
 				try {
 					MethodsForFrames.updateComponentsInDelivery(delivery_id_to_edit, component_id, NumberEditField);
 				} catch (SQLException e1) {
@@ -207,7 +205,7 @@ public class EditDeliveryComponent extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				delivery_id_to_edit = MethodsForFrames.getDeliveryIdByDeliveryName(delivery_name_to_edit, delivery_id_to_edit, DeliveryComboBox, deliveries);			
+				delivery_id_to_edit = MethodsForFrames.getDeliveryIdByDeliveryName(DeliveryComboBox, deliveries);			
 				ProviderMenu.delivery_information_check = 2;
 				EditDeliveryComponent.this.setVisible(false);
 				try {
@@ -283,9 +281,8 @@ public class EditDeliveryComponent extends JFrame {
 		public void itemStateChanged(ItemEvent evt) 
 		{
 			if (evt.getStateChange() == ItemEvent.SELECTED) {
-				String component_name = String.valueOf(EditComboBox.getSelectedItem());
 				int component_id = 0;
-				component_id = MethodsForFrames.getComponentIdByComponentName(component_name, component_id, EditComboBox, ComponentsInDeliveryEdit);
+				component_id = MethodsForFrames.getComponentIdByComponentName(EditComboBox, ComponentsInDeliveryEdit);
 
 				DeliveryComponent record = null;
 				try {

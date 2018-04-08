@@ -71,7 +71,7 @@ public class InfoComponent extends JFrame {
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				id_to_look = MethodsForFrames.getComponentIdByComponentName(name_to_look, id_to_look, ComponentComboBox, components);
+				id_to_look = MethodsForFrames.getComponentIdByComponentName(ComponentComboBox, components);
 				
 				InfoComponent.this.setVisible(false);
 				try {

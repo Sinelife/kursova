@@ -31,7 +31,6 @@ public class EditDelivery extends JFrame {
 	private JCheckBox ShippedCheckBox;
 
 	public static int delivery_id_to_edit;
-	public static String delivery_name_to_edit;
 	
 	Delivery d;
 	
@@ -95,7 +94,7 @@ public class EditDelivery extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				delivery_id_to_edit = MethodsForFrames.getDeliveryIdByDeliveryName(delivery_name_to_edit, delivery_id_to_edit, DeliveryComboBox, deliveries);
+				delivery_id_to_edit = MethodsForFrames.getDeliveryIdByDeliveryName(DeliveryComboBox, deliveries);
 
 				try {
 					d = dd.readDelivery(delivery_id_to_edit);

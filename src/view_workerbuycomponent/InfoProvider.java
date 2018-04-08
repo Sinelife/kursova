@@ -25,9 +25,7 @@ public class InfoProvider extends JFrame {
 
 	private JPanel contentPane;
 	public static int provider_id_to_look;
-	public static String provider_name_to_look;
 	public static int delivery_id_to_look;
-	public static String delivery_name_to_look;
 
 	public List<Delivery> DeliveriesInProvider;
 	public List<DeliveryComponent> ComponentsInfoInDelivery;
@@ -101,7 +99,7 @@ public class InfoProvider extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				provider_id_to_look = MethodsForFrames.getProviderIdByProviderName(provider_name_to_look, provider_id_to_look, ProviderComboBox, providers);
+				provider_id_to_look = MethodsForFrames.getProviderIdByProviderName(ProviderComboBox, providers);
 				InfoProvider.this.setVisible(false);
 				try {
 					new ProviderInformation(InfoProvider.this).setVisible(true);
@@ -122,7 +120,7 @@ public class InfoProvider extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				provider_id_to_look = MethodsForFrames.getProviderIdByProviderName(provider_name_to_look, provider_id_to_look, ProviderComboBox, providers);
+				provider_id_to_look = MethodsForFrames.getProviderIdByProviderName(ProviderComboBox, providers);
 				DeliveriesInProvider = MethodsForFrames.getAllDeliveriesInProvider(provider_id_to_look, DeliveriesInProvider, DeliveryInProviderComboBox);
 
 			}
@@ -138,7 +136,7 @@ public class InfoProvider extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				delivery_id_to_look = MethodsForFrames.getDeliveryIdByDeliveryName(delivery_name_to_look, delivery_id_to_look, DeliveryInProviderComboBox, DeliveriesInProvider);
+				delivery_id_to_look = MethodsForFrames.getDeliveryIdByDeliveryName(DeliveryInProviderComboBox, DeliveriesInProvider);
 				MethodsForFrames.getComponentInfoFromDelivery(delivery_id_to_look, ComponentsInfoInDelivery, ComponentInDeliveryComboBox);
 			}
 		});
@@ -152,7 +150,7 @@ public class InfoProvider extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				delivery_id_to_look = MethodsForFrames.getDeliveryIdByDeliveryName(delivery_name_to_look, delivery_id_to_look, DeliveryInProviderComboBox, DeliveriesInProvider);
+				delivery_id_to_look = MethodsForFrames.getDeliveryIdByDeliveryName(DeliveryInProviderComboBox, DeliveriesInProvider);
 				ProviderMenu.delivery_information_check = 1;
 				InfoProvider.this.setVisible(false);
 				try {

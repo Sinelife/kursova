@@ -24,10 +24,9 @@ import javax.swing.SwingConstants;
 public class InfoClient extends JFrame {
 
 	private JPanel contentPane;
+	
 	public static int client_id_to_look;
-	public static String client_name_to_look;
 	public static int order_id_to_look;
-	public static String order_name_to_look;
 
 	public List<Order> OrdersInClient;
 	public List<OrderDevice> DevicesInfoInOrder;
@@ -107,7 +106,7 @@ public class InfoClient extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				client_id_to_look = MethodsForFrames.getClientIdByClientName(client_name_to_look, client_id_to_look, ClientComboBox, clients);
+				client_id_to_look = MethodsForFrames.getClientIdByClientName(ClientComboBox, clients);
 				InfoClient.this.setVisible(false);
 				try {
 					new ClientInformation(InfoClient.this).setVisible(true);
@@ -126,7 +125,7 @@ public class InfoClient extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				client_id_to_look = MethodsForFrames.getClientIdByClientName(client_name_to_look, client_id_to_look, ClientComboBox, clients);
+				client_id_to_look = MethodsForFrames.getClientIdByClientName(ClientComboBox, clients);
 				OrdersInClient = MethodsForFrames.getAllOrdersInClient(client_id_to_look, OrdersInClient, OrderInClientComboBox);
 			}
 		});
@@ -142,7 +141,7 @@ public class InfoClient extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				order_id_to_look = MethodsForFrames.getOrderIdByOrderName(order_name_to_look, order_id_to_look, OrderInClientComboBox, OrdersInClient);
+				order_id_to_look = MethodsForFrames.getOrderIdByOrderName(OrderInClientComboBox, OrdersInClient);
 				MethodsForFrames.getDeviceInfoFromOrder(order_id_to_look, DevicesInfoInOrder, DeviceInOrderComboBox);
 			}
 		});
@@ -156,7 +155,7 @@ public class InfoClient extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				order_id_to_look = MethodsForFrames.getOrderIdByOrderName(order_name_to_look, order_id_to_look, OrderInClientComboBox, OrdersInClient);
+				order_id_to_look = MethodsForFrames.getOrderIdByOrderName(OrderInClientComboBox, OrdersInClient);
 				ClientMenu.order_information_check = 1;
 				InfoClient.this.setVisible(false);
 				try {

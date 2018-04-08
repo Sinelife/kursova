@@ -24,7 +24,7 @@ import javax.swing.SwingConstants;
 public class EditDevice extends JFrame {
 
 	private JPanel contentPane;
-	public static String name_to_edit;
+
 	public static int id_to_edit;
 
 
@@ -67,7 +67,7 @@ public class EditDevice extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				id_to_edit = MethodsForFrames.getDeviceIdByDeviceName(name_to_edit, id_to_edit, DeviceComboBox, devices);
+				id_to_edit = MethodsForFrames.getDeviceIdByDeviceName(DeviceComboBox, devices);
 				
 				EditDevice.this.setVisible(false);
 				try {

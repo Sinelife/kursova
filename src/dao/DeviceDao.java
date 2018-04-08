@@ -412,7 +412,7 @@ public class DeviceDao
     
     
     
-    public List<Device> getAllDeviceWhichHasAllComponentsWhichHasNotChosenDevice(int device_id) throws SQLException 
+    public List<Device> getAllDeviceWhichNotHasAnyOfChosenDevice(int device_id) throws SQLException 
     {
     	String sql = "select * from device as d where d.device_id in " + 
     			"(select cd.device_id from component_device as cd where not exists " + 

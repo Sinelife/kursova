@@ -23,7 +23,7 @@ import javax.swing.SwingConstants;
 public class EditProvider extends JFrame {
 
 	private JPanel contentPane;
-	public static String name_to_edit;
+
 	public static int id_to_edit;
 	
 
@@ -66,8 +66,7 @@ public class EditProvider extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				id_to_edit = MethodsForFrames.getProviderIdByProviderName(name_to_edit, id_to_edit, ProviderComboBox, providers);
-
+				id_to_edit = MethodsForFrames.getProviderIdByProviderName(ProviderComboBox, providers);
 				EditProvider.this.setVisible(false);
 				try {
 					new EditProviderFrame(EditProvider.this).setVisible(true);

@@ -29,7 +29,6 @@ public class EditSpecification extends JFrame {
 
 	private JPanel contentPane;
 	public static int id_to_choose;
-	public static String name_to_choose;
 	
 	private JTextField NumberAddField;
 	private JTextField NumberEditField;
@@ -100,7 +99,7 @@ public class EditSpecification extends JFrame {
 		SelectButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
-				id_to_choose = MethodsForFrames.getDeviceIdByDeviceName(name_to_choose, id_to_choose, DeviceComboBox, devices);
+				id_to_choose = MethodsForFrames.getDeviceIdByDeviceName(DeviceComboBox, devices);
 				FillAdd_Edit_DeleteComboBoxesFromLists();
 			}
 		});
@@ -115,7 +114,7 @@ public class EditSpecification extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				id_to_choose = MethodsForFrames.getDeviceIdByDeviceName(name_to_choose, id_to_choose, DeviceComboBox, devices);
+				id_to_choose = MethodsForFrames.getDeviceIdByDeviceName(DeviceComboBox, devices);
 				
 				EditSpecification.this.setVisible(false);
 				try {
@@ -178,7 +177,7 @@ public class EditSpecification extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				c_id = MethodsForFrames.getComponentIdByComponentName(c_name, c_id, DeleteComponentComboBox, components_for_delete);
+				c_id = MethodsForFrames.getComponentIdByComponentName(DeleteComponentComboBox, components_for_delete);
 				try {
 					MethodsForFrames.deleteComponentsFromDevice(id_to_choose, c_id);
 				} catch (SQLException e1) {
@@ -197,7 +196,7 @@ public class EditSpecification extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				c_id = MethodsForFrames.getComponentIdByComponentName(c_name, c_id, AddComponentComboBox, components_for_add);
+				c_id = MethodsForFrames.getComponentIdByComponentName(AddComponentComboBox, components_for_add);
 				try {
 					MethodsForFrames.addComponentsToDevice(id_to_choose, c_id, NumberAddField);
 				} catch (SQLException e1) {
@@ -216,7 +215,7 @@ public class EditSpecification extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				c_id = MethodsForFrames.getComponentIdByComponentName(c_name, c_id, EditComponentComboBox, components_for_edit);
+				c_id = MethodsForFrames.getComponentIdByComponentName(EditComponentComboBox, components_for_edit);
 				try {
 					MethodsForFrames.updateComponentsInDevice(id_to_choose, c_id, NumberEditField);
 				} catch (SQLException e1) {
@@ -295,7 +294,7 @@ public class EditSpecification extends JFrame {
 				String c_name = String.valueOf(EditComponentComboBox.getSelectedItem());
 				int c_id = 0;
 				
-				c_id = MethodsForFrames.getComponentIdByComponentName(c_name, c_id, EditComponentComboBox, components_for_edit);
+				c_id = MethodsForFrames.getComponentIdByComponentName(EditComponentComboBox, components_for_edit);
 				
 				ComponentDevice record = null;
 				try {

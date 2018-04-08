@@ -30,9 +30,7 @@ public class ConstructDepartmentDirectorMenu extends JFrame
 	private JPanel contentPane;
 	
 	public static int device_id_to_look;
-	public static String device_name_to_look;
 	public static int component_id_to_look;
-	public static String component_name_to_look;
 
 	private static List<Component> componentsInDevice;
 	private static List<Device> devices;
@@ -107,7 +105,7 @@ public class ConstructDepartmentDirectorMenu extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				device_id_to_look = MethodsForFrames.getDeviceIdByDeviceName(device_name_to_look, device_id_to_look, DeviceComboBox, devices);
+				device_id_to_look = MethodsForFrames.getDeviceIdByDeviceName(DeviceComboBox, devices);
 				
 				ComponentsInDeviceComboBox.removeAllItems();
 				try {
@@ -159,8 +157,7 @@ public class ConstructDepartmentDirectorMenu extends JFrame
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				device_id_to_look = MethodsForFrames.getDeviceIdByDeviceName(device_name_to_look, device_id_to_look, DeviceComboBox, devices);
-				
+				device_id_to_look = MethodsForFrames.getDeviceIdByDeviceName(DeviceComboBox, devices);		
 				ConstructDepartmentDirectorMenu.this.setVisible(false);
 				try {
 					new DeviceInformation(ConstructDepartmentDirectorMenu.this).setVisible(true);
@@ -243,7 +240,7 @@ public class ConstructDepartmentDirectorMenu extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				component_id_to_look = MethodsForFrames.getComponentIdByComponentName(component_name_to_look, component_id_to_look, ComponentsInDeviceComboBox, componentsInDevice);
+				component_id_to_look = MethodsForFrames.getComponentIdByComponentName(ComponentsInDeviceComboBox, componentsInDevice);
 				
 				ConstructDepartmentDirectorMenu.this.setVisible(false);
 				try {
@@ -265,7 +262,7 @@ public class ConstructDepartmentDirectorMenu extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				component_id_to_look = MethodsForFrames.getComponentIdByComponentName(component_name_to_look, component_id_to_look, ComponentsInDeviceComboBox, componentsInDevice);
+				component_id_to_look = MethodsForFrames.getComponentIdByComponentName(ComponentsInDeviceComboBox, componentsInDevice);
 				
 				try {
 					componentNumber = dd.getComponentNumberInDevice(device_id_to_look,component_id_to_look);

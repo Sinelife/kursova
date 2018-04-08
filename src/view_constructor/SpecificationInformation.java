@@ -25,7 +25,6 @@ public class SpecificationInformation extends JFrame {
 
 	private JPanel contentPane;
 	public static int id_to_choose;
-	public String name_to_choose;
 
 	List<Component> components = null;
 	
@@ -79,7 +78,7 @@ public class SpecificationInformation extends JFrame {
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{	
-				id_to_choose = MethodsForFrames.getDeviceIdByDeviceName(name_to_choose, id_to_choose, DeviceComboBox, devices);
+				id_to_choose = MethodsForFrames.getDeviceIdByDeviceName(DeviceComboBox, devices);
 				MethodsForFrames.getSpecificationInfo(id_to_choose, components, ComponentInfoComboBox);
 			}
 		});
@@ -94,7 +93,7 @@ public class SpecificationInformation extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				id_to_choose = MethodsForFrames.getDeviceIdByDeviceName(name_to_choose, id_to_choose, DeviceComboBox, devices);
+				id_to_choose = MethodsForFrames.getDeviceIdByDeviceName(DeviceComboBox, devices);
 				SpecificationInformation.this.setVisible(false);
 				try {
 					new DeviceInformation(SpecificationInformation.this).setVisible(true);

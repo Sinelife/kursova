@@ -22,9 +22,9 @@ import javax.swing.SwingConstants;
 public class ChooseProvider extends JFrame {
 
 	private JPanel contentPane;
-	public static String name_to_choose;
+	
 	public static int id_to_choose;
-
+	public static String name_to_choose;
 
 	/**
 	 * Create the frame.
@@ -68,9 +68,14 @@ public class ChooseProvider extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				id_to_choose = MethodsForFrames.getProviderIdByProviderName(name_to_choose, id_to_choose, ProviderComboBox, providers);
-				
-				name_to_choose = ProviderComboBox.getSelectedItem().toString();
+				id_to_choose = MethodsForFrames.getProviderIdByProviderName(ProviderComboBox, providers);
+				Provider p = new Provider();
+				try {
+					p = pd.readProvider(ChooseProvider.id_to_choose);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				name_to_choose = p.getName();
 				ChooseProvider.this.setVisible(false);
 				new DeliveryMenu().setVisible(true);
 				

@@ -22,7 +22,7 @@ import javax.swing.SwingConstants;
 public class DeleteUser extends JFrame {
 
 	private JPanel contentPane;
-	public static String surname_name_to_delete;
+
 	public static int id_to_delete;
 	
 	UserDao ud;
@@ -55,7 +55,7 @@ public class DeleteUser extends JFrame {
 		lblNewLabel.setBounds(0, 25, 628, 59);
 		contentPane.add(lblNewLabel);
 		
-		JComboBox UserComboBox = new JComboBox();
+		JComboBox<String> UserComboBox = new JComboBox<String>();
 		UserComboBox.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		UserComboBox.setBounds(40, 121, 427, 34);
 		contentPane.add(UserComboBox);
@@ -79,18 +79,16 @@ public class DeleteUser extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				id_to_delete = MethodsForFrames.getUsertIdByUserSurnameAndName(surname_name_to_delete, id_to_delete, UserComboBox, users);
+				id_to_delete = MethodsForFrames.getUsertIdByUserSurnameAndName(UserComboBox, users);
 
 				try {
 					u = ud.readUser(id_to_delete);
 				} catch (SQLException e2) {
-					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				}
 				try {
 					ud.delete(u);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 
@@ -111,13 +109,12 @@ public class DeleteUser extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				id_to_delete = MethodsForFrames.getUsertIdByUserSurnameAndName(surname_name_to_delete, id_to_delete, UserComboBox, users);
+				id_to_delete = MethodsForFrames.getUsertIdByUserSurnameAndName(UserComboBox, users);
 
 				DeleteUser.this.setVisible(false);
 				try {
 					new UserInformation(DeleteUser.this).setVisible(true);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}

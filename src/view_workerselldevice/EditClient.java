@@ -24,7 +24,7 @@ public class EditClient extends JFrame
 {
 
 	private JPanel contentPane;
-	public static String name_to_edit;
+
 	public static int id_to_edit;
 	
 
@@ -68,7 +68,7 @@ public class EditClient extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				id_to_edit = MethodsForFrames.getClientIdByClientName(name_to_edit, id_to_edit, ClientComboBox, clients);
+				id_to_edit = MethodsForFrames.getClientIdByClientName(ClientComboBox, clients);
 				
 				EditClient.this.setVisible(false);
 				try {

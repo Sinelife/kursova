@@ -25,7 +25,7 @@ public class InfoDevice extends JFrame {
 
 	private JPanel contentPane;
 	public static int id_to_look;
-	public static String name_to_look;
+
 	public static int id_to_find;
 	public static String voltage_to_find;
 	public static String name_to_find;
@@ -76,7 +76,7 @@ public class InfoDevice extends JFrame {
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				id_to_look = MethodsForFrames.getDeviceIdByDeviceName(name_to_look, id_to_look, DeviceComboBox, devices);
+				id_to_look = MethodsForFrames.getDeviceIdByDeviceName(DeviceComboBox, devices);
 				InfoDevice.this.setVisible(false);
 				try {
 					new DeviceInformation(InfoDevice.this).setVisible(true);

@@ -39,9 +39,7 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 	private JTextField ShippedMoneyField;
 
 	public static int provider_id_to_look;
-	public static String provider_name_to_look;
 	public static int delivery_id_to_look;
-	public static String delivery_name_to_look;
 	
 	private static int deliveryNumber;
 	private static int paidDeliveryNumber;
@@ -112,13 +110,12 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				provider_id_to_look = MethodsForFrames.getProviderIdByProviderName(provider_name_to_look, provider_id_to_look, ProviderComboBox,providers);
+				provider_id_to_look = MethodsForFrames.getProviderIdByProviderName(ProviderComboBox,providers);
 				
 				DeliveryInProviderComboBox.removeAllItems();
 				try {
 					deliveriesInProvider = dd.getAllFromProvider(provider_id_to_look);
 				} catch (SQLException e2) {
-					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				}
 				for(Delivery delivery : deliveriesInProvider) 
@@ -131,7 +128,6 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 				try {
 					deliveryNumber = pd.getDeliveryNumberOfProvider(provider_id_to_look);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				DeliveryNumberField.setText(String.valueOf(deliveryNumber));
@@ -139,7 +135,6 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 				try {
 					paidDeliveryNumber = pd.getPaidDeliveryNumberOfProvider(provider_id_to_look);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				PaidDeliveryNumberField.setText(String.valueOf(paidDeliveryNumber));
@@ -147,7 +142,6 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 				try {
 					shippedDeliveryNumber = pd.getShippedDeliveryNumberOfProvider(provider_id_to_look);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				ShippedDeliveryNumberField.setText(String.valueOf(shippedDeliveryNumber));
@@ -157,7 +151,6 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 				try {
 					allMoney = pd.getAllMoneyOfProvider(provider_id_to_look);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				AllMoneyField.setText(String.valueOf(allMoney));
@@ -165,7 +158,6 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 				try {
 					paidMoney = pd.getPaidMoneyOfProvider(provider_id_to_look);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				PaidMoneyField.setText(String.valueOf(paidMoney));
@@ -173,7 +165,6 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 				try {
 					shippedMoney = pd.getShippedMoneyOfProvider(provider_id_to_look);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				ShippedMoneyField.setText(String.valueOf(shippedMoney));
@@ -183,7 +174,6 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 				try {
 					componentNumber = pd.getComponentNumberOfProvider(provider_id_to_look);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				ComponentNumberField.setText(String.valueOf(componentNumber));
@@ -191,7 +181,6 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 				try {
 					paidComponentNumber = pd.getPaidComponentNumberOfProvider(provider_id_to_look);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				PaidComponentNumberField.setText(String.valueOf(paidComponentNumber));
@@ -199,7 +188,6 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 				try {
 					shippedComponentNumber = pd.getShippedComponentNumberOfProvider(provider_id_to_look);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				ShippedComponentNumberField.setText(String.valueOf(shippedComponentNumber));
@@ -216,13 +204,12 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				provider_id_to_look = MethodsForFrames.getProviderIdByProviderName(provider_name_to_look, provider_id_to_look, ProviderComboBox,providers);
+				provider_id_to_look = MethodsForFrames.getProviderIdByProviderName(ProviderComboBox,providers);
 				
 				DeliveryDepartmentDirectorMenu.this.setVisible(false);
 				try {
 					new ProviderInformation(DeliveryDepartmentDirectorMenu.this).setVisible(true);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -243,7 +230,6 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 				try {
 					deliveriesInProvider = dd.getAll();
 				} catch (SQLException e2) {
-					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				}
 				for(Delivery delivery : deliveriesInProvider) 
@@ -255,7 +241,6 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 				try {
 					deliveryNumber = pd.getDeliveryNumber();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				DeliveryNumberField.setText(String.valueOf(deliveryNumber));
@@ -263,7 +248,6 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 				try {
 					paidDeliveryNumber = pd.getPaidDeliveryNumber();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				PaidDeliveryNumberField.setText(String.valueOf(paidDeliveryNumber));
@@ -271,7 +255,6 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 				try {
 					shippedDeliveryNumber = pd.getShippedDeliveryNumber();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				ShippedDeliveryNumberField.setText(String.valueOf(shippedDeliveryNumber));
@@ -281,7 +264,6 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 				try {
 					allMoney = pd.getAllMoney();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				AllMoneyField.setText(String.valueOf(allMoney));
@@ -289,7 +271,6 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 				try {
 					paidMoney = pd.getPaidMoney();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				PaidMoneyField.setText(String.valueOf(paidMoney));
@@ -297,7 +278,6 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 				try {
 					shippedMoney = pd.getShippedMoney();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				ShippedMoneyField.setText(String.valueOf(shippedMoney));
@@ -307,7 +287,6 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 				try {
 					componentNumber = pd.getComponentNumber();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				ComponentNumberField.setText(String.valueOf(componentNumber));
@@ -315,7 +294,6 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 				try {
 					paidComponentNumber = pd.getPaidComponentNumber();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				PaidComponentNumberField.setText(String.valueOf(paidComponentNumber));
@@ -323,7 +301,6 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 				try {
 					shippedComponentNumber = pd.getShippedComponentNumber();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				ShippedComponentNumberField.setText(String.valueOf(shippedComponentNumber));
@@ -442,13 +419,11 @@ public class DeliveryDepartmentDirectorMenu extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				delivery_id_to_look = MethodsForFrames.getDeliveryIdByDeliveryName(delivery_name_to_look, delivery_id_to_look, DeliveryInProviderComboBox, deliveriesInProvider);;
-				
+				delivery_id_to_look = MethodsForFrames.getDeliveryIdByDeliveryName(DeliveryInProviderComboBox, deliveriesInProvider);	
 				DeliveryDepartmentDirectorMenu.this.setVisible(false);
 				try {
 					new DeliveryInformation(DeliveryDepartmentDirectorMenu.this).setVisible(true);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}

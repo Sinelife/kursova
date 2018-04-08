@@ -25,7 +25,6 @@ public class InfoOrder extends JFrame
 
 	private JPanel contentPane;
 	public static int order_id_to_look;
-	public static String order_name_to_look;
 
 	public List<OrderDevice> DevicesInfoInOrder;
 
@@ -82,7 +81,7 @@ public class InfoOrder extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				order_id_to_look = MethodsForFrames.getOrderIdByOrderName(order_name_to_look, order_id_to_look, OrderComboBox, orders);
+				order_id_to_look = MethodsForFrames.getOrderIdByOrderName(OrderComboBox, orders);
 				MethodsForFrames.getDeviceInfoFromOrder(order_id_to_look, DevicesInfoInOrder, DeviceInOrderComboBox);
 			}
 		});
@@ -96,7 +95,7 @@ public class InfoOrder extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				order_id_to_look = MethodsForFrames.getOrderIdByOrderName(order_name_to_look, order_id_to_look, OrderComboBox, orders);
+				order_id_to_look = MethodsForFrames.getOrderIdByOrderName(OrderComboBox, orders);
 				ClientMenu.order_information_check = 3;
 				InfoOrder.this.setVisible(false);
 				try {

@@ -30,7 +30,6 @@ public class EditOrderDevice extends JFrame {
 	private JPanel contentPane;
 
 	public static int order_id_to_edit;
-	public static String order_name_to_edit;
 
 	List<Order> orders;
 	private static List<Device> DevicesInOrderEdit = null;
@@ -44,7 +43,6 @@ public class EditOrderDevice extends JFrame {
 	static JComboBox<String> DeleteComboBox = new JComboBox<String>();
 	static JComboBox<String> EditComboBox = new JComboBox<String>();
 	
-	public static String device_name;
 	public static int device_id;
 	
 	static OrderDao od = new OrderDao();
@@ -116,7 +114,7 @@ public class EditOrderDevice extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				order_id_to_edit = MethodsForFrames.getOrderIdByOrderName(order_name_to_edit, order_id_to_edit, OrderComboBox, orders);
+				order_id_to_edit = MethodsForFrames.getOrderIdByOrderName(OrderComboBox, orders);
 				outputAllDeviceComboBoxes();
 			}
 		});
@@ -153,7 +151,7 @@ public class EditOrderDevice extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				device_id = MethodsForFrames.getDeviceIdByDeviceName(device_name, device_id, AddComboBox, DevicesNotInOrder);
+				device_id = MethodsForFrames.getDeviceIdByDeviceName(AddComboBox, DevicesNotInOrder);
 				try {
 					MethodsForFrames.addDevicesInOrder(order_id_to_edit, device_id, NumberAddField);
 				} catch (SQLException e1) {
@@ -171,7 +169,7 @@ public class EditOrderDevice extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				device_id = MethodsForFrames.getDeviceIdByDeviceName(device_name, device_id, DeleteComboBox, DevicesInOrderDelete);
+				device_id = MethodsForFrames.getDeviceIdByDeviceName(DeleteComboBox, DevicesInOrderDelete);
 				try {
 					MethodsForFrames.deleteDevicesFromOrder(order_id_to_edit, device_id);
 				} catch (SQLException e1) {
@@ -191,7 +189,7 @@ public class EditOrderDevice extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				device_id = MethodsForFrames.getDeviceIdByDeviceName(device_name, device_id, EditComboBox, DevicesInOrderEdit);
+				device_id = MethodsForFrames.getDeviceIdByDeviceName(EditComboBox, DevicesInOrderEdit);
 				try {
 					MethodsForFrames.updateDevicesInOrder(order_id_to_edit, device_id, NumberEditField);
 				} catch (SQLException e1) {
@@ -209,7 +207,7 @@ public class EditOrderDevice extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				order_id_to_edit = MethodsForFrames.getOrderIdByOrderName(order_name_to_edit, order_id_to_edit, OrderComboBox, orders);			
+				order_id_to_edit = MethodsForFrames.getOrderIdByOrderName(OrderComboBox, orders);			
 				ClientMenu.order_information_check = 2;
 				EditOrderDevice.this.setVisible(false);
 				try {
@@ -288,9 +286,8 @@ public class EditOrderDevice extends JFrame {
 		{
 			if (evt.getStateChange() == ItemEvent.SELECTED) 
 			{
-				String device_name = String.valueOf(EditComboBox.getSelectedItem());
 				int device_id = 0;
-				device_id = MethodsForFrames.getDeviceIdByDeviceName(device_name, device_id, EditComboBox, DevicesInOrderEdit);
+				device_id = MethodsForFrames.getDeviceIdByDeviceName(EditComboBox, DevicesInOrderEdit);
 				
 				OrderDevice record = null;
 				try {

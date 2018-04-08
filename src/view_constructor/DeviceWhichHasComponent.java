@@ -75,7 +75,7 @@ public class DeviceWhichHasComponent extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				id_to_look = MethodsForFrames.getComponentIdByComponentName(name_to_look, id_to_look, ComponentComboBox, components);
+				id_to_look = MethodsForFrames.getComponentIdByComponentName(ComponentComboBox, components);
 
 				try {
 					devices = dd.getAllDeviceWhichHasComponent(id_to_look);

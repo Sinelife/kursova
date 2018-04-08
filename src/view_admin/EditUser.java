@@ -23,7 +23,7 @@ public class EditUser extends JFrame {
 
 
 	private JPanel contentPane;
-	public static String surname_name_to_edit;
+
 	public static int id_to_edit;
 
 	/**
@@ -67,8 +67,7 @@ public class EditUser extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				id_to_edit = MethodsForFrames.getUsertIdByUserSurnameAndName(surname_name_to_edit, id_to_edit, UserComboBox, users);
-				
+				id_to_edit = MethodsForFrames.getUsertIdByUserSurnameAndName(UserComboBox, users);
 				EditUser.this.setVisible(false);
 				try {
 					new EditUserFrame(EditUser.this).setVisible(true);

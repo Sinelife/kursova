@@ -18,10 +18,6 @@ import domain.Delivery;
 import domain.DeliveryComponent;
 import main.MethodsForFrames;
 import view.AuthorisationMenu;
-import view_workerselldevice.ClientMenu;
-import view_workerselldevice.InfoOrder;
-import view_workerselldevice.OrderInformation;
-
 import javax.swing.SwingConstants;
 
 public class InfoDelivery extends JFrame 
@@ -29,7 +25,6 @@ public class InfoDelivery extends JFrame
 
 	private JPanel contentPane;
 	public static int delivery_id_to_look;
-	public static String delivery_name_to_look;
 
 	public List<DeliveryComponent> ComponentsInfoInDelivery;
 
@@ -84,7 +79,7 @@ public class InfoDelivery extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				delivery_id_to_look = MethodsForFrames.getDeliveryIdByDeliveryName(delivery_name_to_look, delivery_id_to_look, DeliveryComboBox, deliveries);
+				delivery_id_to_look = MethodsForFrames.getDeliveryIdByDeliveryName(DeliveryComboBox, deliveries);
 				MethodsForFrames.getComponentInfoFromDelivery(delivery_id_to_look, ComponentsInfoInDelivery, ComponentInDeliveryComboBox);
 			}
 		});
@@ -98,7 +93,7 @@ public class InfoDelivery extends JFrame
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				delivery_id_to_look = MethodsForFrames.getDeliveryIdByDeliveryName(delivery_name_to_look, delivery_id_to_look, DeliveryComboBox, deliveries);
+				delivery_id_to_look = MethodsForFrames.getDeliveryIdByDeliveryName(DeliveryComboBox, deliveries);
 				ProviderMenu.delivery_information_check = 3;
 				InfoDelivery.this.setVisible(false);
 				try {

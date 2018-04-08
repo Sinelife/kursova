@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import dao.ProviderDao;
 import view.AuthorisationMenu;
 import view_workerselldevice.MakeOrderPaid;
 import view_workerselldevice.OrderMenu;

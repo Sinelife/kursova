@@ -39,9 +39,7 @@ public class SalesDepartmentDirectorMenu extends JFrame {
 	private JTextField ShippedMoneyField;
 
 	public static int client_id_to_look;
-	public static String client_name_to_look;
 	public static int order_id_to_look;
-	public static String order_name_to_look;
 	
 	private static int orderNumber;
 	private static int paidOrderNumber;
@@ -113,13 +111,11 @@ public class SalesDepartmentDirectorMenu extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				client_id_to_look = MethodsForFrames.getClientIdByClientName(client_name_to_look, client_id_to_look, ClientComboBox, clients);
-						
+				client_id_to_look = MethodsForFrames.getClientIdByClientName(ClientComboBox, clients);	
 				OrdersInClientComboBox.removeAllItems();
 				try {
 					ordersInClient = od.getAllFromClient(client_id_to_look);
 				} catch (SQLException e2) {
-					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				}
 				for(Order order : ordersInClient) 
@@ -129,11 +125,9 @@ public class SalesDepartmentDirectorMenu extends JFrame {
 				
 				
 				
-				
 				try {
 					orderNumber = cd.getOrderNumberOfClient(client_id_to_look);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				OrderNumberField.setText(String.valueOf(orderNumber));
@@ -141,7 +135,6 @@ public class SalesDepartmentDirectorMenu extends JFrame {
 				try {
 					paidOrderNumber = cd.getPaidOrderNumberOfClient(client_id_to_look);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				PaidOrderNumberField.setText(String.valueOf(paidOrderNumber));
@@ -149,7 +142,6 @@ public class SalesDepartmentDirectorMenu extends JFrame {
 				try {
 					shippedOrderNumber = cd.getShippedOrderNumberOfClient(client_id_to_look);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				ShippedOrderNumberField.setText(String.valueOf(shippedOrderNumber));
@@ -159,7 +151,6 @@ public class SalesDepartmentDirectorMenu extends JFrame {
 				try {
 					allMoney = cd.getAllMoneyOfClient(client_id_to_look);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				AllMoneyField.setText(String.valueOf(allMoney));
@@ -167,7 +158,6 @@ public class SalesDepartmentDirectorMenu extends JFrame {
 				try {
 					paidMoney = cd.getPaidMoneyOfClient(client_id_to_look);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				PaidMoneyField.setText(String.valueOf(paidMoney));
@@ -175,7 +165,6 @@ public class SalesDepartmentDirectorMenu extends JFrame {
 				try {
 					shippedMoney = cd.getShippedMoneyOfClient(client_id_to_look);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				ShippedMoneyField.setText(String.valueOf(shippedMoney));
@@ -185,7 +174,6 @@ public class SalesDepartmentDirectorMenu extends JFrame {
 				try {
 					DeviceNumber = cd.getDeviceNumberOfClient(client_id_to_look);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				DeviceNumberField.setText(String.valueOf(DeviceNumber));
@@ -193,7 +181,6 @@ public class SalesDepartmentDirectorMenu extends JFrame {
 				try {
 					paidDeviceNumber = cd.getPaidDeviceNumberOfClient(client_id_to_look);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				PaidDeviceNumberField.setText(String.valueOf(paidDeviceNumber));
@@ -201,7 +188,6 @@ public class SalesDepartmentDirectorMenu extends JFrame {
 				try {
 					shippedDeviceNumber = cd.getShippedDeviceNumberOfClient(client_id_to_look);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				ShippedDeviceNumberField.setText(String.valueOf(shippedDeviceNumber));
@@ -218,13 +204,12 @@ public class SalesDepartmentDirectorMenu extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				client_id_to_look = MethodsForFrames.getClientIdByClientName(client_name_to_look, client_id_to_look, ClientComboBox, clients);
+				client_id_to_look = MethodsForFrames.getClientIdByClientName(ClientComboBox, clients);
 				
 				SalesDepartmentDirectorMenu.this.setVisible(false);
 				try {
 					new ClientInformation(SalesDepartmentDirectorMenu.this).setVisible(true);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -244,7 +229,6 @@ public class SalesDepartmentDirectorMenu extends JFrame {
 				try {
 					orderNumber = cd.getOrderNumber();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				OrderNumberField.setText(String.valueOf(orderNumber));
@@ -252,7 +236,6 @@ public class SalesDepartmentDirectorMenu extends JFrame {
 				try {
 					paidOrderNumber = cd.getPaidOrderNumber();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				PaidOrderNumberField.setText(String.valueOf(paidOrderNumber));
@@ -260,7 +243,6 @@ public class SalesDepartmentDirectorMenu extends JFrame {
 				try {
 					shippedOrderNumber = cd.getShippedOrderNumber();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				ShippedOrderNumberField.setText(String.valueOf(shippedOrderNumber));
@@ -270,7 +252,6 @@ public class SalesDepartmentDirectorMenu extends JFrame {
 				try {
 					allMoney = cd.getAllMoney();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				AllMoneyField.setText(String.valueOf(allMoney));
@@ -278,7 +259,6 @@ public class SalesDepartmentDirectorMenu extends JFrame {
 				try {
 					paidMoney = cd.getPaidMoney();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				PaidMoneyField.setText(String.valueOf(paidMoney));
@@ -286,7 +266,6 @@ public class SalesDepartmentDirectorMenu extends JFrame {
 				try {
 					shippedMoney = cd.getShippedMoney();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				ShippedMoneyField.setText(String.valueOf(shippedMoney));
@@ -296,7 +275,6 @@ public class SalesDepartmentDirectorMenu extends JFrame {
 				try {
 					DeviceNumber = cd.getDeviceNumber();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				DeviceNumberField.setText(String.valueOf(DeviceNumber));
@@ -304,7 +282,6 @@ public class SalesDepartmentDirectorMenu extends JFrame {
 				try {
 					paidDeviceNumber = cd.getPaidDeviceNumber();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				PaidDeviceNumberField.setText(String.valueOf(paidDeviceNumber));
@@ -312,7 +289,6 @@ public class SalesDepartmentDirectorMenu extends JFrame {
 				try {
 					shippedDeviceNumber = cd.getShippedDeviceNumber();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				ShippedDeviceNumberField.setText(String.valueOf(shippedDeviceNumber));
@@ -430,13 +406,11 @@ public class SalesDepartmentDirectorMenu extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				order_id_to_look = MethodsForFrames.getOrderIdByOrderName(order_name_to_look, order_id_to_look, OrdersInClientComboBox, ordersInClient);
-				
+				order_id_to_look = MethodsForFrames.getOrderIdByOrderName(OrdersInClientComboBox, ordersInClient);
 				SalesDepartmentDirectorMenu.this.setVisible(false);
 				try {
 					new OrderInformation(SalesDepartmentDirectorMenu.this).setVisible(true);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}

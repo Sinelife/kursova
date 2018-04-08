@@ -68,9 +68,14 @@ public class ChooseClient extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				id_to_choose = MethodsForFrames.getClientIdByClientName(name_to_choose, id_to_choose, ClientComboBox, clients);
-				name_to_choose = ClientComboBox.getSelectedItem().toString();
-				
+				id_to_choose = MethodsForFrames.getClientIdByClientName(ClientComboBox, clients);
+				Client c = new Client();
+				try {
+					c = cd.readClient(id_to_choose);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				name_to_choose = c.getName();
 				ChooseClient.this.setVisible(false);
 				new OrderMenu().setVisible(true);
 			}

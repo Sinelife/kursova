@@ -30,7 +30,6 @@ public class EditOrder extends JFrame {
 	private JCheckBox ShippedCheckBox;
 
 	public static int order_id_to_edit;
-	public static String order_name_to_edit;
 	
 	Order o;
 	
@@ -94,7 +93,7 @@ public class EditOrder extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				order_id_to_edit = MethodsForFrames.getOrderIdByOrderName(order_name_to_edit, order_id_to_edit, OrderComboBox, orders);
+				order_id_to_edit = MethodsForFrames.getOrderIdByOrderName(OrderComboBox, orders);
 				
 				try {
 					o = od.readOrder(order_id_to_edit);

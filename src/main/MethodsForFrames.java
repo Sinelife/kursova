@@ -78,9 +78,10 @@ public class MethodsForFrames
 	
 	//Метод для отримання айдішника постачальника через ім'я постачальника
 	
-	public static int getProviderIdByProviderName(String name, int id, JComboBox<String> ComboBox,List<Provider> providers)
+	public static int getProviderIdByProviderName(JComboBox<String> ComboBox,List<Provider> providers)
 	{
-		name = String.valueOf(ComboBox.getSelectedItem());
+		String name = String.valueOf(ComboBox.getSelectedItem());
+		int id = 0;
 		for(Provider provider : providers) 
 		{
 			id = provider.getId();
@@ -95,9 +96,10 @@ public class MethodsForFrames
 	
 	//Метод для отримання айдішника замовлення постачання через ім'я замовлення постачання
 	
-	public static int getDeliveryIdByDeliveryName(String name, int id, JComboBox<String> ComboBox,List<Delivery> deliveries)
+	public static int getDeliveryIdByDeliveryName(JComboBox<String> ComboBox,List<Delivery> deliveries)
 	{
-		name = String.valueOf(ComboBox.getSelectedItem());
+		String name = String.valueOf(ComboBox.getSelectedItem());
+		int id = 0;
 		for(Delivery delivery : deliveries) 
 		{
 			id = delivery.getId();
@@ -112,9 +114,10 @@ public class MethodsForFrames
 	
 	//Метод для отримання айдішника клієнта через ім'я клієнта
 	
-	public static int getClientIdByClientName(String name, int id, JComboBox<String> ComboBox, List<Client> clients)
+	public static int getClientIdByClientName(JComboBox<String> ComboBox, List<Client> clients)
 	{
-		name = String.valueOf(ComboBox.getSelectedItem());
+		String name = String.valueOf(ComboBox.getSelectedItem());
+		int id = 0;
 		for(Client client : clients) 
 		{
 			id = client.getId();
@@ -130,9 +133,10 @@ public class MethodsForFrames
 	
 	//Метод для отримання айдішника замовлення на купівлю через ім'я замовлення на купівлю
 	
-	public static int getOrderIdByOrderName(String name, int id, JComboBox<String> ComboBox, List<Order> orders)
+	public static int getOrderIdByOrderName(JComboBox<String> ComboBox, List<Order> orders)
 	{
-		name = String.valueOf(ComboBox.getSelectedItem());
+		String name = String.valueOf(ComboBox.getSelectedItem());
+		int id = 0;
 		for(Order order : orders) 
 		{
 			id = order.getId();
@@ -148,9 +152,10 @@ public class MethodsForFrames
 	
 	//Метод для отримання айдішника приладу через ім'я приладу
 	
-	public static int getDeviceIdByDeviceName(String name, int id, JComboBox<String> ComboBox,List<Device> devices)
+	public static int getDeviceIdByDeviceName(JComboBox<String> ComboBox,List<Device> devices)
 	{
-		name = String.valueOf(ComboBox.getSelectedItem());
+		String name = String.valueOf(ComboBox.getSelectedItem());
+		int id = 0;
 		for(Device device : devices) 
 		{
 			id = device.getId();
@@ -166,9 +171,10 @@ public class MethodsForFrames
 	
 	//Метод для отримання айдішника компоненту через ім'я компоненту
 	
-	public static int getComponentIdByComponentName(String name, int id, JComboBox<String> ComboBox,List<Component> components)
+	public static int getComponentIdByComponentName(JComboBox<String> ComboBox,List<Component> components)
 	{
-		name = String.valueOf(ComboBox.getSelectedItem());
+		String name = String.valueOf(ComboBox.getSelectedItem());
+		int id = 0;
 		for(Component component : components) 
 		{
 			id = component.getId();
@@ -184,9 +190,10 @@ public class MethodsForFrames
 	
 	//Метод для отримання айдішника користувача через ім'я і прізвище користувача
 	
-	public static int getUsertIdByUserSurnameAndName(String surname_name, int id, JComboBox<String> ComboBox,List<User> users)
+	public static int getUsertIdByUserSurnameAndName(JComboBox<String> ComboBox,List<User> users)
 	{
-		surname_name = String.valueOf(ComboBox.getSelectedItem());
+		String surname_name = String.valueOf(ComboBox.getSelectedItem());
+		int id = 0;
 		for(User user : users) 
 		{
 			id = user.getId();
@@ -1038,7 +1045,7 @@ public class MethodsForFrames
 		DeviceDao dd = new DeviceDao();
 		DeviceAllNotInChoosenComboBox.removeAllItems();
 		try {
-			devicesAllNotInChoosen = dd.getAllDeviceWhichHasAllComponentsWhichHasNotChosenDevice(device_id);
+			devicesAllNotInChoosen = dd.getAllDeviceWhichNotHasAnyOfChosenDevice(device_id);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
