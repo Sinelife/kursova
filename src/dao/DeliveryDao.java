@@ -344,4 +344,52 @@ public class DeliveryDao
 		}
 		return list;
 	}
+	
+	
+    public List<DeliveryComponent> getAllFromDelivery(int delivery_id) throws SQLException 
+    {
+        String sql = "SELECT * FROM delivery_component WHERE delivery_id = " + delivery_id;
+        List<DeliveryComponent> list = new ArrayList<DeliveryComponent>();
+        try (PreparedStatement stm = Main.conn.prepareStatement(sql)) 
+        {
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) 
+            {
+                DeliveryComponent dc = new DeliveryComponent();
+                dc.setDeliveryId(rs.getInt("delivery_id"));
+                dc.setComponentId(rs.getInt("component_id"));
+                dc.setNumber(rs.getInt("number"));
+                list.add(dc);
+            }
+        }
+        return list;
+    }
+
+    
+    public String getComponentNameById(int delivery_id, int component_id) throws SQLException
+    {
+    	String sql = "SELECT name FROM component WHERE component_id = " + component_id + " and component_id in "
+    			+ "(select component_id from delivery_component where delivery_id = " + delivery_id + ")";
+		Statement s = Main.conn.createStatement();
+ 	  	ResultSet rs = s.executeQuery(sql);
+ 	  	String name = null;
+ 	  	while (rs.next()) {
+ 	  		name = rs.getString("name");
+ 	  	}
+		return name; 
+    }
+    
+    
+    public String getComponentTypeById(int delivery_id, int component_id) throws SQLException
+    {
+    	String sql = "SELECT type FROM component WHERE component_id = " + component_id + " and component_id in "
+    			+ "(select component_id from delivery_component where delivery_id = " + delivery_id + ")";
+		Statement s = Main.conn.createStatement();
+ 	  	ResultSet rs = s.executeQuery(sql);
+ 	  	String type = null;
+ 	  	while (rs.next()) {
+ 	  		type = rs.getString("type");
+ 	  	}
+		return type; 
+    }
 }

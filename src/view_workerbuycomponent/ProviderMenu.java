@@ -14,8 +14,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import view.AuthorisationMenu;
-import view_admin.WorkerSalesDepartmentAdminMenu;
-import view_workerselldevice.WorkerSalesDepartmentMenu;
+import view_admin.WorkerDeliveryDepartmentAdminMenu;
 
 public class ProviderMenu extends JFrame {
 
@@ -128,7 +127,7 @@ public class ProviderMenu extends JFrame {
 					ProviderMenu.this.setVisible(false);
 					ProviderMenu.this.dispose();
 					try {
-						new WorkerSalesDepartmentMenu().setVisible(true);
+						new WorkerDeliveryDepartmentMenu().setVisible(true);
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
@@ -138,7 +137,7 @@ public class ProviderMenu extends JFrame {
 					ProviderMenu.this.setVisible(false);
 					ProviderMenu.this.dispose();
 					try {
-						new WorkerSalesDepartmentAdminMenu().setVisible(true);
+						new WorkerDeliveryDepartmentAdminMenu().setVisible(true);
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}

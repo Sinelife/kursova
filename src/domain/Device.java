@@ -14,12 +14,10 @@ public class Device
 	private int rating;
 	private Date date;
 	private int work_price;
-	private int components_price;
-	private int profit_price;
 	private int sum_price;
 	
 	
-	Device(int device_id, String name,String supply_voltage,String border_regulation_time,int rating,Date date, int work_price, int components_price, int profit_price, int sum_price)
+	Device(int device_id, String name,String supply_voltage,String border_regulation_time,int rating,Date date, int work_price, int sum_price)
 	{
 		this.device_id = device_id; 
 		this.name = name; 
@@ -28,8 +26,6 @@ public class Device
 		this.rating = rating;
 		this.date = date;
 		this.work_price = work_price;
-		this.components_price = components_price;
-		this.profit_price = profit_price;
 		this.sum_price = sum_price;
 	}
 	
@@ -108,30 +104,6 @@ public class Device
 	public void setWorkPrice(int work_price) 
 	{
 		this.work_price = work_price;
-	}
-
-
-	public int getComponentsPrice() 
-	{
-		return components_price;
-	}
-
-
-	public void setComponentsPrice(int components_price) 
-	{
-		this.components_price = components_price;
-	}
-
-
-	public int getProfitPrice() 
-	{
-		return profit_price;
-	}
-
-
-	public void setProfitPrice(int profit_price) 
-	{
-		this.profit_price = profit_price;
 	}
 
 

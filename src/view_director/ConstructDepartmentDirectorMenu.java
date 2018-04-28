@@ -134,13 +134,21 @@ public class ConstructDepartmentDirectorMenu extends JFrame
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
-				componentPrice = d.getComponentsPrice();
+				try {
+					componentPrice = dd.getAllComponentCostInDevice(device_id_to_look);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 				ComponentsPriceField.setText(String.valueOf(componentPrice));
 				
 				workPrice = d.getWorkPrice();
 				WorkPriceField.setText(String.valueOf(workPrice));
 				
-				profitPrice = d.getProfitPrice();
+				try {
+					profitPrice = dd.getProfitPrice(d);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 				ProfitPriceField.setText(String.valueOf(profitPrice));
 				
 				sumPrice = d.getSumPrice();

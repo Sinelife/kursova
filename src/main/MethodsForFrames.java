@@ -10,11 +10,9 @@ import javax.swing.JTextField;
 
 import dao.ClientDao;
 import dao.ComponentDao;
-import dao.DeliveryComponentDao;
 import dao.DeliveryDao;
 import dao.DeviceDao;
 import dao.OrderDao;
-import dao.OrderDeviceDao;
 import dao.ProviderDao;
 import dao.UserDao;
 import domain.Client;
@@ -802,9 +800,9 @@ public class MethodsForFrames
 	public static void getDeviceInfoFromOrder(int order_id, List<OrderDevice> DevicesInfoInOrder, JComboBox<String> DeviceInOrderComboBox)
 	{
 		DeviceInOrderComboBox.removeAllItems();
-		OrderDeviceDao odd = new OrderDeviceDao();
+		OrderDao od = new OrderDao();
 		try {
-			DevicesInfoInOrder = odd.getAllFromOrder(order_id);
+			DevicesInfoInOrder = od.getAllFromOrder(order_id);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
@@ -812,19 +810,19 @@ public class MethodsForFrames
 		{
 			String device_name = null;
 			try {
-				device_name = odd.getDeviceNameById(order_id, order_device.getDeviceId());
+				device_name = od.getDeviceNameById(order_id, order_device.getDeviceId());
 			} catch (SQLException e2) {
 				e2.printStackTrace();
 			}
 			String device_supply_voltage = null;
 			try {
-				device_supply_voltage = odd.getSupplyVoltageById(order_id, order_device.getDeviceId());
+				device_supply_voltage = od.getSupplyVoltageById(order_id, order_device.getDeviceId());
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
 			String border_regulation_time = null;
 			try {
-				border_regulation_time = odd.getBorderRegulationTimeById(order_id, order_device.getDeviceId());
+				border_regulation_time = od.getBorderRegulationTimeById(order_id, order_device.getDeviceId());
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
@@ -926,23 +924,23 @@ public class MethodsForFrames
 	public static void getComponentInfoFromDelivery(int delivery_id, List<DeliveryComponent> ComponentsInfoInDelivery,
 			JComboBox<String> ComponentInDeliveryComboBox) {
 		ComponentInDeliveryComboBox.removeAllItems();
-		DeliveryComponentDao dcd = new DeliveryComponentDao();
+		DeliveryDao dd = new DeliveryDao();
 
 		try {
-			ComponentsInfoInDelivery = dcd.getAllFromDelivery(delivery_id);
+			ComponentsInfoInDelivery = dd.getAllFromDelivery(delivery_id);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
 		for (DeliveryComponent delivery_component : ComponentsInfoInDelivery) {
 			String component_name = null;
 			try {
-				component_name = dcd.getComponentNameById(delivery_id, delivery_component.getComponentId());
+				component_name = dd.getComponentNameById(delivery_id, delivery_component.getComponentId());
 			} catch (SQLException e2) {
 				e2.printStackTrace();
 			}
 			String component_type = null;
 			try {
-				component_type = dcd.getComponentTypeById(delivery_id, delivery_component.getComponentId());
+				component_type = dd.getComponentTypeById(delivery_id, delivery_component.getComponentId());
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}

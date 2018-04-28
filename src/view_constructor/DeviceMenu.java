@@ -125,7 +125,7 @@ public class DeviceMenu extends JFrame {
 		EditSpecificationButton.setBounds(42, 429, 410, 43);
 		contentPane.add(EditSpecificationButton);
 		
-		JButton SpecialInfoButton = new JButton("Особлива інформація");
+		JButton SpecialInfoButton = new JButton("Інформація про схожість");
 		SpecialInfoButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 

@@ -13,11 +13,7 @@ public class Main
 	public static void main(String[] args) 
 	{
 		try {
-		    //conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/department", "ya", "euncZ23-");
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/relsis_db?useSSL=false", "root", "euncZ23-");
-		    if (conn != null) {
-		    	//JOptionPane.showMessageDialog (null, "Succesful conection to database!" ); 
-		    }
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ais_db?useSSL=false", "root", "euncZ23-");
 		} catch (SQLException ex) {
 		    ex.printStackTrace();
 		}
